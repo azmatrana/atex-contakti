@@ -1,0 +1,31 @@
+<div id="new-item-modal" class="modal fade bottom scroll-modal">
+    <div class="modal-dialog" data-bind="if: isNewItemActive">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center><h4 data-i18n="app:new_item.header"></h4></center>
+                    <div class="modal-block-buttons">
+                        <div class="modal-block-buttons">
+                            <div class="pull-left"> 
+                                <button type="button" class="btn btn-primary btn-sm btn-block" data-bind="click: onNewTaskClick"><i class="fa fa-tag fa-2x"></i><br>
+                                    <span data-i18n="app:new_item.task"></span>
+                                </button>
+                            </div>
+
+                            <div class="pull-right"> 
+                                <button type="button" class="btn btn-primary btn-sm btn-block" data-bind="click: onNewEmailClick"><i class="fa fa-envelope fa-2x"></i><br>
+                                    <span data-i18n="app:new_item.email"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <div class="task-actions pull-right">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

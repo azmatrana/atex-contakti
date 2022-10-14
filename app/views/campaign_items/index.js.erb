@@ -1,0 +1,52 @@
+let element = $("#campaign_items-dynamic-index");
+if ( element.length  == 0 )
+{
+  var wrapper = document.createElement("div");
+  wrapper.id = "campaign_items-dynamic-index"
+  $("body").append(wrapper);
+  element = $("#campaign_items-dynamic-index");
+}
+
+element.html("<%= escape_javascript(render 'campaign_items', campaign: @campaign, campaign_items: @campaign_items, is_admin: @is_admin ) %>");
+$("#campaign_items-card-modal").modal('show')
+
+
+if (window.lastDialledNumber)
+{
+  let call_el = document.querySelector(`tr[data-phone='${window.lastDialledNumber}']`);
+  if (call_el)
+  {
+    call_el.classList.add("last_dialled_number")
+  }
+}
+
+var last_campaign_open_el = document.querySelector(".last-campaign-openend");
+var all_campaigns_link = document.querySelector(".all-campaing-link");
+if (last_campaign_open_el)
+{
+  all_campaigns_link.classList.add('hide');
+  last_campaign_open_el.classList.remove('hide');
+  last_campaign_open_el.href = "<%= campaign_campaign_items_path(@campaign) %>";
+}
+
+
+if (Danthes)
+{
+  var danthes_url = "campaigns/<%= @campaign.id %>/campaign_items/danthes_subscribe";
+  $.ajax({
+    url: danthes_url,
+    method: 'get',
+    success: function (subscription) {
+        Danthes.sign(_.extend(subscription, {
+          callback: function (data) {
+            if (data.refresh == true) $("#campaign_item-search-form").submit();
+          },
+          connect: true
+        }));
+    }
+  })
+
+  $('#campaign_items-card-modal').on('hidden.bs.modal', function () {
+    Danthes.unsubscribe("/campaign_items/<%= @campaign.id %>", true)
+  })
+}

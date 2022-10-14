@@ -1,0 +1,6 @@
+<% if @status_message %>
+  <div class="alert alert-dismissable <%= @status_message[:ok] ? 'alert-success' : 'alert-danger' %>">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <span class="message-text"><%= @status_message[:text] %></span>
+  </div>
+<% end %>

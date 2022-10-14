@@ -1,0 +1,13 @@
+<%= simple_form_for(current_super_admin, url: super_ui_details_path, method: :post) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :current_password, autocomplete: 'off' %>
+    <%= f.input :password, autocomplete: 'off' %>
+    <%= f.input :password_confirmation %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, 'Update' %>
+  </div>
+<% end %>

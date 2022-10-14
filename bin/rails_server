@@ -1,0 +1,2 @@
+#!/bin/bash
+bundle exec puma -p 3000 -t 4:16

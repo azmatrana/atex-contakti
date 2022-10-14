@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html class="sidebar sidebar-collapse">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Contakti SuperAdmin" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Contakti" %>">
+    <%= stylesheet_link_tag 'libs', media: 'all' %>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <%= stylesheet_link_tag 'fonts', media: 'all' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <script>
+      var primaryColor = '#26828E';
+      var themerPrimaryColor = primaryColor;
+    </script>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body class="menu-left-visible">
+    <div class="container-fluid">
+    <!-- Content -->
+      <% if  super_admin_signed_in? %>
+        <div id="menu" class="hidden-print hidden-xs sidebar-white">
+          <div id="sidebar-collapse-wrapper">
+            <div>
+              <a href="/super_ui" class="display-block-inline pull-left logo">
+                Contakti SuperAdmin UI
+              </a>
+            </div>
+            <ul class="menu list-unstyled" id="navigation_current_page">
+              <ul id="sidebar-collapse-overview" class="collapse   in ">
+                <li>
+                  <a href="<%= super_ui_companies_path %>"><i class="fa fa-globe"></i> <%= t('layouts.super_ui.companies')%></a>
+                </li>
+                <li>
+                  <a href="<%= super_ui_managers_path %>"><i class="fa fa-group"></i> <%= t('layouts.super_ui.managers')%></a>
+                </li>
+                <li>
+                  <a href="<%= super_ui_admins_path %>"><i class="fa fa-user"></i>Super Admins</a>
+                </li>
+                <li>
+                  <a href="<%= edit_super_ui_credentials_path %>"><i class="fa fa-shopping-basket"></i>Third Party Credentials</a>
+                </li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="container" id="content">
+      <%= render 'super_ui/navigation' if super_admin_signed_in? %>
+      <div class="innerLR">
+        <%= render 'super_ui/messages' %>
+        <%= yield %>
+      </div>
+    </div>
+    <!-- Version: <%= print_version %> -->
+  </body>
+</html>

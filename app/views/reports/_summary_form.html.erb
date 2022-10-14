@@ -1,0 +1,178 @@
+<%= simple_form_for @report, url: {action: 'save'}, html: {:class => 'form-horizontal', :id => 'summary_report_form'} do |f| %>
+  <%= f.hidden_field :kind, value: 'summary' %>
+  <div class="row">
+    <div class="col-md-3">
+      <label><%= t('reports.index.report_name') %> </label>
+      <%= f.input_field :title, :class => 'form-control', :placeholder => t('reports.index.placeholder_name') %>
+      <%= f.error :title %>
+      <br/>
+    </div>
+    <div class="col-md-3">
+      <label><%= t('reports.index.choose_time_range') %> </label>
+
+        <input name="report[date_range]" class="form-control date-range" type="text"
+               autocomplete="off"
+               value="<%= format_date_range(@report) %>"
+          />
+        <%= f.hidden_field :starts_at %>
+        <%= f.hidden_field :ends_at %>
+        <br/>
+
+      <%= f.error :starts_at %>
+    </div>
+    <div class="col-md-3">
+      <label><%= t('reports.summary_report.report_scope') %> </label>
+      <div class="styled-select">
+        <%= f.select :report_scope, %w[all closed].map {|s| [t("reports.summary_report.report_scopes.#{s}"), s]} %>
+        <span class="caret"></span>
+      </div>
+      <br/>
+    </div>
+        <div class="col-md-3">
+          <label><%= t('reports.index.report_layout') %> </label>
+          <div class="styled-select">
+          <%= f.select :dashboard_layout_id, layout_select_options(@layouts), {}, class: 'form-control' %>
+          <%= f.error :dashboard_layout_id %>
+          <span class="caret"></span>
+          </div>
+        </div>
+    <div class="col-md-12">
+      <div class="row">
+      <div class="col-md-4">
+        <div class="input-group">
+            <div class="input-group-btn">
+              <a class="btn btn-default btn-sm" onclick="editDashboardLayout()" style="margin-right:10px;">
+                <%= t 'dashboard_layouts.edit_layout' %> <span class="glyphicon glyphicon-pencil"></span>
+              </a>
+              
+              <a class="btn btn-default btn-sm" onclick="newDashboardLayout()">
+                <%= t 'dashboard_layouts.add_new' %> <span class="glyphicon glyphicon-plus-sign"></span>
+              </a>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-md-12">
+      <div class="widget checkbox-set col-md-3 padd1">
+        <div class="widget-head checkbox-head">
+          <div class="checkbox">
+            <label class="checkbox-custom">
+              <input type="checkbox" data-all-checkboxes="locations-checkboxes-container"/>
+              <i class="fa fa-fw fa-square-o"></i>
+              <%= t('reports.index.location') %>
+            </label>
+          </div>
+        </div>
+        <div class="widget-body inner-2x select-location" id="locations-checkboxes-container">
+          <%= f.collection_check_boxes :location_ids, @locations, :id, :name,
+                                       {item_wrapper_tag: 'div', item_label_class: 'checkbox-custom', item_wrapper_class: 'checkbox'} do |b| %>
+            <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+          <% end %>
+        </div>
+      </div>
+      <div class="widget checkbox-set col-md-3 padd1 service-channels-list">
+        <div class="widget-head checkbox-head">
+          <div class="checkbox">
+            <label class="checkbox-custom">
+              <input type="checkbox" data-all-checkboxes="service-channels-checkboxes-container"/>
+              <i class="fa fa-fw fa-square-o hide"></i>
+              <%= t('reports.index.service_channel') %>
+            </label>
+          </div>
+        </div>
+        <div class="widget-body inner-2x select-service-channel" id="service-channels-checkboxes-container">
+          <%= f.collection_check_boxes :service_channel_ids, @service_channels, :id, :name,
+                                       {item_wrapper_tag: 'div', item_label_class: 'checkbox-custom',
+                                        item_wrapper_class: "checkbox #{get_hide_class(@report)}"} do |b| %>
+            <%= b.check_box('data-locations' => b.object.location_ids.join(','), 'data-media-channels' => b.object.get_active_media_channel_types.join(',')) + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+          <% end %>
+        </div>
+      </div>
+      <div class="widget checkbox-set col-md-3 padd1 media-channels-list">
+        <div class="widget-head checkbox-head">
+          <div class="checkbox">
+            <label class="checkbox-custom">
+              <input type="checkbox" data-all-checkboxes="media-channels-checkboxes-container"/>
+              <i class="fa fa-fw fa-square-o hide"></i>
+              <%= t('reports.index.media_channel') %>
+            </label>
+          </div>
+        </div>
+        <div class="widget-body inner-2x select-media-channel" id="media-channels-checkboxes-container">
+          <%= f.collection_check_boxes :media_channel_types, %i[email web_form call internal sms], :to_s,
+                                       lambda {|x| t("users.agents.media_channel_types.#{x}")},
+                                       {item_wrapper_tag: 'div', item_label_class: 'checkbox-custom',
+                                        item_wrapper_class: "checkbox #{get_hide_class(@report)}"} do |b| %>
+            <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+          <% end %>
+        </div>
+      </div>
+      <div class="widget checkbox-set col-md-3 padd1 agents-list">
+        <div class="widget-head checkbox-head">
+          <div class="checkbox">
+            <label class="checkbox-custom">
+              <input type="checkbox" data-all-checkboxes="agents-summary-checkboxes-container"/>
+              <i class="fa fa-fw fa-square-o hide"></i>
+              <%= t('reports.index.agents') %>
+            </label>
+          </div>
+        </div>
+        <div class="widget-body inner-2x select-agent" id="agents-summary-checkboxes-container">
+          <%= f.collection_check_boxes :user_ids, @agents, :id, :full_name,
+                                       {item_wrapper_tag: 'div', item_label_class: 'checkbox-custom',
+                                        item_wrapper_class: "checkbox #{get_hide_class(@report)}"} do |b| %>
+            <%= b.check_box('data-media-channels' => b.object.media_channel_types.join(',')) + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %> <%# end summary report form %>
+
+<div class="separator top">
+  <div class="btn-group-block pull-right">
+    <button type="button" class="btn btn-default report-form cancel"> <%= t('reports.index.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span></button>
+    <button type="submit" class="btn btn-default report-form summary"> <%= @report.persisted? ? t('reports.index.update') : t('reports.index.create') %> <%= t('reports.index.report') %> <span class="glyphicon glyphicon-ok"></span></button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  Layouts = <%== @layouts.to_json %>;
+
+  function newDashboardLayout() {
+    var selected = null;
+
+    var json = '[]';
+    $('#dashboard_layout_id').val('');
+    $('#dashboard_layout_layout').val(json);
+    $('#dashboard_layout_name').val('');
+    window.dashboardDesigner.clear();
+    window.dashboardDesigner.addWidgetsToDesignPanel();
+
+    $('#create-to-modal-dialog').modal();
+  }
+
+  function editDashboardLayout() {
+    var selected = $('#report_dashboard_layout_id option:selected').val();
+    if (selected == "") {
+      selected = null;
+    }
+
+    $.each(Layouts, function (index, value) {
+      if (value.id == selected) {
+        var json = JSON.stringify(value.layout);
+        $('#dashboard_layout_id').val(value.id);
+        $('#dashboard_layout_layout').val(json);
+        $('#dashboard_layout_name').val(value.name);
+        window.dashboardDesigner.clear();
+        window.dashboardDesigner.addWidgetsToDesignPanel();
+      }
+    });
+
+    $('#create-to-modal-dialog').modal();
+  }
+</script>

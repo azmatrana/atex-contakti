@@ -1,0 +1,51 @@
+<div class="modal fade" id="phonbook-card-modal" tabindex="-1" role="dialog" aria-labelledby="phonbook-card-modal-dialog">
+
+<div class="">
+  <div class="modal-content modal-lg" style="width: 90vw; margin: 0 auto;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.contact_modal.phonebook_card') %></h3>
+    </div>
+    <div class="modal-body">
+      <div class="innerLR">
+        <!-- Widget -->
+        <div class="widget widget-tabs border-bottom-none <%= call_icon.present? ? 'agent-call-phonebook' : '' %>">
+          <!-- Widget heading -->
+          <!-- // Widget heading END -->
+            <%= form_tag url_for(controller: "contacts", action: 'search', locale: I18n.locale), method: :get, remote: true, id: 'contact-search-form' do |f| %>
+              <%= hidden_field_tag :locale, params[:locale] %>
+              <%= hidden_field_tag :public_phonebook, public_phonebook %>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <input name="search" id="contact-search-input" class="form-control" type="text" placeholder="<%= t('user_dashboard.contact_modal.contact_search_placeholder') %>">
+                </div>
+
+
+                <% unless public_phonebook == true %>
+                  <div class="col-md-3">
+                    <%= link_to delete_all_contacts_path(locale: I18n.locale), method: :delete, remote: true, class: 'btn btn-default btn-sm ', data: { confirm: t('user_dashboard.confirm_delete') } do %>
+                      <i class="glyphicon glyphicon-trash"></i>
+                      <%= t('user_dashboard.contact_modal.delete_all_contacts') %>
+                    <% end %>
+                  </div>
+                <% end %>
+
+              </div>
+
+            <% end %>
+            <div id="contacts-table-wrapper">
+              <%= render 'contacts/table', contacts: contacts, public_phonebook: public_phonebook %>
+            </div>
+          <!-- // Tab content END -->
+        </div>
+      </div>
+    </div>
+    <!-- // Widget END -->
+  </div>
+
+
+</div> <!-- modal-body -->
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog -->
+</div> <!-- modal -->

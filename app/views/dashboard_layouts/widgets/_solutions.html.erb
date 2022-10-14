@@ -1,0 +1,24 @@
+<div class="widget border-bottom-none">
+    <h3 class="innerAll handle bg-solutions border-bottom margin-bottom-none"><%= t('reports.comparison.solutions')%> %</h3>
+    <a href="#" class="chart-toggle" data-chart-id="chart_horizontal_bars2">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+    <div class="widget-body">
+        <div id="chart_stacked_bars_solutions_perc" class="flotchart-holder"></div>
+    </div>
+</div>
+<script>
+    $('#chart_stacked_bars_solutions_perc').extremiaFlotchart(
+            'comparisonReportSolutionsPercentageChart',
+            {
+                'rawData': [
+                    {
+                        label: I18n.t('reports.comparison.solutions_percentage'),
+                        data: Report.solutionsPercentageData
+                    }
+                ],
+                'rawTicks': Report.solutionsPercentageTicks,
+                'render': true
+            }
+    );
+</script>

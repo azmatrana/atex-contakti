@@ -1,0 +1,3 @@
+class AnswerButtonsController < ApplicationController
+
+end

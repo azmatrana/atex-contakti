@@ -1,0 +1,42 @@
+<div class="col-md-6">
+  <%= simple_form_for @user, url: agent_path(@user.id), html: {class: 'form-horizontal'} do |f| %>
+    <%= f.fields_for :sip_settings, @user.sip_settings || @user.build_sip_settings do |sip_form| %>
+      <%= sip_form.hidden_field :id %>
+      <div class="row">
+        <div class="col-md-12">
+        <h4><%= t("service_channels.sip_setting") %></h4><br>
+          <div class="form-group margin-none innerB">
+            <%= sip_form.text_field :title, placeholder: t('service_channels.placeholder_title'), class: 'form-control' %>
+          </div>
+          <div class="form-group margin-none innerB">
+            <%= sip_form.text_field :user_name, placeholder: t('service_channels.placeholder_user_name'), class: 'form-control user-name' %>
+          </div>
+          <div class="form-group margin-none innerB">
+            <%= sip_form.text_field :password, placeholder: t('service_channels.placeholder_password'), type: 'password', class: 'form-control password' %>
+          </div>
+          <div class="form-group margin-none innerB">
+            <%= sip_form.text_field :domain, placeholder: t('service_channels.placeholder_domain'), class: 'form-control password' %>
+          </div>
+          <div class="form-group margin-none innerB">
+            <%= sip_form.text_field :ws_server_url, placeholder: t('service_channels.placeholder_ws_server_url'), class: 'form-control password' %>
+          </div>
+
+          <div class="btn-group-block pull-left">
+            <a role="button" class="btn btn-default btn-sm clear-form-btn pull-left">
+              <%= t('service_channels.clear_settings_btn')%>
+              <span class="glyphicon glyphicon-remove"></span>
+            </a>
+          </div>
+
+          <div class="btn-group-block pull-right">
+            <button type="submit" class="btn btn-default btn-sm">
+              <%= t('users.agents.save') %>
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+

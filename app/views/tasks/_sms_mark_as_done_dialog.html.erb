@@ -1,0 +1,13 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title" id="close-task-modal-title"><%= t 'user_dashboard.are_you_sure_want_close_task' %></h3>
+        </div>
+
+        <div class="modal-footer">
+            <a role="button" class="btn btn-default btn-sm" data-dismiss="modal"><%= t('user_dashboard.cancel') %> <span class="glyphicon glyphicon-remove"></span></a>
+            <a role="button" class="btn btn-default btn-sm" data-bind="click: markAsDone" data-dismiss="modal"><%= t('user_dashboard.ok') %> <span class="glyphicon glyphicon-ok"></span></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+setTimeout( function() { 
+  $('#status_messages').html('<%=j render('/layouts/messages') %>');
+}, 2000);
+<% if @report.errors.empty? %>
+  $('p.send-to-emails.has-error').html('').addClass('hide');
+<% else %>
+  $('p.send-to-emails.has-error').html('<%=j @report.errors[:send_to_emails].first %>').removeClass('hide');
+<% end %>
+<% flash.discard(:notice) %>

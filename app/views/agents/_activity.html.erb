@@ -1,0 +1,13 @@
+<div class="row" id="user_activity_report">
+    <div class="col-md-12">
+        <h4><%= t('users.agents.user_activity_report') %></h4> 
+    </div>
+  <div class="col-md-12 marginB10">
+    <div class="input-group date">
+      <input class="form-control date-range" data-id="<%= @user.id %>" type="text"
+             name='daterange' placeholder="<%= t('users.agents.choose_period') %>">
+      <span class="input-group-addon"><i class="fa fa-th"></i></span>
+    </div>
+  </div>
+</div>
+<span class="comparison-report"/>

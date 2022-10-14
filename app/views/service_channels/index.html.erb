@@ -1,0 +1,349 @@
+<% content_for :head do %>
+  <%= include_gon camel_case: true %>
+<% end %>
+
+<div class="container-fluid details">
+  <div class="row">
+    <div class="col-md-3" id="search-form-container">
+      <%= render partial: 'search_form_with_list' %>
+    </div>
+    <%= simple_form_for @service_channel, html: { id: 'service_channel_form', multipart: true } do |f| %>
+      <div class="col-md-9 agent-admin preview-content">
+        <div class="innerLR">
+          <!-- Widget -->
+          <% if @show_form || @service_channel.persisted? %>
+          <div class="widget widget-tabs border-bottom-none">
+            <!-- Widget heading -->
+            <div class="widget-head">
+              <ul>
+                <li class="active"><a href="#basic_info" data-toggle="tab" onclick = "checkTab('basic_info')"><i class="fa fa-sitemap"></i><%= t('service_channels.service_channel_title') %></a></li>
+                <li><a href="#agents" data-toggle="tab" onclick = "checkTab('agents')"><i class="fa fa-user"></i><%= t('service_channels.agents_title') %></a></li>
+                <li><a href="#open" data-toggle="tab" onclick = "checkTab('open')"><i class="fa fa-calendar"></i><%= t('weekly_schedules.title') %></a></li>
+                <li><a href="#alert" data-toggle="tab" onclick = "checkTab('alert')"><i class="fa fa-bell"></i><%= t('service_channels.alert_limits') %></a></li>
+                <li><a href="#tag" data-toggle="tab" onclick = "checkTab('tag')"><i class="fa fa-tag"></i><%= t('layouts.application.tags') %></a></li>
+                <li><a href="#settings" data-toggle="tab" onclick = "checkTab('settings')"><i class="fa fa-gear"></i><%= t('layouts.application.settings') %></a></li>
+              </ul>
+            </div>
+            <!-- // Widget heading END -->
+            <div class="widget-body">
+              <div class="tab-content">
+                <!-- Tab content -->
+                <div class="tab-pane fill-bg active" id="service_channel">
+                  <div class="innerLR padding-none">
+                    <div class="widget widget-tabs border-bottom-none">
+                      <div class="col-md-12" id="del-settings" style="z-index: 1000">
+                        <div class="pull-right" role="group" aria-label="...">
+                          <% if @service_channel.persisted? %>
+                          <%= link_to @service_channel, method: :delete, class: 'btn btn-default btn-sm', data: { confirm: t('service_channels.confirm_delete') } do %>
+                          <%= t('users.agents.delete') %> <span class="glyphicon glyphicon-trash"></span>
+                          <% end %>
+                          <% end %>
+                          <button type="submit" class="btn btn-default btn-sm">
+                          <%= t('service_channels.save_setting_btn')%> <span class="glyphicon glyphicon-ok"></span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="widget-body">
+                        <div class="tab-content">
+                          <div class="tab-pane active clearfix" id="basic_info">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <label><%= t('service_channels.name') %></label>
+                                <%= f.text_field :name, :placeholder => t('service_channels.name'), :class => 'form-control' %>
+                                <%= render partial: '/shared/field_error', locals: { record: @service_channel, field: :name } %>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="widget">
+                                  <!-- Widget heading -->
+                                  <div class="widget checkbox-set">
+                                    <div class="widget-head checkbox-head">
+                                      <div class="checkbox no-margin">
+                                        <label class="checkbox-custom">
+                                        <input type="checkbox" data-all-checkboxes="locations-checkboxes-container"/>
+                                        <i class="fa fa-fw fa-square-o"></i>
+                                        <%= t('service_channels.add_location') %>
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <!-- // Widget heading END -->
+                                    <div class="widget-body inner-2x" id="locations-checkboxes-container">
+                                      <%= f.collection_check_boxes :location_ids, @locations, :id, :name, { item_wrapper_tag: 'div', item_label_class: 'checkbox-custom', item_wrapper_class: 'checkbox' } do |b| %>
+                                      <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                                      <% end %>
+                                      <%= render partial: '/shared/field_error', locals: { record: @service_channel, field: :locations } %>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="widget">
+                                  <!-- Widget heading -->
+                                  <div class="widget checkbox-set">
+                                    <div class="widget-head">
+                                      <h4 class="heading"><%= t('service_channels.media_channels') %></h4>
+                                    </div>
+                                    <!-- // Widget heading END -->
+                                    <div class="widget-body inner-2x">
+                                      <% %w(email web_form call chat internal sip).each do |key| %>
+                                        <% object = @service_channel.__send__("#{key}_media_channel".to_sym) || @service_channel.__send__("build_#{key}_media_channel".to_sym, broken:false) %>
+                                        <div class="checkbox">
+                                          <label class="checkbox-custom">
+                                            <% if key == 'sip' %>
+                                            <% end %>
+
+                                            <% if object.broken? || object.nil? || !object.settings_present? %>
+                                              <span class="input-group-addon" data-toggle="tooltip" data-container="body" data-placement="top"
+                                                data-original-title="<%= t('service_channels.not_configured') %>"><i class="fa fa-exclamation-circle"></i></span>
+                                              <div style="display: none;">
+                                                <%= f.fields_for "#{key}_media_channel_attributes".to_sym, object do |media_form| %>
+                                                  <%= media_form.check_box :active, include_hidden: false %>
+                                                <% end %>
+                                              </div>
+                                            <% else %>
+                                              <%= f.fields_for "#{key}_media_channel_attributes".to_sym, object do |media_form| %>
+                                                <%= media_form.hidden_field :id %>
+                                                <% if key == 'internal' || key == 'sip' %>
+                                                  <%= media_form.hidden_field :active, value: true %>
+                                                  <i class="fa fa-fw fa-square-o checked"></i>
+                                                <% else %>
+                                                  <%= media_form.check_box :active, include_hidden: false %>
+                                                  <i class="fa fa-fw fa-square-o"></i>
+                                                <% end %>
+                                              <% end %>
+                                            <% end %>
+                                            <%= t("service_channels.#{key}") %>
+                                          </label>
+                                          <a href="#<%= key %>_settings" class="pull-right" data-toggle="modal">
+                                            <i class="fa fa-fw fa-pencil-square-o"></i>
+                                          </a>
+                                        </div>
+                                      <% end %>
+                                      <div class="checkbox">
+                                        <label class="checkbox-custom">
+                                        <% if @service_channel.persisted? %>
+                                          <i class="fa fa-fw fa-square-o checked"></i>
+                                          <%= t('service_channels.sms') %>
+                                        <% else %>
+                                          <i class="fa fa-fw fa-square-o"></i>
+                                          <span id="disabled_sms_template_link"><%= t('service_channels.sms') %></span>
+                                        <% end %>
+                                        </label>
+                                        <% if @service_channel.persisted? %>
+                                          <a href="#sms_templates_editor" class="pull-right" data-toggle="modal">
+                                            <i class="fa fa-fw fa-pencil-square-o"></i>
+                                          </a>
+                                        <% end %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="agents">
+                            <div class="widget checkbox-set margin-top-none">
+                              <!-- Widget heading -->
+                              <br>
+                              <div class="widget-head checkbox-head">
+                                <div class="checkbox no-margin">
+                                  <label class="checkbox-custom">
+                                  <input type="checkbox" data-all-checkboxes="agents-checkboxes-container"/>
+                                  <i class="fa fa-fw fa-square-o"></i>
+                                  <%= t('service_channels.agents_in_channel') %>
+                                  </label>
+                                </div>
+                              </div>
+                              <!-- // Widget heading END -->
+                              <div class="widget-body inner-2x" id="agents-checkboxes-container">
+                                <% @agents.each do |agent| %>
+                                  <div class="checkbox">
+                                    <label class="checkbox-custom">
+                                      <input type="checkbox" name="service_channel[user_ids][]" value="<%= agent.id %>" <%= "checked" if @service_channel.users.exists?(agent.id) %>>
+                                      <i class="fa fa-fw fa-square-o checked"></i>
+                                      <table>
+                                        <tr>
+                                          <td><%= agent.full_name %></td>
+                                          <td><%= agent.title %></td>
+                                          <td><%= agent.email %></td>
+                                          <td><%= agent.mobile %></td>
+                                        </tr>
+                                      </table>
+                                    </label>
+                                  </div>
+                                <% end %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="open">
+                            <label><%= t('weekly_schedules.title') %></label>
+                            <div class="row">
+                              <div class="col-xs-12">
+                                <div class="widget">
+                                  <div class="widget-body">
+                                    <%= render partial: 'weekly_schedule/schedule_form', locals: { f: f, entries: @service_channel.weekly_open_hours_with_empty } %>
+                                  </div>
+                                  </br></br></br>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="alert">
+                            <label><%= t('service_channels.alert_limits') %></label>
+                            <div class="row">
+                              <div class="col-xs-12">
+                                <div class="widget">
+                                  <div class="widget-body">
+                                    <div class="col-md-6">
+                                      <div class="form-group margin-none marginB10 col-sm-4 padding-none">
+                                        <div class="input-group">
+                                          <span class="input-group-addon padding-none no-min-width">
+                                          <span class="yellow-box pull-left"></span>
+                                          </span>
+                                          <%= f.text_field :yellow_alert_days, :class => 'form-control', style: "min-width: 25px !important; padding-left: 5px; padding-right: 5px;" %>
+                                          <span class="input-group-addon"><%= t('service_channels.days') %></span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group margin-none marginB10 col-md-4 col-sm-4 padding-none">
+                                        <div class="input-group">
+                                          <%= f.text_field :yellow_alert_hours, value: format_hours(@service_channel.yellow_alert_hours), :class => 'form-control' %>
+                                          <span class="input-group-addon"><%= t('service_channels.hours') %></span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group margin-none marginB10 col-md-4 col-sm-4 padding-none">
+                                        <div class="input-group">
+                                          <%= f.text_field :yellow_alert_minutes, value: sla_minutes(@service_channel.yellow_alert_hours, @service_channel.yellow_alert_minutes), :class => 'form-control' %>
+                                          <span class="input-group-addon"><%= t('service_channels.minutes') %></span>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <%= render partial: '/shared/field_error', locals: { record: @service_channel, field: :yellow_alert_hours } %>
+                                      <div class="form-group margin-none marginB10 col-sm-4 padding-none">
+                                        <div class="input-group">
+                                          <span class="input-group-addon padding-none no-min-width">
+                                          <span class="red-box pull-left"></span>
+                                          </span>
+                                          <%= f.text_field :red_alert_days, :class => 'form-control', style: "min-width: 25px !important; padding-left: 5px; padding-right: 5px;" %>
+                                          <span class="input-group-addon"><%= t('service_channels.days') %></span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group margin-none marginB10 col-sm-4 padding-none">
+                                        <div class="input-group">
+                                          <%= f.text_field :red_alert_hours, value: format_hours(@service_channel.red_alert_hours), :class => 'form-control' %>
+                                          <span class="input-group-addon"><%= t('service_channels.hours') %></span>
+                                        </div>
+                                      </div>
+                                      <div class="form-group margin-none marginB10 col-sm-4 padding-none">
+                                        <div class="input-group">
+                                          <%= f.text_field :red_alert_minutes, value: sla_minutes(@service_channel.red_alert_hours, @service_channel.red_alert_minutes), :class => 'form-control' %>
+                                          <span class="input-group-addon"><%= t('service_channels.minutes') %></span>
+                                        </div>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                      <%= render partial: '/shared/field_error', locals: { record: @service_channel, field: :red_alert_hours } %>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="tag">
+                            <div class="tab-pane fill-bg" id="userTags">
+                              <%= render partial: 'service_channels/tag' %>
+                            </div>
+                          </div>
+                          <div class="tab-pane" id="settings">
+                            <%= render partial: 'service_channels/settings', locals: { f: f } %>
+                          </div>
+
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="widget">
+                                  <div class="widget-body">
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Tab content -->
+                </div>
+              </div>
+            </div>
+            <% else  %>
+            <div class="no-selection">
+              <p class="center size24">
+                <i class="fa fa-sitemap"></i>
+              </p>
+              <div class="center"><%= t('users.nothing_selected_state.no_service_channel') %></div>
+            </div>
+            <% end %>
+            <!-- // Widget END -->
+          </div>
+
+      <div class="modal fade" id="email_settings" aria-hidden="false">
+        <%= render partial: 'imap_smtp_settings', locals: { prefix: :email_media_channel, media_channel: @service_channel.email_media_channel, f: f } %>
+      </div>
+      <div class="modal fade" id="web_form_settings" aria-hidden="false">
+        <%= render partial: 'imap_smtp_settings', locals: { prefix: :web_form_media_channel, media_channel: @service_channel.web_form_media_channel, f: f } %>
+      </div>
+      <div class="modal fade" id="internal_settings" aria-hidden="false">
+        <%= render partial: 'internal_settings', locals: { prefix: :internal_media_channel, media_channel: @service_channel.internal_media_channel || @service_channel.build_internal_media_channel, f: f } %>
+      </div>
+      <div class="modal fade" id="call_settings" aria-hidden="false">
+        <%= render partial: 'call_settings', locals: { prefix: :call_media_channel, media_channel: @service_channel.call_media_channel, f: f } %>
+      </div>
+      <div class="modal fade" id="chat_settings" aria-hidden="false">
+        <%= render :partial => 'chat_settings', locals: {prefix: :chat_media_channel, media_channel: @service_channel.chat_media_channel, f: f} %>
+      </div>
+      <div class="modal fade" id="sip_settings" aria-hidden="false">
+        <%= render :partial => 'sip_settings', locals: {prefix: :sip_media_channel, media_channel: @service_channel.sip_media_channel, f: f} %>
+      </div>
+    <% end %>
+  </div>
+</div>
+ </div>
+      </div>
+<div class=" hide" id="new_chat_initial_button_hidden_nested_fields">
+  <%= render 'chat_initial_button', id: nil , title: "", destroy_value: true, index: '__dynamic_id_dummy__' %>
+</div>
+<div class="modal fade" id="sms_templates_editor" aria-hidden="false">
+  <%= render partial: 'sms_templates_editor' %>
+</div>
+<script>
+  function ResizeToFit() {
+    var GetHeight = $(window).height();
+    $('.service_channels_index .tab-pane:first').height(GetHeight - 150);
+    $('.inbox-preview').height(GetHeight - 200);
+  }
+  $(document).ready(function () {
+    ResizeToFit();
+    $(window).bind('resize', ResizeToFit);
+    $(document).on("click", '.submitServiceChanel', function(e) {
+      var selected = $(".skillTagSelected").val();
+      if(selected){
+        var url = "<%= create_skills_service_channel_path(@service_channel) rescue nil %>";
+        e.preventDefault();
+        $.ajax({
+          type: "POST",
+          dataType: 'script',
+          url: url,
+          data: {
+            tag:   selected
+          }
+        });
+      } else{
+
+      }
+    });
+  });
+
+  function checkTab (id) {
+    document.getElementById('del-settings').style.display = "inline";
+  }
+</script>

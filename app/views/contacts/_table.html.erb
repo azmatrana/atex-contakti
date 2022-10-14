@@ -1,0 +1,52 @@
+<div class="table-responsive overflow-x">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.contact.first_name') %> </th>
+        <th><%= t('activerecord.attributes.contact.last_name') %> </th>
+        <th><%= t('activerecord.attributes.contact.phone') %> </th>
+        <th><%= t('activerecord.attributes.contact.email') %> </th>
+        <th><%= t('activerecord.attributes.contact.address') %> </th>
+        <th><%= t('activerecord.attributes.contact.postcode') %> </th>
+        <th><%= t('activerecord.attributes.contact.city') %> </th>
+        <th><%= t('activerecord.attributes.contact.country') %> </th>
+        <th><%= t('activerecord.attributes.contact.website') %> </th>
+        <th><%= t('activerecord.attributes.contact.vat') %> </th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @contacts.length > 0 %>
+        <% @contacts.each do |contact| %>
+          <tr id="contact-row-<%= contact.id %>" data-phone="<%= contact.phone %>">
+            <td> <%= contact.first_name %> </td>
+            <td> <%= contact.last_name %> </td>
+            <td> <%= contact.phone %> </td>
+            <td> <%= contact.email %> </td>
+            <td> <%= contact.address %> </td>
+            <td> <%= contact.postcode %> </td>
+            <td> <%= contact.city %> </td>
+            <td> <%= contact.country %> </td>
+            <td> <%= contact.website %> </td>
+            <td> <%= contact.vat %> </td>
+            <td>
+              <%= link_to '<i class="fa fa-phone"></i>'.html_safe, 'javascript:void(0);', class: 'contact-call-btn', data: {phone: contact.phone}, style: "display:none" %>
+              <% unless public_phonebook == true %>
+                <%= link_to '<i class="fa fa-eye"></i>'.html_safe, contact_path(contact.id), remote: true %>
+              <% end %>
+            </td>
+
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td class="text-center" colspan="11">  <%= t('user_dashboard.contact_modal.no_contacts') %> </td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+</div>

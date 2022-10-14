@@ -1,0 +1,120 @@
+<div class="modal-dialog">
+  <div class="modal-content" id="new-task-modal-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t 'user_dashboard.new_task' %></h3>
+    </div>
+
+    <%= simple_form_for @task, remote: true do |f| %>
+      <div class="modal-body" style="overflow-y: auto">
+        <%= f.simple_fields_for :messages do |ff| %>
+          <%= f.hidden_field :media_channel_id, value: "MediaChannel::Internal" %>
+
+          <!-- ko if: isSoftfoneTicket -->
+          <%= f.hidden_field :is_softfone_ticket, value: true %>
+          <!-- /ko -->
+          
+          <div class="col-xs-12">
+            <label><%= t("user_dashboard.task_name")%>*</label>
+            <%= ff.text_field :title, class: 'form-control new_task_title' %>
+            <br>
+          </div>
+          <div class="col-xs-12">
+            <label><%= t("reports.index.service_channel")%>*</label>
+            <%= f.collection_select(:service_channel_id,
+                                    company_service_channels_collection,
+                                    :id, :name, {},
+                                    class: 'form-control new_task_service_channel') %>
+            <br>
+            <label><%= t("user_dashboard.assign_to_agent")%></label>
+            <%= f.collection_select(:assigned_to_user_id,
+                                    company_agents_collection,
+                                    :id, :full_name,
+                                    { include_blank: I18n.t('user_dashboard.open_to_all') },
+                                    class: 'form-control new_task_agent', disabled: false) %>
+            <br>
+          </div>
+
+          <div class="col-xs-12">
+            <label><%= t("user_dashboard.add_tags")%></label>
+            <input type="text" class="form-control" autocomplete="off" id="tags" name="tags" />
+            <br>
+          </div>
+
+          <div class="col-xs-12">
+            <label><%= t("user_dashboard.select_template")%></label>
+            <select data-bind="options: $root.viewModels.sharedViews.basicTemplates.basicTemplatesList, optionsText: 'title',
+             optionsValue :'text', value: templateText, optionsCaption: '<%= t("user_dashboard.choose_template")%>', event: {change: setTextFromTemplate } " class="form-control">
+            </select>
+            <br>
+          </div>
+
+          <div class="col-xs-12" data-bind="if: showCallFields">
+            <label><%= t("user_dashboard.phone")%></label>
+            <%= ff.text_field :from, class: 'form-control', placeholder: '+358' %>
+          </div>
+
+          <div class="col-xs-12" data-bind="if: showEmailFields">
+            <label><%= t("user_dashboard.email")%></label>
+            <%= ff.text_field :from, class: 'form-control' %>
+          </div>
+
+          <%= hidden_field_tag 'task[type]', class: 'form-control' %>
+          <%= hidden_field_tag 'task[campaign_item_id]' %>
+          <%= hidden_field_tag 'chat[from]' %>
+          <%= hidden_field_tag 'chat[from_phone]' %>
+
+          <div class="col-xs-12">
+            <label><%= t("user_dashboard.task_message")%></label>
+            <%= ff.text_area :description, class: 'form-control new_task_description' %>
+            <br>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="col-md-4">
+              <div class="fileupload-section pull-left">
+                <%= ff.simple_fields_for :attachments do |fff|%>
+                  <button type="button" class="btn btn-default btn-sm attach-file-btn pull-left"><%= I18n.t('user_dashboard.attach_file') %> <span class="glyphicon glyphicon-paperclip"></span></button>
+                  <br>
+                  <div class="fileupload template hidden fileupload-new margin-none pull-left">
+                    <span class="btn" data-trigger="fileupload">
+                      <span class="fileupload-new"><%= I18n.t('user_dashboard.select_file') %></span>
+                      <span class="fileupload-exists"><%= I18n.t('user_dashboard.attach_change') %></span>
+                    </span>
+                    <input class="form-control file-field margin-none hidden" id="task_messages_attributes_0_attachments" name="task[messages_attributes][0][attachments][]" type="file">
+                    <span class="fileupload-preview"></span>
+                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                  </div>
+                  <br>
+                  <% end %>
+                </div>
+            <% end %>
+          </div>
+
+          <div class="col-md-4">
+            <button type="button" class="pull-left btn btn-default btn-sm" data-bind="click: showFilesModal"><%= I18n.t('user_dashboard.add_file') %><span class="glyphicon glyphicon-paperclip"></span></button>
+            <!-- ko foreach: companyFiles -->
+            <div class="company_files_list">
+              <input class="form-control margin-none hidden" data-bind="value: id" id="ticket_company_files_ids[]" name="company_files_ids[]" type="text" />
+              <span class="pull-left company_file_name"><a data-bind="text: file_name, attr: { href: file.url}"></a>
+                <span data-bind="click: $parent.removeCompanyFile"><i class="fa fa-close pointer"></i></span>
+              </span>
+            </div>
+            <!-- /ko -->
+          </div>
+
+          <div class="col-md-4">
+            <div class="footer clearfix pull-right">
+              <a role="button" class="btn btn-default btn-sm" data-dismiss="modal"><%= t('user_dashboard.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span></a>
+              <a role="button" class="btn btn-default btn-sm new-task-save" disabled="disabled"><%= I18n.t('user_dashboard.send') %> <span class="glyphicon glyphicon-send"></span></a>
+            </div>
+          </div>
+        </div>
+
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

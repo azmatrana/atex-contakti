@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <!-- row-app -->
+  <div class="row row-app">
+    <!-- col -->
+    <!-- col-separator.box -->
+    <div class="col-separator col-unscrollable box">
+      <!-- col-table -->
+      <div class="col-table">
+        <h4 class="innerAll margin-none border-bottom text-center"><i class="fa fa-lock"></i>
+          <%= t('users.passwords.change_pass') %></h4>
+        <!-- col-table-row -->
+        <div class="col-table-row">
+          <!-- col-app -->
+          <div class="col-app col-unscrollable">
+            <!-- col-app -->
+            <div class="col-app">
+              <div class="login">
+                <div class="placeholder text-center"><i class="fa fa-lock"></i>
+                </div>
+                <div class="panel panel-default col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-4">
+                  <div class="panel-body">
+                    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                      <%= f.error_notification %>
+
+                      <%= f.input :reset_password_token, as: :hidden %>
+                      <%= f.full_error :reset_password_token %>
+
+                      <div class="form-inputs">
+                        <%= f.input :password, label: t('users.passwords.new_pass'), required: true, autofocus: true %>
+                        <%= f.input :password_confirmation, label: t('users.passwords.confirm_pass'), required: true %>
+                      </div>
+
+                      <div class="form-actions">
+                        <%= f.button :button, t('users.passwords.change_pass_btn'), :class => 'submit-loader', :type => 'submit' %>
+                      </div>
+                    <% end %>
+                    <br>
+                    <%= render "users/shared/links" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- // END col-app -->
+          </div>
+          <!-- // END col-app.col-unscrollable -->
+        </div>
+        <!-- // END col-table-row -->
+      </div>
+      <!-- // END col-table -->
+    </div>
+    <!-- // END col-separator.box -->
+  </div>
+  <!-- // END row-app -->
+  <!-- Global -->
+</div>

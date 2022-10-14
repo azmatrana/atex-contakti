@@ -1,0 +1,27 @@
+<div>
+  <%= form_tag billing_super_ui_company_url, method: :post, id: 'billing-form' do %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-left">      <h3 class="company-name"><%= resource.name %></h3>
+        </div>
+        <div class="pull-left">      <%= select_year(@year, start_year: resource.created_at.year, end_year: Date.today.year, field_name: 'year', prefix: 'q', prompt: 'All years') %>
+        </div>
+        <div class="pull-left">      <%= select_month(@month, prompt: 'All months', field_name: 'month', prefix: 'q') %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row marginT10">
+  <div id="billing-form-table" class="col-md-12">
+    <%= render 'billing_results' %>
+  </div>
+
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('change', 'select', function() {
+      $('#billing-form').submit();
+    });
+  });
+</script>

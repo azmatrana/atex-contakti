@@ -1,0 +1,133 @@
+<div>
+  <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+    <div class="widget-head">
+      <ul>
+        <li class="active"><a href="#chat_templates" data-toggle="tab"><%= I18n.t('tags.templates_tab.chat') %></a></li>
+        <li><a href="#basic_templates" data-toggle="tab"><%= I18n.t('tags.templates_tab.basic_template') %></a></li>
+      </ul>
+    </div>
+    <div class="widget-body">
+      <div class="tab-content">
+        <!-- Tab content -->
+        <div class="tab-pane active" id="chat_templates" data-bind="with: managerAppViews.chatTemplates">
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="row">
+                  <div class="col-md-10">
+                    <textarea class="form-control ckeditor" type="text" data-bind="value: templateText" id="chat_template_text" placeholder="<%= t('tags.templates_tab.chat_template_text') %>">
+                    </textarea>
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-default btn-sm " data-bind="click: createReplyTemplate">
+                      <%= t('tags.templates_tab.create') %>
+                    </button>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <input name="search"  class="form-control" data-bind="value: templatesFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('tags.templates_tab.search') %>">
+            </div>
+          </div>
+
+          <div class="row">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>
+                  <%= t('tags.templates_tab.chat_templates') %>
+                </th>
+                <th>
+                  <%= t('tags.templates_tab.actions') %>
+                </th>
+              </tr>
+              </thead>
+              <tbody data-bind="foreach: { data: filteredTemplatesList, afterRender: reinitializeCkEditors, as: 'chatTemplate'} ">
+              <tr>
+                <td>
+                  <textarea class="form-control ckeditor" data-bind="value: text, attr: { id: 'chat_template_edit' + id, name: 'chat_template_edit_' + id }"></textarea>
+                </td>
+                <td>
+                  <button class="btn btn-default btn-sm" data-bind="click: $parent.saveTemplate">   <%= t('tags.save') %></button>
+                  &nbsp
+                  <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteTemplate(id)">   <%= t('tags.delete') %></button>
+
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="basic_templates" data-bind="with: managerAppViews.basicTemplates">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-10">
+                  <input class="form-control" type="text" data-bind="value: templateTitle" placeholder="<%= t('tags.templates_tab.basic_template_title') %>">
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-10">
+                  <textarea class="form-control" data-bind="value: templateText" id="basic_template_text" placeholder="<%= t('tags.templates_tab.basic_template_text') %>">
+                  </textarea>
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-default btn-sm " data-bind="click: createBasicTemplate">
+                    <%= t('tags.templates_tab.create') %>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <input name="search"  class="form-control" data-bind="value: basicTemplatesFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('tags.templates_tab.search') %>">
+            </div>
+          </div>
+
+          <div class="row">
+            <table class="table">
+              <thead>
+              <tr>
+                <th>
+                  <%= t('tags.templates_tab.basic_template_title') %>
+                </th>
+                <th>
+                  <%= t('tags.templates_tab.basic_template_text') %>
+                </th>
+                <th>
+                  <%= t('tags.templates_tab.actions') %>
+                </th>
+              </tr>
+              </thead>
+              <tbody data-bind="foreach:  { data: filteredBasicTemplates, afterRender: reinitializeCkEditors, as: 'basicTemplate'} ">
+              <tr>
+                <td>
+                  <input class="form-control" data-bind="value: title">
+                </td>
+                <td>
+                    <textarea class="form-control ckeditor ckeditor-dynamic" data-bind="value: text, attr: { id: 'basic_template_edit' + id, name: 'basic_template_edit_' + id }">
+                    </textarea>
+                </td>
+                <td>
+                  <button class="btn btn-default btn-sm" data-bind="click: $parent.saveBasicTemplate ">   <%= t('tags.save') %></button>
+                  &nbsp
+                  <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteBasicTemplate(id)">   <%= t('tags.delete') %></button>
+
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

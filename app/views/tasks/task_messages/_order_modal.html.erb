@@ -1,0 +1,176 @@
+<div class="modal fade" id="display_order_modal" aria-hidden="true">
+  <div class="modal-dialog modal-sm" data-bind="with: $root.viewModels.taskContainer.orderModal">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title"><%= t('user_dashboard.shopping_cart.order') %></h4>
+          </div>
+          <div class="modal-body" data-bind="css: { disabledContent: loading() == true }">
+          <!-- ko if: order() -->
+            <div>
+              <table class="table">
+                  <!-- ko if: order().chat_inquiry_fields_json !== 'null' -->
+                  <tbody data-bind="foreach: order().chat_inquiry_fields_json">
+                    <tr>
+                      <td data-bind="text: $data.label"></td>
+                      <td>
+                        <span data-bind="text: $data.value"></span>
+                        <!-- ko if: ($index() == 0 && window.userDashboardApp.viewModels.sharedViews.vehicleDetailModal.isAdFinlandCompany() == true) -->
+                          <button class="btn btn-sm btn-default" data-bind="click: ()=>window.userDashboardApp.viewModels.sharedViews.vehicleDetailModal.getVehicleDetails($data.value)"><%= t('user_dashboard.vehicles_data.details') %>
+                          </button>
+                        <!-- /ko -->
+                      </td>
+                    </tr>
+                  </tbody>
+                  <!-- /ko -->
+                  <!-- ko if: order().customer -->
+                  <tbody>
+                      <tr>
+                          <th colspan="2">
+                              <%= t('user_dashboard.shopping_cart.customer.title') %>
+                          </th>
+                      </tr>
+                      <tr>
+                          <td><%= t('user_dashboard.shopping_cart.customer.full_name') %></td>
+                          <td><span data-bind="text: order().customer.full_name"></span></td>
+                      </tr>
+                      <tr>
+                          <td><%= t('user_dashboard.shopping_cart.customer.email') %></td>
+                          <td><span data-bind="text: order().customer.email"></span></td>
+                      </tr>
+                      <tr>
+                          <td><%= t('user_dashboard.shopping_cart.customer.phone_number') %></td>
+                          <td><span data-bind="text: order().customer.phone_number"></span></td>
+                      </tr>
+                      <tr>
+                          <td><%= t('user_dashboard.shopping_cart.customer.street_address') %></td>
+                          <td><span data-bind="text: order().customer.street_address"></span></td>
+                      </tr>
+                      <tr>
+                          <td><%= t('user_dashboard.shopping_cart.customer.city') %></td>
+                          <td><span data-bind="text: order().customer.city"></span></td>
+                      </tr>
+                      <tr>
+                          <td><%= t('user_dashboard.shopping_cart.customer.zip_code') %></td>
+                          <td><span data-bind="text: order().customer.zip_code"></span></td>
+                      </tr>
+                  </tbody>
+                  <!-- /ko -->
+              </table>
+
+              <br>
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th>
+                              <%= t('user_dashboard.shopping_cart.product_title') %>
+                          </th>
+                          <th>
+                              <%= t('user_dashboard.shopping_cart.quantity') %>
+                          </th>
+                          <th>
+                              <%= t('user_dashboard.shopping_cart.price') %>
+                          </th>
+                          <th>
+                              <%= t('products.type') %>
+                          </th>
+                          <th>
+                              <%= t('user_dashboard.shopping_cart.vat') %>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody data-bind="foreach: order().order_products">
+                      <tr>
+                          <td data-bind="text: $data.product.title"></td>
+                          <td data-bind="text: $data.quantity"></td>
+                          <td>
+                              <span data-bind="text: displayPrice($data.price)"></span><!--
+                           --><span data-bind="text: $data.currency"></span>
+                          </td>
+                          <td>
+                            <!-- ko if: $data.with_vat -->
+                            <span><%= t('products.with_vat') %></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: $data.with_vat -->
+                            <span><%= t('products.without_vat') %></span>
+                            <!-- /ko -->
+                          </td>
+                          <td>
+                            <span data-bind="text: $data.vat_percentage"></span>%
+                          </td>
+                      </tr>
+                  </tbody>
+                  <tbody style="border-top: 0px;">
+                    <tr>
+                        <td colspan="3" class="text-right"><strong><%= t('user_dashboard.shopping_cart.price_without_taxes') %></strong></td>
+                        <td colspan="1">
+                            <span data-bind="text: displayPrice(order().price_without_taxes)"></span><!--
+                         --><span data-bind="text: order().currency"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong><%= t('user_dashboard.shopping_cart.taxes') %></strong></td>
+                        <td colspan="1">
+                            <span data-bind="text: displayPrice(order().taxes)"></span><!--
+                         --><span data-bind="text: order().currency"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong><%= t('user_dashboard.shopping_cart.shipment_charges') %></strong></td>
+                        <td colspan="1">
+                            <span data-bind="text: displayPrice(order().shipment_price)"></span><!--
+                         --><span data-bind="text: order().currency"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong><%= t('user_dashboard.shopping_cart.total') %></strong></td>
+                        <td colspan="1">
+                            <span data-bind="text: displayPrice(order().total)"></span><!--
+                         --><span data-bind="text: order().currency"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong><%= t('service_channels.checkout_format') %></strong></td>
+                        <!-- ko if: order().checkout_method == "checkout_ticket" -->
+                        <td colspan="1"><%= t('service_channels.checkout_ticket') %></td>
+                        <!-- /ko -->
+
+                        <!-- ko if: order().checkout_method == "checkout_paytrail" -->
+                        <td colspan="1"><%= t('service_channels.checkout_paytrail') %></td>
+                        <!-- /ko -->
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" class="text-right"><strong><%= t('user_dashboard.shopping_cart.shipment_method') %></strong></td>
+                        <td colspan="1" data-bind="text: order().shipment_method && order().shipment_method.name"></td>
+                    </tr>
+                  <!-- ko if: (order().checkout_method == "checkout_paytrail" && order().chatbot_paytrail_payment) -->
+
+                    <tr>
+                          <td colspan="3" class="text-right"><strong><%= t('paytrail_payment.payment_status') %></strong></td>
+                          <!-- ko if: order().chatbot_paytrail_payment.status == "pending" -->
+                          <td colspan="1"><%= t('paytrail_payment.payment_pending') %></td>
+                          <!-- /ko -->
+                          <!-- ko if: order().chatbot_paytrail_payment.status == "paid" -->
+                          <td colspan="1"><%= t('paytrail_payment.payment_paid') %></td>
+                          <!-- /ko -->
+                          <!-- ko if: order().chatbot_paytrail_payment.status == "failed" -->
+                          <td colspan="1"><%= t('paytrail_payment.payment_failed') %></td>
+                          <!-- /ko -->
+                    </tr>
+                      <!-- ko if: order().chatbot_paytrail_payment.status == "paid" -->
+                    <tr>
+                          <td colspan="3" class="text-right"><strong><%= t('paytrail_payment.payment_time') %></strong></td>
+                          <td colspan="1" data-bind="text: order().chatbot_paytrail_payment.payment_time"></td>
+                    </tr>
+                      <!-- /ko -->
+                  <!-- /ko -->
+                  </tbody>
+
+              </table>
+          </div>
+          <!-- /ko -->
+          </div>
+      </div>
+  </div>
+</div>

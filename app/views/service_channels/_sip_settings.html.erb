@@ -1,0 +1,106 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('service_channels.webphone_header') %></h3>
+    </div>
+
+    <div class="modal-body">
+      <div class="relativeWrap">
+        <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+          <div class="widget-head">
+            <ul>
+                <li class="active"><a class="" href="#sip_settings_tab" data-toggle="tab"><i class="fa fa-gear"></i><%= t('service_channels.webphone_header')%></a></li>
+                <li><a class="" href="#sip_speed_dial_tab" data-toggle="tab"><i class="fa fa-phone"></i><%= t('service_channels.webphone_dial')%></a></li>
+                <li><a class="glyphicons pencil" href="#sip_settings_customize_tab" data-toggle="tab"><i></i><%= t('service_channels.customize')%></a></li>
+            </ul>
+          </div>
+          <div class="widget-body">
+             <div class="tab-content">
+                  <div class="tab-pane active" id="sip_settings_tab">
+                    <%= render partial: 'service_channels/sip_settings/sip_settings_tab', locals: {media_channel: media_channel, f: f} %>
+                  </div>
+
+                  <div class="tab-pane" id="sip_speed_dial_tab">
+                    <%= render partial: 'service_channels/sip_settings/sip_speed_dials', locals: {media_channel: media_channel, f: f} %>
+                  </div>
+
+                  <div class="tab-pane" id="sip_settings_customize_tab">
+                    <%= render partial: 'service_channels/sip_settings/sip_customize_tab', locals: {media_channel: media_channel, f: f} %>
+                  </div>
+             </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a role="button" class="btn btn-default save-settings-btn">
+        <%=t('service_channels.chat_modal_save')%><span class="glyphicon glyphicon-ok"></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // For adding
+  $('.add_nested_fields[data-association=sip_settings]').click(function(){
+    //Nested forms doesn't render an empty form? hax: create a new one and reload page :/
+    var media_channel_id = $('#service_channel_sip_media_channel_attributes_id').val(),
+            params = {media_channel_id : media_channel_id};
+    $.post( "add_sip_settings_to_media_channel", params, function( data ) {
+      window.location.href = window.location.href
+    });
+  });
+
+  // For removing
+  $('.remove_nested_fields[data-association=sip_settings]').click(function(){
+    //Nested forms doesn't render an empty form? hax: create a new one and reload page :/
+    var media_channel_id = $('#service_channel_sip_media_channel_attributes_id').val(),
+            params = {media_channel_id : media_channel_id};
+    $.post( "remove_sip_settings_from_media_channel", params, function( data ) {
+      window.location.href = window.location.href
+    });
+  });
+
+  <% sip_settings = media_channel.sip_settings %>
+  <% if sip_settings.present? %>
+    function connectPBX(){
+      user = {
+        Pass: '<%= "#{sip_settings.password}" %>',
+        Display: '<%= "#{sip_settings.title}" %>',
+        User: '<%= "#{sip_settings.user_name}" %>',
+        Realm: '<%= "#{sip_settings.domain}" %>',
+        WSServer: '<%= "#{sip_settings.ws_server_url}" %>'
+      }
+
+      config =  {
+        media : {
+          remote : {
+          // audio: document.getElementById('audioRemote')
+          // video: document.getElementById('audioRemote'),
+          }
+        },
+        peerConnectionOptions : {
+          rtcConfiguration : {
+            iceServers : [{urls:"stun:stun.l.google.com:19302"}]
+          }
+        },
+        password        : user.Pass,
+        authorizationUser: user.User,
+        displayName     : user.Display,
+        uri             : user.User +'@'+user.Realm,
+        transportOptions: {
+          traceSip: true,
+          wsServers:  user.WSServer,
+        },
+        registerExpires : 30,
+        ua: {}
+      }
+      new SIP.UA(config);
+    }
+
+    connectPBX()
+  <% end %>
+
+</script>

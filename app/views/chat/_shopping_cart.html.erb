@@ -1,0 +1,81 @@
+<div id="contakti-chat-main" class="row">
+  <div id="contakti_cart_box" class="cart_box" style="right: 371px; bottom: -9999px">
+    <div id="contakti-msg-head" class="msg_head" style="background-color: <%= color %>">
+
+      <span id="contakti-user-name" style="color: <%= text_color %>"> Shopping Cart</span>
+    </div>
+    <div></div>
+    <div id="contakti-msg-container" class="msg_wrap">
+      <div id="contakti-msg-body" class="cart_body" style="right: 15px;">
+        <table class="table table-condensed table-striped table-primary ">
+          <thead>
+          <tr>
+            <th style="width: 1%;" class="text-center">No.</th>
+            <th>Title</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Price</th>
+            <th class="text-center" style="width: 100px;">Actions</th>
+          </tr>
+          </thead>
+          <tbody id ="cart_body">
+<!--          <tr>-->
+<!--            <td class="center">1</td>-->
+<!--            <td class="important">Lorem Ipsum Sit</td>-->
+<!--            <td class="center">-->
+<!--              <span > <i class="fa fa-plus"></i></span>-->
+<!--              <span > <i class="fa fa-minus" ></i></span>-->
+<!--            </td>-->
+<!--            <td class="center">-->
+<!--              <span class="fa fa-fw fa-picture-o"></span>1 photos</td>-->
+<!--            <td class="text-center">-->
+<!--              <input type="text" class="form-control" style="width: 50px; margin: 0 auto;" value="5">-->
+<!--            </td>-->
+<!--            <td class="center">€15</td>-->
+<!--            <td class="center">-->
+<!--              <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>-->
+<!--            </td>-->
+<!--          </tr>-->
+          </tbody>
+        </table>
+
+        <div class="">
+          <span id="total_amount"> Sum: <strong> $0</strong> </span>
+        </div>
+        <br/>
+        <br/>
+        <div>
+
+          <label for="payment_method_select"> PAYMENT METHOD:</label>
+
+          <div class="center" id="payment_method_select">
+            <select style="height: 25px;font-size: 15px;width: 50%;">
+              <option> Card</option>
+              <option> PayPal</option>
+            </select>
+          </div>
+          <br/>
+
+          <label for="payment_method_select"> SHIPPING METHOD:</label>
+
+          <div class="center" id="payment_method_select">
+            <select style="height: 25px;font-size: 15px;width: 50%;">
+              <option> ABC</option>
+              <option> DEF</option>
+            </select>
+          </div>
+
+        </div>
+
+        <br/>
+        <div class="center">
+          <button  style="color: <%= text_color %>; background-color: <%=color %>"> CHECKOUT</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+

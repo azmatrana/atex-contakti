@@ -1,0 +1,295 @@
+<div class="container-fluid details">
+  <div class="row">
+    <h3><%= t('users.details.my_account') %></h3>
+    <div class="innerLR">
+      <!-- Widget -->
+      <div class="widget widget-tabs border-bottom-none">
+        <!-- Widget heading -->
+        <div class="widget-head">
+          <ul>
+            <li class="active"><a href="#account-details"
+                                  data-toggle="tab"><i class="fa fa-edit"></i><%= t('users.details.account_details') %>
+            </a>
+            </li>
+
+            <li><a href="#phonebook-tab"
+                   data-toggle="tab"><i class="fa fa-group"></i><%= t('users.details.phonebook') %></a>
+            </li>
+            <% if @current_user.kimai_tracker_api_url.present? %>
+              <li><a href="#timetracker-tab"
+                     data-toggle="tab"><i class="fa fa-lock"></i><%= t('kimai_details.kimai_details') %></a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <!-- // Widget heading END -->
+        <div class="widget-body">
+          <div class="tab-content">
+            <!-- Tab content -->
+            <div class="tab-pane active" id="account-details">
+              <%= form_for @user, url: { id: @user.id }, :class => 'form-horizontal' do |f| %>
+                <!-- Row -->
+                <div class="row">
+                  <!-- Column -->
+                  <div class="col-md-12">
+                    <div class="col-md-5">
+                      <!-- Group -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.first_name') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :first_name, :class => 'form-control' %>
+                            <span class="input-group-addon"><i class="fa fa-user"></i>
+                          </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- // Group END -->
+                      <!-- Group -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.last_name') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :last_name, :class => 'form-control' %>
+                            <span class="input-group-addon"><i class="fa fa-user"></i>
+                          </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Group -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.title') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :title, :class => 'form-control' %>
+                            <span class="input-group-addon"><i class="fa fa-list-alt"></i>
+                          </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Group -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.phone') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :mobile, :class => 'form-control' %>
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- // Group END -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.email') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :email, :class => 'form-control', :placeholder => 'john.dow@email.com', :type => 'email ' %>
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- // Group END -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.password') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :password, :class => 'form-control', :placeholder => t('users.details.leave_empty_option'), :type => 'password' %>
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- // Group END -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.repeat_password') %></label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <%= f.text_field :password_confirmation, :class => 'form-control',
+                                             :placeholder => t('users.details.leave_empty_option'), :type => 'password' %>
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                          </div>
+                          <div class="separator line bottom"></div>
+                          <div class="separator top">
+                            <div class="btn-group-block pull-right">
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                        </div>
+                        <!-- // Group END -->
+                      </div>
+                    </div>
+
+
+                    <!-- // Column END -->
+                    <div class="col-md-7">
+                      <!-- Group -->
+                      <div class="form-group margin-none innerB">
+                        <label class="col-md-3 control-label"><%= t('users.details.select_language') %></label>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                            <% if I18n.locale == :en %>
+                              <i class="flag-GB"></i> <%= t('layouts.navigation.lang_en') %>
+                            <% elsif I18n.locale == :fi %>
+                              <i class="flag-FI"></i> <%= t('layouts.navigation.lang_fi') %>
+                            <% elsif I18n.locale == :sv %>
+                              <i class="flag-SE"></i> <%= t('layouts.navigation.lang_sv') %>
+                            <% end %>
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu locale-switcher">
+                            <%# if user_signed_in? %>
+                            <!--                          <li value="en"><a href="#"><i class="flag-GB"></i> <%#= t('layouts.navigation.lang_en') %></a></li>-->
+                            <!--                          <li value="fi"><a href="#"><i class="flag-FI"></i> <%#= t('layouts.navigation.lang_fi') %></a></li>-->
+                            <!--                          <li value="sv"><a href="#"><i class="flag-SE"></i> <%#= t('layouts.navigation.lang_sv') %></a></li>-->
+                            <%# else %>
+                            <li>
+                              <%= link_to set_user_locale_path(locale: "en") do %>
+                                <i class="flag-GB"></i> <%= t('layouts.navigation.lang_en') %>
+                              <% end %>
+                            </li>
+                            <li>
+                            <%= link_to set_user_locale_path(locale: "fi") do %>
+                              <i class="flag-FI"></i> <%= t('layouts.navigation.lang_fi') %>
+                            <% end %>
+                          </li>
+                          <li>
+                            <%= link_to set_user_locale_path(locale: "se") do %>
+                              <i class="flag-SE"></i>   <%= t('layouts.navigation.lang_sv') %>
+                            <% end %>
+                          </li>
+                          <%# end %>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- // Group END -->
+
+                    <!-- Group -->
+                    <div class="form-group margin-none innerB">
+                      <label class="col-md-3 control-label"><%= t('users.details.select_signature')%></label>
+                      <div class="col-md-9 input-group">
+
+                        <div class="content">
+                          <div class="control-group">
+                            <div class="controls">
+                              <%= f.text_area :signature, :class => 'form-control ckeditor', :rows => 10 %>
+                              <div class="clearfix"></div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- // Row END -->
+              <div class="row">
+                <div class="col-md-6 pull-right">
+                  <div class="footer clearfix innerAll pull-right">
+                    <button id="details_cancel_btn" type="button" class="btn btn-default btn-sm" data-url="<%= home_page_link_url %>"> <%= I18n.t('users.registrations.back')%> <span class="glyphicon glyphicon-arrow-left"></span></button>
+                    <button type="submit" class="btn btn-default btn-sm"> <%= t('users.details.save_details')%> <span class="glyphicon glyphicon-ok"></span></button>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+            <!-- // Form actions END -->
+            <!-- // Tab content END -->
+
+            <div class="tab-pane" id="phonebook-tab">
+              <!-- Row -->
+              <div class="row">
+                <!-- Column -->
+                <div class="col-md-12">
+                  <div class="col-md-6">
+                    <h4><%= I18n.t('tags.attach_phonebook_csv') %></h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <form id="upload_phonebook_form">
+                  <div class="col-md-3">
+                    <div class="input-group btn-block">
+                      <input class="form-control attach_csv" type="file" id="attach_phonebook_csv" name="csv">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-default btn-sm upload_csv" id="upload_phonebook_submit_button">
+                      <%= t('tags.upload') %>
+                    </button>
+                    <script>
+                      $("#upload_phonebook_submit_button").click( function() {
+                        var form = $('#upload_phonebook_form');
+                        var formData = new FormData(form[0]);
+                        $.ajax({
+                          url: 'contacts/upload_csv',
+                          method: 'POST',
+                          processData: false,
+                          contentType: false,
+                          data: formData,
+                          success: function() {
+                            alert('File was imported');
+                            $("#attach_phonebook_csv").val('');
+                          },
+                          error: function(response){
+                            var errors = $.parseJSON(response.responseText).errors;
+                            alert(errors);
+                          }
+                        })
+                      });
+                    </script>
+                  </div>
+                </form>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <a download href="/tags/download_phonebook_template_file"><%= I18n.t('tags.download_phonebook_template_file') %></a>
+                </div>
+
+                <div class="col-md-3">
+                  <%= link_to I18n.t('tags.show_contacts'), "/#{I18n.locale}/contacts", remote: true %>
+                </div>
+              </div>
+            </div>
+            
+            <% if @current_user.kimai_tracker_api_url.present? %>
+              <div class="tab-pane" id="timetracker-tab">
+                <%= form_tag "/users/update_kimai_credentials", remote: true do %>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                          <div class="alert alert-success data-saved-alert hide" id="credentials_created_success">
+                          </div>
+                          <div class="alert alert-warning data-warning-alert hide" id="credentials_created_errors"></div>
+                        </div>
+                        <div class="row mb-1">
+                          <div class="col-md-7">
+                            <label class="control-label"><%= I18n.t('kimai_details.tracker_email') %></label>
+                            <%= text_field_tag :tracker_email, @current_user.kimai_detail.try(:tracker_email), class: 'form-control', placeholder: t('kimai_details.tracker_email_placeholder') %>
+                          </div>
+                          <div class="col-md-7">
+                            <label class="control-label"><%= I18n.t('kimai_details.tracker_auth_token') %></label>
+                            <%= text_field_tag :tracker_auth_token, @current_user.kimai_detail.try(:tracker_auth_token), class: 'form-control', placeholder: t('kimai_details.tracker_auth_token_placeholder') %>
+                          </div>
+                        </div>
+                        <div>
+                          <button type="submit" class="submit_kimai_details btn btn-default btn-sm"><%= t('kimai_details.save') %></button>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <!-- // Tab content END -->
+
+      </div>
+    </div>
+  </div>
+  <!-- // Widget END -->
+</div>
+</div>
+<!-- // Content END -->
+</div>
+</div>

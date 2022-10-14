@@ -1,0 +1,56 @@
+<%= simple_form_for(@company, url: @company.persisted? ? resource_url : collection_url) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.input :name %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :street_address %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :city %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :zip_code %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :code %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :time_zone, priority: /Helsinki/ %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :sms_provider, collection: Company::SMS_PROVIDERS %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :wit_token %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.input :allow_call_translation, as: :select, include_blank: false %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.input :wit_chatbot_token %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :spare_parts_api_key, label: "Spare Parts Api Key (AD Finland)" %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.input :currency, collection: Chatbot::Product::CURRENCY, include_blank: false %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.input :paytrail_merchant_id, label: "Merchant ID (Paytrail)" %>
+    </div>
+    <div class="col-md-4">
+      <%= f.input :paytrail_merchant_secret_key, label: "Merchant Secret Key (Paytrail)" %>
+    </div>
+
+  </div>
+
+  <div class="form-actions" >
+    <%= f.button :submit %>
+  </div>
+<% end %>

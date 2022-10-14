@@ -1,0 +1,419 @@
+<div class="modal-dialog" id="training_modal">
+  <div class="modal-content modal-xl">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.training.training_modal_title') %>
+      </h3>
+    </div>
+    <div class="modal-body" data-bind="css: { disabledContent: disable_controlls() == true }" id='training-modal' style="overflow-y: auto">
+      <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+
+        <div class="widget-head">
+          <ul>
+            <li class="active">
+              <%= link_to '#question_input_tab', class: 'question-input-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-pencil"></i>
+                <%= t('user_dashboard.training.create_questions_tab') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#answer_input_tab', class: ' answer-input-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-pencil"></i>
+                <%= t('user_dashboard.training.create_answers_tab') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#questions_index_tab', class: ' questions-index-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-commenting-o"></i>
+                <%= t('user_dashboard.training.questions') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#answers_index_tab', class: ' answers-index-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-commenting"></i>
+                <%= t('user_dashboard.training.answers') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#intents_index_tab', class: ' intents-index-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-lightbulb-o"></i>
+                <%= t('user_dashboard.training.intent') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#entities_index_tab', class: ' entities-index-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-lightbulb-o"></i>
+                <%= t('user_dashboard.training.entities') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#understandings_tab', class: ' understandings-tab', 'data-toggle': 'tab' do %>
+                <i class="fa fa-lightbulb-o"></i>
+                <%= t('user_dashboard.training.understandings') %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+        <div class="widget-body">
+          <div class="tab-content">
+            <div class="tab-pane active" id="question_input_tab">
+              <div class="row">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>  <%= t('user_dashboard.training.question') %></label>
+                    <input class="form-control" placeholder="<%= t('user_dashboard.training.question_input') %>" data-bind="value: new_question">
+                    <div class="separator bottom"></div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label> <%= t('user_dashboard.training.intent') %></label>
+                    <select id="intents" data-bind="options: sortedIntents(), optionsText: 'text',
+                     optionsValue :'id',optionsCaption : '<%= t('user_dashboard.training.select_intent') %>', value: selected_intent_id" class="form-control">
+                    </select>
+                    <div class="separator bottom"></div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <label> <%= t('user_dashboard.training.create_intent_label') %></label>
+
+                    <div id="create-intent">
+                      <input id="intent-input" class="form-control" placeholder="<%= t('user_dashboard.training.intent') %>" data-bind="value: new_intent_text">
+                      <button id="create-intent-button2" class="btn btn-default btn-sm" data-bind="click: createNewIntent">
+                        <%= t('user_dashboard.training.create_intent') %>
+                      </button>
+                    </div>
+                    <div class="separator bottom"></div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10">
+                    <div class="alert alert-success data-saved-alert hide" id="data_saved_alert">
+                    </div>
+                    <div class="alert alert-warning data-warning-alert hide" id="data_warning_alert"></div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-default btn-sm" data-bind="click: createQuestion"> <%= t('user_dashboard.training.create_question_label') %></button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="tab-pane " id="answer_input_tab">
+              <%= render partial: 'answer_form', locals: {name: "answer_create"} %>
+            </div>
+
+            <div class="tab-pane " id="questions_index_tab">
+              <div class="row">
+                <div class="col-md-3">
+                  <input name="search" id="questions-search-input" class="form-control" data-bind="value: questionFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.training.search_question') %>">
+                </div>
+
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>
+                      <%= t('user_dashboard.training.questions') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.intent') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.action') %>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody data-bind="foreach: filteredQuestionsList">
+                  <tr>
+                    <td data-bind='text: text, attr: {"data-id": id}'></td>
+                    <td data-bind="text:intent.text"></td>
+                    <td>
+                      <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteQuestion(id)">   <%= t('user_dashboard.training.delete') %></button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="alert alert-success data-saved-alert hide" id="question_delete_success">
+                  </div>
+                  <div class="alert alert-warning data-warning-alert hide" id="question_delete_error"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="tab-pane " id="answers_index_tab">
+              <div class="row">
+                <div class="col-md-3 mb-1">
+                  <input name="search" id="answers-search-input" class="form-control" data-bind="value: answerFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.training.search_answer') %>">
+                </div>
+
+                <table class="table text-small">
+                  <thead>
+                  <tr>
+                    <th>
+                      <%= t('user_dashboard.training.answers') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.intent') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.files') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.images') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.products') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.option_buttons') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.custom_action_text') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.action') %>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody data-bind="foreach: filteredAnswersList">
+                  <tr>
+                    <td data-bind='html: text, attr: {"data-id": id}'></td>
+                    <td >
+                      <!-- ko if: "intent" in $data -->
+                      <span data-bind="text:intent.text" ></span>
+                      <!-- /ko -->
+                    </td>
+                    <td>
+                      <span data-bind="foreach: company_files">
+                       <a data-bind="attr: { href: file.url }, text: file_name" download></a> &nbsp
+                      </span>
+                    </td>
+                    <td>
+                      <!-- ko if: images&&images.length > 0 -->
+                      <div data-bind=" foreach:images" class="images_cell" >
+                        <div class="images_item_cell">
+                          <img data-bind="attr:{src: file.url}" class=" img-thumbnail">
+                        </div>
+                      </div>
+                      <!-- /ko -->
+                    </td>
+
+                    <td id="option_buttons" data-bind="foreach: products">
+                      <button class="btn btn-default btn-xs products_button" data-bind="text: title"></button>
+                    </td>
+
+                    <td id="option_buttons" data-bind= "foreach: answer_buttons">
+                      <button class="btn btn-default btn-xs answer_buttons" data-bind="text: text"></button>
+                    </td>
+                    <td>
+                      <!-- ko if: has_custom_action === true -->
+                      <button  class="btn btn-default btn-xs answer_buttons" data-bind='text: custom_action_text'>
+                      </button>
+                      <!-- /ko -->
+                    </td>
+                    <td>
+                      <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteAnswer(id)">    <%= t('user_dashboard.training.delete') %></button>
+                      <button class="btn btn-default btn-sm" data-bind="click: $parent.selectAnswerForEdit">    <%= t('user_dashboard.training.edit') %></button>
+
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="alert alert-success data-saved-alert hide" id="answer_delete_success">
+                  </div>
+                  <div class="alert alert-warning data-warning-alert hide" id="answer_delete_error"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="tab-pane " id="intents_index_tab">
+              <div class="row">
+                <div class="col-md-3">
+                  <input name="search" id="intents-search-input" class="form-control" data-bind="value: intentFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.training.search_intent') %>">
+                </div>
+
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>
+                      <%= t('user_dashboard.training.intent') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.action') %>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody data-bind="foreach: filteredIntentsList">
+                  <tr>
+                    <td data-bind='text: text, attr: {"data-id": id}'></td>
+                    <td>
+                      <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteIntent(id)">    <%= t('user_dashboard.training.delete') %></button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="alert alert-success data-saved-alert hide" id="intent_delete_success">
+                  </div>
+                  <div class="alert alert-warning data-warning-alert hide" id="intent_delete_error"></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="tab-pane " id="entities_index_tab">
+              <div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <input name="search" id="entities-search-input" class="form-control" data-bind="value: entityFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.training.search_entities') %>">
+                  </div>
+                  <div class="col-md-1"></div>
+                  <div class="col-md-6" style="display: flex">
+                    <input name="create" id="entity-create-input" class="form-control" data-bind="value: entityName, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.training.entity_text') %>">
+                    <button class="btn btn-default btn-sm" data-bind="click: createEntity"> <%= t('user_dashboard.training.create_entity') %></button>
+                  </div>
+                </div>
+
+                <div class="row separator top">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-10">
+                    <div class="alert alert-success data-saved-alert hide" id="entity_success">
+                    </div>
+                    <div class="alert alert-warning data-warning-alert hide" id="entity_error"></div>
+                  </div>
+                </div>
+
+                <table class="table">
+                  <thead>
+                    <th> <%= t('user_dashboard.training.name') %></th>
+                    <th> <%= t('user_dashboard.training.key_words') %></th>
+                    <th> <%= t('user_dashboard.training.synonyms') %></th>
+                    <th> <%= t('user_dashboard.training.action') %></th>
+                  </thead>
+
+                  <tbody data-bind="foreach: entitiesList().sort(function(a,b) {
+                      var x = a.name.toLowerCase();
+                      var y = b.name.toLowerCase();
+                      return x < y ? -1 : x > y ? 1 : 0;
+                    });">
+                    <tr data-bind="attr:{id: id}, css: { hidden: !name.toLocaleLowerCase().includes($parent.entityFilter().toLocaleLowerCase()) }">
+                      <td  data-bind=" attr:{rowspan: key_words().length ? key_words().length : 1}"><h5 data-bind="text: name"> </h5> <button class="btn btn-default btn-sm" data-bind="click: $parent.addKeyWord"> <%= t('user_dashboard.training.add_keywords') %></button></td>
+                      <td class="keyword-cell">
+                        <!-- ko if: key_words().length    -->
+                        <input class="form-control" data-bind="value: key_words()[0].keyword"/>
+                        <!-- /ko -->
+                      </td>
+                      <td class="synonyms-cell" >
+                        <!-- ko if: key_words().length   -->
+                        <input class="synonyms" data-bind='value: key_words()[0].synonyms'/>
+                        <!-- /ko -->
+                      </td>
+                      <td data-bind="attr:{rowspan: key_words().length ? key_words().length : 1 }">
+                        <button class="btn btn-default btn-sm" data-bind="event: {click: $parent.saveEntity}">  <%= t('user_dashboard.training.save_entity') %></button>
+                        <button class="btn btn-default btn-sm" data-bind="event: {click:()=> $parent.deleteEntity(id)}">  <%= t('user_dashboard.training.delete') %></button>
+                      </td>
+                    </tr>
+                    <!-- ko if: key_words().length > 1   -->
+                      <!-- ko foreach: key_words  -->
+                       <!-- ko if: $index  -->
+                        <tr data-bind="css: { hidden: !name.toLocaleLowerCase().includes($parents[1].entityFilter().toLocaleLowerCase()) }">
+                          <td>
+                            <input class="form-control" data-bind="value: keyword"/>
+                          </td>
+                          <td > <input class="synonyms" data-bind='value: synonyms'/></td>
+                        </tr>
+                       <!-- /ko -->
+                     <!-- /ko -->
+                    <!-- /ko -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+            <div class="tab-pane " id="understandings_tab">
+              <div class="row">
+                <div class="col-md-3">
+                  <input name="search"  class="form-control" data-bind="value: questionTemplatesFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.training.search') %>">
+                </div>
+                <div class="col-md-3">
+                  <button  data-bind="click: deleteAllQuestionTemplates"  class="btn btn-default btn-sm" > <i class="glyphicon glyphicon-trash"> </i> <%= t('user_dashboard.training.delete_all')  %> </button>
+                </div>
+              </div>
+              <div class="row separator top"></div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div class="alert alert-success data-saved-alert hide" id="template_delete_success">
+                  </div>
+                  <div class="alert alert-warning data-warning-alert hide" id="template_delete_error"></div>
+                </div>
+              </div>
+
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>
+                      <%= t('user_dashboard.training.questions') %>
+                    </th>
+                    <th>
+                      <%= t('user_dashboard.training.assign_intent') %></th>
+                    <th>
+                      <%= t('user_dashboard.training.action') %>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody data-bind="foreach: filteredQuestionTemplatesList">
+                  <tr>
+                    <td data-bind='text: text'></td>
+                    <td>
+                      <select id="intents" data-bind="options: $parent.intents, optionsText: 'text',
+                     optionsValue :'id', optionsCaption : '<%= t('user_dashboard.training.select_intent') %>', value: intent_id" class="form-control">
+                      </select>
+                    </td>
+                    <td>
+                      <button class="btn btn-default btn-sm" data-bind="click: $parent.saveQuestionTemplate">  <%= t('user_dashboard.training.save_entity') %></button>
+                      <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteQuestionTemplate(id)">  <i class="glyphicon glyphicon-trash"> </i> <%= t('user_dashboard.training.delete') %></button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+
+
+</script>
+

@@ -1,0 +1,39 @@
+<div class="table-responsive overflow-x half innerAll">
+  <div class='row innerTB half border-bottom'>
+    <div class='col-xs-4 strong'><%= t('activerecord.attributes.campaign.name') %> </div>
+    <div class='col-xs-4 strong'><%= t('activerecord.attributes.campaign.service_channel') %> </div>
+    <div class='col-xs-3 strong'><%= t('activerecord.attributes.campaign.items_count') %> </div>
+    <div class='col-xs-1 strong'></div>
+  </div>
+
+  <div class="campaign-data overflow-y-auto" style="max-height: 70vh;">
+
+  <% if @campaigns.length > 0 %>
+    <% service_channels = service_channels_collection_for_campaign %>
+    <% agents = agents_collection %>
+    <% @campaigns.each do |campaign| %>
+        <div class='row innerTB half border-bottom'>
+          <div class='col-xs-4'>
+            <%= campaign.name %>
+          </div>
+          <div class='col-xs-4'>
+            <%= campaign.try(:service_channel).try(:name) %>
+          </div>
+          <div class='col-xs-3 innerTB half'>
+            <%= campaign.campaign_items.length %>
+          </div>
+          <div class='col-xs-1 innerTB half'>
+            <%= link_to '<i class="fa fa-eye"></i>'.html_safe, campaign_campaign_items_path(campaign.id), remote: true %>
+          </div>
+
+        </div>
+    <% end %>
+
+  <% else %>
+    <div class='row'>
+      <div class='col-xs-12 text-center half innerAll'> <%= t('user_dashboard.campaign_modal.no_campaigns') %> </div>
+    </div>
+  <% end %>
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+<div id="shell">
+  <nav class="navbar navbar-default" data-bind="visible: !applicationOffline()">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="brand">
+          <img src="img/logo.png" alt="Contakti"/>
+        </div>
+        <div class="loader" data-bind="css: { active: router.isNavigating }">
+          <i class="icon-spinner icon-2x icon-spin"></i>
+        </div>
+
+        <button data-bind="visible: menuEnabled" type="button" class="navbar-right navbar-item navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#contakti-navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <button data-bind="visible: menuEnabled, click: onNewItemClicked" type="button"
+                class="navbar-right navbar-item collapsed btn btn-lg" style="margin-top: 2px;">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+
+        <!--button data-bind="visible: menuEnabled" type="button" class="navbar-right navbar-toggle collapsed btn-lg" style="margin-top: 2px;" data-toggle="collapse" data-target="#contakti-search-collapse" aria-expanded="false">
+            <span class="glyphicon glyphicon-search"></span>
+        </button-->
+      </div>
+      <div data-bind="visible: menuEnabled" class="collapse navbar-collapse" id="contakti-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="#" data-bind="click: onSignOutClicked"><span data-i18n="app:login.sign_out"></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid page-host" data-bind="router: { cacheViews:true }, visible: !applicationOffline()"></div>
+  <div class="container-fluid page-host" data-bind="visible: applicationOffline">
+    <div class="text-center">
+      <h3 data-i18n="app:offline.title"></h3>
+      <p>
+    <div class="col-md-3"></div>
+        <div class="col-md-6">      
+            <button class="btn btn-primary form-control" data-bind="click: onReconnectClicked"
+                data-i18n="app:offline.reconnect">
+            </button>
+        </div>  
+    <div class="col-md-3"></div>
+      </p>
+    </div>
+  </div>
+  <div data-bind="compose: 'shell_new_item_modal.html'"></div>
+  <div data-bind="compose: 'shell_new_task_modal.html'"></div>
+  <div data-bind="compose: 'shell_new_email_modal.html'"></div>
+</div>

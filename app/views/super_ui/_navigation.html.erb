@@ -1,0 +1,25 @@
+<nav class="navbar hidden-print main " role="navigation">
+  <div class="navbar-header pull-left">
+    <div class="navbar-brand">
+      <a class="no-cursor">
+        <img src=<%== asset_path "logo.png" %>>
+      </a>
+    </div>
+  </div>
+  <ul class="main pull-right ">
+    <% if super_admin_signed_in? %>
+      <li class="dropdown username">
+        <a href="" class="dropdown-toggle glyphicons user" data-toggle="dropdown">
+          <i></i> <%= current_super_admin.email %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu pull-right">
+          <li><%= link_to 'Details', super_ui_details_path %></li>
+          <li><%= link_to 'Create new superadmin', new_super_ui_admin_path %></li>
+          <li><%= link_to 'Logout', destroy_super_admin_session_path, :method => 'delete' %></li>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+
+</nav>

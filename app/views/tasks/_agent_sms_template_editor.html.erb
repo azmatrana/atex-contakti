@@ -1,0 +1,131 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('service_channels.sms') %></h3>
+    </div>
+    <div>
+    <div class="alert modal-alert alert-success" style="display: none;">
+      <button type="button" class="close" aria-hidden="true">&times;</button>
+      <div></div>
+    </div>
+      <div class="modal-body">
+        <div class="relativeWrap">
+          <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+            <div class="widget-head">
+              <ul>
+                <li class="active">
+                  <%= link_to '#sms_template_tab', class: 'sms-tab', 'data-toggle': 'tab' do %>
+                    <i class="fa fa-pencil"></i>
+                    <%= t('service_channels.agent_sms_templates') %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to '#sms_multi_sending', class: 'glyphicons send sms-tab', 'data-toggle': 'tab' do %>
+                    <i></i>
+                    <%= t('service_channels.group_sms') %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to '#individual_sms', class: 'glyphicons send sms-tab', 'data-toggle': 'tab' do %>
+                    <i></i>
+                    <%= I18n.t('user_dashboard.send_sms') %>
+                  <% end %>
+                </li>
+                <li>
+              </ul>
+            </div>
+            <div class="widget-body">
+              <div class="tab-content">
+                <div class="tab-pane active" id="sms_template_tab">
+                  <div class="row innerAll">
+                    <%= simple_form_for SmsTemplate.new, url: {controller: :tasks, action: :create_sms_template},
+                                        remote: true, method: :post, html: {id: 'sms_template_form'} do |f| %>
+                      <%= hidden_field_tag 'locale', locale %>
+                      <%= f.hidden_field :kind, value: :agent %>
+                      <%= f.hidden_field :is_agent_console, value: 'true' %>
+                      <%= f.hidden_field :service_channel_id, value: @service_channel.id %>
+                      <%= f.hidden_field :save_as_new, value: false %>
+                      <%= render partial: '/agents/status_message' %>
+                      <div>
+                        <div class="styled-select form-group">
+                          <%= f.collection_select(:id, @sms_templates, :id, :title, { prompt: t('service_channels.select_template') }, { class: 'sms_template_id' }) %>
+                          <span class="caret"></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <%= f.text_area :text, :placeholder => t('service_channels.placeholder_template_text'),
+                                        :class => 'form-control sms-message-input' %>
+                        <span class="sms-message-counter">0/160, 1 message</span>
+                        <%= f.error :text %>
+                      </div>
+                      <div class="styled-select form-group">
+                        <%= f.select :visibility,
+                                     %w[service_channel company location].map {|v| [t("service_channels.template_visibility_types.#{v}"), v]},
+                                     include_blank: t('service_channels.sms_template_visibility')
+                        %>
+                        <span class="caret"></span>
+                      </div>
+                      <div class="styled-select form-group <%= 'hide' unless @sms_template.try(:visibility) == 'location' %>">
+                        <%= f.collection_select :location_id, @service_channel.locations, :id, :name, {prompt: t('service_channels.select_location')} %>
+                        <span class="caret"></span>
+                      </div>
+                      <%= render partial: '/sms_templates/title_form', locals: {f: f} %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="tab-pane" id="sms_multi_sending">
+                  <form id="sms_multi_sending_form">
+                    <input type="hidden" name="is_agent_console" value="true">
+                    <div class="row innerAll">
+                      <div class="styled-select form-group">
+                        <%= hidden_field_tag 'locale', locale %>
+                        <%= collection_select(nil, :service_channel_id, current_user.service_channels, :id, :name, { prompt: t('user_dashboard.please_select_service_channel') }, { class: 'sms_template_id group_sms_channel', id: 'service_channel_id' }) %>
+                        <span class="caret"></span>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="styled-select form-group">
+                        <%= collection_select(nil, :id, @sms_templates, :id, :title, {prompt: t('service_channels.select_template')}, {class: 'sms_template_id'}) %>
+                        <span class="caret"></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <textarea class="form-control sms-message-input" name="message" placeholder="<%= t('user_dashboard.sms_message') %>"></textarea>
+                      <span class="sms-message-counter hide">0/0, 0 messages</span>
+                    </div>
+                    <div class="form-group">
+                      <label><%= t('service_channels.attach_csv') %></label>
+                      <input class="form-control" type="file" id="attach_csv" name="csv">
+                    </div>
+                    <div class="form-group">
+                      <label><%= t('service_channels.create tasks') %>
+                        <input type="checkbox" name="create_tasks">
+                      </label>
+                      <button type="button" class="btn btn-default btn-sm pull-right"
+                              id="sms_multi_sending_submit_button" disabled>
+                        <%= t('user_dashboard.send') %>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="tab-pane" id="individual_sms">
+                  <%= render partial: '/tasks/task_messages/agent_sms_form' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a role="button" class="btn btn-default btn-sm" data-dismiss="modal"><%= t('service_channels.close') %>
+        <span class="glyphicon glyphicon-ok"></span></a>
+    </div>
+  </div>
+</div>
+<script>
+    $(document).on("change", "#service_channels", function () {
+        $("#service_channel_id").val($(this).val())
+    })
+</script>

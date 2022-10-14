@@ -1,0 +1,35 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('service_channels.modal_internal_settings') %></h3>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="relativeWrap">
+        <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+          <div class="widget-head">
+            <ul>
+              <li class="active"><a class="glyphicons bell" href="#<%= prefix %>_sla" data-toggle="tab"><i></i><%= t('service_channels.sla')%></a></li>
+            </ul>
+          </div>
+          <div class="widget-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="<%= prefix %>_internal">
+                <div class="tab-pane" id="<%= prefix %>_sla">
+                  <%= render partial: 'media_channel_sla', locals: { media_channel: media_channel, prefix: prefix } %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <a role="button" class="btn btn-default btn-sm save-settings-btn"> <%= t('service_channels.save_details') %> <span class="glyphicon glyphicon-ok"></span></a>
+      </div>
+    </div>
+  </div>
+</div>

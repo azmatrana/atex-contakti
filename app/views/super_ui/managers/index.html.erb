@@ -1,0 +1,33 @@
+<h1>Managers</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @managers.each do |manager| %>
+      <tr>
+        <td><%= manager.title %></td>
+        <td><%= manager.full_name %></td>
+        <td><%= manager.email %></td>
+        <td><%= link_to(manager.company.name, super_ui_company_path(manager.company_id)) if manager.company %></td>
+        <td>
+          <%= link_to 'Open', super_ui_switch_user_path(manager), :class => 'btn btn-default', target: '_blank' %>
+          <%= link_to 'Show', super_ui_manager_path(manager), :class => 'btn btn-default' %>
+          <%= link_to 'Edit', edit_super_ui_manager_path(manager), :class => 'btn btn-default' %>
+          <%= link_to 'Delete', super_ui_manager_path(manager), method: :delete, :class => 'btn btn-default', data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'New Manager', new_super_ui_manager_path, :class => 'btn btn-default' %>

@@ -1,0 +1,63 @@
+<div id="super-search-bar" data-bind="with: viewModels.superSearch">
+
+<i data-bind="css: { 'fa-search' : !searchingInProgress(),
+        'fa-spinner fa-spin' : searchingInProgress() }" class="super-seatch-search-icon fa fa-search">
+  </i>  
+  
+  <input
+    class="super-search"
+    data-bind="value: queryString, valueUpdate: 'keyup', hasFocus: superSearchHasFocus"
+    id="super_search_input"
+    type="text"
+    placeholder="<%= t('user_dashboard.searchcustomer') %>"
+    />
+
+    <i data-bind="click: showData" class="super-dropdown-icon fa fa-caret-down"></i>
+  </i>  
+  <%# end %>
+  <!--    <div class="dropdown super-search-dropdown">-->
+  <!--        <a href="" class="dropdown-toggle fa fa-cog" data-toggle="dropdown">-->
+  <!--            <span class="caret"></span>-->
+  <!--        </a>-->
+  <!--        <ul class="dropdown-menu super-search-dropdown-menu">-->
+  <!--            <li>-->
+  <!--                <div class="super-search-radio-div">-->
+  <!--                    <input class="super-search-radio" type="radio" name="searchRadio" id="search_all_radio" value="search_all" data-bind="checked: $root.searchRadioButton, click: $root.archivedChanged" />-->
+  <!--                    <label for="search_all_radio" class="super-search-radio-label">-->
+  <%#= t('user_dashboard.super_search.all') %>
+  <!--                    </label>-->
+  <!--                </div>-->
+  <!--                <div class="super-search-radio-div">-->
+  <!--                    <input class="super-search-radio" type="radio" name="searchRadio" id="search_unsolved_radio" value="search_unsolved" data-bind="checked: $root.searchRadioButton, click: $root.archivedChanged" />-->
+  <!--                    <label for="search_unsolved_radio" class="super-search-radio-label">-->
+  <%#= t('user_dashboard.super_search.unsolved') %>
+  <!--                    </label>-->
+  <!--                </div>-->
+  <!--                <div class="super-search-radio-div">-->
+  <!--                    <input class="super-search-radio" type="radio" name="searchRadio" id="search_archived_radio" value="search_archived" data-bind="checked: $root.searchRadioButton, click: $root.archivedChanged" />-->
+  <!--                    <label for="search_archived_radio" class="super-search-radio-label">-->
+  <%#= t('user_dashboard.super_search.archived') %>
+  <!--                    </label>-->
+  <!--                </div>-->
+  <!--            </li>-->
+  <!--        </ul>-->
+  <!--    </div>-->
+
+  <ul data-bind="foreach: superSearchResults, visible: superSearchResultsShow" class="super-search-results hide">
+    <li data-bind="attr: { 'data-id': id, 'data-result_type': result_type }" class="super-search-result">
+      <!-- ko if: result_type && result_type == 'customer' -->
+      <div class="super-search-result-title">
+        <span data-bind="text: name"></span>
+      </div>
+      <div class="super-search-result-subtitle">
+        <span data-bind="if: address"><span data-bind="text: address"></span></span></br>
+        <span data-bind="if: postcode"><span data-bind="text: postcode"></span></span>
+        <span data-bind="if: city"><span data-bind="text: city"></span></span></br>
+        <span data-bind="if: country"><span data-bind="text: country"></span></span></br>
+        <span data-bind="if: contact_phone"><span data-bind="text: contact_phone"></span></span></br>
+        <span data-bind="if: contact_email"><span data-bind="text: contact_email"></span></span>
+      </div>
+      <!-- /ko -->
+    </li>
+  </ul>
+</div>

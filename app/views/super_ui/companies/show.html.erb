@@ -1,0 +1,11 @@
+<h1>Company</h1>
+<label>Name:</label> <%= @company.name %><br/>
+<label>Company Code:</label> <%= @company.code %><br/>
+<label>Street Address:</label> <%= @company.street_address %><br/>
+<label>Zip Code:</label> <%= @company.zip_code %><br/>
+<label>City:</label> <%= @company.city %><br/>
+<label>Time Zone:</label> <%= ActiveSupport::TimeZone.new(@company.time_zone).to_s %><br/>
+<label>Sms provider:</label> <%= @company.sms_provider %><br/>
+<label>Allow call translation:</label> <%= @company.allow_call_translation ? 'Yes' : 'No' %><br/>
+
+<%= link_to 'Edit', edit_super_ui_company_path(@company), :class => 'btn btn-default' %>

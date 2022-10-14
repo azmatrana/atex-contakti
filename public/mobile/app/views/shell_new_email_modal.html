@@ -1,0 +1,99 @@
+<div id="new-email-modal" class="modal fade bottom scroll-modal">
+  <div class="modal-dialog" data-bind="if: newEmail">
+    <div class="modal-content">
+      <form id="new-email-form">
+        <div class="modal-body scroll-body">
+        <h4 data-i18n="app:new_email.header"></h4>
+          <div class="form-group">
+            <label for="new_email_to" data-i18n="app:new_email.recipient"></label>
+            <div class="input-group">
+              <input class="form-control" type="text" id="new_email_recipient" name="recipient"
+                     data-bind="textInput: newEmail().recipient">
+              <div class="input-group-btn">
+                <button type="button" data-toggle="collapse" data-target="#new_email_ccbcc"
+                        class="btn btn-primary btn-stroke" data-i18n="app:new_email.ccbcc">
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="new_email_ccbcc" class="collapse">
+            <div class="form-group">
+              <label for="new_email_cc" data-i18n="app:new_email.cc"></label>
+              <input class="form-control" type="text" id="new_email_cc" name="cc"
+                     data-bind="textInput: newEmail().cc">
+            </div>
+            <div class="form-group">
+              <label for="new_email_bcc" data-i18n="app:new_email.bcc"></label>
+              <input class="form-control" type="text" id="new_email_bcc" name="bcc"
+                     data-bind="textInput: newEmail().bcc">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="new_email_service_channel" data-i18n="app:new_email.from"></label>
+            <select class="form-control" id="new_email_service_channel" name="service_channel_id"
+                    data-bind="value: newEmail().serviceChannelId">
+              <option value="agent" data-i18n="app:new_email.service_channel_agent"></option>
+              <!-- ko foreach: emailServiceChannels -->
+              <option data-bind="value: id, text: name"></option>
+              <!-- /ko -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="new_email_subject" data-i18n="app:new_email.subject"></label>
+            <input class="form-control" type="text" id="new_email_subject" name="subject"
+                   data-bind="textInput: newEmail().subject">
+          </div>
+          <div class="form-group">
+            <label for="new_email_message" data-i18n="app:new_email.message"></label>
+            <textarea id="new_email_message" class="form-control" type="text" name="message"
+                      data-bind="textInput: newEmail().message" rows="10"></textarea>
+          </div>
+          <div class="form-group">
+            <div class="fileupload-section">
+              <button type="button"
+                      data-bind="click: addAttachment"
+                      class="btn btn-default btn-sm attach-file-button"
+              ><span data-i18n="app:new_email.attach_file"></span>
+              </button>
+              <div class="fileupload template hidden fileupload-new margin-none"
+                   data-provides="fileupload"
+              >
+                <span class="btn" data-trigger="fileupload">
+                  <span class="fileupload-new" data-i18n="app:new_email.select_file"></span>
+                  <span class="fileupload-exists" data-i18n="app:new_email.attach_change"></span>
+                </span>
+                <input class="form-control file-field margin-none hidden" id="send_email_attachments_file"
+                       name="attachments[]" disabled="disabled" type="file">
+                <span class="fileupload-preview"></span>
+                <a href="#" class="close fileupload-exists" data-dismiss="fileupload"
+                   style="float: none">×</a>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="pull-left">
+            <div class="message-actions" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="btn btn-primary btn-sm" data-bind="click: onCancelNewEmail">
+                <span class="fa fa-times"></span>
+                <span data-i18n="app:new_email.action.cancel"></span>
+              </button>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="message-actions">
+              <div data-bind="visible: isNewEmailSending()"
+                   data-i18n="app:tasks.sending"></div>
+              <button type="button" class="btn btn-primary btn-sm"
+                      data-bind="click: onConfirmNewEmail, visible: showNewEmailSubmitBut()">
+                <span class="fa fa-check"></span>
+                <span data-i18n="app:new_email.action.ok"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

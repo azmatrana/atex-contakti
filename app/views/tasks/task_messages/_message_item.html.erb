@@ -1,0 +1,611 @@
+<script type="text/html" id="external_message_item_template">
+  <!-- header -->
+<div data-bind = "css: { 'left-chain' : ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number != $parent.task().combinedMessages().length }">
+  <div class="innerAll" data-bind = "css: { 'border-bottom' : $data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal' }">
+    <div class="row">
+      <!-- ko ifnot: $data.data.sms && ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') -->
+      <div class="" data-bind = "css: { 'col-sm-6' : $data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type != 'chat' && $data.channel_type !== 'internal' || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length),  'col-sm-12' : ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number != $parent.task().combinedMessages().length}">
+        <ul class="media-list">
+          <li class="media">
+            <div class="media-body">
+
+            <!-- ko if: ($data.channel_type == 'email' || $data.channel_type == 'web_form'|| $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number != $parent.task().combinedMessages().length -->
+              <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span>
+
+              <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+              <!-- ko ifnot: $data.data.sms && ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') -->
+              <span class="text-word-break" data-bind="text: ($data.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').filter(function(e) {return e !== $data.from}).join(', ')"></span><br/>
+              <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if: ($data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length) -->
+              <strong><%= I18n.t('user_dashboard.time') %> :</strong>
+              <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+            <!-- /ko -->
+              <!-- ko if: $data.channel_type == 'call' && !$data.data.sms -->
+              <span class="item-title"><strong> <span data-bind="text: $data.isCallback() ? '<%= I18n.t('user_dashboard.chat_callback_title') %>' : '<%= I18n.t('user_dashboard.unanswered_call') %>'"></span> :</strong>
+                    <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span><br/>
+                        <strong><%= I18n.t('user_dashboard.call_from') %>
+                          : </strong><span data-bind="text: $parent.task().data.caller_name"></span><br/>
+                        <strong><%= I18n.t('user_dashboard.service_channel') %>
+                    :</strong> <span data-bind="text: $parent.task().serviceChannelName"></span>
+              </span>
+
+              <!-- /ko -->
+
+              <!-- ko ifnot: $data.channel_type == 'call' && !$data.data.sms -->
+              <p class="task-message-item-from-to">
+                <!-- ko if: $data.data.sms -->
+                  <!-- ko ifnot: $data.data.inbound -->
+                    <strong><%= I18n.t('user_dashboard.text_message_sent') %></strong><br/>
+                  <!-- /ko -->
+
+                  <!-- ko if: !_.isEmpty($data.parent.data.data.caller_name) -->
+                    <strong><%= I18n.t('user_dashboard.name_chat') %> :</strong>
+                    <span data-bind="text: $data.parent.data.data.caller_name"></span><br/>
+                  <!-- /ko -->
+
+                  <!-- ko if: $data.data.inbound -->
+                    <strong><%= I18n.t('user_dashboard.text_message_inbound') %></strong><br/>
+                  <!-- /ko -->
+
+                <!-- ko if: !($data.parent.data.media_channel === 'sms' && $data.data.number === 1)   -->
+                  <!-- ko ifnot: $data.from === window.UserDashboard.currentUserName -->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text: $data.from"></span><br/>
+                  <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: !_.isEmpty(parent.data.data.caller_name) && data.inbound -->
+                <strong><%= I18n.t('user_dashboard.name_chat') %>: </strong>
+                <span data-bind="text: $data.parent.data.data.caller_name"></span><br/>
+                <!-- /ko -->
+                  <!-- ko ifnot: $data.data.inbound-->
+                    <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: $data.to"></span><br/>
+                  <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: $data.data.sms  -->
+                  <!-- ko if: !_.isEmpty($data.from) && (($data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type !== 'internal'&& $data.channel_type != 'chat') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length) )-->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text: $data.from"></span><br/>
+                  <!-- /ko -->
+                  <!-- ko if: !_.isEmpty($data.from) && $data.channel_type == 'chat' && $data.data.number == $parent.task().combinedMessages().length -->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text: $data.from"></span><br/>
+                  <!-- /ko -->
+                  <!-- ko if: $data.channel_type === 'chat' && $data.data.number == $parent.task().combinedMessages().length -->
+                    <strong><%= I18n.t('user_dashboard.created') %> :</strong> <span class="text-word-break" data-bind="text: $data.to"></span>
+                  <!-- /ko -->
+                  <!-- ko if: ($data.channel_type !== 'chat' && $data.channel_type !== 'call' && $data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length ) -->
+<!--                    <strong><%#= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: ($data.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').filter(function(e) {return e !== $data.from}).join(', ')"></span>-->
+                    <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: ($data.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').filter(function(e) {return (($data.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').length === 1 || e !== $data.from)}).join(', ')"></span><!-- /ko -->
+                  <br>
+                  <!-- ko if: $data.channel_type == 'email' && $data.cc && $data.cc.length > 0 && $data.data.number == $parent.task().combinedMessages().length -->
+                    <strong><%= I18n.t('user_dashboard.send_to_cc') %> :</strong> <span data-bind="text: $data.cc"></span>
+                    <br>
+                  <!-- /ko -->
+                  <!-- ko if: $data.channel_type == 'email' && $data.bcc && $data.bcc.length > 0 && $data.data.number == $parent.task().combinedMessages().length  -->
+                    <strong><%= I18n.t('user_dashboard.send_to_bcc') %> :</strong> <span data-bind="text: $data.bcc"></span>
+                    <br>
+                  <!-- /ko -->
+                  <!-- ko if: ($data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length) -->
+                    <strong><%= t('tasks.subject') %> :</strong> <span data-bind="text: $data.title"></span></br>
+                  <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: ($data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length) -->
+                  <strong><%= I18n.t('user_dashboard.service_channel') %> :</strong>
+                  <span data-bind="text: $parent.task().serviceChannelName"></span></br>
+                <!-- /ko -->
+                <!-- ko if: (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length && $parent.task().data.agent) -->
+                  <strong><%= I18n.t('user_dashboard.agent') %> :</strong>
+                  <span data-bind="text: $parent.task().agentName"></span>
+                <!-- /ko -->
+              </p>
+              <!-- /ko -->
+              <!-- ko if: $data.parent.showClosedByUser -->
+                <div>
+                  <strong><%= I18n.t('user_dashboard.closed_by') %> :</strong>
+                  <span data-bind="text: $data.parent.closedByUserFullName"></span>
+                </div>
+              <!-- /ko -->
+              <!-- ko if: !_.isEmpty($data.parent.data.send_by_user) && (($data.data.sms && $data.channel_type === 'call') || $data.channel_type === 'sms') && ($data.channel_type === 'call' || $data.channel_type === 'sms') && $data.data.number == $parent.task().combinedMessages().length -->
+                <div>
+                  <strong><%= I18n.t('user_dashboard.sender') %> :</strong>
+                  <span data-bind="text: $data.parent.sendByUserFullName"></span>
+                </div>
+              <!-- /ko -->
+              <!-- ko if: $data.parent.lastMessage() && $data.channel_type === 'call' && $data.data.number == $parent.task().combinedMessages().length -->
+                <!-- <div>
+                  <strong><%#= I18n.t('user_dashboard.sender') %> :</strong>
+                  <span data-bind="text: $data.from"></span>
+                </div> -->
+              <!-- /ko -->
+              <div class="clearfix"></div>
+
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: $data.data.sms && $data.parent.data.latest_message && ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length-->
+        <div class="col-sm-6">
+          <ul class="media-list">
+            <li class="media">
+              <div class="media-body">
+                <strong><%= I18n.t('user_dashboard.time') %> :</strong>
+                <span class="timestamp" data-bind="text: moment($data.parent.data.latest_message.created_at).format('DD.MM.YYYY HH:mm')"></span></br>
+              </div>
+              <p class="task-message-item-from-to">
+                <!-- ko if: !_.isEmpty($data.parent.data.latest_message.from) && $data.channel_type !== 'chat' -->
+                  <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                  <span data-bind="text:  $data.parent.data.latest_message.from"></span><br/>
+                <!-- /ko -->
+                <!-- ko if: $data.channel_type === 'chat' -->
+                  <!-- ko if: $data.parent.data.latest_message.customer -->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text:  $data.parent.data.latest_message.customer.first_name + ' ' + $data.parent.data.latest_message.customer.last_name"></span><br/><br/>
+                  <!-- /ko -->
+                  <!-- ko ifnot: $data.parent.data.latest_message.customer -->
+                    <!-- ko if: $data.parent.data.latest_message.from == 'Anonymous' -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: $data.parent.data.latest_message.from == 'Anonymous' -->
+                      <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                      <span data-bind="text:  $data.parent.data.latest_message.from"></span><br/>
+                    <!-- /ko -->
+                  <!-- /ko -->
+                  <strong><%= I18n.t('user_dashboard.created') %> :</strong> <span class="text-word-break" data-bind="text: $data.parent.data.latest_message.to"></span><br/>
+                <!-- /ko -->
+                <!-- ko if: $data.channel_type !== 'chat' -->
+                  <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: ($data.parent.data.latest_message.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').filter(function(e) {return e !== $data.parent.data.latest_message.from}).join(', ')"></span><br/>
+                <!-- /ko -->
+                <!-- ko if: $data.channel_type == 'email' && $data.parent.data.latest_message.cc && $data.parent.data.latest_message.cc.length > 0 -->
+                  <strong><%= I18n.t('user_dashboard.send_to_cc') %> :</strong> <span data-bind="text: $data.parent.data.latest_message.cc"></span>
+                  <br>
+                <!-- /ko -->
+                <!-- ko if: $data.channel_type == 'email' && $data.parent.data.latest_message.bcc && $data.parent.data.latest_message.bcc.length > 0 -->
+                  <strong><%= I18n.t('user_dashboard.send_to_bcc') %> :</strong> <span data-bind="text: $data.parent.data.latest_message.bcc"></span>
+                  <br>
+                <!-- /ko -->
+                <strong><%= t('tasks.subject') %> :</strong> <span data-bind="text: $data.parent.data.latest_message.title"></span></br>
+                <strong><%= I18n.t('user_dashboard.service_channel') %> :</strong>
+                <span data-bind="text: $parent.task().serviceChannelName"></span>
+              </p>
+              <!-- ko if: $data.parent.showClosedByUser -->
+                <div>
+                  <strong><%= I18n.t('user_dashboard.closed_by') %> :</strong>
+                  <span data-bind="text: $data.parent.closedByUserFullName"></span>
+                </div>
+              <!-- /ko -->
+            </li>
+          </ul>
+        </div>
+      <!-- /ko -->
+
+      <!-- ko if: $data.data.sms && $data.parent.data.latest_message && ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number != $parent.task().combinedMessages().length-->
+        <div class="col-sm-12">
+          <ul class="media-list">
+            <li class="media">
+              <div class="media-body">
+                <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span>
+                <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br></br>
+
+                <strong><%= I18n.t('user_dashboard.time') %> :</strong>
+                <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+              </div>
+
+              <p class="task-message-item-from-to">
+                <!-- ko if: $data.data.sms -->
+                  <!-- ko ifnot: $data.data.inbound -->
+                    <strong><%= I18n.t('user_dashboard.text_message_sent') %></strong><br/>
+                  <!-- /ko -->
+
+                  <!-- ko if: !_.isEmpty($data.parent.data.data.caller_name) -->
+                    <strong><%= I18n.t('user_dashboard.name_chat') %> :</strong>
+                    <span data-bind="text: $data.parent.data.data.caller_name"></span><br/>
+                  <!-- /ko -->
+
+                  <!-- ko if: $data.data.inbound -->
+                    <strong><%= I18n.t('user_dashboard.text_message_inbound') %></strong><br/>
+                  <!-- /ko -->
+
+                <!-- ko if: !($data.parent.data.media_channel === 'sms' && $data.data.number === 1)   -->
+                  <!-- ko ifnot: $data.from === window.UserDashboard.currentUserName -->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text: $data.from"></span><br/>
+                  <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: !_.isEmpty(parent.data.data.caller_name) && data.inbound -->
+                <strong><%= I18n.t('user_dashboard.name_chat') %>: </strong>
+                <span data-bind="text: $data.parent.data.data.caller_name"></span><br/>
+                <!-- /ko -->
+                  <!-- ko ifnot: $data.data.inbound-->
+                    <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: $data.to"></span><br/>
+                  <!-- /ko -->
+                <!-- /ko -->
+                  <strong><%= I18n.t('user_dashboard.service_channel') %> :</strong>
+                  <span data-bind="text: $parent.task().serviceChannelName"></span>
+              </p>
+              <!-- ko if: $data.parent.showClosedByUser -->
+                <div>
+                  <strong><%= I18n.t('user_dashboard.closed_by') %> :</strong>
+                  <span data-bind="text: $data.parent.closedByUserFullName"></span>
+                </div>
+              <!-- /ko -->
+            </li>
+          </ul>
+        </div>
+      <!-- /ko -->
+      <!-- buttons -->
+      <div class="col-sm-6">
+        <!-- ko if: $data.parent.combinedMessages().length -->
+        <div class="pull-right">
+          <div class="btn-group-sm" role="group" aria-label="...">
+            <%#= render 'tasks/task_messages/time_tracker' %>
+            <!-- ko if: $data.data.number == $parent.task().combinedMessages().length && !$data.parent.follow_user_ids().includes(window.UserDashboard.currentUserId) -->
+            <button type="button" class="btn btn-default off_padding" data-bind="click: $root.viewModels.taskContainer.followTask, tooltip: {title: '<%= I18n.t('user_dashboard.follow') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.follow') %>" title="<%= I18n.t('user_dashboard.follow') %>">
+              <span class="glyphicon glyphicon-star-empty fa-2x text-primary"></span>
+            </button>
+            <!-- /ko -->
+
+            <!-- ko if: $data.data.number == $parent.task().combinedMessages().length && $data.parent.follow_user_ids().includes(window.UserDashboard.currentUserId) -->
+            <button type="button" class="btn btn-default off_padding" data-bind="click: $root.viewModels.taskContainer.unfollowTask, tooltip: {title: '<%= I18n.t('user_dashboard.unfollow') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.unfollow') %>" title="<%= I18n.t('user_dashboard.unfollow') %>">
+              <span class="glyphicon glyphicon-star fa-2x text-primary"></span>
+            </button>
+            <!-- /ko -->
+
+            <!-- ko if: $data.parent.data.may_lock && $data.data.number == $data.parent.combinedMessages().length -->
+            <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.lockTask, tooltip: {title: '<%= I18n.t('user_dashboard.lock') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.lock') %>" title="<%= I18n.t('user_dashboard.lock') %>">
+              <span class="fa fa-lock"></span>
+            </button>
+            <!-- /ko -->
+
+            <!-- ko if: $data.parent.data.may_unlock && $data.data.number == $data.parent.combinedMessages().length -->
+            <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.unlockTask, tooltip: {title: '<%= I18n.t('user_dashboard.unlock') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.unlock') %>" title="<%= I18n.t('user_dashboard.unlock') %>">
+              <span class="fa fa-unlock"></span>
+            </button>
+            <!-- /ko -->
+
+            <!-- ko if: $data.data.number == $parent.task().combinedMessages().length && $parent.task().state() == 'open'-->
+
+            <button href="#task_mark_as_new_modal" data-bind="tooltip: {title: '<%= I18n.t('user_dashboard.mark_as_new') %>'}"  data-toggle="modal" class="btn btn-default" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.mark_as_new') %>" title="<%= I18n.t('user_dashboard.mark_as_new') %>">
+              <span class="glyphicon glyphicon-repeat"></span>
+            </button>
+
+            <!-- /ko -->
+
+            <!-- ko if: ($data.channel_type == 'call') && $data.data.number == $parent.task().combinedMessages().length && $parent.task().state() != 'ready'-->
+
+            <button href="#task_mark_as_done_modal" data-bind="tooltip: {title: '<%= I18n.t('user_dashboard.mark_as_done') %>'}" data-toggle="modal" class="btn btn-default" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.mark_as_done') %>" title="<%= I18n.t('user_dashboard.mark_as_done') %>">
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+
+            <!-- /ko -->
+
+            <!-- ko if: ($data.channel_type == 'sms') && $data.data.number == $parent.task().combinedMessages().length && $parent.task().state() != 'ready'-->
+
+            <button href="#sms_mark_as_done_modal" data-bind="tooltip: {title: '<%= I18n.t('user_dashboard.mark_as_done') %>'}" data-toggle="modal" class="btn btn-default" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.mark_as_done') %>" title="<%= I18n.t('user_dashboard.mark_as_done') %>">
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+
+            <!-- /ko -->
+
+            <!-- ko if: $data.parent.data.may_restart && $data.data.number == $parent.task().combinedMessages().length -->
+            <button type="button" class="btn btn-default"
+                    data-bind="click: $root.viewModels.taskContainer.reopenTask, attr: {'data-id': $data.id }, tooltip: {title: '<%= I18n.t('user_dashboard.restart') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.restart') %>" title="<%= I18n.t('user_dashboard.restart') %>">
+              <span class="glyphicon glyphicon-repeat"></span>
+            </button>
+            <!-- /ko -->
+
+            <!-- ko if: $data.canReply() && $parent.task().state() != 'ready' && $data.data.number == $parent.task().combinedMessages().length -->
+
+            <button href="#mail_task_mark_as_done_modal" data-bind="tooltip: {title: '<%= I18n.t('user_dashboard.mark_as_done') %>'}" data-toggle="modal" class="btn btn-default" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.mark_as_done') %>" title="<%= I18n.t('user_dashboard.mark_as_done') %>">
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+
+            <div class="dropdown">
+              <button type="button" data-bind="tooltip: {title: '<%= I18n.t('user_dashboard.reply') %>'}" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.reply') %>" title="<%= I18n.t('user_dashboard.reply') %>">
+                <i class="fa fa-reply"></i>
+              </button>
+
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a data-bind="click: $root.viewModels.taskContainer.showReplyClicked, attr: {'data-id': $data.id }">
+                    <%= I18n.t('user_dashboard.reply') %>
+                  </a>
+                </li>
+                <!-- ko if: $data.canReplyAll() -->
+                <li>
+                  <a data-bind="click: $root.viewModels.taskContainer.showReplyAllClicked">
+                    <%= I18n.t('user_dashboard.reply_all') %>
+                  </a>
+                </li>
+                <!-- /ko -->
+              </ul>
+            </div>
+            <!-- /ko -->
+
+            <!-- ko if: $data.parent.data.media_channel === 'sms' && $data.data.number == $parent.task().combinedMessages().length -->
+            <button type="button" class="btn btn-default"
+                    data-bind="click: $root.viewModels.taskContainer.sendSmsClicked, attr: {'data-id': $data.id }, tooltip: {title: '<%= I18n.t('user_dashboard.reply') %>'}" data-tooltip="true"
+                    data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.reply') %>" title="<%= I18n.t('user_dashboard.reply') %>">
+              <span class="glyphicon glyphicon-share-alt"></span>
+            </button>
+            <!-- /ko -->
+
+            <!-- ko if: $data.data.number == $parent.task().combinedMessages().length -->
+            <button type="button" class="btn btn-default"
+                    data-toggle="modal" data-target="#assign-to-agent" data-bind="click: $parent.task().managementResetDirty, tooltip: {title: '<%= I18n.t('user_dashboard.management') %>'}"
+                    data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.management') %>" title="<%= I18n.t('user_dashboard.management') %>">
+              <span class="glyphicon glyphicon-cog"></span>
+            </button>
+
+
+            <div class="dropdown">
+              <button type="button" class="btn btn-default" data-bind="tooltip: {title: '<%= I18n.t('user_dashboard.options') %>'}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.options') %>" title="<%= I18n.t('user_dashboard.options') %>">
+                <i class="fa fa-ellipsis-v"></i>
+              </button>
+
+
+              <ul class="dropdown-menu pull-right">
+                <li>
+                  <a data-bind="click: $root.viewModels.taskContainer.internalNoteClicked">
+                    <%= I18n.t('user_dashboard.internal_note') %>
+                  </a>
+                </li>
+                <!-- ko if: $data.parent.data.media_channel !== 'sms'&& $data.parent.data.media_channel !== 'callbac' && $data.parent.data.is_not_call && (sc = _.findWhere(UserDashboard.serviceChannels, {id: $parent.task().data.service_channel_id})) && sc.has_valid_email -->
+                <li>
+                  <a data-bind="click: $root.viewModels.taskContainer.forwardClicked">
+                    <%= I18n.t('user_dashboard.forward') %>
+                  </a>
+                </li>
+                <!-- /ko -->
+                <li>
+                  <a data-bind="attr: { 'data-id': $data.id}, click: $root.viewModels.taskContainer.printClicked">
+                    <%= I18n.t('user_dashboard.print') %>
+                  </a>
+                </li>
+
+                <!-- ko if: $data.parent.data.media_channel !== 'sms' -->
+                <li>
+                  <a data-bind="click: $root.viewModels.taskContainer.sendSmsClicked">
+                    <%= I18n.t('user_dashboard.send_sms') %>
+                  </a>
+                </li>
+                <!-- /ko -->
+
+                <li>
+                  <a data-bind="click: $root.viewModels.taskContainer.showDeleteModal">
+                    <%= I18n.t('user_dashboard.mark_as_spam') %>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <!-- /ko -->
+
+
+          </div>
+          <!-- ko if: $parent.task().order_id -->
+
+          <button type="button" class="btn btn-default mt-1" data-toggle="modal" data-target="#display_order_modal" data-bind="click: function() { $root.viewModels.taskContainer.orderModal.fetchOrder($parent.task()) }">
+            <span class="glyphicon glyphicon-shopping-cart text-primary"></span>
+          </button>
+          <!-- /ko -->
+
+          <!-- ko if: $data.data.number == $parent.task().combinedMessages().length -->
+          <button type="button" class="btn btn-default mt-1" id="same_email_filter_button" data-bind="css:{'active-state': $root.show_related_tickets()}, click: $root.viewModels.taskContainer.showOtherTickets, tooltip: {title: '<%= I18n.t('user_dashboard.tickets_filter_title') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.tickets_filter_title') %>" title="<%= I18n.t('user_dashboard.tickets_filter_title') %>">
+            <span class="glyphicon glyphicon-tag text-primary"></span>
+          </button>
+
+          <button type="button" class="btn btn-default  mt-1" id="domain_filter_button" data-bind="css:{'active-state': $root.enable_filter_domain()}, click: $root.viewModels.taskContainer.filterTicketsByDomain, tooltip: {title: '<%= I18n.t('user_dashboard.domain_filter_title') %>'}" data-tooltip="true" data-container="body" data-placement="top" data-original-title="<%= I18n.t('user_dashboard.domain_filter_title') %>" title="<%= I18n.t('user_dashboard.domain_filter_title') %>">
+            <span class="glyphicon glyphicon-globe text-primary"></span>
+          </button>
+          <!-- /ko -->
+
+        </div>
+        <!-- /ko -->
+
+      </div>
+
+      <!-- buttons ends -->
+    </div>
+  </div>
+  <!-- header ends -->
+  <!-- ko if: ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') && $data.data.number == $parent.task().combinedMessages().length -->
+  <div class="border-bottom"></div>
+  <div class="left-chain">
+    <div class="innerAll">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="media-list">
+            <li class="media">
+              <div class="media-body">
+                <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span>
+                <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+                <!-- ko ifnot: $data.data.sms && ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') -->
+                <span class="text-word-break" data-bind="text: ($data.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').filter(function(e) {return e !== $data.from}).join(', ')"></span><br/>
+                <!-- /ko -->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- ko if: $data.data.sms && ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') -->
+    <div>
+      <ul class="media-list">
+          <li class="media">
+            <div class="media-body">
+              <strong><%= I18n.t('user_dashboard.time') %> :</strong>
+              <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+
+              <!-- ko ifnot: $data.channel_type == 'call' && !$data.data.sms -->
+              <p class="task-message-item-from-to">
+                <!-- ko if: $data.data.sms -->
+                  <!-- ko ifnot: $data.data.inbound -->
+                    <strong><%= I18n.t('user_dashboard.text_message_sent') %></strong><br/>
+                  <!-- /ko -->
+
+                  <!-- ko if: !_.isEmpty($data.parent.data.data.caller_name) -->
+                    <strong><%= I18n.t('user_dashboard.name_chat') %> :</strong>
+                    <span data-bind="text: $data.parent.data.data.caller_name"></span><br/>
+                  <!-- /ko -->
+
+                  <!-- ko if: $data.data.inbound -->
+                    <strong><%= I18n.t('user_dashboard.text_message_inbound') %></strong><br/>
+                  <!-- /ko -->
+
+                <!-- ko if: !($data.parent.data.media_channel === 'sms' && $data.data.number === 1)   -->
+                  <!-- ko ifnot: $data.from === window.UserDashboard.currentUserName -->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text: $data.from"></span><br/>
+                  <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: !_.isEmpty(parent.data.data.caller_name) && data.inbound -->
+                <strong><%= I18n.t('user_dashboard.name_chat') %>: </strong>
+                <span data-bind="text: $data.parent.data.data.caller_name"></span><br/>
+                <!-- /ko -->
+                  <!-- ko ifnot: $data.data.inbound-->
+                    <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: $data.to"></span><br/>
+                  <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: $data.data.sms  -->
+                  <!-- ko if: !_.isEmpty($data.from) -->
+                    <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                    <span data-bind="text: $data.from"></span><br/>
+                  <!-- /ko -->
+                  <!-- ko if: $data.channel_type === 'chat' -->
+                    <strong><%= I18n.t('user_dashboard.created') %> :</strong> <span class="text-word-break" data-bind="text: $data.to"></span>
+                  <!-- /ko -->
+                  <!-- ko if: ($data.channel_type !== 'chat') -->
+                    <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span class="text-word-break" data-bind="text: ($data.to).replace(/\s*(,|^|$)\s*/g, '$1').split(',').filter(function(e) {return e !== $data.from}).join(', ')"></span>
+                  <!-- /ko -->
+                  <br>
+                  <!-- ko if: $data.channel_type == 'email' && $data.cc && $data.cc.length > 0 -->
+                    <strong><%= I18n.t('user_dashboard.send_to_cc') %> :</strong> <span data-bind="text: $data.cc"></span>
+                    <br>
+                  <!-- /ko -->
+                  <!-- ko if: $data.channel_type == 'email' && $data.bcc && $data.bcc.length > 0  -->
+                    <strong><%= I18n.t('user_dashboard.send_to_bcc') %> :</strong> <span data-bind="text: $data.bcc"></span>
+                    <br>
+                  <!-- /ko -->
+                    <strong><%= t('tasks.subject') %> :</strong> <span data-bind="text: $data.title"></span></br>
+                <!-- /ko -->
+                  <strong><%= I18n.t('user_dashboard.service_channel') %> :</strong>
+                  <span data-bind="text: $parent.task().serviceChannelName"></span>
+              </p>
+              <!-- /ko -->
+              <!-- ko if: $data.parent.showClosedByUser -->
+                <div>
+                  <strong><%= I18n.t('user_dashboard.closed_by') %> :</strong>
+                  <span data-bind="text: $data.parent.closedByUserFullName"></span>
+                </div>
+              <!-- /ko -->
+              <!-- ko if: $data.parent.lastMessage() && $data.channel_type === 'call' && $data.data.number == $parent.task().combinedMessages().length -->
+                <div>
+                  <strong><%= I18n.t('user_dashboard.sender') %> :</strong>
+                  <span data-bind="text: $data.from"></span>
+                </div>
+              <!-- /ko -->
+              <div class="clearfix"></div>
+            </div>
+          </li>
+        </ul>
+    </div>
+    <!-- /ko -->
+    <div class="innerAll">
+      <div class="innerAll" data-bind="css: internalCss">
+        <!-- ko ifnot: $data.channel_type == 'call' && !$data.data.sms -->
+        <div class="content">
+          <p class="formatted-message-description" data-bind="html: $data.formattedDescription"></p>
+          <!-- ko if: $data.call_transcript() && $data.call_transcript().length >= 0 -->
+            <p><b><%= t('user_dashboard.translation') %>: </b><span data-bind="html: $data.call_transcript()"></span></p>
+          <!-- /ko -->
+
+        </div>
+        <!-- /ko -->
+        <div class="innerAll">
+          <div class="media inline-block margin-none" data-bind="foreach: $data.attachments">
+            <div class="innerLR">
+              <i class="fa fa-file pull-left"></i>
+              <div class="media-body">
+                <div>
+                  <a class="strong text-regular" data-bind="text: file_name, attr: {href: '/attachments/' + $parent.id + '/' + id}" download></a>
+                  <span class="display-block" data-bind="text: human_file_size"></span>
+                </div>
+                <!-- ko if: content_type.includes('audio') -->
+                  <!-- ko if: content_type.includes('amr') -->
+                    <!-- ko if: $root.viewModels.taskContainer.playingId() == id -->
+                      <button class="btn-playpause" data-bind="click: $root.viewModels.taskContainer.stopAmr" id="amr-pause-record">
+                        <i class="fa fa-pause"></i>
+                      </button>
+                    <!-- /ko -->
+
+                    <!-- ko ifnot: $root.viewModels.taskContainer.playingId() == id -->
+                      <button class="btn-playpause" data-bind="click: ()=>$root.viewModels.taskContainer.playAmr('/attachments/' + $parent.id + '/' + id, id), attr: {'item_src': '/attachments/' + $parent.id + '/' + id}" id="amr-play-record">
+                        <i class="fa fa-play"></i>
+                      </button>
+                    <!-- /ko -->
+                  <!-- /ko -->
+
+                  <!-- ko ifnot: content_type.includes('amr') -->
+                    <audio class="message-attachment-audio" controls>
+                      <source data-bind="text: file_name, attr: {src: '/attachments/' + $parent.id + '/' + id}" >
+                    </audio>
+                  <!-- /ko -->
+                <!-- /ko -->
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /ko -->
+  <!-- ko if: ($data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type != 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data.data.number != $parent.task().combinedMessages().length) -->
+  <!-- content -->
+  <div class="innerAll">
+    <div class="innerAll" data-bind="css: internalCss">
+      <!-- ko ifnot: $data.channel_type == 'call' && !$data.data.sms -->
+      <div class="content">
+        <p class="formatted-message-description" data-bind="html: $data.formattedDescription"></p>
+        <!-- ko if: $data.call_transcript() && $data.call_transcript().length >= 0 -->
+          <p><b><%= t('user_dashboard.translation') %>: </b><span data-bind="html: $data.call_transcript()"></span></p>
+        <!-- /ko -->
+
+      </div>
+      <!-- /ko -->
+      <div class="innerAll">
+        <div class="media inline-block margin-none" data-bind="foreach: $data.attachments">
+          <div class="innerLR">
+            <i class="fa fa-file pull-left"></i>
+            <div class="media-body">
+              <div>
+                <a class="strong text-regular" data-bind="text: file_name, attr: {href: '/attachments/' + $parent.id + '/' + id}" download></a>
+              </div>
+              <span data-bind="text: human_file_size"></span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /ko -->
+</div>
+  <!-- content ends-->
+
+  <!-- footer -->
+  <!-- ko if: $data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal'  -->
+  <div class="bg-background">
+    <br/>
+  </div>
+  <!-- /ko -->
+
+  <!-- footer ends -->
+
+</script>
+
+

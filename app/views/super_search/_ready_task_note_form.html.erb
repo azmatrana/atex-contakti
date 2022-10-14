@@ -1,0 +1,45 @@
+<script type="text/html" id="customer_ready_task_note_form_template">
+  <form data-bind="attr: {action: (function() {return '/customers/' + customerSafe().id + '/note'; })()}" id="customer_ready_task_note_form" method="post" data-remote="true">
+    <input name="_method" type="hidden" value="POST" />
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+    <div class="message-box reply-box">
+      <div class="content">
+        <h4><%= I18n.t('user_dashboard.internal_note') %></h4><br>
+        <div class="control-group">
+          <div class="controls">
+            <textarea data-bind="enable: readyTaskNoteEditMode, textInput: customerReadyTaskNoteSafe().body" name="note[body]" class="wysihtml5 col-md-12 form-control internal-note box-hight" rows="10"></textarea>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="alert alert-success customer-ready-task-note-saved-alert hide">
+            <%= t('user_dashboard.customer_modal.saved') %>
+          </div>
+          <div class="alert alert-warning customer-ready-task-note-warning-alert hide">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="footer clearfix" data-bind="visible: readyTaskNoteEditMode">
+        <button type="button" data-bind="click: clearReadyTaskNote" class="btn btn-default btn-sm">
+          <%= I18n.t('user_dashboard.clear') %> <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button type="button" data-bind="click: saveReadyTaskNote" class="btn btn-default btn-sm">
+          <%= I18n.t('user_dashboard.save') %> <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </div>
+
+      <div class="footer clearfix" data-bind="visible: readyTaskNoteReadOnlyMode">
+        <button type="button" data-bind="click: enableReadyTaskNoteEdit" class="btn btn-default btn-sm">
+          <%= I18n.t('users.registrations.edit') %> <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+      </div>
+
+    </div>
+  </form>
+</script>

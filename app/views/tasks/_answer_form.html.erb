@@ -1,0 +1,161 @@
+<div>
+  <div class="row">
+    <div class="col-md-12" data-bind="afterRender: () => alert('123456')">
+      <label>
+        <%= t('user_dashboard.training.answer') %>
+      </label>
+      <textarea data-bind="value: new_answer" class="ckeditor form-control padding-none" rows="8" name="<%= name %>" id="<%= name %>" placeholder="<%= t('user_dashboard.training.answer_input') %>"></textarea>
+      <div class="separator bottom"></div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+
+      <div class="row">
+        <div class="col-md-10">
+          <label>
+            <%= t('user_dashboard.training.intent') %>
+          </label>
+
+          <select id="intents" data-bind="options: sortedIntents(), optionsText: 'text',
+                     optionsValue :'id', optionsCaption : '<%= t('user_dashboard.training.select_intent') %>', value: selected_answer_intent" class="form-control">
+          </select>
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+      <!-- ko if: answerFile -->
+      <div class="row">
+        <div class="col-md-12">
+          <label>
+            <%= t('user_dashboard.training.file') %>:
+          </label>
+          <span><a data-bind="attr: { href: answerFile().file.url }, text: answerFile().file_name" download></a> <i class="fa fa-close ml-1 pointer" data-bind="click: removeFileFromCreateAnswer"> </i></span>
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+      <!-- /ko -->
+
+      <!-- ko if: answerFile() == null -->
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-default btn-sm" data-bind="click: showFilesModal"> <%= t('user_dashboard.training.add_files') %> </button>
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+      <!-- /ko -->
+      <div class="row mb-1">
+          <div class="col-md-10">
+            <label><%= t('user_dashboard.training.images') %></label>
+            <input class="form-control" type="file" id="<%= name %>_images_input" placeholder="<%= t('user_dashboard.training.images') %>" accept="image/*" multiple>
+          </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-md-10">
+          <div class="answer_edit_images_cell">
+            <!-- ko foreach: answerImages -->
+            <!-- ko if: $data._destroy() == false -->
+            <div class="answer_edit_images_item_cell">
+              <div class="test">
+              <img data-bind="attr:{src: file.url}" class=" img-thumbnail">
+              <i class="fa fa-close ml-1 pointer" data-bind="click: $parent.removeImageFromAnswer"> </i>
+              </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+          </div>
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+        <button class="btn btn-default btn-sm" data-bind="click: addAnswerButton">
+            <i class="fa fa-plus"> </i> &nbsp <%= t('user_dashboard.training.add_option_button') %>
+          </button>
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" data-bind="foreach: answerButtons">
+          <!-- ko if: $data._destroy() == false -->
+          <div class="row">
+            <div class="col-md-1">
+              <i class="fa fa-close ml-1 pointer" data-bind="click: $parent.removeAnswerButton"></i>
+            </div>
+            <div class="col-md-5">
+              <input class="form-control" data-bind="value: text, valueUpdate: 'keyup'" placeholder="<%= t('user_dashboard.training.option_button_text') %>">
+            </div>
+            <div class="col-md-5">
+              <input class="form-control" data-bind="value: hyper_link, valueUpdate: 'keyup'" placeholder="<%= t('user_dashboard.training.option_button_link') %>">
+            </div>
+          </div>
+          <div class="separator bottom"></div>
+          <!-- /ko -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-10">
+          <input type="checkbox" data-bind="checked: customActionFlag">
+          <label><%= t('user_dashboard.training.custom_action_flag') %></label>
+        </div>
+      </div>
+      <!-- ko if: customActionFlag() -->
+      <div class="row">
+        <div class="col-md-10">
+          <label><%= t('user_dashboard.training.custom_action_button_text') %></label>
+          <input class="form-control" data-bind="value: customActionText" placeholder="<%= t('user_dashboard.training.custom_action_button_text') %>">
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+      <!-- /ko -->
+
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-10">
+          <label>
+            <%= t('user_dashboard.training.add_products') %>
+          </label>
+          <select data-bind="options: $root.viewModels.sharedViews.productsModel.productsList, optionsText: 'title',
+                     optionsValue : $data, optionsCaption: '<%= t('user_dashboard.training.choose_products') %>', value: selectedProduct" class="form-control">
+          </select>
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+
+      <!-- ko if: selectedProductsArray().length > 0 -->
+      <div class="row">
+        <div class="col-md-10">
+          <label>
+            <%= t('user_dashboard.training.products') %>:
+          </label>
+          <ul data-bind="foreach: selectedProductsDataArray">
+            <li>
+                            <span><strong data-bind="text: title"></strong>
+                              <i class="fa fa-close ml-1 pointer" data-bind="click: $parent.removeProduct"> </i></span>
+            </li>
+          </ul>
+          <div class="separator bottom"></div>
+        </div>
+      </div>
+      <!-- /ko -->
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="alert alert-success data-saved-alert hide" id="<%= name %>_success">
+      </div>
+      <div class="alert alert-warning data-warning-alert hide" id="<%= name %>_warning"></div>
+    </div>
+  </div>
+  <br/>
+
+  <button class="btn btn-default btn-sm" data-bind="click: createAnswer"> <%= t('user_dashboard.training.save') %></button>
+
+</div>

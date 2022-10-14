@@ -1,0 +1,49 @@
+<div class="innerLR col-md-4">
+  <div class="widget border-bottom-none">
+    <h3 class="innerAll bg-gray border-bottom margin-bottom-none"><%= header %></h3>
+    <div class="widget-body">
+      <%= render :partial => 'channel_stats_piecharts', :locals => { tasks_count: tasks_count } %>
+      <div class="row border-bottom  separator top border-top">
+        <div class="col-md-6 center">
+          <p class="text-small">
+            <%= t('reports.summary_report.solved') %><br/>
+            <%= tasks_count[:ready] %>
+          </p>
+        </div>
+        <div class="col-md-6 center">
+          <p class="text-small">
+            <%= t('reports.summary_report.unsolved') %><br/>
+            <%= tasks_count[:unsolved] %>
+          </p>
+        </div>
+        <div class="col-md-6 center">
+          <p class="text-small">
+            <%= t('user_dashboard.task_result.positive')%><br>
+            <%= tasks_count[:positive] %>
+          </p>
+        </div>
+        <div class="col-md-6 center">
+          <p class="text-small">
+            <%= t('user_dashboard.task_result.negative') %><br>
+            <%= tasks_count[:negative] %>
+          </p>
+        </div>
+        <div class="col-md-6 center">
+          <p class="text-small"><%= t('user_dashboard.task_result.neutral') %><br>
+            <%= tasks_count[:neutral] %>
+          </p>
+        </div>
+        <div class="col-md-6 center">
+          <p class="text-small">
+            <%= t('reports.summary_report.waiting')%><br>
+            <%= tasks_count[:waiting] %>
+          </p>
+        </div>
+      </div>
+      <div class="separator top center">
+        <p><%= t('reports.summary_report.average_process_time')%>: <%= tasks_count[:avg_processing_time] %><%= t('reports.summary_report.minutes')%></p>
+      </div>
+    </div>
+  </div>
+</div>
+

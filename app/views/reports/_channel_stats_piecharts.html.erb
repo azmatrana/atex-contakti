@@ -1,0 +1,24 @@
+<div class="row ">
+    <div class="col-xs-6 padd1">
+        <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+            <div data-percent="<%= percentage_division(tasks_count[:ready], tasks_count[:total]) %>" class="easy-pie primary">
+              <span class="value">
+                <%= percentage_division(tasks_count[:ready], tasks_count[:total]) %>%
+              </span>
+            </div>
+            <span class="txt"><%= t('reports.summary_report.solved')%></span>
+            <div class="clearfix"></div>
+        </a>
+    </div>
+    <div class="col-xs-6 padd1">
+        <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+            <div data-percent="<%= percentage_division(tasks_count[:unsolved], tasks_count[:total]) %>" class="easy-pie primary">
+              <span class="value">
+                <%= 100-percentage_division(tasks_count[:ready], tasks_count[:total]) %>%
+              </span>
+            </div>
+            <span class="txt"><%= t('reports.summary_report.unsolved')%></span>
+            <div class="clearfix"></div>
+        </a>
+    </div>
+</div>

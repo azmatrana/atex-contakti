@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "https://desk.contakti.com/contakti-chat-plugin/static/css/main.d2ba8068.chunk.css",
+    "main.js": "https://desk.contakti.com/contakti-chat-plugin/static/js/main.9e773263.chunk.js",
+    "main.js.map": "https://desk.contakti.com/contakti-chat-plugin/static/js/main.9e773263.chunk.js.map",
+    "runtime-main.js": "https://desk.contakti.com/contakti-chat-plugin/static/js/runtime-main.925b2d26.js",
+    "runtime-main.js.map": "https://desk.contakti.com/contakti-chat-plugin/static/js/runtime-main.925b2d26.js.map",
+    "static/css/2.f2512455.chunk.css": "https://desk.contakti.com/contakti-chat-plugin/static/css/2.f2512455.chunk.css",
+    "static/js/2.f2bb5f84.chunk.js": "https://desk.contakti.com/contakti-chat-plugin/static/js/2.f2bb5f84.chunk.js",
+    "static/js/2.f2bb5f84.chunk.js.map": "https://desk.contakti.com/contakti-chat-plugin/static/js/2.f2bb5f84.chunk.js.map",
+    "static/js/3.d9da2f1b.chunk.js": "https://desk.contakti.com/contakti-chat-plugin/static/js/3.d9da2f1b.chunk.js",
+    "static/js/3.d9da2f1b.chunk.js.map": "https://desk.contakti.com/contakti-chat-plugin/static/js/3.d9da2f1b.chunk.js.map",
+    "index.html": "https://desk.contakti.com/contakti-chat-plugin/index.html",
+    "static/css/2.f2512455.chunk.css.map": "https://desk.contakti.com/contakti-chat-plugin/static/css/2.f2512455.chunk.css.map",
+    "static/css/main.d2ba8068.chunk.css.map": "https://desk.contakti.com/contakti-chat-plugin/static/css/main.d2ba8068.chunk.css.map",
+    "static/js/2.f2bb5f84.chunk.js.LICENSE.txt": "https://desk.contakti.com/contakti-chat-plugin/static/js/2.f2bb5f84.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.925b2d26.js",
+    "static/css/2.f2512455.chunk.css",
+    "static/js/2.f2bb5f84.chunk.js",
+    "static/css/main.d2ba8068.chunk.css",
+    "static/js/main.9e773263.chunk.js"
+  ]
+}

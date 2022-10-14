@@ -1,0 +1,11 @@
+desc 'Delete broken data'
+task :delete_broken_data do
+  on primary(:app) do
+    within current_path do
+      with :rails_env => fetch(:rails_env) do
+        rake :delete_broken_data
+      end
+    end
+  end
+end
+

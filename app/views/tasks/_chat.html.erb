@@ -1,0 +1,183 @@
+<div id="contakti-chat-main" class="row" data-bind="foreach: { data: channels.filteredChannels}, visible: true" style="display: none">
+  <div class="msg_box" data-bind="style: { right: $index() * 350 + 20 + 'px' }, css: {incoming: state() == 'incoming', active: state() == 'active', minimized: minimized()}, attr: { 'id': (function() { return 'chat-widget-menu' + channel.channel; })()}">
+        <div class="msg_titlebar" data-bind="click: maximize, css: {activity: activity()}">
+            <a class="msg_menu_button" href="#" data-bind="click: toggleMenu, visible: !minimized()">
+                <i class="fa fa-bars"></i>
+            </a>
+            <span class="title_text">CHAT</span>
+            <span class="fa-stack chat_close" data-bind="click: $parent.closeChat.bind($data)">
+              <i class="fa fa-times fa-stack-1x" style="top: -2px; left: -1px"></i>
+            </span>
+
+            <span class="fa-stack chat_minimize" data-bind="click: minimize">
+                <i class="fa fa-minus fa-stack-1x" style="top: -2px; left: -1px"></i>
+            </span>
+
+            <!-- <span style="margin-left: 95px;">
+                <a data-bind="attr: { 'data-id': $data.id}, click: $root.viewModels.taskContainer.downloadChatTxt" download="chat_history.txt">
+                    <%#= "Download" %>
+                </a>
+            </span> -->
+
+
+        </div>
+        <div class="msg_head row m-0">
+
+            <span class="fa-stack fa-lg status_icon">
+              <i class="fa fa-user fa-stack-2x " ></i>
+            </span>
+          <div style="font-style: normal;
+            font-weight: 0;
+            font-size: 14px; margin-left: 50px">
+           <!-- ko if: isAdFinlandCompany() == true &&  chatDisplayFields().length > 0 -->
+             <button  class=" vehicle_info_button btn btn-sm btn-default" data-bind="click: showVehicleDetailsModal"><%= t('user_dashboard.vehicles_data.details') %></button>
+           <!-- /ko -->
+            <!-- ko foreach: chatDisplayFields() -->
+              <strong data-bind="text: label ">: </strong> <span data-bind="text: value"></span><br>
+            <!-- /ko -->
+            <span data-bind="if: invitationFrom"><br><%= t('user_dashboard.invitation_chat') %>
+              : <span data-bind="text: invitationFrom"></span></span>
+          </div>
+        </div>
+
+    <div class="msg_wrap">
+          <div class="msg_body" data-bind="foreach: {data: messages, afterAdd: scrollToBottom}">
+                <!-- ko if: type != 'file' && type != 'join' && type != 'quit' && type != 'bot_message_with_file' -->
+                <div data-bind="html: ChatUtils.replaceURLs(message).replace(/\r?\n/g,'<br/>') , css: { msg_b: !(from == $parent.fromUser), msg_a: !!(from == $parent.fromUser), msg_n: type != 'message'} "></div>
+                <!-- /ko -->
+
+                <!-- ko if: type == 'join' -->
+                <div class="msg_n"><span data-bind="text: from"></span> <%= t('user_dashboard.join_chat') %></div>
+                <!-- /ko -->
+
+                <!-- ko if: type == 'quit' -->
+                <div class="msg_n"><span data-bind="text: from"></span> <%= t('user_dashboard.quit_chat') %></div>
+                <!-- /ko -->
+
+                <!-- ko if: type == 'file' -->
+                  <div data-bind="css: { msg_b: !(from == $parent.fromUser), msg_a: !!(from == $parent.fromUser)} ">
+                    <a download target="_blank" data-bind="attr: {href: message}, text: from + ' <%= t('user_dashboard.upload_chat') %>'"></a>
+                  </div>
+                <!-- /ko -->
+
+                <!-- ko if: type == 'bot_message_with_file' -->
+                  <div data-bind="css: { msg_b: !(from == $parent.fromUser), msg_a: !!(from == $parent.fromUser)} ">
+                    <div data-bind="html: ChatUtils.replaceURLs(message).replace(/\r?\n/g,'<br/>') "></div>
+                    <div data-bind="foreach: files">
+                      <a download target="_blank" data-bind="attr: {href: url}, text: name"></a>
+                      <br/>
+                    </div>
+                  </div>
+                <!-- /ko -->
+
+                <!-- ko if: type == 'message' || type == 'file' || type == 'bot_message_with_file' -->
+                    <div data-bind="text: moment.utc(timestamp).local().format('D.M.YYYY HH.mm'), css: { time_b: !(from == $parent.fromUser), time_a: !!(from == $parent.fromUser)}"></div>
+                  <!-- ko if: !!(from == $parent.fromUser)  -->
+                    <div data-bind="text: from, css: { from_b: !(from == $parent.fromUser), from_a: !!(from == $parent.fromUser)}"></div>
+                  <!-- /ko -->
+                  <!-- ko if: !(from == $parent.fromUser)  -->
+                  <div class="message-wrap-from-b">
+                    <!-- ko ifnot: from == $parent.chatDisplayFields()[0].value -->
+                    <div data-bind="text: from, css: { from_b: !(from == $parent.fromUser), from_a: !!(from == $parent.fromUser)}"></div>
+                    <!--/ko -->
+                    <!-- ko if: from == $parent.chatDisplayFields()[0].value -->
+                      <!-- ko foreach: $parent.chatDisplayFields() -->
+                        <div data-bind="text: value, css: { from_b: !($parent.from == $parents[1].fromUser), from_a: !!($parent.from == $parents[1].fromUser)}"></div>
+                       <!-- /ko -->
+                    <!--/ko -->
+                  </div>
+                  <!-- /ko -->
+
+                <!-- /ko -->
+                <div class="msg_push"></div>
+            </div>
+            <span class="cus_typetxt" data-bind="if: typing_indication"><br>
+                <%= t('user_dashboard.typing_indicator_chat') %>
+                <div id="wave">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </span>
+            <div class="msg_footer" data-bind="visible: state() == 'active'">
+                <textarea  id="contakti-agent-chat-text-input" class="msg_input" placeholder="<%= t('user_dashboard.type_message') %>" rows="3" data-bind="value: typedText,  event: {keyup:function(data, event) { sendIndicator(data, event); sendText(data, event) } }, valueUpdate: 'afterkeydown'"></textarea>
+                <div class="pull-left">
+                <span class="btn btn-default btn-xs" data-bind="click: OpenFile" id="open-file"><%= t('user_dashboard.attachment_chat') %></span>
+                </div>
+                <form style="display: none">
+                  <input type="file" data-bind="event: {change: fileSelected}" name="upload" class="upload">
+                </form>
+
+            </div>
+
+        </div>
+        <div style="margin: 30px 70px;">
+            <div class="" role="group" aria-label="..."  data-bind="visible: state() === 'incoming'">
+                <div class="center" role="group" aria-label="...">
+                    <button class="btn btn-sm btn-default" data-bind="click: $parent._acceptChat.bind($data, channel)"><%= t('user_dashboard.accept_chat') %></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="contakti-chat-menus" class="row" data-bind="foreach: { data: channels.filteredChannels}, visible: true" style="display: none">
+    <div class="msg_box_menu" data-bind="visible: menuVisible, style: { right: $index() * 350 + 20 + 350 + 'px' }, css: state, attr: { 'id': (function() { return 'chat-widget-' + channel.channel; })()}">
+        <div class="msg_titlebar">
+            <%= t('user_dashboard.options_chat') %>
+        </div>
+      <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+        <div class="widget-head">
+          <ul>
+            <li class="active">
+              <%= link_to '#ticket_assign_tab', class: 'ticket-assign-tab', 'data-toggle': 'tab' do %>
+                <%=  t('user_dashboard.ticket') %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to '#answer_templates_tab', class: ' answer-templates-tab', 'data-toggle': 'tab' do %>
+               <%=  t('user_dashboard.reply_template.reply_template_modal_tab') %>
+              <% end %>
+            </li>
+            <li>
+          </ul>
+        </div>
+      </div>
+      <div class="widget-body">
+        <div class="tab-content">
+          <div class="tab-pane active" id="ticket_assign_tab">
+            <div class="msg_box_menu_main">
+              <div class="search">
+                <div class="form-inline">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                      <input type="text" class="form-control" placeholder="<%= t('user_dashboard.search_chat') %>" data-bind="textInput: searchQuery, valueUpdate: 'keyup'" autocomplete="off">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="results">
+                <h5><%= t('user_dashboard.onlineagents') %></h5>
+                <ul class="innerB" data-bind="foreach: { data: agents }">
+                  <li><a href="#" data-bind="click: $parent.inviteAgent.bind($parent, id), text: first_name + ' ' + last_name"></a> <i class="glyphicon glyphicon-ok pull-right" style="color: green" data-bind="visible: invited"></i></li>
+                </ul>
+              </div>
+
+              <div class="center">
+                <a data-bind="click: $parent.addAsTask.bind({data: $data, clientInfo: clientInfo, chatDisplayFields: chatDisplayFields}), visible: state() != 'incoming'" href="" class="btn btn-default" data-toggle="modal" data-target="#new_task_modal" id="new_task_button">
+                  <span><%= t('user_dashboard.addtask_chat') %></span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane " id="answer_templates_tab" data-bind="with: {replyTemplate: $root.viewModels.sharedViews.replyTemplatesModal, parent: $data}, as: replyView" >
+             <%= render partial: "reply_templates" %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

@@ -1,0 +1,36 @@
+Delivered-To: webform@example.com
+Received: by 10.114.88.17 with SMTP id l17cs543774wab;
+        Mon, 7 May 2007 03:02:12 -0700 (PDT)
+Received: by 10.100.143.1 with SMTP id q1mr1353572and.1178532132509;
+        Mon, 07 May 2007 03:02:12 -0700 (PDT)
+Return-Path: <apache@wpc0735.amenworld.com>
+Received: from wpc0735.amenworld.com (wpc0735.amenworld.com [62.193.232.79])
+        by mx.google.com with ESMTP id d21si12914276and.2007.05.07.03.02.11;
+        Mon, 07 May 2007 03:02:12 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of apache@wpc0735.amenworld.com designates 62.193.232.79 as permitted sender)
+Received: by wpc0735.amenworld.com (Postfix, from userid 81)
+	id A2E8B14037; Mon,  7 May 2007 13:02:09 +0300 (EEST)
+To: webform@example.com
+Subject: Enquiry from josephkokkinos
+MIME-Version: 1.0
+From:
+Content-Type: text/html; charset="ISO-8859-1"
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <20070507100209.A2E8B14037@wpc0735.amenworld.com>
+Date: Mon,  7 May 2007 13:02:09 +0300 (EEST)
+
+
+<h1>Contact Information Form result:</h1><br />
+Full Name: Test Testovich <br />
+Address: Centennial Building <br />
+Telephone: 1234567 <br />
+Fax:  <br />
+Email: test@example.com <br />
+Comments: Suppa, did not receive the CV for the engineer.=20
+Please can you send it when you have a moment. I do have a vacancy for this=
+ candidate.=20
+Thank you in advance.
+
+Test <br />
+
+

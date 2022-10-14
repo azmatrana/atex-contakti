@@ -1,0 +1,28 @@
+<script type="text/html" id="internal_message_item_template">
+  <div class="message-box">
+  <div class="header">
+    <div class="btn-group">
+      <!-- ko if: $data.canReply() -->
+      <button type="button" class="btn btn-default reply-btn" data-bind="attr: {'data-id': $data.id}">
+        <%= I18n.t('user_dashboard.reply') %> <span class="glyphicon glyphicon-share-alt"></span>
+      </button>
+      <!-- /ko -->
+
+      <button type="button" class="btn btn-default print-btn" data-bind="attr: {'data-id': $data.id}" >
+        <%= I18n.t('user_dashboard.print') %> <span class="glyphicon glyphicon-print"></span>
+      </button>
+    </div>
+    <br/>
+    <span class="timestamp" data-bind="text: moment($data.created_at).format('DD.MM.YYYY HH:mm')"></span>
+
+    <p><%= I18n.t('user_dashboard.send_from') %>: <a data-bind="text: $data.from"></a></p>
+
+    <p><%= I18n.t('user_dashboard.send_to') %>: <a data-bind="text: $data.to"></a></p>
+
+    <h1 class="item-title" data-bind="text: $data.title"></h1>
+  </div>
+  <div class="content">
+    <p class="formatted-message-description" data-bind="html: $data.formattedDescription"></p>
+  </div>
+</div>
+</script>

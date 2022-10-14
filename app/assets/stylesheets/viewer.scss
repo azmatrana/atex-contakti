@@ -1,0 +1,34 @@
+#vehicles_data_table {
+  .td_head {
+    float: left
+  }
+
+  .top_size {
+    height: 51px
+  }
+
+  #inner_tbl {
+    padding-left: 2px
+  }
+
+  .td_row_even {
+    padding: 2px;
+    background-color: #F6F4F0
+  }
+
+  .td_row_odd {
+    padding: 2px;
+    background-color: #FFF
+  }
+
+  .td_head {
+    padding: 2px;
+    font-weight: 700
+  }
+
+  table,
+  td,
+  th {
+    border: 1px solid gray
+  }
+}

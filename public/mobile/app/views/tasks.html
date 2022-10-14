@@ -1,0 +1,162 @@
+<div id="tasks-view">
+
+  <div id="tasks-view-inner">
+    <ul id="task-filters" class="row btns-row">
+      <li>
+        <button class="btn btn-new active"
+                data-bind="text: taskCounts()['new']"></button>
+      </li><!--
+            -->
+      <li>
+        <button class="btn btn-open active"
+                data-bind="text: taskCounts()['open']"></button>
+      </li><!--
+            -->
+      <li>
+        <button class="btn btn-waiting active"
+                data-bind="text: taskCounts()['waiting']"></button>
+      </li><!--
+            -->
+      <li>
+        <button class="btn btn-ready active"
+                data-bind="text: taskCounts()['ready']"></button>
+      </li><!--
+            -->
+      <li>
+        <button class="btn btn-default active"
+                data-bind="text: taskCounts()['all']"></button>
+      </li><!--
+            -->
+      <!-- ko if: taskAssociationFilterLabel().length > 0 -->
+      <!-- <li class="assoc-filter-btn-container">
+        <button class="btn btn-default"
+                data-bind="text: taskAssociationFilterLabel, click: toggleAssociationFilter"></button>
+      </li> -->
+      <!-- /ko -->
+    </ul>
+    <div id="search-box" class="row">
+      <div class="col-xs-12">
+        <div class="">
+          <input class="form-control" type="text" name="search"
+                 data-bind="attr: { placeholder: i18n.t('app:tasks.search') }, value: filter().searchWords, valueUpdate: 'afterkeydown'">
+        </div>
+      </div>
+    </div>
+    <div class="tasks-loading" data-bind="visible: tasksPromise">
+      <span class="fa fa-circle-o-notch fa-spin"></span>
+    </div>
+
+    <div class="panel-group" id="tasks-list" role="tablist" aria-multiselectable="true"
+         data-bind="foreach: filteredTasks, event: { scroll: onTaskListScroll}">
+      <div class="panel panel-task" data-bind="css: { urgent: isUrgent }">
+        <div class="panel-heading" role="tab" data-bind="css: priorityClass, attr: { id: 'task-' + id + '-heading' }">
+          <a class="panel-title" data-bind="attr: { href: detailsUrl() }">
+            <div class="state" data-bind="css: state"></div>
+            <span class="glyphicon" data-bind="css: media_channel">
+            </span>
+            <span class="task-label" data-bind="text: label"></span>
+            <br>
+            <span data-bind="if: call_counter()">
+              <span data-bind="text: callerName"></span>
+            </span>
+            <br>
+            <span class="task-label" data-bind="text: emailSubject"></span>
+            <span data-bind="if: call_counter()" class="call-counter count-task">
+              <span data-bind="text: call_counter()"></span>
+            </span>
+            <span data-bind="if: $data.media_channel !== 'call' && $data.media_channel !== 'sms'">
+                <span data-bind="text: emailSubject"></span>
+            </span>
+
+            <span data-bind="if: $data.media_channel === 'call'">
+              <span data-bind="if: isCallback()">
+                <span data-i18n="app:task.unanswered_call"></span>
+              </span>
+
+              <span data-bind="if: !isCallback()">
+                <span data-i18n="app:task.chat_callback_title"></span>
+              </span>
+            </span>
+
+            <span data-bind="if: $data.media_channel === 'sms'" style="margin-bottom: 0px;">
+              <span data-bind="if: !isSent()">
+                <span data-i18n="app:task.text_message_sent"></span><br/>
+              </span>
+
+              <span data-bind="if: isSent()">
+                <span data-i18n="app:task.text_message_inbound"></span><br/>
+              </span>
+
+            </span>
+
+
+            <span class="task-sla">
+              <span data-bind="if: call_counter()" class="call-counter count-task">
+              <span data-bind="text: call_counter()"></span>
+              </span>
+              <span data-bind="if: noteBody() && noteBody() !== ''">
+                <span class="task-list-item-note-present glyphicon glyphicon-file"></span>
+              </span>
+              <span class="task-age" data-bind="text: timer"></span>
+              <span data-bind="css: clockClass" class="glyphicon glyphicon-time"></span>
+            </span>
+            <br>
+            <span class="task-creation-time" data-bind="text: created_at_i18n"></span> <span
+              class="task-service-channel pull-right" data-bind="text: service_channel().name"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="footer-menu">
+    <ul class="row btns-row">
+      <li>
+        <button class="btn btn-transparent btn-block btn-footer"
+                data-bind="click: onFooterButtonClick.bind($data, 'home')">
+                    <span class="icon-wrapper">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </span>
+          <span class="btn-label" data-i18n="app:tasks.footer.home"></span>
+        </button>
+      </li>
+      <li>
+        <button class="btn btn-transparent btn-block btn-footer"
+                data-bind="click: onFooterButtonClick.bind($data, 'filter')">
+                    <span class="icon-wrapper">
+                        <span class="glyphicon glyphicon-filter"></span>
+                    </span>
+          <span class="btn-label" data-i18n="app:tasks.footer.filter"></span>
+        </button>
+      </li>
+      <li>
+        <button class="btn btn-transparent btn-block btn-footer"
+                data-bind="click: onFooterButtonClick.bind($data, 'bookmarks')">
+                    <span class="icon-wrapper">
+                        <span class="glyphicon glyphicon-bookmark"></span>
+                    </span>
+          <span class="btn-label" data-i18n="app:tasks.footer.bookmarks"></span>
+        </button>
+      </li>
+      <li>
+        <button class="btn btn-transparent btn-block btn-footer"
+                data-bind="click: onFooterButtonClick.bind($data, 'settings')">
+                    <span class="icon-wrapper">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </span>
+          <span class="btn-label" data-i18n="app:tasks.footer.settings"></span>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div data-bind="compose: 'app_settings_modal.html'"></div>
+  <div data-bind="compose: 'filter_modal.html'"></div>
+  <div data-bind="compose: 'task_modal.html', event: { 'hidden.bs.modal': onTaskModalHidden }"></div>
+  <div data-bind="compose: 'result_modal.html'"></div>
+  <div data-bind="compose: 'settings_modal.html'"></div>
+  <div data-bind="compose: 'sms_modal.html'"></div>
+  <div data-bind="compose: 'email_modal.html'"></div>
+  <div data-bind="compose: 'change_task_state_modal.html'"></div>
+  <div data-bind="compose: 'delete_task_modal.html'"></div>
+</div>

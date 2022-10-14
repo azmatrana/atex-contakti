@@ -1,0 +1,48 @@
+/* Preserve transform and origin */
+var transform = $('#dashboard-gridster').css('transform');
+var origin = $('#dashboard-gridster').css('transform-origin');
+
+/* Preserve maximized state */
+var maximized = {};
+$('.flotchart-holder').each(function(index, value) {
+  var id = $(value).attr('id');
+  maximized[id] = $(value).data('maximized');
+});
+
+
+$('div#main_dashboard div.row').html('<%=j render partial: 'summary_report', locals: { is_for_dashboard: true } %>');
+
+/* Restore maximized state */
+for(id in maximized) {
+  $('#' + id).data('maximized', maximized[id]);
+}
+
+$("div#main_dashboard div.row").find("script").each(function(i) {
+  eval($(this).text());
+});
+
+/* Restore transforms */
+$('#dashboard-gridster').css('transform', transform);
+$('#dashboard-gridster').css('transform-origin', origin);
+
+/* Hide bottom widgets is fullscreen */
+if($('body').hasClass('fullscreen')) {
+  $('#dashboard-gridster ul li').each(function(index, e) {
+    var $e = $(e);
+    $e.css('visibility', 'visible');
+
+    if($e.data('row') > 4) {
+      $e.css('visibility', 'hidden');
+    }
+  });
+}
+
+window.InitEasyPieCharts();
+
+/*window.dynamicDashboard = new window.DynamicDashboard($('#dashboard-gridster ul'));*/
+applyDateRangePicker();
+
+$('#dashboard-date-range-select').on('apply.daterangepicker', function() {
+  window.refreshDashboard();
+});
+

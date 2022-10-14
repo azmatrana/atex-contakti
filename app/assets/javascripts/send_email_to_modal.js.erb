@@ -1,0 +1,219 @@
+$(document).ready(function () {
+
+  function AgentsResult(data) {
+    var self = this;
+    this.email = data;
+  }
+
+  function ServiceChannelResult(data) {
+    var self = this;
+    this.id = data[0];
+    this.name = data[1];
+    this.signature = data[2];
+  }
+
+  /**
+   * KnockoutJS model.
+   */
+  function SendEmailToModalViewModel() {
+    var self = this;
+    this.loadingState = ko.observable('select');
+    this.agents_by_service_channel_id_query_url = "/tasks/get_agents_by_service_channel_id";
+    this.all_service_channels_query_url = "tasks/get_all_service_channels";
+    this.allEmailsCheckbox = ko.observable(false);
+    this.emailsToSend = ko.observable(''); // Hidden field
+    this.serviceChannelSelected = ko.observable();
+    this.agentServiceChannelSelected = ko.observable();
+    this.signatureSelected = ko.observable();
+    this.emailsTextField = ko.observable('');
+    this.emailsCcField = ko.observable('');
+    this.emailsBccField = ko.observable('');
+    this.emailsSubjectField = ko.observable('');
+    this.chosenAgents = ko.observableArray([]);
+    this.serviceChannels = ko.observableArray([]);
+    this.agentServiceChannels = ko.observableArray([]);
+    this.signatures = ko.observableArray([]);
+    this.templateText = ko.observable();
+    this.companyFiles = ko.observableArray([]);
+    this.signature = ko.computed(function() {
+      var currentSignature = self.signatureSelected;
+      if(typeof(ckEditorElement) !== "undefined") {
+        ckEditorElement.setData("<br><br>" + currentSignature);
+      }
+    });
+
+    this.replaceMessageTextBodyWith = function(text=''){
+      //ckEditorElement.setData('');
+      if(text.length > 0){
+        setTimeout(function(){
+          ckEditorElement.insertHtml(text + "<br><br>");
+          }, 100)
+      }
+    }
+    this.setTextFromTemplate = function(){
+      this.replaceMessageTextBodyWith(this.templateText())
+      self.templateText(null);
+    }
+
+
+    this.recepientEmails = [];
+    this.fetchRecepientEmailList = function () {
+      $.getJSON('/api/v1/users/recepient_emails', function (data) {
+        self.recepientEmails = data;
+
+        $('.recepient_emails_for_email').tokenfield('destroy');
+        $('.recepient_emails_for_email').tokenfield({
+          autocomplete: {
+            source: self.recepientEmails,
+            delay: 100
+          },
+          createTokensOnBlur: true,
+          showAutocompleteOnFocus: true,
+          delimiter: [',',' ']
+        })
+      });
+    }
+
+    this.fetchRecepientEmailList();
+
+    this.loadAllServiceChannels = function () {
+      if (!_.isEmpty(self.serviceChannels())) // Return if service channels already retrieved
+        return;
+
+      $.ajax({
+        url: self.all_service_channels_query_url,
+        dataType: 'json',
+        success: function (data) {
+          self.serviceChannels([]);
+          self.agentServiceChannels([]);
+          _.forEach(data, function (res, key) {
+            self.serviceChannels.push(new ServiceChannelResult([res[0], I18n.t('user_dashboard.user_dashboard_mailer.service_channel') + ": " + res[1]]));
+            self.agentServiceChannels.push(new ServiceChannelResult([res[0], I18n.t('user_dashboard.user_dashboard_mailer.service_channel') + ": " + res[1]]));
+            if(res[2]) {
+              self.signatures.push(new ServiceChannelResult([res[0], I18n.t('user_dashboard.user_dashboard_mailer.service_channel') + ": " + res[1], res[2]]));
+            }
+          });
+          self.serviceChannels.sort(function (left, right) {
+            return left.name.toLowerCase() == right.name.toLowerCase()
+              ? 0
+              : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1);
+          });
+          self.agentServiceChannels.sort(function (left, right) {
+            return left.name.toLowerCase() == right.name.toLowerCase()
+              ? 0
+              : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1);
+          });
+          if (window.hasPersonalEmail || true) {
+            self.serviceChannels.push(new ServiceChannelResult(['agent', I18n.t('user_dashboard.user_dashboard_mailer.agent')]));
+          }
+          if (window.userSignature) {
+            self.signatures.push(new ServiceChannelResult(['agent', I18n.t('user_dashboard.user_dashboard_mailer.agent'), window.userSignature]));
+            self.signatureSelected = window.userSignature;
+          }
+        }
+      });
+    };
+    this.addCompanyFile = function(file){
+      self.companyFiles.push(file);
+    }
+
+    this.removeCompanyFile = function (){
+      self.companyFiles.remove(this);
+    }
+    this.showFilesModal = function () {
+      window.userDashboardApp.viewModels.selectCompanyFilesModal.showModal({afterAddFile: self.addCompanyFile})
+    }
+
+    this.clearCompanyFiles = function () {
+        self.companyFiles([]);
+    }
+
+    $('#send_email_modal').on('hide.bs.modal', function () {
+      self.clearCompanyFiles();
+    })
+
+  }
+
+  // Binding
+  var sendEmailToModalViewModel = new SendEmailToModalViewModel();
+  window.sendEmailModalViewModel = sendEmailToModalViewModel;
+  //ko.applyBindings(sendEmailToModalViewModel, document.getElementById("send_email_modal"));
+
+  // jQuery things
+  // Text area rich text
+
+
+  var ckEditorElement = CKEDITOR.replace('send_email_email_message', {
+    language: I18n.currentLocale(),
+    removePlugins: 'elementspath',
+    resize_enabled: false
+  });
+
+  // Load service channels only on modal show
+  $('#send_email_modal').on('shown.bs.modal', function () {
+    sendEmailToModalViewModel.loadAllServiceChannels();
+  });
+
+  var buttonElement = $("#send_email_button");
+
+  var sentToEmail = '';
+  // Fire form submit
+  buttonElement.on("click", function () {
+    string = $("[name='send_email[recipient]']").val();
+    sentToEmail=string.replace(/\s*(,|^|$)\s*/g, "$1").split(',').filter(function(item,i,allItems){
+        return i==allItems.indexOf(item);
+    }).join(', ');
+    $("#send_email_form_id").trigger("submit.rails")
+    $("input, textarea, select", $("#send_email_form_id"))
+      .not(buttonElement)
+      .not("#send_email_email_lang")
+      .val("");
+    if (window.userSignature) {
+      ckEditorElement.setData("<br><br>" + window.userSignature);
+    } else {
+      ckEditorElement.setData("");
+    }
+
+
+    $('.recepient_emails_for_email').val('');
+    $('.recepient_emails_for_email').tokenfield('setTokens', []);
+    $('#send_email_form_id .fileupload.fileupload-exists').remove();
+    $("#send_email_modal").modal("hide");
+  });
+
+  // Clean fields when response is succesful
+  $("#send_email_form_id")
+    .on("ajax:before", function () {
+      $("#send_email_email_message").val(ckEditorElement.getData());
+      buttonElement.button("loading");
+    })
+    .on("ajax:success", function (e, data, status) {
+      $("#send_email_modal").modal("hide");
+      $("input, textarea, select", $("#send_email_form_id"))
+        .not(buttonElement)
+        .not("#send_email_email_lang")
+        .val("");
+
+      if (window.userSignature) {
+        $('#send_email_email_message').val("<br><br>" + window.userSignature);
+        ckEditorElement.setData("<br><br>" + window.userSignature);
+      } else {
+        ckEditorElement.setData("");
+        $('#send_email_email_message').val('');
+      }
+
+      userDashboardService.showStatusMessage(I18n.t('user_dashboard.user_dashboard_mailer.msg_sent_to') + ' ' + sentToEmail);
+    })
+    .on('ajax:error', function (e, data, status) {
+      userDashboardService.showStatusMessage(I18n.t('user_dashboard.user_dashboard_mailer.error_msg_sent_to') + ' ' + sentToEmail, true);
+    })
+    .on("ajax:complete", function () {
+      window.sendEmailModalViewModel.fetchRecepientEmailList();
+      buttonElement.button('reset');
+    });
+
+    $('#send_email_signature').on("change", function() {
+      ckEditorElement.setData($(this).val())
+    });
+
+});

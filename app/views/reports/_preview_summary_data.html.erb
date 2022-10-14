@@ -1,0 +1,12 @@
+<div class="col-md-12">
+    <%= render :partial => 'preview_action_buttons' %>
+    <div class="container-fluid" id="main_dashboard">
+        <div class="row">
+            <%= render partial: 'dashboard_layouts/show', locals: { is_for_dashboard: false} %>
+        </div>
+
+    </div>
+</div>
+
+
+<script>window.InitEasyPieCharts();</script>

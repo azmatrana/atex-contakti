@@ -1,0 +1,110 @@
+<div class="col-md-12">
+    <%= render :partial => 'preview_action_buttons' %>
+    <div class="col-md-12">
+        <div class="row marginT10">
+            <div class="col-md-12">
+                <div class="widget margin-bottom-none white-bg">
+                    <div class="widget-head">
+                        <h4 class="heading"><%= t('reports.comparison.solved_tasks')%></h4>
+                    </div>
+                    <div class="widget-comparison">
+                        <div id="chart_stacked_bars_tasks" class="flotchart-holder white-bg"></div>
+                    </div>
+                </div><br>
+            </div>
+           <div class="col-md-12">
+                <div class="widget margin-bottom-none white-bg">
+                    <div class="widget-head">
+                        <h4 class="heading"><%= t('reports.comparison.turnaround')%></h4>
+                    </div>
+                    <div class="widget-comparison">
+                        <div id="chart_stacked_bars_turnaround" class="flotchart-holder white-bg"></div>
+                    </div>
+                </div><br>
+            </div>
+        <!--<div class="col-md-6 marginT10">
+                <div class="widget widget-gray margin-bottom-none">
+                    <div class="widget-head">
+                        <h4 class="heading"><%= t('reports.comparison.pauses')%></h4>
+                    </div>
+                    <div class="widget-body">
+                        <div id="chart_stacked_bars_pauses" class="flotchart-holder"></div>
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-md-12">
+                <div class="widget margin-bottom-none white-bg">
+                    <div class="widget-head">
+                        <h4 class="heading"><%= t('reports.comparison.solutions')%></h4>
+                    </div>
+                    <div class="widget-comparison">
+                        <div id="chart_stacked_bars_solutions_perc" class="flotchart-holder white-bg"></div>
+                    </div>
+                </div><br>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    Report = {};
+    Report.tasksByUserData = <%== @data[:tasks_data] %>;
+    Report.tasksByUserTicks = <%== @data[:tasks_ticks] %>;
+    Report.tasksTurnaroundData = <%== @data[:tasks_turnaround_data] %>;
+    Report.tasksTurnaroundTicks = <%== @data[:tasks_turnaround_ticks] %>;
+    /*Report.pausesData = <%== @data[:pauses_data] %>;
+    Report.pausesTicks = <%== @data[:tasks_ticks] %>;*/
+    Report.solutionsPercentageData = <%== @data[:solutions_perc_data] %>;
+    Report.solutionsPercentageTicks = <%== @data[:solutions_perc_ticks] %>;
+    $('#chart_stacked_bars_tasks').extremiaFlotchart(
+        'comparisonReportChart',
+        {
+            'rawData': [
+                {
+                    label: '',
+                    data: Report.tasksByUserData
+                }
+            ],
+            'rawTicks': Report.tasksByUserTicks,
+            'render': true
+        }
+    );
+    $('#chart_stacked_bars_turnaround').extremiaFlotchart(
+            'comparisonReportChart',
+            {
+                'rawData': [
+                    {
+                        label: '',
+                        data: Report.tasksTurnaroundData
+                    }
+                ],
+                'rawTicks': Report.tasksTurnaroundTicks,
+                'render': true
+            }
+    );
+    /*$('#chart_stacked_bars_pauses').extremiaFlotchart(
+            'comparisonReportPausesChart',
+            {
+                'rawData': [
+                    {
+                        label: I18n.t('reports.comparison.pauses_percentage'),
+                        data: Report.pausesData
+                    }
+                ],
+                'rawTicks': Report.pausesTicks,
+                'render': true
+            }
+    );*/
+    $('#chart_stacked_bars_solutions_perc').extremiaFlotchart(
+            'comparisonReportSolutionsPercentageChart',
+            {
+                'rawData': [
+                    {
+                        label: '',
+                        data: Report.solutionsPercentageData
+                    }
+                ],
+                'rawTicks': Report.solutionsPercentageTicks,
+                'render': true
+            }
+    );
+</script>

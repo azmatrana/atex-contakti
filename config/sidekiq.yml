@@ -1,0 +1,13 @@
+:queues:
+  - default
+staging:
+  :logfile: log/sidekiq.log
+  :pidfile: tmp/pids/sidekiq.pid
+
+production:
+  :logfile: log/sidekiq.log
+  :pidfile: tmp/pids/sidekiq.pid
+
+development:
+  timeout: 1500
+  concurrency: 1

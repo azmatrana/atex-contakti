@@ -1,0 +1,52 @@
+<div id="settings-modal" class="modal fade bottom scroll-modal">
+    <div class="modal-dialog" data-bind="if: selectedTask">
+        <div class="modal-content" data-bind="template: { afterRender: afterTaskSettingsRender }">
+            <form id="settings-form">
+                <div class="modal-body scroll-body">
+                    <h4 data-i18n="app:settings.header"></h4>
+                    <div class="form-group">
+                        <label for="task_priority" data-i18n="app:settings.priority"></label>
+                        <select class="form-control" type="text" id="task_priority" name="task_priority" data-bind="value: (function(){return selectedTask().isUrgent() ? 'urgent' : 'normal'})()">
+                            <option value="normal" data-i18n="app:settings.priority_normal"></option>
+                            <option value="urgent" data-i18n="app:settings.priority_urgent"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tags"><span data-i18n="app:settings.tags"></span></label>
+                        <input type="text" class="form-control" autocomplete="off" id="tags" name="tags" data-bind="value: selectedTask().tagsAsString" />
+                    </div>
+                    <div class="form-group">
+                        <label for="move_to_service_channel" data-i18n="app:settings.move_to_service_channel"></label>
+                        <select class="form-control" id="move_to_service_channel" name="service_channel_id" data-bind="disabled: selectedTask().state == 'open', value: selectedTask().service_channel_id, foreach: filteredServiceChannels()[selectedTask().media_channel]">
+                            <option data-bind="value: id, text: name"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="agent_id" data-i18n="app:settings.assign_to_agent"></label>
+                        <select class="form-control" name="agent_id" data-bind="value: selectedTask().assigned_to_user_id, foreach: ko.utils.arrayFirst(serviceChannels(), function(item) { return item.id == selectedTask().service_channel().id }).agents">
+                            <option data-bind="value: id, text: name"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <div class="message-actions" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onCancelSettings">
+                                <span class="fa fa-times"></span>
+                                <span data-i18n="app:settings.action.cancel"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="message-actions" data-bind="if: selectedTask">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmSettings">
+                                <span class="fa fa-check"></span>
+                                <span data-i18n="app:settings.action.save"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<% I18n.locale = order.try(:preferred_language) || :en %>
+<table style="border: 1px solid grey; border-collapse: collapse; padding: 4px;">
+    <thead>
+      <tr>
+        <td style="border: 1px solid grey">
+            <strong><%= I18n.t('user_dashboard.shopping_cart.product_title') %></strong>
+        </td>
+        <td style="border: 1px solid grey">
+            <strong><%= I18n.t('user_dashboard.shopping_cart.quantity') %></strong>
+        </td>
+        <td style="border: 1px solid grey">
+            <strong><%= I18n.t('user_dashboard.shopping_cart.price') %></strong>
+        </td>
+        <td style="border: 1px solid grey">
+            <strong><%= I18n.t('products.type') %></strong>
+        </td>
+        <td style="border: 1px solid grey">
+            <strong><%= I18n.t('user_dashboard.shopping_cart.vat') %></strong>
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% order.order_products.each do |order_product| %>
+        <tr>
+          <td style="border: 1px solid grey"><%= order_product.product.title %></td>
+          <td style="border: 1px solid grey"><%= order_product.quantity %></td>
+          <td style="border: 1px solid grey"><%= "%.2f" % order_product.price %><%= order_product.currency %></td>
+          <% if order_product.with_vat %>
+            <td style="border: 1px solid grey"><%= I18n.t('products.with_vat') %></td>
+          <% else %>
+            <td style="border: 1px solid grey"><%= I18n.t('products.without_vat') %></td>
+          <% end %>
+          <td style="border: 1px solid grey"><%= order_product.vat_percentage %>%</td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tbody>
+      <tr>
+          <td style="border: 1px solid grey" colspan="2"><strong><%= I18n.t('user_dashboard.shopping_cart.price_without_taxes') %></strong></td>
+          <td style="border: 1px solid grey" colspan="3">
+              <span><%= "%.2f" % order.price_without_taxes %><%= order.currency %></span>
+          </td>
+      </tr>
+      <tr>
+          <td style="border: 1px solid grey" colspan="2"><strong><%= I18n.t('user_dashboard.shopping_cart.taxes') %></strong></td>
+          <td style="border: 1px solid grey" colspan="3">
+              <span><%= "%.2f" % order.taxes %><%= order.currency %></span>
+          </td>
+      </tr>
+      <tr>
+          <td style="border: 1px solid grey" colspan="2"><strong><%= I18n.t('user_dashboard.shopping_cart.shipment_charges') %></strong></td>
+          <td style="border: 1px solid grey" colspan="3">
+              <span><%= "%.2f" % order.shipment_price %><%= order.currency %></span>
+          </td>
+      </tr>
+      <tr>
+          <td style="border: 1px solid grey" colspan="2"><strong><%= I18n.t('user_dashboard.shopping_cart.total') %></strong></td>
+          <td style="border: 1px solid grey" colspan="3">
+              <span><%= "%.2f" % order.total %><%= order.currency %></span>
+          </td>
+      </tr>
+      <tr>
+          <td style="border: 1px solid grey" colspan="2" class="text-right"><strong><%= I18n.t('service_channels.checkout_format') %></strong></td>
+          <% if order.checkout_method == "checkout_ticket" %>
+            <td style="border: 1px solid grey" colspan="3"><%= I18n.t('service_channels.checkout_ticket') %></td>
+          <% elsif order.checkout_method == "checkout_paytrail" %>
+            <td style="border: 1px solid grey" colspan="3"><%= I18n.t('service_channels.checkout_paytrail') %></td>
+          <% end %>
+      </tr>
+
+      <tr>
+          <td style="border: 1px solid grey" colspan="2" class="text-right"><strong><%= I18n.t('user_dashboard.shopping_cart.shipment_method') %></strong></td>
+          <td style="border: 1px solid grey" colspan="3"><%= order.shipment_method.name %></td>
+      </tr>
+    </tbody>
+</table>
+

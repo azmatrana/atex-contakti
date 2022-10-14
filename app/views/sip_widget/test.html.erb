@@ -1,0 +1,32 @@
+<body>
+
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= javascript_include_tag 'jquery' %>
+    <%= javascript_include_tag 'sip/sip.js' %>
+    <%= javascript_include_tag 'sip/sip_widget' %>
+    <%= stylesheet_link_tag "sip/sip_widget", :media => "all" %>
+  </head>
+
+  <body id="contakti_sip_chat_widget">
+    <div id='contakti-phone-container'>
+      <%= render 'sip_widget' %>
+    </div>
+  </body>
+  </html>
+
+  </body>
+<!-- <script type="text/javascript" src="http://localhost:3000/chat/9"></script> -->
+<script type="text/javascript">
+  let credentials = {
+      Pass: '<%= "#{@sip_settings.password}" %>',
+      Display: '<%= "#{@sip_settings.title}" %>',
+      User: '<%= "#{@sip_settings.user_name}" %>',
+      Realm: '<%= "#{@sip_settings.domain}" %>',
+      WSServer: '<%= "#{@sip_settings.ws_server_url}" %>'
+    }
+
+    new SipClient(credentials)
+</script>

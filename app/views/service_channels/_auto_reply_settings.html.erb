@@ -1,0 +1,21 @@
+<%= fields_for "service_channel[#{prefix}_attributes]", media_channel, html: {id: 'auto_reply_settings_form'} do |f| %>
+  <div class="row innerAll">
+    <div class="form-group">
+      <div class="checkbox">
+        <label class="checkbox-custom">
+          <%= f.check_box :send_autoreply, :class => '' %>
+          <i class="fa fa-fw fa-square-o"></i><%= t('service_channels.use_auto_reply')%>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <p><%= t('service_channels.subject') %></p>
+      <%= f.text_field :autoreply_email_subject, :placeholder => t('service_channels.subject'), :class => 'form-control' %>
+    </div>
+    <div class="form-group">
+      <p><%= t('service_channels.auto_reply') %></p>
+      <%= f.text_area :autoreply_text, :placeholder => t('service_channels.placeholder_autoreply'), :class => 'form-control ckeditor' %>
+    </div>
+  </div>
+
+<% end %>

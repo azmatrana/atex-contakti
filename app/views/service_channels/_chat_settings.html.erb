@@ -1,0 +1,78 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('service_channels.chat_modal_header') %></h3>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="relativeWrap">
+        <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+          <div class="widget-head">
+            <ul>
+                <li class="active"><a class="" href="#<%= prefix %>_chat" data-toggle="tab"><i class="fa fa-comment"></i><%= t('service_channels.modal_chat_settings')%></a></li>
+                <li><a class="glyphicons pencil" href="#<%= prefix %>_customize" data-toggle="tab"><i></i><%= t('service_channels.customize')%></a></li>
+                <li><a class="glyphicons bell" href="#<%= prefix %>_sla" data-toggle="tab"><i></i><%= t('service_channels.sla')%></a></li>
+                <li><a class="glyphicons send" href="#<%= prefix %>_autoreply" data-toggle="tab"><i></i><%= t('service_channels.sms_autoreply')%></a></li>
+            </ul>
+          </div>
+          <div class="widget-body">
+             <div class="tab-content">
+                 <div class="tab-pane active" id="<%= prefix %>_chat">
+                   <% if media_channel.id.present? %>
+                   <div class="row innerAll">
+                     <%= t('service_channels.chat_help_text') %>
+                   </div>
+                    <div class="row">
+                      <%= f.fields_for "#{prefix}_attributes", f.object.chat_media_channel do |ff|%>
+                        <%= ff.text_field :embed_url, :readonly => true, :class => 'form-control' %>
+
+
+                        <div class="form-group">
+                            <%= ff.fields_for "chat_settings_attributes", media_channel.chat_settings, html: {id: 'chat_settings_form'} do |chat_form| %>
+                                <%= chat_form.hidden_field :id %>
+                                <%= chat_form.text_area :whitelisted_referers, class: 'form-control', placeholder: "#{t('service_channels.chat_whitelist')}"%>
+                            <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <% else %>
+                    <div class="row">
+                      <%= t('service_channels.chat_modal_need_save') %>
+                    </div>
+                    <% end %>
+                 </div>
+                  <div class="tab-pane" id="<%= prefix %>_customize">
+                      <%= render partial: 'chat_customize', locals: { media_channel: media_channel, prefix: prefix } %>
+                  </div>
+                  <div class="tab-pane" id="<%= prefix %>_sla">
+                      <%= render partial: 'media_channel_sla', locals: { media_channel: media_channel, prefix: prefix } %>
+                  </div>
+                  <div class="tab-pane" id="<%= prefix %>_autoreply">
+                      
+
+                    <div class="row innerAll">
+                      <%= hidden_field_tag "service_channel[#{prefix}_attributes][id]", media_channel.id %>
+                      <%= fields_for "service_channel[#{prefix}_attributes]", media_channel do |settings| %>
+                        <span id="chat_manager_template_status_message"></span>
+                        <span id="chat_autoreply_text">
+                              <%= render partial: 'autoreply_text', locals: {autoreply_text: @service_channel.chat_media_channel.autoreply_text, prefix: prefix} %>
+                            </span>
+                      <% end %>
+                    </div>
+
+
+                  </div>
+             </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      	<a role="button" class="btn btn-default btn-sm save-settings-btn"><%=t('service_channels.chat_modal_save')%> <span class="glyphicon glyphicon-ok"></span></a>
+    </div>
+  </div>
+</div>

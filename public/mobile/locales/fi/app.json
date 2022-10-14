@@ -1,0 +1,277 @@
+{
+  "language": {
+    "en": "Englanti",
+    "fi": "Suomi"
+  },
+  "offline": {
+    "title": "Yhteys on katkennut",
+    "reconnect": "Yhdistä"
+  },
+  "daterangepicker": {
+    "ranges": {
+      "today": "Tänään",
+      "yesterday": "Eilen",
+      "last_x_days": "Viimeiset {{days}} päivää",
+      "this_month": "Tämä kuukausi",
+      "last_month": "Edellinen kuukausi"
+    },
+    "no_time": "Valitse",
+    "cancel": "Tyhjennä",
+    "close": "Sulje",
+    "next_month": "Seuraava kuukausi",
+    "prev_month": "Edellinen kuukausi",
+    "select_month": "Valitse kuukausi",
+    "select_year": "Valitse vuosi",
+    "apply": "Käytä",
+    "from": "Alku",
+    "to": "Loppu",
+    "custom_range": "Muu ajanjakso",
+    "days_of_week": [
+      "su",
+      "ma",
+      "ti",
+      "ke",
+      "to",
+      "pe",
+      "la"
+    ],
+    "month_names": [
+      "tammi",
+      "helmi",
+      "maalis",
+      "huhti",
+      "touko",
+      "kesä",
+      "heinä",
+      "elo",
+      "syys",
+      "loka",
+      "marras",
+      "joulu"
+    ]
+  },
+  "login": {
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "sign_in": "Kirjaudu",
+    "sign_out": "Kirjaudu ulos",
+    "remember_me": "Pidä minut kirjautuneena sisään"
+  },
+  "app_settings": {
+    "first_name": "Etunimi",
+    "last_name": "Sukunimi",
+    "title": "Titteli",
+    "mobile": "Puhelinnumero",
+    "email": "Sähköpostiosoite",
+    "password": "Salasana",
+    "password_confirmation": "Toista salasana",
+    "empty_if_no_change": "Jätä tyhjäksi, mikäli et halua muuttaa",
+    "language": "Valitse kieli",
+    "user_signature": "Lisää allekirjoitus",
+    "section": {
+      "personal_details": "Asetukset",
+      "settings": "Asetukset"
+    },
+    "action": {
+      "cancel": "Peruuta",
+      "save": "Tallenna"
+    }
+  },
+  "new_item": {
+    "header": "Luo uusi",
+    "task": "Tiketti",
+    "email": "Sähköposti"
+  },
+  "new_task": {
+    "header": "Tiketti",
+    "title": "Otsikko",
+    "service_channel": "Palvelusarja",
+    "agent": "Siirrä agentille",
+    "description": "Viesti",
+    "attach_file": "Liitä",
+    "select_file": "Valitse",
+    "attach_change": "Vaihda",
+    "action": {
+      "cancel": "Peruuta",
+      "ok": "Tallenna"
+    }
+  },
+  "new_email": {
+    "header": "Sähköposti",
+    "service_channel_agent": "Agentti",
+    "recipient": "Vastaanottaja",
+    "ccbcc": "CC/BCC",
+    "cc": "Kopio",
+    "bcc": "Piilokopio",
+    "subject": "Otsikko",
+    "from": "Lähettäjä",
+    "message": "Viesti",
+    "attach_file": "Liitä",
+    "select_file": "Valitse",
+    "attach_change": "Vaihda",
+    "action": {
+      "cancel": "Peruuta",
+      "ok": "Lähetä"
+    }
+  },
+  "tasks": {
+    "sending": "Lähetetään",
+    "internal_note": "Sisäinen muistiinpano",
+    "add_internal_note": "Add internal note",
+    "saved": "Tallennettu",
+    "footer": {
+      "home": "Koti",
+      "filter": "Suodata",
+      "bookmarks": "Kirjanmerkit",
+      "settings": "Asetukset"
+    },
+    "association_filter": {
+      "open_to_all": "avoimet",
+      "created_by_me": "omat",
+      "assigned_to_me": "annetut"
+    },
+    "search": "Hae tehtävistä",
+    "media_channel": {
+      "call": "Takaisinsoitto",
+      "email": "Sähköposti",
+      "web_form": "Web-lomake",
+      "sip": "SIP Puhelu",
+      "chat": "Chat",
+      "internal": "Tiketti",
+      "sms": "SMS"
+    },
+    "state": {
+      "new": "Uusi",
+      "open": "Avoin",
+      "waiting": "Odottaa",
+      "ready": "Valmis"
+    },
+    "type": {
+      "unanswered_call": "Takaisinsoitto",
+      "sms": "Tekstiviesti"
+    },
+    "view_task": "Näytä tehtävä",
+    "filtering": {
+      "category": {
+        "open_to_all": "Avoinna kaikille",
+        "created_by_me": "Omat tehtävät",
+        "assigned_to_me": "Annetut tehtävät",
+        "assigned_to_other": "Määritetty muille",
+        "i_am_following": "Minä seuraan"
+      },
+      "status": {
+        "new": "Uudet",
+        "open": "Avoinna",
+        "waiting": "Odottaa",
+        "ready": "Valmis"
+      },
+      "priority": {
+        "red_alert": "Myöhässä",
+        "yellow_alert": "Odottaa",
+        "urgent": "Kiireellinen"
+      }
+    }
+  },
+  "task": {
+    "task": "Tehtävä",
+    "tasks": "Tehtävät",
+    "internal_communications": "Sisäinen viestintä",
+    "from": "Lähettäjä",
+    "to": "Vastaanottaja",
+    "subject": "Aihe",
+    "caller_name": "Soittaja",
+    "name": "Nimi",
+    "date": "Aika",
+    "service_channel": "Palvelusarja",
+    "agent_name": "Agentti",
+    "unanswered_call": "Vastaamaton puhelu",
+    "text_message_sent": "Lähetetty tekstiviesti",
+    "text_message_inbound": "Saapunut tekstiviesti",
+    "name_chat": "Nimi",
+    "created": "Luonut",
+    "send_to_bcc": "Piilokopio",
+    "send_to_cc": "Kopio",
+    "sender": "Lähettäjä",
+    "caller": "Soittaja",
+    "time": "Aika",
+    "closed_by": "Sulkenut",
+    "confirmation": "Oletko varma, että haluat poistaa tehtävän?",
+    "select_state_for_this_task": "Valitse tämän tehtävän tila",
+    "action": {
+      "lock": "Lukitse",
+      "mark_as_done": "Merkitse tehdyksi",
+      "reply": "Vastaa",
+      "forward": "Ohjaa eteenpäin",
+      "send_sms": "Lähetä SMS",
+      "delete": "Poista"
+    },
+    "results": {
+      "header": "Merkitse tehdyksi",
+      "positive": "Positiivinen",
+      "neutral": "Neutraali",
+      "negative": "Negatiivinen"
+    }
+  },
+  "filter": {
+    "categories": "Kategoriat",
+    "status": "Tila",
+    "service_channel": "Palvelusarja",
+    "media_channel": "Mediakanava",
+    "priority": "Prioriteetti",
+    "tags": "Tunnisteet",
+    "daterange": "Aika",
+    "action": {
+      "ok": "OK"
+    }
+  },
+  "settings": {
+    "header": "Asetukset",
+    "priority": "Prioriteetti",
+    "priority_normal": "Normaali",
+    "priority_urgent": "Kiireellinen",
+    "tags": "Tunnisteet",
+    "move_to_service_channel": "Siirrä palvelusarjaan",
+    "assign_to_agent": "Siirrä agentille",
+    "action": {
+      "cancel": "Peruuta",
+      "save": "Tallenna"
+    }
+  },
+  "sms": {
+    "header": "Tekstiviesti",
+    "phone_number": "Puhelinnumero",
+    "template": "Viestipohja",
+    "message": "Viesti",
+    "select_template": "Valitse nykyisistä viestipohjista",
+    "action": {
+      "cancel": "Peruuta",
+      "send": "Lähetä"
+    }
+  },
+  "email": {
+    "response_type": "Sähköposti",
+    "response_type_client": "Asiakas",
+    "response_type_internal": "Välitä",
+    "to": "Vastaanottaja",
+    "title": "Otsikko",
+    "attach_file": "Liitä",
+    "select_file": "Valitse",
+    "attach_change": "Vaihda",
+    "message": "Viesti",
+    "new_email.header": "Sähköposti",
+    "action": {
+      "cancel": "Peruuta",
+      "send": "Lähetä",
+      "save": "Tallenna"
+    }
+  },
+  "time": {
+    "short": {
+      "hour": "h",
+      "min": "min",
+      "day": "d",
+      "month": "m",
+      "year": "y"
+    }
+  }
+}

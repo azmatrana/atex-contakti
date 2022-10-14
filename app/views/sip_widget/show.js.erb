@@ -1,0 +1,73 @@
+var ContaktiSipWidget = {};
+ContaktiSipWidget.loadStatus = {};
+ContaktiSipWidget.serverUrl = '<%= Settings.hostname + '/api/v1' %>';
+
+ContaktiSipWidget.phone_widget = "<%= escape_javascript(render 'sip_widget/sip_widget', sip_settings: @sip_settings) %>";
+
+ContaktiSipWidget.AddCSS = function(href) {
+    ContaktiSipWidget.loadStatus[href] = false;
+    var head = document.getElementsByTagName('head')[0];
+    var styleTag = document.createElement('link');
+    styleTag.setAttribute('rel', 'stylesheet');
+    styleTag.setAttribute('href', href);
+    head.appendChild(styleTag);
+    styleTag.onload = function() {
+        ContaktiSipWidget.loadStatus[href] = true;
+        ContaktiSipWidget.checkStart();
+    };
+};
+
+ContaktiSipWidget.buildDom = function(){
+    var mainContainer = document.createElement('div');
+    mainContainer.setAttribute('id', 'contakti-phone-container');
+    mainContainer.innerHTML= ContaktiSipWidget.phone_widget;
+    document.getElementsByTagName('body')[0].appendChild(mainContainer);
+};
+
+ContaktiSipWidget.AddJS = function(href) {
+    ContaktiSipWidget.loadStatus[href] = false;
+    var body = document.getElementsByTagName('body')[0];
+    var jsTag = document.createElement('script');
+    jsTag.setAttribute('type', 'text/javascript');
+    jsTag.setAttribute('src', href);
+    body.appendChild(jsTag);
+    jsTag.onload = function() {
+        ContaktiSipWidget.loadStatus[href] = true;
+        ContaktiSipWidget.checkStart();
+    };
+};
+
+ContaktiSipWidget.checkStart = function() {
+    var allGood = true;
+    for(var key in ContaktiSipWidget.loadStatus) {
+        if(ContaktiSipWidget.loadStatus[key] == false) {
+            // console.log("Not all loaded yet. Delaying start!");
+            allGood = false;
+        }
+    }
+    if(allGood) {
+        ContaktiSipWidget.start();
+    }
+};
+
+ContaktiSipWidget.start = function() {
+    ContaktiSipWidget.buildDom();
+
+    var credentials = {
+      Pass: '<%= "#{@sip_settings.password}" %>',
+      Display: '<%= "#{@sip_settings.title}" %>',
+      User: '<%= "#{@sip_settings.user_name}" %>',
+      Realm: '<%= "#{@sip_settings.domain}" %>',
+      WSServer: '<%= "#{@sip_settings.ws_server_url}" %>'
+    }
+
+    new SipClient(credentials)
+};
+
+
+ContaktiSipWidget.AddJS('<%= javascript_url 'jquery' %>');
+ContaktiSipWidget.AddJS('<%= javascript_url 'sip/sip.js' %>');
+ContaktiSipWidget.AddJS('<%= javascript_url 'sip/sip_widget' %>');
+ContaktiSipWidget.AddCSS('https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css');
+ContaktiSipWidget.AddCSS('<%= stylesheet_url 'sip/sip_widget' %>');
+// Add the dom part also.

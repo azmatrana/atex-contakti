@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7<%= " sidebar sidebar-collapse" if current_user %>"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8<%= " sidebar sidebar-collapse" if current_user %>"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9<%= "sidebar sidebar-collapse" if current_user %>"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie<%= " sidebar sidebar-collapse" if current_user %>"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="<%= 'sidebar sidebar-collapse' if current_user %>">
+  <head>
+    <script>window.CKEDITOR_BASEPATH = '/assets/ckeditor/';</script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Contakti" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Contakti" %>">
+    <%= render partial: '/layouts/template_head' %>
+    <%= csrf_meta_tags %>
+    <%= content_for?(:head) ? yield(:head) : '' %>
+    <!--[if IE]>
+    <style type="text/css">
+      .caret {
+        display: none;
+      }
+    </style>
+    <![endif]-->
+  </head>
+  <body class="<%= "#{controller.controller_name}_#{controller.action_name}" %> <%= current_user && current_user.has_role?(:admin) && !users_details? ? 'manager menu-left-visible' : 'menu-hidden' %>">
+  <div class="<%= (current_user && current_user.has_role?(:admin)) ? 'container-fluid' : '' %>">
+      <!-- Content -->
+      <% if current_user && current_user.has_role?(:admin) %>
+        <div id="menu" class="hidden-print hidden-xs sidebar-white">
+          <div id="sidebar-collapse-wrapper">
+            <ul class="menu list-unstyled" id="navigation_current_page">
+              <ul id="sidebar-collapse-overview" class="collapse in ">
+                <%= semantic_navigation :primary do |n|
+                  n.item "<i class='fa fa-dashboard'></i> #{t('layouts.application.dashboard')}".html_safe, main_dashboard_path, {highlights_on: /main_dashboard/}
+                  n.item "<i class='fa fa-globe'></i> #{t('layouts.application.locations')}".html_safe, controller: 'locations'
+                  n.item "<i class='fa fa-sitemap'></i> #{t('layouts.application.service_channels')}".html_safe, controller: 'service_channels'
+                  n.item "<i class='fa fa-user'></i> #{t('layouts.application.agents')}".html_safe, controller: 'agents'
+                  n.item "<i class='fa fa-bar-chart-o'></i> #{t('layouts.application.reporting')}".html_safe, reports_path, {highlights_on: /reports/}
+                  n.item "<i class='fa fa-gear'></i> #{t('layouts.application.ai')}".html_safe, controller: 'tags'
+                end %>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      <% elsif current_user %>
+        <div id="menu" class="hidden-print hidden-xs sidebar-agents">
+          <div id="sidebar-collapse-wrapper">
+            <ul class="menu list-unstyled" id="navigation_current_page">
+              <ul id="sidebar-collapse-overview" class="collapse in ">
+                <li>
+                  <%= render partial: 'layouts/task_filter' %>
+                </li>
+              </ul>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <div id="content">
+        <%= render 'layouts/navigation' %>
+        <div class="innerLR">
+          <div id="status_messages">
+            <%= render 'layouts/messages' %>
+          </div>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
+    <%= javascript_include_tag 'init' %>
+    <script>
+      I18n.locale = '<%= I18n.locale %>';
+    </script>
+
+    <div class="modal fade" id="switch_user_modal" aria-hidden="false">
+      <% if user_signed_in? %>
+        <%= render 'layouts/switch_user_modal' %>
+      <% end %>
+    </div>
+
+    <% if current_user && current_user.has_role?(:admin) %>
+      <%= render partial: 'dashboard_layouts/create_dialog' %>
+    <% end %>
+    <!-- Version: <%= print_version %> -->
+  </body>
+</html>

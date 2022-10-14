@@ -1,0 +1,159 @@
+<%= hidden_field_tag :is_ad_finland_company, current_user.company.is_ad_finland_company? %>
+<% content_for :head do %>
+  <%= javascript_include_tag 'user_dashboard' %>
+  <%= include_gon camel_case: true %>
+<% end %>
+
+<%# alert message for ajax requests %>
+<div class="alert-container">
+</div>
+<!-- alerts -->
+<div class="alert alert-success" style="display: none;">
+  <button type="button" class="close" aria-hidden="true">&times;</button>
+  <div></div>
+</div>
+<!-- alerts ends -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- left panel -->
+    <div class="col-md-4" id="task-list-panel-container">
+      <!-- search -->
+      <div data-bind="with: viewModels.searchBox" class="form-control search-wrapper">
+        <input data-bind="value: searchBox, valueUpdate: 'afterkeyup'" class="form-control" id="search_inbox" type="text" placeholder="<%= t('user_dashboard.search') %>"/>
+        <div data-bind="text: resultText" id="search_inbox_status" class="search-status"></div>
+      </div>
+      <!-- search ends -->
+      <div id="tasks_counter_select_container">
+        <ul data-bind="with: viewModels.messageCounters" class="status-box" id="message_counters">
+        </ul>
+      </div>
+      <!-- task list -->
+      <div class="inbox-preview" id="task-list-container" data-bind="with: viewModels.taskList">
+        <span class="" data-bind="template: {name: 'task_list_item_template', foreach: tasks}"></span>
+      </div>
+      <!-- task list ends -->
+    </div>
+    <!-- left panel ends -->
+    <!-- right panel -->
+    <div class="col-md-8 preview-content" id="task-panel-container">
+      <div class="innerLR" data-bind="with: viewModels.taskContainer" id="task_container">
+        <!-- ko template: $parent.selectedTask() == null ? 'task_container_empty_template' : 'task_container_template', data: task -->
+        <!-- /ko -->
+      </div>
+    </div>
+    <!-- right panel ends -->
+  </div>
+  <div class="" id="contakti-chat-main-container" data-bind="with: chatClient">
+    <%= render partial: 'tasks/chat' %>
+  </div>
+</div>
+
+<div class="modal fade" id="task_mark_as_new_modal" data-bind="with: viewModels.markAsNewDialog" aria-hidden="false">
+  <%= render partial: 'mark_as_new_dialog' %>
+</div>
+<div class="modal fade" id="task_mark_as_done_modal" data-bind="with: viewModels.markAsDoneDialog" aria-hidden="false">
+  <%= render partial: 'mark_as_done_dialog' %>
+</div>
+<div class="modal fade" id="sms_mark_as_done_modal" data-bind="with: viewModels.smsMarkAsDoneDialog" aria-hidden="false">
+  <%= render partial: 'sms_mark_as_done_dialog' %>
+</div>
+<div class="modal fade" id="chat_mark_as_done_modal" data-bind="with: viewModels.chatMarkAsDoneDialog" aria-hidden="false">
+  <%= render partial: 'chat_mark_as_done_dialog' %>
+</div>
+<div class="modal fade" id="new_task_modal" data-bind="with: viewModels.newTaskModal" aria-hidden="false">
+  <%= render partial: 'new_task_dialog' %>
+</div>
+<div class="modal fade" id="presence_modal" aria-hidden="false">
+  <%= render partial: 'presence_dialog' %>
+</div>
+<div class="modal fade" id="send_email_modal" data-bind="with: viewModels.sendEmailModal" aria-hidden="false">
+  <%= render partial: 'layouts/send_email_dialog' %>
+</div>
+<div class="modal fade" id="company_modal" data-bind="with: viewModels.customerModal"
+     aria-hidden="false">
+  <%= render partial: 'super_search/company_modal' %>
+</div>
+<div class="modal fade" id="time_tracker" data-bind="viewModels.timeTracker"
+     aria-hidden="false">
+  <%= render partial: 'tasks/task_messages/time_tracker'%>
+</div>
+<div class="modal fade" id="sms_templates_editor"  aria-hidden="false">
+  <%= render partial: 'agent_sms_template_editor' %>  
+</div>
+
+<div class="modal fade" id="third_party_tools_modal"  aria-hidden="false">
+  <%= render partial: 'third_party_tool_modal' %>
+</div>
+
+<!-- <div data-bind="with: viewModels.searchBox" class="form-control search-wrapper"> -->
+<% if current_user.company.have_chatbot? %>
+  <div data-bind="with: viewModels.trainingViewModal" class="modal fade" id="training-modal" aria-hidden="false">
+    <%= render partial: 'tasks/training'  %>
+  </div>
+<% end %>
+<% if current_user.company.is_ad_finland_company? %>
+  <div data-bind="with: viewModels.sharedViews.vehicleDetailModal" class="modal fade" id="vehicles_data_modal" aria-hidden="false" style="z-index: 999999;">
+    <%= render partial: 'vehicles_data' %>
+  </div>
+<% end %>
+
+<%= render partial: 'layouts/select_company_files_modal' %>
+
+ <div data-bind="with: viewModels.trainingViewModal" class="modal fade" id="answer_edit_modal" aria-hidden="false">
+   <%= render partial: 'answer_edit_modal' %>
+ </div>
+
+<div class="modal fade" id="mail_task_mark_as_done_modal" data-bind="with: viewModels.markAsDoneDialog" aria-hidden="false">
+  <%= render partial: 'mail_mark_as_done_dialog' %>
+</div>
+
+<script type="text/javascript">
+  window.current_user_skills = <%= raw current_user.user_skills %>;
+  window.current_user_in_low_priority = <%= current_user.in_low_priority %>;
+  // window.low_priority_service_channels = <%= raw current_user.low_priority_service_channels %>;
+  window.UserDashboard = {};
+  window.UserDashboard.currentUserId = <%= current_user.id %>;
+  window.UserDashboard.currentUserName = "<%= current_user.alias_name.blank? ? current_user.full_name : current_user.alias_name %>";
+  window.UserDashboard.currentTitle = "<%= current_user.title %>";
+  window.UserDashboard.serviceChannels = <%== json_for(@service_channels) %>;
+  window.UserDashboard.currentUserFromEmails = <%= raw current_user.from_emails %>;
+  window.UserDashboard.agents = <%== json_for(@agents) if @agents %>;
+  window.UserDashboard.mediaChannels = <%== json_for(@media_channels, each_serializer: ::MediaChannelSerializer) %>;
+  window.UserDashboard.sipSettings = <%== json_for(@sip_settings, serializer: SipSettingsSerializer) %>;
+  window.UserDashboard.current_user_service_channels = <%== json_for(@current_user_service_channels)  %>;
+  window.UserDashboard.current_user_locations = <%== json_for(@current_user_locations)  %>;
+  window.current_user_task_count = <%= current_user.unseen_tasks_count %>;
+  window.Danthes.addOutgoingProperties({user_id: "<%= current_user.id.to_s %>"});
+  window.UserDashboard.locale = '<%= locale %>';
+  window.userSignature = '<%= current_user.signature.nil? ? '' : raw(current_user.signature + '<br><br>') %>';
+  window.hasPersonalEmail = <%= (current_user.service_channel and current_user.imap_settings and current_user.smtp_settings and current_user.imap_settings.from) ? 'true' : 'false' %>;
+  <% if current_user.service_channel_id %>
+    window.personalSc = <%= current_user.service_channel_id %>;
+  <% end %>
+</script>
+
+<%= render partial: '/super_search/task_list_item'                     %>
+<%= render partial: '/super_search/message_item'                       %>
+<%= render partial: '/super_search/task_note_form'                     %>
+<%= render partial: '/super_search/ready_task_note_form'               %>
+<%= render partial: '/tasks/task_list_item'                            %>
+<%= render partial: '/tasks/task_container'                            %>
+<%= render partial: '/tasks/task_messages/order_modal' %>
+<%= render partial: '/tasks/task_container_empty'                      %>
+<%= render partial: '/tasks/task_header'                               %>
+<%= render partial: '/tasks/note'                                      %>
+<%= render partial: '/tasks/assign_to_agent_modal'                     %>
+<%= render partial: '/tasks/disconnected_modal'                        %>
+<%= render partial: '/tasks/task_messages/internal/container'          %>
+<%= render partial: '/tasks/task_messages/internal/item'               %>
+<%= render partial: '/tasks/task_messages/container'                   %>
+<%= render partial: '/tasks/task_messages/message_item'                %>
+<%= render partial: '/tasks/task_messages/message_item_buttons'        %>
+<%= render partial: '/tasks/task_messages/message_item_buttons_email'  %>
+<%= render partial: '/tasks/task_messages/sms_form'                    %>
+<%= render partial: '/tasks/task_messages/forward_form'                %>
+<%= render partial: '/tasks/task_messages/reply_form'                  %>
+<%= render partial: '/tasks/task_messages/delete_dialog'               %>
+<%= render partial: '/tags/skill_tag' %>
+<%= render partial: '/tags/flag_tag' %>
+<%= render partial: '/tags/generic_tag' %>

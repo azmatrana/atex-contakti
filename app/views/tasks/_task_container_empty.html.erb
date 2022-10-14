@@ -1,0 +1,8 @@
+<script type="text/html" id="task_container_empty_template">
+  <div style="margin: 25% auto;width: 300px;text-align: center;">
+    <span class="glyphicon glyphicon-file " style="font-size: 50px;padding: 10px;"></span>
+
+    <h2 data-bind="if: $parent.filteredTasks().length == 0" style="text-align:center;"><%= I18n.t('user_dashboard.no_any_tasks') %></h2>
+    <h2 data-bind="if: $parent.filteredTasks().length > 0" style="text-align: center;"><%= I18n.t('user_dashboard.no_tasks_selected') %></h2>
+  </div>
+</script>

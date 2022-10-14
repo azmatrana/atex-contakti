@@ -1,0 +1,29 @@
+<div class="form-group">
+  <a class="btn btn-default btn-sm pull-right delete-template"
+     data-confirm="<%= t('service_channels.sms_template_confirm_delete') %>">
+     <%= t('reports.comparison.delete') %> <i class="fa fa-trash-o"></i>
+  </a>
+  <a class="btn btn-default btn-sm pull-left save-as-new-template" disabled>
+     <%= t('service_channels.save_sms_template') %> <i class="fa fa-check"></i>
+  </a>
+  
+  		<div class="col-md-6">
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group">
+                        <%= f.text_field :title, class: ' form-control ',
+                             placeholder: t('service_channels.placeholder_template_title') %>
+    					<%= f.error :title %>
+                        <span class="input-group-addon">
+                		<i class="fa fa-tag"></i>
+              			</span>
+                    </div>  
+                </div>
+            </div>
+        </div>
+  
+</div>
+
+
+
+		

@@ -1,0 +1,1437 @@
+---
+fi:
+  views:
+    login:
+      logged_in_message: Sisäänkirjautuminen onnistui
+    service_channels:
+      imap_settings:
+        test_success: Yhteys onnistunut
+        test_error: 'Ei saada yhteyttä IMAP palvelimeen: %s'
+      smtp_settings:
+        test_success: Yhteys onnistunut
+        test_error: 'Ei saada yhteyttä SMTP palvelimeen: %s'
+  activerecord:
+    models:
+      task:
+        states:
+          new: Uudet
+          open: Avoinna
+          waiting: Odottaa
+          ready: Valmis
+        association_types:
+          created_by_me: Omat tehtävät
+          assigned_to_me: Annetut tehtävät
+          assigned_to_other: Määritetty muille
+          open_to_all: Avoinna kaikille
+          i_am_following: Minä seuraan
+    attributes:
+      company:
+        kimai_tracker_api_url: Osoite
+      message:
+        to: 'Vastaanottaja'
+        description: 'Viesti'
+      question:
+        text: Kysymykset
+      intent:
+        text: Tarkoitus
+      answer:
+        text: Vastaus
+      answer_buttons:
+        text: Vastausnäppäimen teksti
+      entity:
+        name: Kokonaisuus
+      template_reply:
+        text: Text
+
+      contact:
+        first_name: Etunimi
+        last_name: Sukunimi
+        phone: Puhelinnumero
+        email: Sähköpostiosoite
+        website: Verkkosivut
+        address: Osoite
+        city: Kaupunki
+        country: Maa
+        vat: Y-tunnus tai Sotu
+        postcode: Postinumero
+      campaign:
+        name: Nimi
+        agent_name: Agentin nimi
+        service_channel: Palvelusarja
+        items_count: Kohteita
+      campaign_item:
+        first_name: Etunimi
+        last_name: Sukunimi
+        phone: Puhelinnumero
+        email: Sähköpostiosoite
+        address: Osoite
+        city: Kaupunki
+        country: Maa
+        postcode: Postinumero
+        last_call_time: Viimeisin soittoaika
+        info_1: Lisätieto 1
+        info_2: Lisätieto 2
+      vat:
+        vat_percentage: Arvonlisäprosentti
+
+    errors:
+      models:
+        intent:
+          attributes:
+            text:
+              invalid: "Tarkoitus käyttää vain yli 2 aakkosnumeerista merkkiä kun nimeät tarkoituksesi. Tarkoituksen nimi ei voi alkaa numerolla."
+        service_channel:
+          attributes:
+            red_alert_hours:
+              required: Aseta aikaraja
+              inconsistent_data: Keltaisen aikarajan tulee olla punaista aikarajaa pienempi
+            yellow_alert_hours:
+              required: Aseta aikaraja
+            locations:
+              blank: Valitse vähintään yksi toimipaikka
+  errors:
+    messages:
+      improbable_phone: 'Varmistathan että matkapuhelinnumero on kansainvälisessä muodossa (esim. +358401234567)'
+      accepted: täytyy olla hyväksytty
+      blank: ei voi olla tyhjä
+      confirmation: ei vastaa varmennusta
+      empty: ei voi olla tyhjä
+      equal_to: täytyy olla yhtä suuri kuin %{count}
+      even: täytyy olla parillinen
+      exclusion: on varattu
+      greater_than: täytyy olla suurempi kuin %{count}
+      greater_than_or_equal_to: täytyy olla suurempi tai yhtä suuri kuin %{count}
+      inclusion: ei löydy listasta
+      invalid: on kelvoton
+      less_than: täytyy olla pienempi kuin %{count}
+      less_than_or_equal_to: täytyy olla pienempi tai yhtä suuri kuin %{count}
+      not_a_number: ei ole luku
+      not_an_integer: ei ole kokonaisluku
+      odd: täytyy olla pariton
+      record_invalid: ! 'Validointi epäonnistui: %{errors}'
+      taken: on jo käytössä
+      too_long: on liian pitkä (saa olla enintään %{count} merkkiä)
+      too_short: on liian lyhyt (oltava vähintään %{count} merkkiä)
+      wrong_length: on väärän pituinen (täytyy olla täsmälleen %{count} merkkiä)
+      sms_sender: Lisää sms-lähettäjä palvelukanavaan!
+      csv_not_present: Lisää csv-tiedosto!
+  devise:
+    passwords:
+      forgot_password: Unohtuiko salasana?
+      send_instructions: Lähetämme ohjeet salasanan vaihtamiseen.
+      reset: Vaihda salasana
+      email: Sähköpostiosoite
+    registrations:
+      edit: Muokkaa
+      waiting_conformation: Odottaa vahvistusta
+      leave_blank: Jätä nämä kentät tyhjäksi mikäli et halua vaihtaa salasanaasi.
+      enter_password: Anna nykyinen salasanasi tehdäksesi muutoksia.
+      cancel_account: Sulje tili
+      unhappy: Tyytymätön? Olemme pahoillamme lähdöstäsi.
+      sign_up: Uusi tili
+      sure: Oletko varma?
+      update: Päivitä
+    sessions:
+      login: Kirjaudu
+    shared:
+      sign_in: Kirjaudu sisään
+      sign_up: Uusi tili
+      forgot_password: Unohtuiko salasana?
+      no_confirm_instructions_received: Etkö saanut ohjeita vahvistamiseen?
+      no_unlock_instructions_received: Etkö saanut ohjeita avaamiseen?
+      sign_in_with: Kirjaudu sisään
+  dashboard_layouts:
+      edit_layout: Muokkaa
+      add_new: Lisää Uusi
+      fullscreen: Kokoruututila
+  layouts:
+    navigation:
+      lang_en: Englanti
+      lang_fi: Suomi
+      lang_sv: Ruotsi
+      my_details: Asetukset
+      company_detals: Yrityksen tiedot
+      logout: Kirjaudu ulos
+      notifications: Ilmoitukset
+      edit_layout: Muokkaa
+      add_widget: Lisää uusi widget
+      layout_name: Nimi
+      delete: Poista
+      cancel: Peruuta
+      save_layout: Tallenna
+      reload: Yhdistä
+    application:
+      dashboard: Monitorointi
+      reporting: Raportointi
+      agents: Käyttäjät
+      service_channels: Palvelusarjat
+      locations: Toimipisteet
+      tags: Tagit
+      skills: Taidot
+      ai: AI
+      settings: Asetukset
+    super_ui:
+      dashboard: Monitorointi
+      companies: Yritykset
+      managers: Pääkäyttäjät
+      tags: Tagit
+  tags:
+    skills: Tagit
+    contacts: Asiakaskortit
+    campaigns: Kampanjat
+    company_files: Tiedostot
+    templates: Tekstipohjat
+    products: Tuotteet
+    shipment_method: Toimitustapa
+    save: Tallenna
+    add: Lisää uusia tageja...
+    add_tags: Lisää tageja...
+    cleanup: Turha
+    upgrade: Lisää tagi
+    delete: Poista
+    suggestion: Ehdotukset
+    management: Hallitse tageja
+    attach_scv: Liitä csv
+    attach_phonebook_csv: Liitä puhelinluettelo csv
+    attach_campaign_csv: Liitä kampanja csv
+    show_contacts: Näytä puhelinluettelo
+    show_campaigns: Näytä kampanjat
+    upload: Lataa
+    download_template_file: Lataa mallipohjatiedosto
+    download_phonebook_template_file: Lataa mallipohjatiedosto
+    download_campaign_template_file: Lataa mallipohjatiedosto
+    low: Matala
+    medium: Keskitaso
+    high: Korkea
+    please_select: Valitse
+    select_skill: Valitse taito
+    select_time: Valitse Aika
+    hour: 1 Tunnin
+    hours: '%{count} tuntia'
+    minute: minuutti
+    minutes: '%{count} Minuuttia'
+    never: Ei koskaan
+    alarm: Vastaanottaja
+    email: Sähköpostiviesti
+    sms: Tekstiviesti
+    message: Hälytysviestit
+    saved_successfully: Tallennettu onnistuneesti.
+    order_placed: Tilausvahvistus
+    payment_link: Maksulinkin
+    terms_and_conditions: käyttöehdot
+    templates_tab:
+      create: Luo
+      search: Etsi..
+      actions: Toiminnot
+      ticket: Agentit
+      chat: Chat
+      chat_templates: Chat tekstipohjat
+      basic_template: Tekstipohjat
+      chat_template_text: Chat tekstipohjan teksti
+      template_save_success: Tekstipohja tallennettu onnistuneesti.
+      template_update_success: Tekstipohja ladattu onnistuneesti.
+      template_delete_success: Tekstipohja poistettu onnistuneesti.
+      basic_template_title: Otsikko
+      basic_template_text: Teksti
+      agent_basic_templates: Agentin tiketin tekstipohja
+      send_ticket: Lähetä tiketti
+    cart_email_template_tab:
+      order_placed: Tilausvahvistus malli
+      payment_link: Maksulinkin malli
+      terms_and_conditions: Hyväksyn toimitus- ja myyntiehdot
+      terms_checkbox_text: Valintaruudun teksti
+      title: Tilausmalli
+      subject: Aihe
+      body: Teksti
+    third_party_tools_tab:
+      tab_title: Ohjelmistot
+      delete: Poista
+      save: Tallenna
+      add_more: Lisää ohjelmisto
+      title: Otsikko
+      content: Sisältö
+
+  company_files:
+    files: Tiedostot
+    size: Koko
+    type: Tyyppi
+    actions: Toiminnot
+    file_create_success: Tiedosto ladattu onnistuneesti.
+    file_delete_success: Tiedosto poistettu onnistuneesti.
+    select: Valitse
+    search: Etsi tiedosto
+
+  products:
+    title: Verkkokauppa
+    product_title: Nimike
+    product_description: Kuvaus
+    currency: Valuutta
+    price: Hinta
+    vat: ALV
+    type: Tuotetyyppi
+    with_vat: Sisältää ALV:n
+    without_vat: Ilman ALV:tä
+    create: Luo
+    delete: Poista
+    actions: Toiminnot
+    images: Kuva
+    files: Tiedostot
+    edit: Muokkaa
+    create_success: Tuote luotu onnistuneesti
+    delete_success: Tuote poistettu onnistuneesti
+    update_success: Tuote päivitetty onnistuneesti
+    edit_product: Muokkaa tuotetta
+    close: Sulje
+    save: Tallenna
+
+  vats:
+    create_vat: Luo ALV
+    create_success: Uusi ALV luotu
+    update_success: ALV päivitetty onnistuneesti
+    delete_success: ALV poistettu
+
+  shipment_methods:
+    title: Toimitustapa
+    name: Toimitustavan nimi
+    price: Hinta
+    select: Valitse
+    search: Etsi...
+    actions: Toiminnot
+    create: Luo
+    save:  Tallenna
+    delete: Poista
+    create_success: Toimitustapa luotu onnistuneesti
+    update_success: Toimitustapa päivitetty onnistuneesti
+    delete_success: Toimitustapa poistettu onnistuneesti
+
+  locations:
+    sort_by: Järjestä
+    date: Päivämäärä
+    subject: Aihe
+    email: Sähköpostiosoite
+    phone: Puhelinnumero
+    search: Etsi...
+    agents: käyttäjää
+    details: Tiedot
+    enter_location_details: Lisää toimipisteen tiedot
+    location_name: Toimipisteen nimi
+    mandatory_tip: Tämä kenttä on pakollinen
+    street_address: Katuosoite
+    zip: Postinumero
+    city: Kaupunki
+    online: Päällä
+    offline: Poissa
+    agents_head: Käyttäjät
+    managers: Pääkäyttäjät
+    save: Tallenna
+    location_saved: Toimipaikka tallennettu
+    name: Nimi
+  preferences:
+    skills_management: Skills Management
+    new_task: Uusi tehtävä
+    email_sender: Sähköposti
+    customer_registry: Asiakasrekisteri
+  reports:
+    summary_report:
+      default: Oletus
+      sla: SLA
+      sla_red: Myöhässä
+      sla_yellow: Odottaa
+      sla_no_alert: Ajallaan
+      email: Sähköposti
+      calls: Puhelut
+      tickets: Tiketit
+      sales: Myynti
+      free: Vapaana
+      busy: Varattu
+      sms: SMS
+      waiting_period: Odotusaika
+      successful: Onnistunut
+      unsuccessful: Epäonnistunut
+      total_chats: Chatit yhteensä
+      replies_rate: Onnistunut
+      failure_rate: Epäonnistunut
+      sended: Lähetetty
+      received: Vastaanotettu
+      solved: Ratkaistu
+      unsolved: Ratkaisematon
+      new: Uusi
+      in_progress: Avoin
+      waiting: Odottaa
+      hitrate: Hit rate
+      answered: Vastattu
+      unaswered: Vastaamaton
+      unanswered: Vastaamaton
+      average_process_time: Keskimääräinen käsittelyaika
+      minutes: min
+      web_form: Web-lomake
+      call: Takaisinsoitto
+      callback: Takaisinsoitto
+      peak_time: Ruuhka-ajat
+      media_channels: Mediakanavat
+      overall_amount_tasks: Tehtävät
+      tasks_by_service_channel: Tehtävät palvelusarjoittain
+      tasks_by_location: Tehtävät toimipisteittäin
+      tasks: Tehtävät
+      messages: viestit
+      report_scope: Raportin laajuus
+      report_scopes:
+        all: Sisällytä raporttiin kaikki tehtävät
+        closed: Sisällytä raporttiin vain valmiit tehtävät
+      chat:  Chat
+      chatbot: Chatbot
+      internal: Tiketti
+      orders: Tilaus
+    comparison:
+      comparison_report: Vertailuraportti
+      edit: Muokkaa
+      print: Tulosta
+      save: Tallenna
+      delete: Poista
+      selected_agents: Valitut käyttäjät
+      schedule_report: Ajasta raporttien lähettäminen
+      daily: Päivittäin
+      weekly: Viikoittain
+      monthly: Kuukausittain
+      send_report_email: Lähetä raportti sähköpostitse
+      separate_by_comma: Erota sähköpostiosoitteet pilkulla
+      send_now: Lähetä
+      tasks: Tehtävät
+      turnaround: Läpimenoaika
+      pauses: Tauot
+      solutions: Ratkaisut
+      report_updated: Raportti päivitetty
+      report_sent: Raportti lähetetty
+      solved_tasks: Ratkaistut tehtävät
+      tasks_turnaround: Tehtävien läpimenoaika
+      solved_tasks_by_user: Käyttäjän ratkaisemat tehtävät
+      pauses_percentage: Taukojen prosenttiosuus
+      solutions_percentage: Ratkaisujen prosenttiosuus
+    index:
+      view_report: Muokkaa
+      new_report: Uusi raportti
+      loading_preview: Ladataan esikatselua
+      sort_by: Järjestä
+      date: Päivämäärä
+      subject: Aihe
+      email: Sähköpostiosoite
+      phone: Puhelinnumero
+      search: Etsi...
+      created: Luotu
+      type: Tyyppi
+      author: Tekijä
+      scheduled: Ajastettu
+      report: Raportti
+      summary_report: Yhteenvetoraportti
+      comparison_report: Vertailuraportti
+      report_name: Raportin nimi
+      placeholder_name: Nimi
+      choose_time_range: Valitse aikajakso
+      location: Toimipiste
+      service_channel: Palvelusarja
+      media_channel: Mediakanava
+      agents: Käyttäjät
+      update: Päivitä
+      create: Luo
+      cancel: Tyhjennä
+      create_report: Luo raportti
+      deleted_report: Raportti poistettu onnistuneesti
+      cannot_delete_report: Raporttia ei voi poistaa
+      confirm_delete: Vahvista valintasi
+      select_all: Valitse kaikki
+      unselect_all: Poista valinnat
+      report_layout: Raportin pohja
+      report_locale: Raportin kieli
+      report_locale_tooltip: Tämä kieli käytetään sähköposteissa
+      report_locales:
+        en: Englanti
+        fi: Suomi
+        sv: Ruotsi
+    summary:
+      summary_report: Yhteenvetoraportti
+      edit: Muokkaa
+      print: Tulosta
+      save: Tallenna
+      delete: Poista
+      starts: Alkaa
+      selected_locations: Valitut toimipisteet
+      schedule_report: Ajasta raporttien lähettäminen
+      send_report_email: Lähetä raportti sähköpostitse
+      separate_by_comma: Erota sähköpostiosoitteet pilkulla
+      send: Lähetä
+    generic:
+      please_save_first: Toiminto edellyttää raportin tallentamista.
+      type:
+        summary: yhteenveto
+        comparison: vertailu
+  service_channels:
+    sip: Web puhelin
+    sms: SMS
+    group_sms: Ryhmäviestit
+    attach_csv: Liitä csv
+    create tasks: Luo tehtävä
+    service_channel_saved: Palvelusarja tallennettu
+    add_new_channel: Lisää uusi palvelusarja
+    sort_by: Järjestä
+    date: Päivämäärä
+    subject: Aihe
+    email: Sähköposti
+    internal: Tiketti
+    phone: Puhelinnumero
+    agents: käyttäjää
+    details: Tiedot
+    service_channel_title: Palvelusarja
+    agents_title: Käyttäjät
+    basic_info: Perustiedot
+    send_report: Lähetä raportti
+    name: Nimi
+    add_location: Lisää toimipiste
+    alert_limits: Hälytysrajat
+    days: päiviä
+    hours: tunteja
+    minutes: minuuttia
+    media_channels: Mediakanavat
+    email_setting: Sähköposti
+    call_settings: asetukset
+    chat_settings: asetukset
+    internal_settings: asetukset
+    web_form_settings: asetukset
+    web_form: Web-lomake
+    call: Takaisinsoitto
+    not_configured: 'Ei toiminnassa'
+    save_details: Tallenna tiedot
+    agents_in_channel: Käyttäjät palvelusarjassa
+    format: Muoto
+    format_excel: Excel
+    format_csv: CSV
+    format_pdf: PDF
+    receivers: Vastaanottajat
+    delivery_interval: Lähetysten aikaväli
+    delivery_time: Lähetysaika
+    delivery_days: Lähetysten päivämäärät
+    modal_email_settings: Asetukset
+    modal_internal_settings: Asetukset
+    email_settings: Sähköposti
+    incoming_IMAP: Saapuva posti (IMAP)
+    outgoing_SMTP: Lähtevä posti (SMTP)
+    sla: Hälytysrajat
+    modal_call_settings: Puheluasetukset
+    placeholder_autoreply: Automaattivastauksen teksti
+    auto_reply: Automaattinen vastaus
+    use_auto_reply: Käytä automaativastausta
+    placeholder_description: Kuvaus
+    placeholder_from_email: Lähettäjän sähköpostiosoite
+    placeholder_from_name: Lähettäjän koko nimi
+    placeholder_incoming_mail_server: Saapuvan postin palvelin
+    placeholder_port: Portti
+    placeholder_title: Kuvaus
+    use_ssl: Käytä SSL-varmennusta
+    use_contakti_smtp: Käytä Contakti SMTP
+    placeholder_auth_method: Oikeuksien tarkastaminen
+    placeholder_user_name: Käyttäjänimi
+    placeholder_password: Salasana
+    test_btn: Testi
+    sender: Lähettäjä
+    sms_sender: lähettäjä
+    placeholder_server_name: Lähtevän postin palvelin
+    save_setting_btn: Tallenna
+    save_internal_setting_btn: Tallenna
+    clear_settings_btn: Tyhjennä
+    smtp_auth_methods:
+      login: Sisäänkirjautumisen tarkastaminen
+      NTLM: NTLM (oletuksena MS Exchangelle)
+      plain: Plain
+    call_media_channel_settings:
+      name_check: Automaattinen nimihaku
+    modal_call_settings: Takaisinsoittoasetukset
+    placeholder_call_group_id: Puhelun ryhmänumero
+    placeholder_autoreply_text: Automaattisen tekstiviestivastauksen teksti
+    save_call_setting_btn: Tallenna
+    placeholder_multi_address: Sähköpostiosoitteet pilkulla eroteltuina
+    placeholder_name: Nimi
+    search: Etsi...
+    sms_autoreply: SMS vastaus
+    automatic_mark_as_done: Automaattinen takaisinsoiton kuittaus
+    payment: Maksu
+    automated_namesearch: Automaattinen nimihaku
+    on: Päällä
+    off: Poissa
+    select_template: Valitse nykyisistä viestipohjista
+    save_template: Tallenna uudeksi viestipohjaksi
+    close: Sulje
+    edit_sms_tempalte: SMS
+    sms_tempalte: SMS
+    agent_sms_templates: Tekstiviestipohjat
+    save_sms_template: Tallenna
+    placeholder_template_text: Tekstiviestipohjan teksti
+    placeholder_template_title: Tekstiviestipohjan otsikko
+    sms_template_saved: Tekstiviestipohja tallennettu
+    sms_template_confirm_delete: Oletko varma että haluat pysyvästi poistaa tämän tekstiviestipohjan?
+    sms_template_deleted: Tekstiviestipohja poistettu.
+    cannot_delete_template: Et voi poistaa tekstiviestipohjaa, jota ei ole tallennettu
+    please_save_first: Tallenna ensin palvelusarja.
+    sms_template_visibility: Valitse tekstiviestipohjan näkyvyys
+    template_visibility_types:
+      service_channel: Palvelusarja
+      company: Yritys
+      location: Toimipiste
+    select_location: Valitse paikka
+    proceed_overwriting_template: 'Oletko varma että haluat korvata olemassaolevan viestipohjan: {{name}}?'
+    confirm_delete: 'Vahvista valintasi'
+    will_be_removed: 'Palvelusarja poistetaan muutaman minuutin kuluttua'
+    chat_help_text : Kopioi seuraavat rivit web-sivullesi juuri ennen sulkevaa body-tagia.
+    chat_modal_header: Chat asetukset
+    modal_chat_settings: Chat asetukset
+    modal_sip_settings: SIP asetukset
+    chat_modal_save: Tallenna
+    chat_modal_need_save: Tallenna palvelukanavan asetukset, jotta voit tehdä Chat asetukset.
+    chat_whitelist: "Sallitut domainit (pilkulla eroteltuna). Esimerkki: contakti.com, facebook.com"
+    customize : Muokkaa
+    welcome_message: Automaattinen agentin vastaus
+    initial_msg: Automaattinen järjestelmän vastaus
+    bot_alias: Bot Alias
+    chat_box_color: Chat ikkunan väri
+    chat_text_color: Chat tekstin väri
+    chat_format : Chat formaatti
+    checkout_format : Maksumuoto
+    checkout_paytrail : Paytrail
+    checkout_ticket : Nouto
+    paytrail_success_url: Maksun onnistumisen URL-osoite
+    paytrail_failure_url: Maksuvirheen URL-osoite
+    enable_chatbot : Ota käyttöön Chatbot
+    enable_chatbot_yes : Kyllä
+    enable_chatbot_no : Ei
+    chat_classic : Klassinen
+    chat_form : Kysely
+    chat_logo : Logo
+    private_agent_channel_name: Private Agent Channel
+    sip_settings: Puhe
+    sip_setting: Asetukset
+    not_registered: Ei rekisteröity
+    in_call: Puhelu
+    incoming_call: Saapuva puhelu
+    not_connected: Ei yhdistetty
+    registered: Rekisteröity
+    delete_tasks: Poista tehtävät
+    webphone_header: Asetukset
+    webphone_dial: Pikavalinnat
+    webphone_name: Nimi
+    webphone_number: Numero
+    widget_button_color: Widget painikkeen väri
+    dial_color: Painikkeen fontin väri
+    dial_bg_color: Painikkeen taustaväri
+    inquiry_fields: Kyselykentät
+    initial_buttons: Chatin aloituspainikkeet
+    chat_title: Chat otsikko
+    enable_initial_chat_buttons: Käytä Chatin aloituspainikkeita
+    enable_cart: Ota ostoskori käyttöön
+    add_more_initial_button: Lisää enemmän
+
+  paytrail_payment:
+    success: Kiitos, tilauksenne maksaminen onnistui.
+    failure:  Pahoittelumme, mutta tilauksen maksu epäonnistui jostain syystä.
+    notification: Tilaus on vastaanotettu.
+    payment_status: Maksun tilanne
+    payment_pending: Odottaa
+    payment_paid: Maksettu
+    payment_failed: Epäonnistui
+    payment_time: Maksettu
+
+  tasks:
+    from: Lähettäjä
+    name: Nimi
+    subject: Otsikko
+    default_from: Tuntematon
+  user_dashboard:
+    welcome: Miten voin auttaa?
+    search: "Etsi tehtävä..."
+    ticket: Agentit
+    reply_template:
+      reply_template_modal_tab: "Vastauspohjat"
+      templates_heading: "Vastaukset"
+      create_template: "Luo"
+      template_search: "Etsi tai luo vastaus"
+      template_delete_message: Template Deleted Successfully
+    training:
+      training_title: Chatbot
+      action: Toiminto
+      delete: Poista
+      training_modal_title: Koulutus
+      create_questions_tab: Luo kysymys botille
+      create_answers_tab: Luo vastaus botille
+      create_intent: Luo tarkoitus
+      create_intent_label: Luo tarkoitus jos sitä ei ole listalla
+      create_question_label: Luo kysymys
+      create_answer_label: Luo vastaus
+      search_intent: Etsi tarkoitus
+      intent: Tarkoitus
+      question: Kysymykset
+      answer: Vastaus
+      answer_delete_message: Vastaus poistettu
+      question_delete_message: Kysymys poistettu
+      question_create_success: Vastaus tallennettu onnistuneesti
+      answer_create_success: Vastaus luotu onnistuneesti
+      intent_create_success: Tarkoitus luotu onnistuneesti. Luo kysymys painikkeella Luo kysymys.
+      intent_already_present: "Tarkoitus on jo luotu"
+      question_input: Kirjoita kysymys
+      answer_input: Kirjoita vastaus
+      questions: Kysymykset
+      answers: Vastaukset
+      search_question: Etsi kysymys
+      search_answer: Etsi vastaus
+      intent_delete_message: Tarkoitus poistettu onnistuneesti
+      no_intent_selected: Luo tarkoitus ensin
+      entities: Kokonaisuudet
+      entity: Kokonaisuus
+      synonyms: Synonyymit
+      entity_text: Kokonaisuuden teksti
+      key_words: Avainsanat
+      entity_save_success: Kokonaisuus tallennettu onnistuneesti
+      entity_create_success: Kokonaisuus luotu onnistuneesti
+      keyword_empty: Avainsana ei voi olle tyhjä
+      no_keyword: Lisää avainsana
+      name: Nimi
+      save_entity: Tallenna
+      add_keywords: + Avainsanat
+      create_entity: Luo kokonaisuus
+      search_entities: Etsi kokonaisuus
+      search: Etsi...
+      understandings: Tulkinta
+      delete_all: Poista kaikki
+      question_template_delete_success: Poistettu onnistuneesti
+      entity_delete_success: Kokonaisuus poistettu onnistuneesti
+      files: Tiedostot
+      file: Tiedosto
+      add_files: Lisää tiedosto
+      custom_action_button_text: Toimintopainikkeen teksti
+      custom_action_flag: Näytä toimintopainike
+      add_option_button: Lisää optionäppäin
+      option_button_text: Optionäppäimen teksti
+      option_button_link: Optionäppäimen linkki
+      option_buttons: Optionäppäin
+      custom_action_text: Kustomoitu toiminnon teksti
+      assign_intent: Määritä tarkoitus
+      intent_empty: Valitse tarkoitus ennen tallentamista.
+      understanding_to_question: Kysymys on luotu botille.
+      select_intent: Valitse tarkoitus
+      products: Tuotteet
+      add_products: Lisää tuote
+      choose_products: Valitse tuote
+      images: Kuva
+      edit: Muokkaa
+      edit_answer: Muokkaa vastausta
+      save: Tallenna
+
+
+    typing_text: " kirjoittaa"
+    ask_human_to_help: "Hetki, kysyn kollegalta..."
+    retry_message: "Anteeksi, mutten osaa vastata kysymykseesi. Voit kokeilla uudestaan muotoilemalla kysymyksen hieman eri tavalla."
+    typing_indicator_chat: 'Asiakas kirjoittaa'
+    open_to_all: "Avoin kaikille"
+    number: "Syötä numero..."
+    call: "Soita"
+    mute: "mykistä"
+    unmute: "poista mykistys"
+    hold: "Pito"
+    hangup: "Lopeta"
+    answer: "Vastaa"
+    decline: "Hylkää"
+    volume: "Äänenvoimakkuus"
+    incoming: "Saapuva puhelu"
+    from: "Numerosta"
+    deskphone: "Puhelin"
+    release_time: "Tehtävä avautuu kaikille"
+    calllog: "Puheluhistoria"
+    extensions: "Agentit"
+    signature: "Allekirjoitus"
+    online: "Paikalla"
+    offline: "Poissa"
+    busy: "Varattu"
+    dnd: "Älä häiritse"
+    voicemail: "Ääniviestit"
+    acd: "Jonot"
+    followme: "Seuraa"
+    transfercalls: "Siirrä"
+    activate: "Aktivoi"
+    number: "Numero"
+    startscreen: "Soita puhelu kirjoittamalla numero tai SIP-osoite."
+    calllist: "Puhelut"
+    downloadaudio: "Lataa äänitiedosto"
+    translation: "Tekstikäännös"
+    vehicles_data:
+      reg_num: "Rekisterinumero"
+      details: "Tiedot"
+      modal_title: "Ajoneuvon tiedot"
+      info: "Tiedot"
+      registrationNumber: "Rekisterinumero"
+      manufacturingNumber: "Valmistenumero"
+      manufacturerName: "Valmistaja"
+      modelName: "Malli"
+      variant: "Versio"
+      version: "Versio"
+      typeCode: "Tyyppikoodi"
+      registrationDate: "Rekisteröinti päivämäärä"
+      transmission: "Vaihteisto"
+      engineType: "Moottorin tyyppi"
+      engineDisplacement: "Moottorin iskutilavuus"
+      value: "Arvo"
+      unit: "Yksikkö"
+      maximumPower: "Teho"
+      engineIdentifier: "Moottorin tunniste"
+      netWeight: "Nettopaino"
+      maxWeightTechnical: "Maksimipaino"
+      maxWeightRoad: "Maksimipaino liikenteessä"
+      drivetrain: "Vetotapa"
+      links: "Linkit"
+      identifier: "Tunniste"
+      autodata: "autodata"
+      haynes: "haynes"
+      tecDoc: "tecDoc"
+      source: "Lähde"
+      id: "Tunniste"
+      fuel: "Polttoaine"
+      engineCode: "Moottorin koodi"
+      modelYears: "Vuosimallit"
+      start: "Alkaa"
+      end: "Päättyy"
+      carId: "Auton tunniste"
+      name: "Nimi"
+      powerKw: "Teko KW"
+      powerHp: "Teho HP"
+      cylinderCount: "Sylinteriluku"
+      fuelInfo: "Polttoaine"
+      driveType: "Vetotapa"
+      brakeSystem: "Jarrujärjestelmä"
+      valveCount: "Venttiilien määrä"
+      fuelType: "Polttoaine"
+      bodyType: "Korityyppi"
+      series: "Sarja"
+      manufacturer: "Valmmistaja"
+      preferredLink: "Ensisijainen linkki"
+      errors: "Virheet"
+      message: "Viesti"
+      no_data: "Ei saatavilla"
+
+    callin: "Vastattu"
+    callout: "Soitettu"
+    callername: "Soittaja"
+    calltime: "Aika"
+    callernumber: "Numero"
+    calltype: "Puheluntyyppi"
+    callto: "Soitettu"
+    duration: "Kesto"
+    third_party_tools:
+      create_success: Ohjelmisto luotu onnistuneesti
+      update_success: Ohjelmisto päivitetty onnistuneesti
+      delete_success: Ohjelmisto poistettu onnistuneesti
+    shopping_cart:
+      order: Tilaus
+      cart_title: Ostoskori
+      quantity: Määrä
+      items: Tuotteet
+      product_title: Tuote
+      price: Hinta
+      vat: ALV
+      price_without_taxes: Hinnat ilman ALV
+      taxes: ALV
+      including: Sisältää
+      excluding: Ei sisällä
+      action: Poista
+      total: Yhteensä
+      checkout_method: Maksutapa
+      shipment_method: Toimitustapa
+      shipment_charges: Toimituskulut
+      checkout: Kassalle
+      checkout_button_paytrail: Siirry maksamaan
+      checkout_button_ticket: Vahvista tilaus
+      product_details: Tuotetiedot
+      close: Sulje
+      order: Tilaus
+      order_products: Tilatut tuotteet
+      thanks_for_order: Kiitos, Olemme vastaanottaneet tilauksenne.
+      thanks_for_contact: "Kiitos, olemme vastaanottaneet pyyntösi. <br><br> Palaamme asiaan mahdollisimman pian."
+      note_for_order_payment: "Olemme lähettäneet sinulle linkin sähköpostiisi. <br><br> Noudata maksuohjeita."
+      order_details: "Tilattujen tuotteiden tiedot"
+      terms_modal_heading: Käyttöehdot
+      accept: Hyväksy
+      customer:
+        title: Asiakastiedot
+        full_name: Koko nimi
+        email: Sähköposti
+        phone_number: Puhelin
+        street_address: Katuosoite
+        zip_code: Postinumero
+        city: Kaupunki
+
+    invalid_service_channel: "Viestiä ei voitu lähettää, koska palvelusarjan asetukset eivät ole kunnossa."
+    text_message_sent: "Lähetetty tekstiviesti"
+    text_message_inbound: "Saapunut tekstiviesti"
+    chat_not_available: "Pahoittelut, mutta olemme kaikki juuri nyt varattuja. "
+    chat_leave_a_message_link:  "Voitte jättää meille viestin tai soittopyynnön, niin otamme teihin yhteyttä."
+    priority: "Prioriteetti"
+    normal: "Normaali"
+    urgent: "Kiireellinen"
+    add_tags: "Hallitse tageja"
+    type_message: "Kirjoita viesti..."
+    attachment_chat: "Liitä tiedosto"
+    bot_chat: "Miten voin auttaa?"
+    join_chat: "on liittynyt keskusteluun"
+    quit_chat: "on poistunut keskustelusta"
+    upload_chat: "on lähettänyt tiedoston"
+    name_chat: "Nimi"
+    email_chat: "Sähköposti"
+    phone_chat: "Puhelinnumero"
+    start_chat: "Aloita keskustelu"
+    invitation_chat: "Kutsu agentilta"
+    search_chat: "Etsi..."
+    options_chat: "VALINNAT"
+    addtask_chat: "Luo tiketti"
+    accept_chat: "Hyväksy"
+    waiting_chat: "Odottaa vastausta..."
+    options: "Valitse"
+
+    onlineagents: "Kirjautuneet käyttäjät"
+    clientheading_chat: "CHAT"
+    callback_message_title: "Yhteydenottopyyntö"
+    chat_history: "Chat historia"
+    callback_chat: "Lähetä soittopyyntö"
+    cbnumber_chat: "Puhelinnumero"
+    time_chat: "Valitse ajankohta"
+    message_chat: "Lähetä viesti"
+    send_chat_history_title: "Lähetä Chat keskustelu"
+    messageheading_chat: "OTA YHTEYTTÄ"
+    messageemail_chat: "Sähköpostiosoitteesi..."
+    messagemsg_chat: "Viestisi"
+    messagesend_chat: "Lähetä"
+    messagesend_cancel: "Peruuta"
+    thanks_chat: "Kiitos"
+    sentmessage_chat: "Viestisi on lähetetty onnistuneesti!<br><br>Palaamme asiaan mahdollisimman pian."
+    chat_history_send: "Sähköposti lähetetty"
+    disconnected:
+      title: Yhteys palveluun on katkennut
+      body: Yhdistä uudelleen välttääksesi mahdolliset ongelmat.
+    task_filters:
+      association: Kategoria
+      state: Tila
+      service_channel: Palvelukanavat
+      media_channel: Mediakanavat
+      sla: Prioriteetti
+      tags: Tagit
+      sla_levels:
+        red_alert: Myöhässä
+        yellow_alert: Odottaa
+        urgent: Kiireellinen
+    all: Kaikki
+    channels: Kanavat
+    no_channels: Ei määritettyjä kanavia
+    all_channels: Kaikki palvelusarjat
+    group: Ryhmä
+    management: Hallinta
+    time: Aika
+    new: Uusia
+    create: Uusi
+    open: Avoinna
+    waiting: Odottaa
+    ready: Valmis
+    sort_by: Järjestä
+    presence_user: Läsnäolo
+    presence_select: Valitse tila
+    presence_available: Paikalla
+    presence_busy: Varattu
+    presence_disturb: Älä häiritse
+    presence_away: Tauolla
+    presence_notavailable: Poissa
+    presence_type: Kirjoita tilasi
+    presence_reply: Lähetä automaattinen poissaolovastaus
+    date: Päivämäärä
+    subject: Aihe
+    service_channel: Ryhmä
+    closed_by: Sulkenut
+    channel: Kanava
+    filter: Suodata tehtävät
+    send_email: Lähetä sähköposti
+    forward_email: Välitä sähköposti
+    email: Sähköpostiosoite
+    select_template: Valitse tekstipohja
+    choose_template: Valitse tekstipohja..
+    phone: Puhelinnumero
+    phone_placeholder: 'Matkapuhelinnumero (esim. +358401234567)'
+    move_to_service_channel: Siirrä palvelusarjaan
+    moved_to_service_channel: Tehtävä siirretty Palvelukanavaan "{{name}}"
+    mark_as_done: Merkitse tehdyksi
+    mark_as_new: Merkitse uudeksi
+    restart: Avaa uudelleen
+    follow: Seuraa tehtävää
+    unfollow: Lopeta seuranta
+    lock: Lukitse
+    unlock: Avaa
+    reply: Vastaa
+    reply_all: Vastaa kaikille
+    tickets_filter_title: Katso muut tehtävät.
+    domain_filter_title: Suodata domainin perusteella.
+    replying:
+      target: Vastauksen tyyppi
+      internal: Sisäinen
+      customer: Asiakas
+    forward: Välitä
+    mark_as_spam: Poista
+    archive: Arkistoi
+    confirm_mark_as_spam: Tehtävä poistuu näkymästä ja kaikilta raporteilta. Oletko varma?
+    send_sms: Lähetä tekstiviesti
+    print: Tulosta
+    cancel: Peruuta
+    created: Vastaanottanut
+    send_to: Vastaanottaja
+    send_to_bcc: BCC
+    send_to_cc: CC
+    call_from: Soittaja
+    send_from: Lähettäjä
+    subject: Otsikko
+    cc: Kopio
+    bcc: Piilokopio
+    cc_bcc: Kopio/Piilokopio
+    clear: Tyhjennä
+    send: Lähetä
+    save: Tallenna
+    delete: Poista
+    task: Tehtävä
+    tasks: Tehtävät
+    alarm: Hälytys
+    internal_communication: Sisäinen viestintä
+    internal_note: Sisäinen muistiinpano
+    download_txt_file: Lataa tekstitiedosto
+    send_to_email: Lähetä sähköpostiin
+    end_chat: Lopeta chat
+    start_new_chat: Aloita uusi Chat
+    task_skills: Skills Requirement
+    task_management: Hallinta
+    message: Viesti
+    sms_message: viesti
+    sms_messages: viestiä
+    searchcustomer: Etsi asiakas...
+    attach_file: Liitä
+    select_file: Valitse tiedosto
+    email_to: Lähetä s-posti
+    email_to_message: Viesti
+    please_select_service_channel: Valitse palvelusarja
+    agents_loading: Ladataan käyttäjiä...
+    attach_change: Vaihda
+    forwarding: Edeleenlähetetään viestiä...
+    sending_sms: Lähetetään tekstiviestiä...
+    agent: Käyttäjä
+    add_file: Lisää tiedosto
+    assign_to_agent: Siirrä agentille
+    task_result:
+      negative: Negatiivinen
+      neutral: Neutraali
+      positive: Positiivinen
+    task_state: Tehtävän tila
+    task_states:
+      new: uusi
+      open: avoinna
+      waiting: odottaa
+      ready: valmis
+      archived: arkistoitu
+    task_actions:
+      start: Avoin
+      restart: Avaa uudelleen
+      pause: Aseta odottamaan
+      close: Sulje
+      archive: Arkistoi
+    new_task_mailer:
+      header: "Uusi taski on luotu"
+      body: "Alhaalla löytyy enemmän informaatiota"
+      task_name: "Otsikko"
+      task_message: "Viesti"
+      task_id: "Taskin id: "
+      agent: "Käyttäjä: "
+      media_channel: "Mediakanava: "
+      service_channel: "Palvelusarja: "
+      creators_message: "Tekijän viesti: "
+      timestamp: "Aikaleima: "
+    user_dashboard_mailer:
+      send_email: "Sähköposti"
+      subject: "Otsikko"
+      recipient: "Vastaanottaja"
+      cc: "Kopio"
+      bcc: "Piilokopio"
+      service_channel: "Palvelusarja"
+      message: "Viesti"
+      agent: "Käyttäjä"
+      email: "Sähköposti"
+      best_regards: "Ystävällisin terveisin"
+      msg_sent_to: "Viesti lähetetty"
+      sms_sent_to: "Tekstiviesti lähetetty"
+      error_msg_sent_to: "Viestiä ei voitu lähettää"
+    languages:
+      en: "Englanti"
+      fi: "Suomi"
+      sv: "Ruotsi"
+    super_search:
+      all: Kaikki
+      unsolved: Ratkaisematon
+      archived: Arkistoitu
+      task_id: Id
+      agent: Käyttäjä
+      task: Tehtävä
+      customer: Käyttäjä
+      company: Yritys
+    unanswered_call: 'Vastaamaton puhelu'
+    chat_callback_title: "Soittopyyntö"
+    sender: 'Lähettäjä'
+    caller: 'Soittaja'
+    no_any_tasks: "Ei tehtäviä saatavilla"
+    no_tasks_selected: "Ei valittua tehtävää"
+    are_you_sure_want_close_call_task: "Merkitäänkö tehtävä käsitellyksi?"
+    are_you_sure_want_task_to_be_marked_new: "Merkitäänkö tehtävä uudeksi?"
+    are_you_sure_want_close_task: "Merkitäänkö tehtävä käsitellyksi?"
+    select_state_for_this_task: "Valitse tämän tehtävän tila"
+    task_is_already_in_work: "Tehtävä on jo käsitelyssä käyttäjällä: %{agent}"
+    rate_this_chat: "Arvostele keskustelu"
+    ok: "Vahvista"
+    select_task_result: "Valitse tulos"
+    filter: Suodata
+    create_new: Luo uusi
+    task_name: "Otsikko"
+    task_message: "Viesti"
+    new_task: Tiketti
+    new_email: Sähköposti
+    new_customer: Asiakas
+    new_tasks: Uusia tehtäviä
+    mark_as_seen: Merkitse nähdyksi
+    waiting_time_out_dialog: "Lukittu tehtävä avautuu pian."
+    waiting_time_out_modal_title: "Tehtävän lukitsemisaika on päättymässä"
+    keep_working: "Pidä lukittuna"
+    contact_card:
+      company: Yritys
+      basic_information: Perustiedot
+      customers: Asiakkaat
+      tasks: Tehtävät
+      calls: Soitot
+      emails: Sähköpostit
+      chats: Chatit
+      sms: SMS
+      web_forms: Web-lomakkeet
+      company_basic_information: Yrityksen perustiedot
+      loading: Ladataan...
+      company_name: Yrityksen nimi
+      business_number: Yrityksen numero
+      address: Osoite
+      primary_contact_person: Pääyhteyshenkilö
+      postal_code: Postinumero
+      city: Kaupunki
+      email_address: Sähköpostiosoite
+      phone_number: Puhelin
+      deleting: Poistetaan...
+      delete: Poista
+      save: Tallenna
+      task_history: Taskien historia
+      date_created: Luotu
+      from: Keneltä
+      media_channel: Mediakanava
+      service_channel: Palvelusarja
+      reminder: Muistutus
+      internal_notes: Sisäiset muistiinpanot
+      customer: Asiakas
+      customer_basic_information: Asiakkaan perustiedot
+      first_name: Etunimi
+      last_name: Sukunimi
+      work_title: Työtitteli
+      second_address: Toinen osoite
+      contact_card: Asiakaskortisto
+      saving: Tallennetaan...
+    customer_modal:
+      customer_card: Asiakaskortti
+      open_tickets: Avoimet tehtävät
+      customer_details: Asiakastiedot
+      task_history: Tehtävähistoria
+      customer_name: Nimi
+      address: Osoite
+      city: Kaupunki
+      vat: Y-tunnus tai Sotu
+      postcode: Postinumero
+      country: Maa
+      contact: Yhteyshenkilö
+      phone: Puhelinnumero
+      email: Sähköpostiosoite
+      website: Verkkosivut
+      facebook: Facebook
+      twitter: Twitter
+      skype_id: Skype ID
+      first_name: Etunimi
+      last_name: Sukunimi
+      saved: Tallennettu
+      deleted: Asiakaskortti poistettu
+      phone_invalid: Puhelinnumero ei ole kelvollinen
+      phone_already_in_use: Puhelinnumero on jo käytössä
+      email_already_in_use: Sähköpostiosoite on jo käytössä
+      contact_person: Yhteyshenkilö
+      contact_info: Yhteystiedot
+      customer: Asiakas
+      clear: Tyhjennä
+    contact_modal:
+      contact_search_placeholder: Etsi yhteystieto ...
+      delete_all_contacts: Poista puhelinluettelo
+      no_contacts: Ei yhteystietoja
+      save_contact: Tallenna
+      phonebook_card: Puhelinluettelo
+      phone_invalid: Puhelinnumero ei ole kelvollinen
+      phone_already_in_use: Puhelinnumero on jo käytössä
+      email_already_in_use: Sähköposti on jo käytössä
+    campaign_modal:
+      campaign_search_placeholder: Etsi kampanja...
+      delete_all_campaigns: Poista kampanjat
+      no_campaigns: Ei kampanjoita
+      save_campaign: Tallenna
+      campaigns_card: Kampanjat
+      phone_invalid: Puhelinnumero ei ole kelvollinen
+      phone_already_in_use: Puhelinnumero on jo käytössä
+      email_already_in_use: Sähköposti on jo käytössä
+
+    campaign_item_modal:
+      save_campaign_item: Tallenna
+      search_placeholder: Etsi kampanjan kohde...
+      campaign_items_card: Kampanjan kohde
+      delete_all: Poista kaikki kampanjan kohteet.
+      no_campaign_items: Ei kampanjoita
+
+    confirm_delete: Oletko varma että haluat poistaa?
+    delete_success: Poistettu onnistuneesti
+    saved: Tallennettu
+    deleted: Asiakaskortti poistettu
+
+
+  daterangepicker:
+    ranges:
+      today: Tänään
+      yesterday: Eilen
+      last_x_days: 'Viimeiset {{days}} päivää'
+      this_month: Tämä kuukausi
+      last_month: Edellinen kuukausi
+    cancel: Tyhjennä
+    apply: Valitse
+    from: Alku
+    to: Loppu
+    custom_range: Muu ajanjakso
+    days_of_week:
+      - su
+      - ma
+      - ti
+      - ke
+      - to
+      - pe
+      - la
+    month_names:
+      - tammi
+      - helmi
+      - maalis
+      - huhti
+      - touko
+      - kesä
+      - heinä
+      - elo
+      - syys
+      - loka
+      - marras
+      - joulu
+  users:
+    log_in_as: Valitse käyttäjä
+    switch_user: Vaihda käyttäjää
+    switch_back: Pääkäyttäjä
+    resend_instructions: Uudelleenlähetä ohjeet vahvistamiselle
+    mailer:
+      welcome: Tervetuloa
+      paragraph_text: Voit vahvistaa tilisi allaolevan linkin kautta
+      hello: Hei
+      link_text: Vaihda salasanasi.
+      set_password: Tervetuloa CONTAKTI -palveluun! Voit asettaa salasanan allaolevan
+        linkin kautta.
+      declaration: Sait tämän sähköpostiviestin, koska saimme tilisi salasanan vaihtamista koskevan pyynnön. Jos et pyytänyt salasanan vaihtamista, voit poistaa tämän sähköpostin turvallisesti.
+      unlock_text_html: "<p>Tilisi on lukittu toistuvien epäonnistuneiden sisäänkirjautumisten
+        vuoksi.</p> <p>Paina allaolevaa linkkiä avataksesi tilisi:</p>"
+      reset_button: Vaihda salasana
+    passwords:
+      change_pass: Vaihda salasana
+      new_pass: Uusi salasana
+      confirm_pass: Vahvista uusi salasana
+      change_pass_btn: Vaihda salasana
+      forgot_pass: Unohditko salasanasi?
+      send_reset_instructions: Lähetä
+      forgot_pass_header: Unohditko salasansi? Ole hyvä ja anna sähköpostiosoitteesi
+        niin lähetämme sinulle linkin, jonka avulla voit vaihtaa salasanasi.
+      email_not_found: Pahoittelut, emme löytäneet sähköpostiosoitettasi.
+      instructions_sent: 'Salasanan vaihto-ohjeet lähetetty osoitteeseen %{email}'
+    registrations:
+      edit: Muokkaa
+      waiting_for: Odottaa vahvistusta
+      cancel_account: Sulje tili
+      unhappy: Oletko tyytymätön?
+      sure: Oletko varma?
+      back: Takaisin
+      update: Päivitä
+      pass_hint_1: jätä tyhjäksi mikäli et halua vaihtaa sitä
+      pass_hint_2: syötä nykyinen salasanasi vahvistaaksesi muutokset
+      sign_up: Uusi tili
+    sessions:
+      login_to_account: Kirjaudu sisään tilillesi
+      password: Salasana
+      wrong_login: Väärä käyttäjänimi tai salasana
+      login: Kirjaudu sisään
+      forgot_password: Unohtuiko salasana?
+      trouble_sign_in: Onko ongelmia sisäänkirjautumisessa?
+      how_to_reset: Vaihtaaksesi salasanasi, anna alkuperäinen sähköpostiosoite, jolla
+        kirjauduit palveluun.
+      email: Sähköpostiosoite
+      username: Käyttätunnus
+      placeholder_email: Anna sähköpostiosoite
+      reset_password_btn: Vaihda salasana
+      remember_me: Muista minut
+    unlocks:
+      resend_unlock_instructions:
+    user:
+      change_role: Vaihda roolia
+      close: Sulje
+    agents:
+      sort_by: Järjestä
+      date: Päivämäärä
+      subject: Aihe
+      email: Sähköpostiosoite
+      phone: Puhelinnumero
+      add_new_agent: Lisää uusi käyttäjä
+      search: Etsi...
+      online: Paikalla
+      offline: Poissa
+      agent_profile: Profiili
+      agent_activity: Tapahtumat
+      agent_history: Viestihistoria
+      enter_agent_details: Käyttäjän tiedot
+      placeholder_first_name: Etunimi
+      placeholder_last_name: Sukunimi
+      placeholder_alias_name: Chat-alias
+      placeholder_title: Titteli
+      placeholder_phone: Puhelinnumero
+      placeholder_email: Sähköpostiosoite
+      placeholder_minutes_until_offline: Minuutteja offline-tilaa varten
+      add_to_service_channels: Lisää palvelusarjaan
+      add_to_locations: Lisää toimipisteeseen
+      add_to_media_channels: Lisää mediakanavaan
+      mandatory_tip: Tämä kenttä on pakollinen
+      save: Tallenna
+      user_activity_report: Käyttäjän toimintaraportti
+      tasks: Tehtävät
+      turnaround: Läpimenoaika
+      pauses: Tauot
+      solutions: Ratkaisut
+      all: Kaikki
+      today: Tänään
+      open: Avoin
+      waiting: Odottaa
+      ready: Valmis
+      from: Lähettäjä
+      choose_period: Valitse aktiviteettien ajankohta
+      delete: Poista
+      name: Nimi
+      added_agent: Agentti lisätty
+      updated_agent: Agentin tiedot päivitetty
+      deleted_agent: Agentti poistettu
+      not_deleted_agent: Agenttia ei voi poistaa
+      media_channel_types:
+        email: Sähköposti
+        web_form: Web-lomake
+        call: Takaisinsoitto
+        internal: Tiketti
+        chat: Chat
+      empty_message_history: Viestihistoria on tyhjä.
+      default_location: "Kustannuspaikka"
+      select_default_location: "Valitse kustannuspaikka"
+      minutes_to_offline_tooltip: "Minutes until other sessions stay online if user logs out"
+    details:
+      my_account: Asetukset
+      account_details: Henkilökohtaiset tiedot
+      phonebook: Puhelinluettelo
+      first_name: Etunimi
+      last_name: Sukunimi
+      title: Titteli
+      phone: Puhelinnumero
+      email: Sähköpostiosoite
+      password: Salasana
+      leave_empty_option: Jätä tyhjäksi mikäli et halua muuttaa
+      repeat_password: Toista salasana
+      cancel: Peruuta
+      save_details: Tallenna tiedot
+      mandatory_tip: Tämä kenttä
+      updated_details: Käyttäjän tiedot päivitetty
+      select_language: Valitse kieli
+      select_signature: Lisää allekirjoitus
+    index:
+      users: Käyttäjät
+      user_name: Käyttäjänimi
+      email: Sähköpostiosoite
+      registered: Rekisteröitynyt
+      role: Rooli
+      change_role: Vaihda roolia
+      delete_user: Poista käyttäjä
+      sure: Oletko varma?
+    show:
+      user: Käyttäjä
+      email: Sähköpostiosoite
+      edit_account: Muokkaa tiliä
+    nothing_selected_state:
+      no_agent: Valitse käyttäjä tai luo uusi
+      no_location: Valitse toimipiste tai luo uusi
+      no_report: Valitse raportti tai luo uusi
+      no_service_channel: Valitse palvelusarja tai luo uusi
+  weekly_schedules:
+    title: Aukioloajat
+    open_full_time: "Avoinna 24/7"
+    use_entries: "Käytä määriteltyjä aikoja"
+  search:
+    results:
+      one: '1 tulos'
+      other: '%{count} tulosta'
+  date:
+    abbr_day_names: [Su, Ma, Ti, Ke, To, Pe, La]
+  tag_notifications:
+    time_success: Tehtävän avautumisen ajan päivitys onnistui
+    time_failure: Tehtävän avautumisen ajan päivitys epäonnistui
+    priority_success: Prioriteetin päivitys onnistui
+    priority_failure: Prioriteetin päivitys epäonnistui
+    priority_add: Prioriteetti lisätty onnistuneesti
+    priority_add_failure: Prioriteetin lisääminen epäonnistui
+    alarm_receivers_success: Hälyytysten vastaanottajien päivitys onnistui
+    alarm_receivers_failure: Hälyytysten vastaanottajien päivitys epäonnistui
+    email_template_success: Sähköpostiviestin päivitys onnistui
+    email_template_failure: Sähköpostiviestin päivitys epäonnistui
+    sms_template_success: Tekstiviestipohjan päivitys onnistui
+    sms_template_failure: Tekstiviestipohjan päivitys epäonnistui
+    success: TALLENNETTU!
+    failure: TALLENTAMINEN EPÄONNISTUI!
+
+  time_tracker:
+    customer: Asiakkaat
+    projects: Projekti
+    activities: Aktiviteetti
+    description: Kuvaus
+    select_default: Valitse
+    title_time_tracker: Työajanseuranta
+    start: Aloita
+    required: Vaaditaan
+    open_modal: Avaa näkymä
+    pause_timer: Tauko
+    stop_timer: Pysäytä
+    restart_timer: Käynnistä uudelleen
+    error_timesheet: Työaikalomaketta ei luoda
+    customer_not_found_with_contact: 'Asiakasta ei löydy kontaktilla: %{contact}'
+    activity_and_project_must_present: 'Varmista, että teillä on projekti nimeltä "Soita" työajanseurannassa asiakkaan (%{customer}) kanssa ja myös toimintaa nimeltä "puhelu"'
+
+
+  kimai_details:
+    kimai_details: Työajanseuranta
+    tracker_email: Käyttäjä Sähköposti
+    tracker_auth_token: Token avain
+    kimai_tracker_api_url: Osoite
+    save: Tallenna
+    tracker_email_placeholder: Syötä käyttäjätunnus
+    tracker_auth_token_placeholder: Syötä Token avain
+    kimai_tracker_api_url_placeholder: Syötä palvelimen osoite
+    saved: Tallennettu onnistuneesti

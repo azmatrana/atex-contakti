@@ -1,0 +1,89 @@
+<script type="text/html" id="assign_to_agent_template">
+  <!-- Modal -->
+  <form data-bind="attr: {action: (function() {return '/tasks/' + task().id + '/manage'; })()}" method="post" data-remote="true">
+    <div class="modal fade" id="assign-to-agent" tabindex="-1" role="dialog" aria-labelledby="assign-to-agent">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><%= t("user_dashboard.task_state")%></h4>
+          </div>
+          <div class="modal-body innerAll">
+            <div class="col-md-12"><br>
+
+              <div class="col-md-6">  
+                <strong><%= I18n.t('user_dashboard.priority') %></strong>
+                <div class="styled-select">
+                  <select type="text" name="urgency" data-bind="value: (function(){return task().isUrgent() ? 'urgent' : 'normal'})()">
+                    <option value="normal"> <%= I18n.t('user_dashboard.normal') %> </option>
+                    <option value="urgent"> <%= I18n.t('user_dashboard.urgent') %> </option>
+                  </select>
+                  <span class="caret"></span>
+                </div>
+              </div>  
+
+              <div class="col-md-6">  
+                <strong><%= I18n.t('user_dashboard.add_tags') %></strong>
+                <input type="text" class="form-control" autocomplete="off" id="tokenfield" name="tags" data-bind="value: task().tagsAsString" />
+              </div>
+
+            </div>  
+
+            <div class="col-md-12">
+                </br>
+              <div class="col-md-6">  
+                <strong><%= I18n.t('user_dashboard.move_to_service_channel') %></strong>
+                <div class="styled-select">
+                  <select id="move_to_service_channel" name="service_channel_id" placeholder="<%= I18n.t('user_dashboard.move_to_service_channel') %>" 
+                          data-bind="
+                                    disabled: task().state == 'open', 
+                                    options: userDashboardApp.filteredServiceChannelsByAgent,
+                                    optionsText: function(item) { return item.name; }, 
+                                    optionsValue: function(item) { return item.id},
+                                    value: task().serviceChannelId,
+                                    event: { 'change': serviceChannelChanged }
+                  ">
+                  </select>
+                  <span class="caret"></span>
+                </div>
+              </div>  
+
+              <div class="col-md-6">  
+                <strong><%= t("user_dashboard.assign_to_agent")%></strong>
+                <div class="styled-select">
+                  <select id="move_to_agent" name="agent_id" 
+                          data-bind="
+                                      options: UserDashboard.agents,
+                                      optionsCaption: '<%= t("user_dashboard.open_to_all") %>',
+                                      optionsValue: function(item) {
+                                        return item.id
+                                      },
+                                      optionsText: function(item) {
+                                        return item.first_name + ' ' + item.last_name
+                                      },
+                                      value: '',
+                                      event: { 'change': agentChanged }
+                    ">
+                    <option data-bind="value: id, text: name"></option>
+                  </select>
+                  <span class="caret"></span>
+                </div>
+              </div>  
+
+            </div>
+            <div class="clearfix"></div><br>
+          </div>
+          <div class="modal-footer">
+            <div class="pull-right">
+
+                <input type="hidden" name="cancel" id="cancel-manage" value="0"/>
+                <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelManagement"><%= t('user_dashboard.cancel') %><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="submit" class="btn btn-default btn-sm" data-bind="click: saveManagement"><%= t('user_dashboard.save') %> <span class="glyphicon glyphicon-ok"></span></button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</script>

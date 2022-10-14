@@ -1,0 +1,5 @@
+<% if current_user.has_role? :agent %>
+  <%= render 'campaigns/agent_table', campaigns: campaigns %>
+<% elsif current_user.has_role? :admin %>
+  <%= render 'campaigns/company_table', campaigns: campaigns %>
+<% end %>

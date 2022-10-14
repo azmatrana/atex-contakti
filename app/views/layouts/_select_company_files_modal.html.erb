@@ -1,0 +1,50 @@
+<div  class="modal fade" id="file_select_modal_dialog" data-bind="with: viewModels.selectCompanyFilesModal" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content select_company_file">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title"><%= t('company_files.files') %></h3>
+      </div>
+
+      <div class="modal-body ">
+         <div class="row">
+           <div class="col-md-6">
+             <input name="search"  class="form-control" data-bind="value: filesFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('company_files.search') %>">
+           </div>
+         </div>
+
+        <div class="row">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>
+                <%= t('company_files.files') %>
+              </th>
+              <th>
+                <%= t('company_files.size') %>
+              </th>
+              <th>
+                <%= t('company_files.type') %>
+              </th>
+              <th>
+                <%= t('company_files.actions') %>
+              </th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: filteredFilesList()">
+            <tr>
+              <td> <a data-bind="attr: { href: file.url }, text: file_name" download></a>
+              </td>
+              <td data-bind="text: humanize_file_size"></td>
+              <td data-bind="text: file_type"></td>
+              <td>
+                <button class="btn btn-default btn-sm" data-bind="click: () => $parent.addFile($data)">   <%= t('company_files.select') %></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

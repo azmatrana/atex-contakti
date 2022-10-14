@@ -1,0 +1,30 @@
+<script type="text/html" id="message_item_buttons_email">
+
+<!-- ko if: $data.parent.data.is_not_call -->
+  <!-- ko ifnot: $data.data.sms -->
+    <!-- ko if: $data.canReply() || true -->
+      <span data-bind="text: JSON.stringify($data.canReply)"></span>
+      <button type="button" class="btn btn-default"
+            data-bind="click: $root.viewModels.taskContainer.showReplyClicked, attr: {'data-id': $data.id }">
+        <%= I18n.t('user_dashboard.reply') %><span class="glyphicon glyphicon-share-alt"></span>
+      </button>
+    <!-- /ko -->
+    <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.forwardClicked">
+      <%= I18n.t('user_dashboard.forward') %>
+      <span class="glyphicon glyphicon-forward"></span>
+    </button>
+    <button type="button" class="btn btn-default"><%= I18n.t('user_dashboard.mark_as_spam') %>
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  <!-- /ko -->
+  <button type="button" class="btn btn-default" data-bind="attr: {'data-id': $data.id}">
+    <%= I18n.t('user_dashboard.print') %> <span class="glyphicon glyphicon-print"></span>
+  </button>
+<!-- /ko -->
+
+</script>
+
+
+
+
+

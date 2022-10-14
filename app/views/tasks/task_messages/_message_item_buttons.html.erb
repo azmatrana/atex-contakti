@@ -1,0 +1,80 @@
+
+<script type="text/html" id="message_item_buttons">
+  <button type="button" class="btn btn-primary btn-stroke" data-bind="click: $root.viewModels.taskContainer.internalNoteClicked">
+    <%= I18n.t('user_dashboard.internal_note') %> <span class="glyphicon glyphicon-note"></span>
+  </button>
+
+<!-- ko if: $data.parent.data.is_not_call -->
+
+  <!-- ko if: $data.parent.data.may_lock -->
+    <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.lockTask">
+      <%= I18n.t('user_dashboard.lock') %> <span class="fa fa-lock"></span>
+    </button>
+  <!-- /ko -->
+
+  <!-- ko if: $data.parent.data.may_unlock -->
+    <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.unlockTask">
+      <%= I18n.t('user_dashboard.unlock') %> <span class="fa fa-unlock"></span>
+    </button>
+  <!-- /ko -->
+
+  <!-- ko if: $data.canReply() -->
+    <button type="button" class="btn btn-default"
+        data-bind="click: $root.viewModels.taskContainer.showReplyClicked, attr: {'data-id': $data.id}">
+      <%= I18n.t('user_dashboard.reply') %><span class="glyphicon glyphicon-share-alt"></span>
+    </button>
+  <!-- /ko -->
+
+  <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.forwardClicked">
+    <%= I18n.t('user_dashboard.forward') %> <span class="glyphicon glyphicon-forward"></span>
+  </button>
+
+  <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.sendSmsClicked">
+    <%= I18n.t('user_dashboard.send_sms') %> <span class="glyphicon glyphicon-comment"></span>
+  </button>
+
+  <button type="button" class="btn btn-default" data-bind="attr: { 'data-id': $data.id}, click: $root.viewModels.taskContainer.printClicked">
+    <%= I18n.t('user_dashboard.print') %> <span class="glyphicon glyphicon-print"></span>
+  </button>
+
+  <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.showDeleteModal">
+    <%= I18n.t('user_dashboard.mark_as_spam') %>
+    <span class="glyphicon glyphicon-trash"></span>
+  </button>
+
+<!-- /ko -->
+
+<!-- ko ifnot: $data.parent.data.is_not_call -->
+  <!-- ko if: $data.parent.data.may_close -->
+
+    <!-- ko if: $data.parent.data.may_lock -->
+      <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.lockTask">
+        <%= I18n.t('user_dashboard.lock') %> <span class="fa fa-lock"></span>
+      </button>
+    <!-- /ko -->
+
+    <!-- ko if: $data.parent.data.may_unlock -->
+      <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.unlockTask">
+        <%= I18n.t('user_dashboard.unlock') %> <span class="fa fa-unlock"></span>
+      </button>
+    <!-- /ko -->
+
+    <button href="#task_mark_as_done_modal" data-toggle="modal" class="btn btn-default">
+      <%= I18n.t('user_dashboard.mark_as_done') %> <span class="glyphicon glyphicon-ok"></span>
+    </button>
+
+  <!-- /ko -->
+
+  <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.sendSmsClicked">
+    <%= I18n.t('user_dashboard.send_sms') %> <span class="glyphicon glyphicon-comment"></span>
+  </button>
+
+<!-- /ko -->
+
+<!-- ko if: 0-->//$data.parent.data.may_archive -->
+  <button type="button" class="btn btn-default" data-bind="click: $root.viewModels.taskContainer.archiveTask">
+    <%= I18n.t('user_dashboard.archive') %>  <span class="glyphicon glyphicon-folder-close"></span>
+  </button>
+<!-- /ko -->
+
+</script>

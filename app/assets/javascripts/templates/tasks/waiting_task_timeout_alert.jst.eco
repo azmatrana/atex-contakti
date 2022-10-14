@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="unlock-preview inbox-preview-modal height-auto">
+      <table class="table">
+      <tr>
+          <td class="item-type <%= if @message.channel_type == 'call' then 'phone' else 'email' %>">
+            <span class="glyphicon <%= @iconClass %> "></span>
+          </td>
+          <td class="item-description">
+            <% if @message.channel_type == 'call': %>
+              <a class="caller-number-link">
+                <span class="caller-number"><%= @firstMessage.from %></span>
+
+                <% if @task.call_counter: %>
+                  <span class="call-counter pull-right">(<%= @task.call_counter %>)</span><br>
+                <% end %>
+                <% if @task.caller_name: %>
+                  <span class="caller-name"><%= @task.caller_name %></span>
+                <% end %>
+              </a>
+            <% else: %>
+              <% if @message.sms: %>
+                <span><%= @message.to %></span>
+              <% else: %>
+                <span><%= @message.from_email %></span>
+              <% end %>
+            <% end %>
+            <h1 class="item-title dark-font">
+              <% if @message.channel_type == 'call': %>
+                <%= I18n.t('user_dashboard.unanswered_call') %>
+              <% else: %>
+                <%= @firstMessage.title %>
+              <% end %>
+            </h1>
+            <p class="last-message-description"><%- @message.description %></p>
+            <span class="manage-task-link clearfix"><span class="glyphicon glyphicon-share-alt"></span> <span class="task-list-item-service-channel-name"><%= @task.service_channel.name %></span></span>
+
+            <span class="manage-task-link clearfix">
+              <span class="glyphicon glyphicon-time"></span>
+              <span id="task-list-item-create-time"></span>
+            </span>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>

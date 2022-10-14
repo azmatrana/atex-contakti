@@ -1,0 +1,72 @@
+<div id="result-modal" class="modal fade bottom">
+    <div class="modal-dialog small" data-bind="if: selectedTask">
+        <div class="modal-content">
+            <div class="modal-body">
+                <center><h4 data-i18n="app:task.results.header"></h4></center>
+                <div class="row innerAll" style="margin-top: 20%;">
+                    <div class="col-xs-3">
+
+                    </div>
+                    <!-- ko if: selectedTask()._originalData.media_channel == 'call' -->
+                        <div class="col-xs-7 button-col">
+                            <div class="row vertical-align">
+                                <div class="col-xs-10">
+                                    <button type="button" class="btn btn-result btn-block" data-bind="click: setResult.bind($data, 'negative')">
+                                        <span data-i18n="app:task.results.negative"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="fa fa-check fa-lg" data-bind="visible: selectedResult() == 'negative'"></span>
+                                </div>
+                            </div>
+
+                            <div class="row vertical-align">
+                                <div class="col-xs-10">
+                                    <button type="button" class="btn btn-result btn-block" data-bind="click: setResult.bind($data, 'neutral')">
+                                        <span data-i18n="app:task.results.neutral"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="fa fa-check fa-lg" data-bind="visible: selectedResult() == 'neutral'"></span>
+                                </div>
+                            </div>
+
+                            <div class="row vertical-align">
+                                <div class="col-xs-10">
+                                    <button type="button" class="btn btn-result btn-block" data-bind="click: setResult.bind($data, 'positive')">
+                                        <span data-i18n="app:task.results.positive"></span>
+                                    </button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <span class="fa fa-check fa-lg" data-bind="visible: selectedResult() == 'positive'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- /ko -->
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left">
+                    <div class="message-actions" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn btn-primary btn-sm" data-bind="click: onRejectClose">
+                            <span class="fa fa-times"></span>
+                            <span data-i18n="app:task.action.cancel"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div class="message-actions" data-bind="if: selectedTask">
+                        <button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmClose">
+                            <span class="fa fa-check"></span>
+                            <span data-i18n="app:task.action.mark_as_done"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

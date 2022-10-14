@@ -1,0 +1,16 @@
+hostname: '213.167.240.63'
+protocol: http
+from_email: admin@netdesk.com
+
+smtp:
+  address: localhost
+  port: 1025
+  authentication: plain
+  enable_starttls_auto: true
+
+call_media_channel:
+  server_name: host
+  user_name: login
+  password: password
+  port: 993
+  use_ssl: false

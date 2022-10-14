@@ -1,0 +1,12 @@
+<div class="col-md-6">
+  <div class="widget margin-bottom-none">
+    <div class="widget-head">
+      <h4 class="heading"><%= t('reports.summary.selected_locations')%>:</h4>
+    </div>
+    <div class="widget-body">
+      <% @report.locations.each do |location| %>
+        <span class="tagbadge"><%= location.name %></span>
+      <% end %>
+    </div>
+  </div>
+</div>

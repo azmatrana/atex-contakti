@@ -1,0 +1,772 @@
+---
+sv:
+  views:
+    login:
+      logged_in_message: Inloggningen lyckades
+    service_channels:
+      imap_settings:
+        test_success: Förbindelsen lyckades
+        test_error: Kan ej etablera förbindelse till IMAP server
+      smtp_settings:
+        test_success: Förbindelsen lyckades
+        test_error: Kan ej etablera förbindelse till SMTP server
+  activerecord:
+    models:
+      task:
+        states:
+          new: Ny
+          open: "Öppen"
+          waiting: Väntar
+          ready: Klar
+        association_types:
+          created_by_me: Created by me
+          assigned_to_me: Assigned to me
+          assigned_to_other: Assigned to others
+          open_to_all: Open to all
+          i_am_following: I am following
+    errors:
+      models:
+        service_channel:
+          attributes:
+            red_alert_hours:
+              required: Vänligen ange rött larm
+              inconsistent_data: Gul tid skall vara mindre än röd tid
+            yellow_alert_hours:
+              required: Vänligen ange gult larm
+            locations:
+              blank: Vänligen ange minst en plats
+    attributes:
+      contact:
+        first_name: First Name
+        last_name: Last Name
+        phone: Phone
+        email: Email
+        website: Website
+        address: Address
+        city: City
+        country: Country
+        vat: Vat
+        postcode: Postcode
+  errors:
+    messages:
+      improbable_phone: Vänligen kontrollera att telefonnumret är skrivet i internationellt format (t.ex. +468123456)
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: not valid
+      empty: can't ne empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: busy
+      greater_than: must be higher than %{count}
+      greater_than_or_equal_to: must be higher than or equal to %{count}
+      inclusion: not found in list
+      invalid: invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: not a number
+      not_an_integer: not an integer
+      odd: must be odd
+      record_invalid: ! 'Validation error: %{errors}'
+      taken: already in use
+      too_long: too long (must be less than %{count} characters)
+      too_short: too short (must be greater than %{count} characters)
+      wrong_length: wrong length (must be exactly %{count} characters)
+  devise:
+    passwords:
+      forgot_password: Glömt lösenordet?
+      send_instructions: Vi kommer att skicka er instruktioner för återställning av lösenord
+      reset: "Återställ lösenord"
+    registrations:
+      edit: Redigera
+      waiting_conformation: Inväntar nu godkännande för
+      leave_blank: Lämna dessa fält tomma om du inte vill ändra ditt lösenord
+      enter_password: Du måste ange ditt aktuella lösenord för att göra ändringar
+      cancel_account: Avsluta mitt konto
+      unhappy: Missnöjd? Vi är ledsna över att du avslutar
+      sign_up: Registrera dig
+      sure: "Är du säker?"
+      update: Uppdatera
+    sessions:
+      login: Logga in
+    shared:
+      sign_in: Registrera dig
+      sign_up: Registrera dig
+      forgot_password: Har du glömt ditt lösenord?
+      no_confirm_instructions_received: Fick du inte instruktionerna för godkännande?
+      no_unlock_instructions_received: Fick du inte instruktionerna för att låsa upp?
+      sign_in_with: Registrera dig med
+  layouts:
+    navigation:
+      lang_en: Engelska
+      lang_fi: Finska
+      lang_sv: Svenska
+      my_details: Mitt konto
+      company_detals: Företags information
+      logout: Logga ut
+    application:
+      dashboard: Manöverpanel
+      reporting: Rapporter
+      agents: Användare
+      service_channels: Avdelningar
+      locations: Platser
+      ai: AI
+    super_ui:
+      dashboard: Manöverpanel
+      companies: Företag
+      managers: Ledare
+      tags: Taggarna
+  tags:
+    skills: Färdighet
+    contacts: Contacts
+    add: Nya färdighet..
+    add_tags: Taggarna..
+    cleanup: Värdelös
+    upgrade: Till färdightet
+    please_select: Välj
+    attach_scv: Attach csv
+    attach_phonebook_csv: Attach phonebook csv
+    show_contacts: show phonebook
+    upload: Upload
+    download_template_file: Download template file
+    download_phonebook_template_file: Download template file
+  locations:
+    sort_by: Sortera efter
+    date: Datum
+    subject: "Ämne"
+    email: e-post adress
+    phone: Telefonnummer
+    search: Sök
+    agents: Användare
+    details: Detaljer
+    enter_location_details: Fyll i platsdetaljer
+    location_name: Namn på platsen
+    mandatory_tip: Detta fält är obligatoriskt
+    street_address: Gatuadress
+    zip: Postnummer
+    city: Stad
+    online: Online
+    offline: Offline
+    agents_head: Huvudanvändare
+    managers: Ledare
+    save: Spara
+    location_saved: Plats sparad
+    name: Namn
+  preferences:
+    skills_management: Skills Management
+    new_task: New Task
+    email_sender: Email
+    customer_registry: Customer Registry
+  reports:
+    summary_report:
+      default: Default
+      email: e-post
+      waiting_period: Väntetid
+      solved: Löst
+      unsolved: Ej löst
+      new: Ny
+      in_progress: "Öppna"
+      waiting: Vänta
+      hitrate: Hit rate
+      answered: Besvarad
+      average_process_time: Genomsnittlig behandlingstid
+      minutes: Minuter
+      web_form: Webformulär
+      call: Callback
+      callback: Callback
+      peak_time: Rusningstider
+      media_channels: Mediakanaler
+      overall_amount_tasks: Arbetsuppgifter
+      tasks_by_service_channel: Arbetsuppgifter från avdelning
+      tasks_by_location: Arbetsuppgifter från platser
+      messages: Meddelanden
+      report_scope: Report scope
+      report_scopes:
+        all: Include all tasks
+        closed: Include only completed tasks
+    comparison:
+      comparison_report: Jämförelserapporter
+      edit: Redigera
+      print: Skriv ut
+      save: Spara
+      delete: Radera
+      selected_agents: Valda användare
+      schedule_report: Schemalagd sändning av rapporter
+      daily: Dagligen
+      weekly: Veckovis
+      monthly: Månadsvis
+      send_report_email: Skicka rapporten via e-post
+      separate_by_comma: Separera e-postadresserna med komma
+      send_now: Sänd
+      tasks: Uppgifter
+      turnaround: Omsättning
+      pauses: Pauser
+      solutions: Lösningar
+      report_updated: Rapporten uppdaterad
+      report_sent: Rapporten sänd
+      solved_tasks: Lösta uppgifter
+      tasks_turnaround: Uppgifter i omsättning
+      solved_tasks_by_user: Lösta uppgifter av användare
+      pauses_percentage: Pauser i procent
+      solutions_percentage: Lösningar i procent
+    index:
+      view_report: Visa rapport
+      new_report: Ny rapport
+      loading_preview: Laddar förhandsvisning
+      sort_by: Sortera efter
+      date: Datum
+      subject: "Ämne"
+      email: e-post adress
+      phone: Telefonnummer
+      search: Sök
+      created: Skapad
+      type: Typ
+      author: Upphovsman
+      scheduled: Schemalagd
+      report: Rapport
+      summary_report: Sammanfattande rapport
+      comparison_report: jämförelserapport
+      report_name: namn på rapport
+      placeholder_name: Namn
+      choose_time_range: Välj tidsperiod
+      location: Plats
+      service_channel: Servicekanal
+      media_channel: Mediakanal
+      agents: Användare
+      update: Uppdatera
+      create: Skapa
+      cancel: Annullera
+      create_report: Skapa rapport
+      deleted_report: Rapporten raderad
+      cannot_delete_report: Rapporten kan ej raderas
+      confirm_delete: "Är du säker på att du vill radera rapporten permanent"
+      select_all: Markera alla
+      unselect_all: Omarkera alla
+      report_locale: Rapport språk
+      report_locale_tooltip: This is language that used in email sendings
+      report_locales:
+        en: Engelska
+        fi: Finska
+        sv: Svenska
+    summary:
+      summary_report: Sammanfattande rapport
+      edit: Redigera
+      print: Skriv ut
+      save: Spara
+      delete: Radera
+      starts: Börja
+      selected_locations: Valda platser
+      schedule_report: Schemalagd sändning av rapport
+      send_report_email: Sänd rapporten via e-post
+      separate_by_comma: Separera e-postadresser med komma
+      send: Sänd
+    generic:
+      please_save_first: Vänligen spara rapporten först
+      type:
+        summary: Sammanfattning
+        comparison: Jämförelse
+  service_channels:
+    service_channel_saved: Avdelning sparad
+    add_new_channel: Skapa ny avdelning
+    sort_by: Sortera efter
+    date: Datum
+    subject: "Ämne"
+    email: e-post
+    phone: Telefonnummer
+    agents: Användare
+    details: Detaljer
+    sender: Avsändare
+    sms_sender: avsändare
+    service_channel_title: Avdelning
+    agents_title: Användare
+    basic_info: Grundinformation
+    send_report: Sänd rapport
+    name: Namn
+    add_location: Lägg till plats
+    alert_limits: Varnings tider
+    days: dagar
+    hours: timmar
+    minutes: minuter
+    media_channels: Mediakanaler
+    email_settings: Inställningar
+    call_settings: Inställningar
+    web_form_settings: Inställningar
+    web_form: Webformulär
+    call: Callback
+    not_configured: Ej konfigurerad
+    save_details: Spara detaljer
+    agents_in_channel: Användare inom avdelningen
+    format: Format
+    format_excel: Excel
+    format_csv: CSV
+    format_pdf: PDF
+    receivers: Mottagare
+    delivery_interval: Leverans intervall
+    delivery_time: Leveranstid
+    delivery_days: Leveransdag
+    modal_email_settings: e-post inställningar
+    incoming_IMAP: Inkommande mail (IMAP)
+    outgoing_SMTP: Utgående mail (SMTP)
+    sla: Alarm gränser
+    modal_call_settings: Samtal inställningar
+    placeholder_description: Beskrivning
+    placeholder_from_email: Från e-postadress
+    placeholder_from_name: fullständigt namn
+    placeholder_incoming_mail_server: Inkommande mailserver (IMAP)
+    placeholder_port: Port
+    use_ssl: dont know have to get back on this one
+    placeholder_auth_method: Autentiseringsmetod
+    placeholder_user_name: Användarnamn
+    placeholder_password: Lösenord
+    test_btn: Test
+    placeholder_server_name: Servernamn
+    save_setting_btn: Spara e-post inställningar
+    clear_settings_btn: Clear
+    smtp_auth_methods:
+      login: Inloggningsmetod
+      NTLM: NTLM (default for MS Exchange)
+      plain: Plain
+    call_media_channel_settings:
+      name_check: Automatisk namnsökning
+    modal_call_settings: Callbackinställningar
+    placeholder_call_group_id: Samtalsgrupp
+    placeholder_autoreply_text: SMS autosvar text
+    save_call_setting_btn: Spara callbackinställningar
+    placeholder_multi_address: e-postadresser separeras med komma
+    placeholder_name: Namn
+    search: Sök
+    sms_autoreply: SMS autosvar
+    automated_namesearch: Automatisk namnsökning
+    on: ON
+    off: OFF
+    select_template: Välj existerande mall
+    save_template: Spara som en ny mall
+    close: Stäng
+    edit_sms_tempalte: Redigera användar SMS mallar
+    agent_sms_templates: Användar SMS mallar
+    save_sms_template: Spara mall
+    placeholder_template_text: SMS malltext
+    placeholder_template_title: Malltitel
+    sms_template_saved: SMS mall sparad
+    sms_template_confirm_delete: "Är du säker på att du permanent vill radera denna SMS mall?"
+    sms_template_deleted: SMS mall raderad
+    cannot_delete_template: Can not delete template that is not saved yet
+    please_save_first: Vänligen spara avdelningen först
+    sms_template_visibility: Välj mallens synlighet
+    template_visibility_types:
+      service_channel: Avdelning
+      company: Företag
+      location: Plats
+    select_location: Select location
+    not_registered: Not registered
+    in_call: In call
+    incoming_call: Incoming call
+    not_connected: Not connected
+    registered: Registered
+    proceed_overwriting_template: "Är du säker på att du vill ersätta den nuvarande mallen?"
+    confirm_delete: 'Do you want to permanently delete all the data related to this Service Channel?'
+    will_be_removed: 'Servicekanalen kommer att tas bort på några minuter'
+    private_agent_channel_name: Private Agent Channel
+  tasks:
+    from: Från
+    subject: "Ämne"
+    default_from: "Okänd"
+  user_dashboard:
+    open_to_all: "Öppet för alla"
+    task_filters:
+      association: Koppling
+      state: Tillstånd
+      service_channel: Avdelning
+      media_channel: Mediakanaler
+      sla: SLA
+      tags: Taggarna
+    all: Alla
+    channels: Kanaler
+    no_channels: Inga kanaler
+    all_channels: Alla kanaler
+    service_channel: Grupp
+    management: Förvaltning
+    send_chat_history_title: "Send chat history"
+    chat_history_send: "Email has been sent"
+    time: Tid
+    new: Ny
+    open: "Öppna"
+    waiting: Väntar
+    ready: Redo
+    sort_by: Sortera efter typ
+    date: Datum
+    subject: "Ämne"
+    email: e-postadress
+    phone: Telefonnummer
+    phone_placeholder: Mobilnummer (te.x. +4672123456)
+    move_to_service_channel: Flytta till avdelning
+    moved_to_service_channel: Moved task to service channel "{{name}}"
+    mark_as_done: Markera som klar
+    follow: Follow this task
+    unfollow: Unfollow this task
+    lock: Lås
+    unlock: Lås upp
+    reply: Svara
+    reply_all: Svara alla
+    replying:
+      target: Svar typ
+      internal: Inre
+      customer: Kund
+    forward: vidarbefodra
+    mark_as_spam: Annulera
+    archive: Arkiv
+    confirm_mark_as_spam: Om du annulerar uppgiften, kan du inte längre se den. Är du säkert?
+    send_sms: Skicka SMS
+    print: Skriv ut
+    cancel: Annullera
+    created: Ta
+    send_to: Sänd till
+    send_to_bcc: BCC
+    send_to_cc: CC
+    send_from: Från
+    subject: Subject
+    clear: rensa
+    send: Sänd
+    save: Spara
+    task: Uppgift
+    tasks: Uppgifter
+    internal_communication: Interna kommunikationer
+    internal_note: interna noteringar
+    download_txt_file: Hämta txt-filen
+    send_to_email: Skicka det till e-post
+    end_chat: End chat
+    start_new_chat: Start new Chat
+    task_skills: Skills Requirement
+    task_management: Uppgiftsledning
+    message: Meddelande
+    sms_message: Meddelande
+    sms_messages: Meddelanden
+    search: Sök
+    attach_file: Bifoga fil
+    select_file: Attach file
+    email_to: Email to
+    email_to_message: Message
+    please_select_service_channel: Please select service channel
+    agents_loading: Agents loading...
+    attach_change: Byt
+    forwarding: Vidarbefodra meddelande
+    sending_sms: Skicka sms
+    agent: Användar
+    assign_to_agent: Användar
+    task_result:
+      negative: Negativt
+      neutral: Neutralt
+      positive: Positivt
+    task_state: Uppgifts status
+    task_states:
+      new: Ny
+      open: "Öppna"
+      waiting: Väntar
+      ready: klar
+      archived: Arkivera
+    task_actions:
+      start: "Öppna"
+      restart: Reopen
+      pause: Sätt på vänta
+      close: Stäng
+      archive: Arkiv
+    new_task_mailer:
+      header: "New task created"
+      body: "Below is tasks information"
+      task_name: "Task name: "
+      task_id: "Task id: "
+      agent: "Agent: "
+      media_channel: "Media channel: "
+      service_channel: "Service channel: "
+      creators_message: "Creators message: "
+      timestamp: "Timestamp: "
+    user_dashboard_mailer:
+      send_email: "Send email"
+      subject: "Subject"
+      recipient: "Recipient"
+      service_channel: "Service Channel"
+      message: "Message"
+      agent: "Agent"
+      email: "Email"
+      best_regards: "Best regards"
+      msg_sent_to: "Message sent to"
+      sms_sent_to: "SMS sent to"
+      error_msg_sent_to: "Error sending message to"
+    languages:
+      en: "English"
+      fi: "Finnish"
+      sv: "Swedish"
+    super_search:
+      all: All
+      unsolved: Unsolved
+      archived: Archived
+      task_id: Id
+      agent: Agent
+      task: Task
+      customer: Customer
+      company: Company
+    unanswered_call: Obesvarade samtal
+    chat_callback_title: "Ring tillbaka"
+    sender: Avsändare
+    caller: Uppringare
+    no_any_tasks: Inga uppgifter finns tillgängliga
+    no_tasks_selected: Inga uppgifter är valda
+    are_you_sure_want_close_call_task: "Are you sure you want to mark the call as done?"
+    select_state_for_this_task: "Select state for this task"
+    task_is_already_in_work: "Selected task is already being processed by %{agent}"
+    ok: "OK"
+    select_task_result: "Select result"
+    new_task: Ny uppgift
+    new_tasks: Nya uppgifter
+    mark_as_seen: Mark sett
+    waiting_time_out_dialog: "This task you have locked is about to be unlocked soon."
+    waiting_time_out_modal_title: "Task's waiting time about to expire"
+    keep_working: "Keep working"
+    contact_card:
+      company: Company
+      basic_information: Basic Information
+      customers: Customers
+      tasks: Tasks
+      calls: Calls
+      emails: Emails
+      chats: Chats
+      sms: SMS
+      web_forms: Web Forms
+      company_basic_information: Company Basic Information
+      loading: Loading...
+      company_name: Company Name
+      business_number: Business Number
+      address: Address
+      primary_contact_person: Primary Contact Person
+      postal_code: Postal Code
+      city: City
+      email_address: Email Address
+      phone_number: Phone Number
+      deleting: Deleting...
+      delete: Delete
+      save: Save
+      task_history: Tasks History
+      date_created: Date Created
+      from: From
+      media_channel: Media Channel
+      service_channel: Service Channel
+      reminder: Reminder
+      internal_notes: Internal Notes
+      customer: Customer
+      customer_basic_information: Customer Basic Information
+      first_name: First Name
+      last_name: Last Name
+      work_title: Work Title
+      second_address: Second Address
+      contact_card: Contact Card
+      saving: Saving...
+    contact_modal:
+      contact_search_placeholder: Search contact ...
+      delete_all_contacts: Delete phonebook
+      no_contacts: No contacts
+      save_contact: Save
+      phonebook_card: Phonebook card
+      phone_invalid: Phone is invalid
+      phone_already_in_use: Phone is already in use
+      email_already_in_use: Email is already in use
+    confirm_delete: Are you sure you want to delete?
+    delete_success: Deleted successfully
+  daterangepicker:
+    ranges:
+      today: Idag
+      yesterday: Igår
+      last_x_days: Dagar
+      this_month: Denna månad
+      last_month: Förra månaden
+    cancel: Rensa
+    apply: Ansök
+    from: Från
+    to: Till
+    custom_range: Vald tidsperiod
+    days_of_week:
+      - Su
+      - Mo
+      - Tu
+      - We
+      - Th
+      - Fr
+      - Sa
+    month_names:
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+  users:
+    log_in_as: Logga in som ...
+    switch_user: Byt användare
+    switch_back: Tillbaka till admin
+    resend_instructions: "Återsänd instruktioner för godkännande"
+    mailer:
+      welcome: Välkommen
+      paragraph_text: Du kan godkänna ditt konto genom länken nedan
+      hello: Hej
+      link_text: Ange mitt lösenord
+      set_password: Du har begärt att ändra ditt lösenord hos Contakti. Vänligen klicka
+        på länken nedan för att ändra ditt lösenord
+      unlock_text_html: Ditt konto har blivit låst pga för många felaktiga försök
+        att logga in. Vänligen klicka på länken nedan för att låsa upp kontot
+      reset_button: Ändra lösenord
+    passwords:
+      change_pass: "Ändra ditt lösenord"
+      new_pass: Nytt lösenord
+      confirm_pass: Godkänn ditt nya lösenord
+      change_pass_btn: "Ändra mitt lösenord"
+      forgot_pass: Glömt ditt lösenord?
+      send_reset_instructions: Skicka mig instruktioner för att återställa mitt lösenord
+      forgot_pass_header: Did you forget your password? Please provide your email
+        address and we will send you a link to change your password.
+      email_not_found: Sorry, we could not find your email address
+      instructions_sent: Skickat instruktioner för att återställa lösenord
+    registrations:
+      edit: Redigera
+      waiting_for: Väntar för närvarande godkännande för
+      cancel_account: Annullera mitt konto
+      unhappy: Ej nöjd?
+      sure: "Är du säker?"
+      back: Backa
+      update: Uppdatera
+      pass_hint_1: Lämna detta tomt om du inte vill ändra det
+      pass_hint_2: Vi behöver ditt nuvarande lösenord för att godkänna dina ändringar
+      sign_up: Registrera dig
+    sessions:
+      login_to_account: Logga in till ditt konto
+      password: Lösenord
+      wrong_login: Fel användarnamn eller lösenord
+      login: Användarnamn
+      forgot_password: Glömt lösenord?
+      trouble_sign_in: Har du problem med att logga in?
+      how_to_reset: To reset your password, enter the email address you use to sign
+        in to CONTAKTI.
+      email: e-postadress
+      username: Användarnamn
+      placeholder_email: Skriv e-postadress
+      reset_password_btn: "Återställ lösenord"
+      remember_me: Remember me
+    unlocks:
+      resend_unlock_instructions:
+    user:
+      change_role: Byt roll
+      close: Stäng
+    agents:
+      sort_by: Sortera efter sort
+      date: Datum
+      subject: "Ämne"
+      email: e-post adress
+      phone: Telefonnummer
+      add_new_agent: Lägg till ny användare
+      search: Sök
+      online: Online
+      offline: Offline
+      agent_profile: Profil
+      agent_activity: Aktiviteter
+      agent_history: Meddelande historia
+      enter_agent_details: Skriv användardetaljer
+      placeholder_first_name: Förnamn
+      placeholder_last_name: Efternamn
+      placeholder_alias_name: Chattalias
+      placeholder_title: Titel
+      placeholder_phone: Telefonnummer
+      placeholder_email: e-postadress
+      placeholder_minutes_until_offline: Minutes until offline
+      add_to_service_channels: lägg till avdelning
+      add_to_locations: Lägg till plats
+      add_to_media_channels: lägg till mediakanaler
+      mandatory_tip: Detta fält är obligatoriskt
+      save: Spara
+      user_activity_report: Aktivitetsrapport användare
+      tasks: Uppgift
+      turnaround: Omsättning
+      pauses: Pauser
+      solutions: Lösningar
+      all: Alla
+      today: Idag
+      open: "Öppen"
+      waiting: Väntar
+      ready: Redo
+      from: Från
+      choose_period: Välj aktivitets period
+      delete: Radera
+      name: Fullständigt namn
+      added_agent: Added agent
+      updated_agent: Updated agent
+      deleted_agent: Deleted agent
+      not_deleted_agent: Cannot delete agent
+      media_channel_types:
+        email: e-post
+        web_form: Webbformulär
+        call: Callback
+      empty_message_history: Ingen meddelande historik tillgänglig
+      default_location: "Cost center"
+      select_default_location: "Select default location"
+      minutes_to_offline_tooltip: "Minutes until other sessions stay online if user logs out"
+    details:
+      my_account: Inställningar
+      account_details: Personlig information
+      phonebook: Phonebook
+      first_name: Förnamn
+      last_name: Efternamn
+      title: Titel
+      phone: Telefonnummer
+      email: e-post
+      password: Lösenord
+      leave_empty_option: Lämna tomt för ingen ändring
+      repeat_password: Repetera lösenord
+      cancel: Annullera
+      save_details: Spara detaljer
+      mandatory_tip: Detta fält är obligatoriskt
+      updated_details: Användardetaljer uppdaterade
+    index:
+      users: Användare
+      user_name: Användarnamn
+      email: e-post
+      registered: registrerad
+      role: Roll
+      change_role: Byt roll
+      delete_user: Radera användare
+      sure: "Är du säker?"
+    show:
+      user: Användare
+      email: e-post
+      edit_account: Redigera konto
+    nothing_selected_state:
+      no_agent: Please select an agent or create a new one
+      no_location: Please select a location or create a new one
+      no_report: Please select a report or create a new one
+      no_service_channel: Please select a service channel or create a new one
+  weekly_schedules:
+    title: Öppettid
+    open_full_time: "Open 24/7"
+    use_entries: "Use defined hours"
+  search:
+    results:
+      one: '1 result'
+      other: '%{count} results'
+  date:
+    abbr_day_names: [Sön, Mon, Tis, Ons, Tho, Fri, Lör]
+  tag_notifications:
+    time_success: Prioritetsöppningstid uppdaterades framgångsrikt för
+    time_failure: Priority open time update was failed for
+    priority_success: Uppdatering av prioriterad öppen tid misslyckades med
+    priority_failure: Priority update was failed for
+    priority_add: Prioritetsuppdatering misslyckades med
+    priority_add_failure: Prioritetsskapande misslyckades för
+    alarm_receivers_success: Alram-mottagare uppdaterades framgångsrikt för
+    alarm_receivers_failure: Uppdateringen av Alram-mottagare misslyckades med
+    email_template_success: E-postmallen uppdaterades för
+    email_template_failure: Uppdateringen av e-postmallen misslyckades med
+    sms_template_success: SMS-mallen uppdaterades för
+    sms_template_failure: Uppdatering av SMS-mall misslyckades för
+    success: FRAMGÅNG!
+    failure: FEL!

@@ -1,0 +1,38 @@
+namespace :danthes do
+  desc 'Start danthes daemon'
+  task :start do
+    on roles(:danthes), in: :sequence, wait: 3 do
+      within current_path do
+        with :rails_env => fetch(:rails_env) do
+          #execute :sudo, 'start danthes'
+          execute :sudo, :systemctl, :start, :danthes
+        end
+      end
+    end
+  end
+
+  desc 'Stop danthes daemon'
+  task :stop do
+    on roles(:danthes), in: :sequence, wait: 3 do
+      within current_path do
+        with :rails_env => fetch(:rails_env) do
+          #execute :sudo, 'stop danthes'
+          execute :sudo, :systemctl, :stop, :danthes
+        end
+      end
+    end
+  end
+
+  desc 'Restart danthes daemon'
+  task :restart do
+    on roles(:danthes), in: :sequence, wait: 3 do
+      within current_path do
+        with :rails_env => fetch(:rails_env) do
+          #execute :sudo, 'restart danthes'
+           execute :sudo, :systemctl, :restart, :danthes
+        end
+      end
+    end
+  end
+end
+

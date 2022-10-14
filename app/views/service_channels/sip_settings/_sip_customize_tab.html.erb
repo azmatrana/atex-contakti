@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+
+  <%= f.fields_for "sip_media_channel_attributes", media_channel do |ff|%>
+    <%= ff.fields_for "sip_settings_attributes", ff.object.sip_settings do |settings| %>
+      <%= settings.fields_for "sip_widget_attributes", settings.object.try(:sip_widget) do |widget| %>
+        <%= widget.hidden_field :id %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <p><%= t('service_channels.widget_button_color') %></p>
+              <%= widget.color_field :widget_button_color, :class => 'form-control' %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <p><%= t('service_channels.dial_color') %></p>
+              <%= widget.color_field :dial_color, :class => 'form-control' %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <p><%= t('service_channels.dial_bg_color') %></p>
+              <%= widget.color_field :dial_bg_color, :class => 'form-control' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

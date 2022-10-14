@@ -1,0 +1,267 @@
+
+<div class="container-fluid details">
+  <div class="row">
+    <div class="col-md-12 agent-admin">
+      <div class="innerLR">
+        <!-- Widget -->
+        <div class="widget widget-tabs border-bottom-none">
+          <!-- Widget heading -->
+          <div class="widget-head">
+            <ul>
+              <li class="active"><a href="#skills" data-toggle="tab"><i class="fa fa-tag"></i><%= I18n.t('tags.skills') %></a></li>
+              <li><a href="#contacts" data-toggle="tab"><i class="fa fa-group"></i><%= I18n.t('tags.contacts') %></a></li>
+              <li><a href="#campaigns" data-toggle="tab"><i class="fa fa-bullhorn"></i><%= I18n.t('tags.campaigns') %></a></li>
+              <li><a href="#company_files" data-toggle="tab"><i class="fa fa-file"></i><%= I18n.t('tags.company_files') %></a></li>
+              <li><a href="#templates" data-toggle="tab"><i class="fa fa-pencil"></i><%= I18n.t('tags.templates') %></a></li>
+              <li><a href="#products" data-toggle="tab"><i class="fa fa-shopping-cart"></i><%= I18n.t('tags.products') %></a></li>
+              <li><a href="#shipment_methods" data-toggle="tab"><i class="fa fa-truck" style="transform: scaleX(-1);"></i><%= I18n.t('tags.shipment_method') %></a></li>
+              <li><a href="#cart_email_templates_tab" data-toggle="tab"><i class="fa fa-file" style="transform: scaleX(-1);"></i><%= I18n.t('tags.cart_email_template_tab.title') %></a></li>
+              <li><a href="#third_party_tools_tab" data-toggle="tab"><i class="fa fa-file" style="transform: scaleX(-1);"></i><%= I18n.t('tags.third_party_tools_tab.tab_title') %></a></li>
+              <li><a href="#kimai_details" data-toggle="tab"><i class="fa fa-lock" style="transform: scaleX(-1);"></i><%= I18n.t('kimai_details.kimai_details') %></a></li>
+            </ul>
+          </div>
+          <!-- // Widget heading END -->
+          <div class="widget-body">
+            <div class="tab-content">
+              <!-- Tab content -->
+              <div class="tab-pane active" id="skills">
+                <!-- Row -->
+                <div class="row">
+                  <!-- Column -->
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <h4><%= I18n.t('tags.management') %></h4>
+                    </div>
+
+                    <div class="col-md-6 pull-right">
+                      <%= form_tag create_skills_tags_path, method: :post do %>
+                        <div class="input-group">
+                          <div class="styled-select">
+                            <input type="text" autocomplete="off" class="form-control" id="tokenfield" name="tags" placeholder="<%= I18n.t('tags.add') %>"/>
+                          </div>
+                          <div class="input-group-btn">
+                            <button type="submit" id="tokenfield-submit" class="btn btn-default btn-sm form-control"><%= I18n.t('user_dashboard.save') %>
+                              <span class="glyphicon glyphicon-ok"></span></button>
+                            <script>
+                                $('#tokenfield').tokenfield({delimiter: [',', ' '], createTokensOnBlur: true});
+                            </script>
+                          </div>
+                        </div>
+                      <% end %>
+                      <br>
+                    </div>
+                  </div>
+                </div>
+                <!-- Group -->
+                <div class="col-md-3">
+                  <div class="skill-container-fluid" style="background-color: #ffffff">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th><%= I18n.t('tags.suggestion') %></th>
+                        <th><%= I18n.t('user_dashboard.tasks') %></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <% @skill_counts.fetch(:generic_tags, {}).each do |skill_name, counts| %>
+                        <tr>
+                          <td><span class="taglabels"><%= skill_name %></span></td>
+                          <td><center><strong><%= counts.fetch(:tasks, 0) %></strong></center></td>
+                          <td>
+                            <%= form_tag create_skills_tags_path, method: :post do %>
+                              <input type="hidden" name="tags" value="<%= skill_name %>">
+                              <button type="submit" class="btn btn-primary btn-stroke pull-left">
+                                <i class="fa fa-plus"></i></button>
+                            <% end %>
+                          </td>
+                          <td>
+                            <%= form_tag cleanup_tags_path, method: :delete do %>
+                              <input type="hidden" name="tag" value="<%= skill_name %>">
+                              <button type="submit" class="btn btn-primary btn-stroke pull-right">
+                                <i class="fa fa-trash"></i></button>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- // Column END -->
+                <!-- Group -->
+                <div class="col-md-9">
+                  <div class="skill-container-fluid" style="background-color: #ffffff">
+                    <table class="table">
+                      <thead>
+                      <tr>
+                        <th><%= I18n.t('tags.skills') %></th>
+                        <th><%= I18n.t('user_dashboard.priority') %></th>
+                        <th><%= I18n.t('user_dashboard.release_time') %></th>
+                        <th><%= I18n.t('user_dashboard.alarm') %></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <% @skills.each do |skill| %>
+                        <tr id="skill_<%=skill.id %>">
+                          <%= render "tags/skill", skill: skill %>
+                        </tr>
+                      <% end %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- // Column END -->
+              </div>
+              <!-- // Tab content -->
+              <!-- Tab content -->
+              <div class="tab-pane" id="contacts">
+                <!-- Row -->
+                <div class="row">
+                  <!-- Column -->
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <h4><%= I18n.t('tags.attach_scv') %></h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <form id="upload_contacts_form">
+                    <div class="col-md-3">
+                      <div class="input-group btn-block">
+                        <input class="form-control attach_csv" type="file" id="attach_csv" name="csv">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-default btn-sm upload_csv" id="upload_contacts_submit_button">
+                        <%= t('tags.upload') %>
+                      </button>
+                      <script>
+                        $("#upload_contacts_submit_button").click( function() {
+                          var form = $('#upload_contacts_form');
+                          var formData = new FormData(form[0]);
+                          $.ajax({
+                            url: 'tags/upload_contacts',
+                            method: 'POST',
+                            processData: false,
+                            contentType: false,
+                            data: formData,
+                            success: function() {
+                              alert('File was imported');
+                              window.location.replace("/tags");
+                            },
+                            error: function(response){
+                              var errors = $.parseJSON(response.responseText).errors;
+                              alert(errors);
+                            }
+                          })
+                        });
+                      </script>
+                    </div>
+                  </form>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <a download href="/tags/download_template_file" ><%= I18n.t('tags.download_template_file') %></a>
+                  </div>
+                </div>
+                <div class="separator"></div>
+                <hr>
+                <div class="separator"></div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                  <!-- Column -->
+                  <div class="col-md-12">
+                    <div class="col-md-6">
+                      <h4><%= I18n.t('tags.attach_phonebook_csv') %></h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <form id="upload_phonebook_form">
+                    <div class="col-md-3">
+                      <div class="input-group btn-block">
+                        <input class="form-control attach_csv" type="file" id="attach_phonebook_csv" name="csv">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-default btn-sm upload_csv" id="upload_phonebook_submit_button">
+                        <%= t('tags.upload') %>
+                      </button>
+                      <script>
+                        $("#upload_phonebook_submit_button").click( function() {
+                          var form = $('#upload_phonebook_form');
+                          var formData = new FormData(form[0]);
+                          $.ajax({
+                            url: 'contacts/upload_csv',
+                            method: 'POST',
+                            processData: false,
+                            contentType: false,
+                            data: formData,
+                            success: function() {
+                              alert('File was imported');
+                              $("#attach_phonebook_csv").val('');
+                            },
+                            error: function(response){
+                              var errors = $.parseJSON(response.responseText).errors;
+                              alert(errors);
+                            }
+                          })
+                        });
+                      </script>
+                    </div>
+                  </form>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <a download href="/tags/download_phonebook_template_file" ><%= I18n.t('tags.download_phonebook_template_file') %></a>
+                  </div>
+
+                  <div class="col-md-3">
+                    <%= link_to I18n.t('tags.show_contacts'), "/#{I18n.locale}/contacts", remote: true %>
+                  </div>
+                </div>
+              </div>
+              <!-- // Tab content -->
+
+              <!-- Tab content -->
+              <div class="tab-pane" id="campaigns">
+                <!-- Row -->
+                <%= render 'tags/campaigns_tab' %>
+              </div>
+              <!-- // Tab content -->
+
+              <div class="tab-pane" id="company_files"  data-bind="with: managerAppViews.companyFiles" >
+                <%= render 'tags/company_files' %>
+              </div>
+              <div class="tab-pane" id="templates"  >
+                <%= render 'tags/templates' %>
+              </div>
+              <div class="tab-pane" id="products" data-bind="with: managerAppViews.productsModel" >
+                <%= render 'tags/products' %>
+              </div>
+              <div class="tab-pane" id="shipment_methods" data-bind="with: managerAppViews.shipmentMethod">
+                <%= render 'tags/shipment_methods' %>
+              </div>
+
+              <div class="tab-pane" id="cart_email_templates_tab" data-bind="with: managerAppViews.cartEmailTemplates">
+                <%= render 'tags/cart_email_templates' %>
+              </div>
+                <div class="tab-pane" id="third_party_tools_tab" data-bind="with: managerAppViews.thirdPartyTools" >
+                <%= render 'tags/third_party_tools' %>
+              </div>
+              <div class="tab-pane" id="kimai_details">
+                <%= render 'tags/kimai_details' %>
+              </div>
+            </div>
+          </div>
+          <!-- // Widget END -->
+        </div>
+      </div>
+    </div>
+    <%#= render 'tags/contacts/contacts' %>
+    <!-- // Content END -->
+  </div>
+</div>
+<%= javascript_include_tag 'admin_view_modals' %>

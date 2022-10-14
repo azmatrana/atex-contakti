@@ -1,0 +1,75 @@
+<% calls_count = @data[:tasks_count][:agent_calls] %>
+    <div class="widget border-bottom-none">
+        <h3 class="innerAll handle bg-calls border-bottom margin-bottom-none"><%= t('reports.summary_report.calls') %><span class="pull-right glyphicon glyphicon-earphone"></span></h3>
+        <div class="widget-body">
+            <div class="row ">
+                <div class="col-xs-6 padd1">
+                    <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+                        <div data-percent="<%= 100-percentage_division(calls_count[:answered_count], calls_count[:total_calls]) %>" class="easy-pie primary">
+                          <span class="value">
+                            <%= 100-percentage_division(calls_count[:answered_count], calls_count[:total_calls]) %>%
+                         </span>
+                        </div>
+                        <span class="txt"><%= t('reports.summary_report.unanswered')%></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+                <div class="col-xs-6 padd1">
+                    <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+                        <div data-percent="<%= percentage_division(calls_count[:answered_count], calls_count[:total_calls]) %>" class="easy-pie primary">
+                          <span class="value">
+                            <%= percentage_division(calls_count[:answered_count], calls_count[:total_calls]) %>%
+                          </span>
+                        </div>
+                        <span class="txt"><%= t('reports.summary_report.answered')%></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="row border-bottom  separator top border-top">
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.unanswered') %>
+                        <%= calls_count[:unanswered_count] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.answered') %>
+                        <%= calls_count[:answered_count] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small"><%= t('reports.summary_report.tickets')%>
+                        <%= calls_count[:tickets_counts] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.sales')%>
+                        <%= calls_count[:sales_counts] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.free')%>
+                        <%= calls_count[:free_agents] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.busy')%>
+                        <%= calls_count[:busy_agents] %>
+                    </p>
+                </div>
+            </div>
+            <div class="separator top center">
+                <strong>
+                <p><%= t('reports.summary_report.waiting_period')%>: <%= calls_count[:average_call_wait_seconds] %>s</p>
+                <p><%= t('reports.summary_report.average_process_time')%>: <%= calls_count[:average_call_duration_seconds] %>s</p>
+                </strong>
+            </div>
+        </div>
+    </div>

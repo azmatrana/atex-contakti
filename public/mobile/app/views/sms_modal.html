@@ -1,0 +1,422 @@
+<div id="sms-modal" class="modal fade bottom scroll-modal">
+    <div class="modal-dialog" data-bind="if: smsMessage">
+        <div class="modal-content">
+            <form id="sms-form">
+                <div class="modal-body scroll-body">
+                    <h4 data-i18n="app:sms.header"></h4>
+                    <div class="form-group">
+                        <label for="phone_number" data-i18n="app:sms.phone_number"></label>
+                        <input id="phone_number" class="form-control" type="tel" name="phone_number"
+                               data-bind="value: selectedTask().messages()[selectedTask().messages().length - 1].from">
+                    </div>
+
+                    <div class=" form-group">
+                        <select type="text" id="sms_template_select" class="form-control" data-bind="event: { change: handleTemplateSelect}"
+                                >
+                            <option value="" data-bind="text: i18n.translate('sms.select_template')"></option>
+                            <!-- ko foreach: selectedTask().service_channel().agent_sms_templates -->
+                            <option data-bind="value: $data.text, text: $data.title"></option>
+                            <!-- /ko -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="description" data-i18n="app:sms.message"></label>
+                        <textarea id="description" class="form-control" type="text" name="description" data-bind="value: smsMessage().description, valueUpdate: 'onUpdateSmsMessage'" rows="10"></textarea>
+                    </div>
+                    <div id="messages-list" data-bind="foreach: selectedTask().messages">
+                            <div data-bind = "css: { 'left-chain' : ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number != $parent.selectedTask().combinedMessages().length }">
+                              <div class="innerAll" data-bind = "css: { 'border-bottom' : $data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal' }">
+                                <div class="row">
+                                  <!-- ko ifnot: $data._originalData.sms && ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') -->
+                                  <div class="" data-bind = "css: { 'col-sm-6' : $data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type != 'chat' && $data.channel_type !== 'internal' || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length),  'col-sm-12' : ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number != $parent.selectedTask().combinedMessages().length}">
+                                    <ul class="media-list">
+                                      <li class="media">
+                                        <div class="media-body">
+                            
+                                        <!-- ko if: ($data.channel_type == 'email' || $data.channel_type == 'web_form'|| $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number != $parent.selectedTask().combinedMessages().length -->
+                                          <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span>
+                                      
+                                          <span class="timestamp" data-bind="text: $data.created_at_i18n"></span></br>
+                                          <!-- ko ifnot: $data._originalData.sms && ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') -->
+                                          <span class="text-word-break" data-bind="text: toLabel()"></span><br/>
+                                          <!-- /ko -->
+                                        <!-- /ko -->
+                            
+                                        <!-- ko if: ($data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length) -->
+                                          <strong><span data-i18n="app:task.time"></span>:</strong>
+                                          <span class="timestamp" data-bind="text: $data.created_at_i18n"></span></br>
+                                        <!-- /ko -->  
+                                          <!-- ko if: $data.channel_type == 'call' && !$data._originalData.sms -->
+                                          <span class="item-title"><strong><span data-i18n="app:task.unanswered_call"></span> :</strong>
+                                                <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span><br/>
+                                                    <strong><span data-i18n="app:task.caller_name"></span>
+                                                      : </strong><span data-bind="text: $parent.selectedTask().caller_name"></span><br/>
+                                                    <strong><span data-i18n="app:task.service_channel"></span>
+                                                :</strong> <span data-bind="text: $parent.selectedTask().serviceChannelName"></span>
+                                          </span>
+                            
+                                          <!-- /ko -->
+                            
+                                          <!-- ko ifnot: $data.channel_type == 'call' && !$data._originalData.sms -->
+                                          <p class="task-message-item-from-to" style="margin-bottom: 0px;">
+                                            <!-- ko if: $data._originalData.sms -->
+                                              <!-- ko ifnot: $data._originalData.inbound -->
+                                                <strong><span data-i18n="app:task.text_message_sent"></span></strong><br/>
+                                              <!-- /ko -->
+                                              <!-- ko if: $data._originalData.inbound -->
+                                                <strong><span data-i18n="app:task.text_message_inbound"></span></strong><br/>
+                                              <!-- /ko -->
+                            
+                                            <!-- ko if: !($parent.selectedTask()._originalData.media_channel === 'sms' && $data._originalData.number === 1)   -->
+                                              <!-- ko ifnot: true -->
+                                                <span data-i18n="app:task.from"></span>
+                                                <span data-bind="text: from || from_email"></span><br/>
+                                               <!-- /ko -->
+                                            <!-- /ko -->
+                                            <!-- ko if: $parent.selectedTask().caller_name -->
+                                            <strong><span data-i18n="app:task.caller"></span>:</strong>
+                                            <span data-bind="text: $parent.selectedTask().caller_name"></span><br/>
+                                            <!-- /ko -->
+                                              <!-- ko ifnot: $data._originalData.inbound-->
+                                                <strong><span data-i18n="app:task.to"></span>:</strong> <span class="text-word-break" data-bind="text: $data.to"></span><br/>
+                                              <!-- /ko -->
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: $data._originalData.sms  -->
+                                              <!-- ko if: $data.from && (($data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type !== 'internal'&& $data.channel_type != 'chat') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length) )-->
+                                                <strong><span data-i18n="app:task.from"></span>:</strong>
+                                                <span data-bind="text: from || from_email"></span><br/>
+                                              <!-- /ko -->
+                                              <!-- ko if: $data.from && $data.channel_type == 'chat' && $data._originalData.number == $parent.selectedTask().combinedMessages().length -->
+                                                <strong><span data-i18n="app:task.from"></span>:</strong>
+                                                <span data-bind="text: $data.from"></span><br/>
+                                              <!-- /ko -->
+                                              <!-- ko if: $data.channel_type === 'chat' && $data._originalData.number == $parent.selectedTask().combinedMessages().length -->
+                                                <strong><span data-i18n="app:task.created"></span>:</strong> <span class="text-word-break" data-bind="text: $data.to"></span>
+                                              <!-- /ko -->
+                                              <!-- ko if: ($data.channel_type !== 'chat' && $data.channel_type !== 'call' && $data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length ) -->
+                                                <strong><span data-i18n="app:task.to"></span>:</strong> <span class="text-word-break" data-bind="text: toLabel()"></span>
+                                              <!-- /ko -->
+                                              <br>
+                                              <!-- ko if: $data.channel_type == 'email' && $data.cc && $data.cc.length > 0 && $data._originalData.number == $parent.selectedTask().combinedMessages().length -->
+                                                <strong><span data-i18n="app:task.send_to_cc"></span>:</strong> <span data-bind="text: $data.cc"></span>
+                                                <br>
+                                              <!-- /ko -->
+                                              <!-- ko if: $data.channel_type == 'email' && $data.bcc && $data.bcc.length > 0 && $data._originalData.number == $parent.selectedTask().combinedMessages().length  -->
+                                                <strong><span data-i18n="app:task.send_to_bcc"></span>:</strong> <span data-bind="text: $data.bcc"></span>
+                                                <br>
+                                              <!-- /ko -->
+                                              <!-- ko if: ($data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length) -->
+                                                <strong><span data-i18n="app:task.subject"></span>:</strong> <span data-bind="text: titleLabel"></span></br>
+                                              <!-- /ko -->
+                                            <!-- /ko -->
+                                            <!-- ko if: ($data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length) -->
+                                              <strong><span data-i18n="app:task.service_channel"></span>:</strong>
+                                              <span data-bind="text: $parent.selectedTask().serviceChannelName"></span>
+                                            <!-- /ko -->
+                                          </p>
+                                          <!-- /ko -->
+                                         
+                                          <!-- ko if: $parent.selectedTask()._originalData.send_by_user && (($data._originalData.sms && $data.channel_type === 'call') || $data.channel_type === 'sms') && ($data.channel_type === 'call' || $data.channel_type === 'sms') && $data._originalData.number == $parent.selectedTask().combinedMessages().length -->
+                                            <div>
+                                              <strong><span data-i18n="app:task.sender"></span>:</strong>
+                                              <span data-bind="text: $parent.selectedTask().sendByUserFullName"></span>
+                                            </div>
+                                          <!-- /ko -->
+                
+                                          <div class="clearfix"></div>
+                            
+                            
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <!-- /ko -->
+                
+                                   <!-- ko if: $data._originalData.sms && $parent.selectedTask()._originalData.latest_message && ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number != $parent.selectedTask().combinedMessages().length-->
+                                  <div class="col-sm-12">
+                                      <ul class="media-list">
+                                        <li class="media">
+                                          <div class="media-body">
+                                            <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span>
+                                            <span class="timestamp" data-bind="text: $data.created_at_i18n"></span></br></br>
+                            
+                                            <strong><span data-i18n="app:task.time"></span>:</strong>
+                                            <span class="timestamp" data-bind="text: $data.created_at_i18n"></span></br>
+                                          </div>
+                            
+                                          <p class="task-message-item-from-to">
+                                            <!-- ko if: $data._originalData.sms -->
+                                              <!-- ko ifnot: $data._originalData.inbound -->
+                                                <strong><span data-i18n="app:task.text_message_sent"></span></strong><br/>
+                                              <!-- /ko -->
+                                              <!-- ko if: $data._originalData.inbound -->
+                                                <strong><span data-i18n="app:task.text_message_inbound"></span></strong><br/>
+                                              <!-- /ko -->
+                            
+                                            <!-- ko if: !($parent.selectedTask()._originalData.media_channel === 'sms' && $data._originalData.number === 1)   -->
+                                              <!-- ko ifnot: $data.from === window.UserDashboard.currentUserName -->
+                                                <strong><span data-i18n="app:task.from"></span> :</strong>
+                                                <span data-bind="text: $data.from"></span><br/>
+                                              <!-- /ko -->
+                                            <!-- /ko -->
+                                            <!-- ko if: $parent.selectedTask().caller_name() && $data._originalData.inbound -->
+                                            <strong><span data-i18n="app:task.name_chat"></span>: </strong>
+                                            <span data-bind="text: $parent.selectedTask().caller_name() "></span><br/>
+                                            <!-- /ko -->
+                                              <!-- ko ifnot: $data._originalData.inbound-->
+                                                <strong><span data-i18n="app:task.to"></span>:</strong> <span class="text-word-break" data-bind="text: toLabel()"></span><br/>
+                                              <!-- /ko -->
+                                            <!-- /ko -->
+                                              <strong><span data-i18n="app:task.service_channel"></span>:</strong>
+                                              <span data-bind="text: $parent.selectedTask().serviceChannelName"></span>
+                                          </p>
+                                          <!-- ko if: $parent.selectedTask().showClosedByUser -->
+                                            <div>
+                                              <strong><span data-i18n="app:task.closed_by"></span>:</strong>
+                                              <span data-bind="text: $parent.selectedTask().closedByUserFullName"></span>
+                                            </div>
+                                          <!-- /ko -->
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  <!-- /ko -->
+                
+                                  <!-- ko if: $data._originalData.sms && $parent.selectedTask()._originalData.latest_message && ($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length-->
+                                  <div class="col-sm-6">
+                                    <ul class="media-list">
+                                      <li class="media">
+                                        <div class="media-body">
+                                          <strong><span data-i18n="app:task.time"></span>:</strong>
+                                          <span class="timestamp" data-bind="text: $parent.selectedTask()._originalData.latest_message.created_at"></span></br>
+                                        </div>
+                                        <p class="task-message-item-from-to">
+                                          <!-- ko if: @parent.selectedTask()._originalData..latest_message.from && $data.channel_type !== 'chat' -->
+                                            <strong><span data-i18n="app:task.from"></span> :</strong>
+                                            <span data-bind="text:  $parent.selectedTask()._originalData.latest_message.from"></span><br/>
+                                          <!-- /ko -->
+                                          <!-- ko if: $data.channel_type === 'chat' -->
+                                            <!-- ko if: $parent.selectedTask()._originalData.latest_message.customer -->
+                                              <strong><span data-i18n="app:task.from"></span> :</strong>
+                                              <span data-bind="text:  $parent.selectedTask()._originalData..customer.first_name + ' ' + $parent.selectedTask()._originalData.latest_message.customer.last_name"></span><br/><br/>
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: $parent.selectedTask()._originalData.latest_message.customer -->
+                                              <!-- ko if: $parent.selectedTask()._originalData.latest_message.from == 'Anonymous' -->
+                                              <!-- /ko -->
+                                              <!-- ko ifnot: $parent.selectedTask()._originalData.latest_message.from == 'Anonymous' -->
+                                                <strong><span data-i18n="app:task.from"></span>:</strong>
+                                                <span data-bind="text:  $parent.selectedTask()._originalData.latest_message.from"></span><br/>
+                                              <!-- /ko -->
+                                            <!-- /ko -->
+                                            <strong><span data-i18n="app:task.created"></span>:</strong> <span class="text-word-break" data-bind="text: $parent.selectedTask()._originalData.latest_message.to"></span><br/>
+                                          <!-- /ko -->
+                                          <!-- ko if: $data.channel_type !== 'chat' -->
+                                            <strong><span data-i18n="app:task.to"></span>:</strong> <span class="text-word-break" data-bind="text: toLabel"></span><br/>
+                                          <!-- /ko -->
+                                          <!-- ko if: $data.channel_type == 'email' && $parent.selectedTask()._originalData.latest_message.cc && $parent.selectedTask()._originalData.latest_message.cc.length > 0 -->
+                                            <strong><span data-i18n="app:task.send_to_cc"></span>:</strong> <span data-bind="text: $parent.selectedTask()._originalData.latest_message.cc"></span>
+                                            <br>
+                                          <!-- /ko -->
+                                          <!-- ko if: $data.channel_type == 'email' && $parent.selectedTask()._originalData.latest_message.bcc && $parent.selectedTask()._originalData.latest_message.bcc.length > 0 -->
+                                            <strong><span data-i18n="app:task.send_to_bcc"></span>:</strong> <span data-bind="text: $parent.selectedTask()._originalData.latest_message.bcc"></span>
+                                            <br>
+                                          <!-- /ko -->
+                                          <strong><span data-i18n="app:task.subject"></span>:</strong> <span data-bind="text: $parent.selectedTask()._originalData.latest_message.title"></span></br>
+                                          <strong><span data-i18n="app:task.service_channel"></span>:</strong>
+                                          <span data-bind="text: $parent.selectedTask().serviceChannelName"></span>
+                                        </p>
+                                        <!-- ko if: $parent.selectedTask().showClosedByUser -->
+                                          <div>
+                                            <strong><span data-i18n="app:task.closed_by"></span>:</strong>
+                                            <span data-bind="text: $parent.selectedTask()._originalData.closedByUserFullName"></span>
+                                          </div>
+                                        <!-- /ko -->
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <!-- /ko -->
+                                </div>
+                              </div>
+                      
+                
+                            <!-- ko if: ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') && $data._originalData.number == $parent.selectedTask().combinedMessages().length -->
+                            <div class="border-bottom"></div>
+                            <div class="left-chain">
+                              <div class="innerAll">
+                                <div class="row">
+                                  <div class="col-sm-12">
+                                    <ul class="media-list">
+                                      <li class="media">
+                                        <div class="media-body">
+                                          <span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span>                
+                                          <span class="timestamp" data-bind="text: $data.created_at_i18n"></span></br>
+                                          <!-- ko ifnot: $data._originalData.sms && ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') -->
+                                          <span class="text-word-break" data-bind="text: toLabel()"></span><br/>
+                                          <!-- /ko -->
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- ko if: $data._originalData.sms && ($data.channel_type == 'email' || $data.channel_type == 'chat' || $data.channel_type == 'web_form' || $data.channel_type == 'internal') -->
+                              <div>
+                                <ul class="media-list">
+                                    <li class="media">
+                                      <div class="media-body">
+                                        <strong><span data-i18n="app:task.time"></span>:</strong>
+                                        <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+                
+                                        <!-- ko ifnot: $data.channel_type == 'call' && !$data._originalData.sms -->
+                                        <p class="task-message-item-from-to">
+                                          <!-- ko if: $data._originalData.sms -->
+                                            <!-- ko ifnot: $data._originalData.inbound -->
+                                              <strong><span data-i18n="app:task.text_message_sent"></span></strong><br/>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data._originalData.inbound -->
+                                              <strong><span data-i18n="app:task.text_message_inbound"></span></strong><br/>
+                                            <!-- /ko -->
+                
+                                          <!-- ko if: !($parent.selectedTask()._originalData.media_channel === 'sms' && $data._originalData.number === 1)   -->
+                                            <!-- ko ifnot: $data.from === window.UserDashboard.currentUserName -->
+                                              <strong><span data-i18n="app:task.from"></span>:</strong>
+                                              <span data-bind="text: $data.from"></span><br/>
+                                            <!-- /ko -->
+                                          <!-- /ko -->
+                                          <!-- ko if: $parent.selectedTask().caller_name && $data._originalData.inbound -->
+                                          <strong><span data-i18n="app:task.name_chat"></span>: </strong>
+                                          <span data-bind="text: $parent.selectedTask().caller_name"></span><br/>
+                                          <!-- /ko -->
+                                            <!-- ko ifnot: $data._originalData.inbound-->
+                                              <strong><span data-i18n="app:task.to"></span>:</strong> <span class="text-word-break" data-bind="text: $data.to"></span><br/>
+                                            <!-- /ko -->
+                                          <!-- /ko -->
+                                          <!-- ko ifnot: $data._originalData.sms  -->
+                                            <!-- ko if: $data.from -->
+                                              <strong><span data-i18n="app:task.from"></span> :</strong>
+                                              <span data-bind="text: $data.from"></span><br/>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data.channel_type === 'chat' -->
+                                              <strong><span data-i18n="app:task.created"></span> :</strong> <span class="text-word-break" data-bind="text: $data.to"></span>
+                                            <!-- /ko -->
+                                            <!-- ko if: ($data.channel_type !== 'chat') -->
+                                              <strong><span data-i18n="app:task.to"></span>:</strong> <span class="text-word-break" data-bind="text: $data.to"></span>
+                                            <!-- /ko -->
+                                            <br>
+                                            <!-- ko if: $data.channel_type == 'email' && $data.cc && $data.cc.length > 0 -->
+                                              <strong><span data-i18n="app:task.send_to_cc"></span>:</strong> <span data-bind="text: $data.cc"></span>
+                                              <br>
+                                            <!-- /ko -->
+                                            <!-- ko if: $data.channel_type == 'email' && $data.bcc && $data.bcc.length > 0  -->
+                                              <strong><span data-i18n="app:task.send_to_bcc"></span>:</strong> <span data-bind="text: $data.bcc"></span>
+                                              <br>
+                                            <!-- /ko -->
+                                              <strong><span data-i18n="app:task.subject"></span>:</strong> <span data-bind="text: $data.title"></span></br>
+                                          <!-- /ko -->
+                                            <strong><span data-i18n="app:task.service_channel"></span>:</strong>
+                                            <span data-bind="text: $parent.selectedTask().serviceChannelName"></span>
+                                        </p>
+                                        <!-- /ko -->
+                                        <!-- ko if: $parent.selectedTask().showClosedByUser -->
+                                          <div>
+                                            <strong><span data-i18n="app:task.closed_by"></span>:</strong>
+                                            <span data-bind="text: $parent.selectedTask().closedByUserFullName"></span>
+                                          </div>
+                                        <!-- /ko -->
+                                        <!-- ko if: $parent.selectedTask().lastMessage() && $data.channel_type === 'call' && $data._originalData.number == $parent.selectedTask().combinedMessages().length -->
+                                          <div>
+                                            <strong><span data-i18n="app:task.sender"></span>:</strong>
+                                            <span data-bind="text: $data.from"></span>
+                                          </div>
+                                        <!-- /ko -->
+                                        <div class="clearfix"></div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                              </div>
+                              <!-- /ko -->
+                              <div class="innerAll">
+                                <div class="innerAll" data-bind="css: internalCss">
+                                  <!-- ko ifnot: $data.channel_type == 'call' && !$data._originalData.sms -->
+                                  <div class="content">
+                                    <p class="formatted-message-description" data-bind="html: $data.formatted_description"></p>
+                                  </div>
+                                  <!-- /ko -->
+                                  <div class="innerAll">
+                                    <div class="media inline-block margin-none" data-bind="foreach: $data.attachments">
+                                      <div class="innerLR">
+                                        <i class="fa fa-file pull-left"></i>
+                                        <div class="media-body">
+                                          <div>
+                                            <a class="strong text-regular" data-bind="text: file_name, attr: {href: '/attachments/' + $parent.id + '/' + id}" download></a>
+                                          </div>
+                                          <span data-bind="text: human_file_size"></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+                
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: ($data.channel_type != 'email' && $data.channel_type != 'web_form' && $data.channel_type != 'chat' && $data.channel_type !== 'internal') || (($data.channel_type == 'email' || $data.channel_type == 'web_form' || $data.channel_type == 'chat' || $data.channel_type == 'internal') && $data._originalData.number != $parent.selectedTask().combinedMessages().length) -->
+                            <div class="innerAll">
+                              <div class="innerAll" data-bind="css: internalCss">
+                                <!-- ko ifnot: $data.channel_type == 'call' && !$data._originalData.sms -->
+                                <div class="content">
+                                  <p class="formatted-message-description" data-bind="html: $data.formatted_description"></p>
+                
+                                </div>
+                                <!-- /ko -->
+                                <div class="innerAll">
+                                  <div class="media inline-block margin-none" data-bind="foreach: $data.attachments">
+                                    <div class="innerLR">
+                                      <i class="fa fa-file pull-left"></i>
+                                      <div class="media-body">
+                                        <div>
+                                          <a class="strong text-regular" data-bind="text: file_name, attr: {href: '/attachments/' + $parent.id + '/' + id}" download></a>
+                                        </div>
+                                        <span data-bind="text: human_file_size"></span>
+                                      </div>
+                                      <div class="clearfix"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                
+                              </div>
+                            </div>
+                            <!-- /ko -->
+                          
+                            </div>
+                            <!-- ko if: $data.channel_type !== 'email' && $data.channel_type !== 'web_form' && $data.channel_type !== 'chat' && $data.channel_type !== 'internal'  -->
+                            <div class="bg-background">
+                              <br/>
+                            </div>
+                            <!-- /ko -->
+                          </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <div class="message-actions" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onCancelSms">
+                                <span class="fa fa-times"></span>
+                                <span data-i18n="app:sms.action.cancel"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="message-actions" data-bind="if: selectedTask">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmSmsSend">
+                                <span class="fa fa-check"></span>
+                                <span data-i18n="app:sms.action.send"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

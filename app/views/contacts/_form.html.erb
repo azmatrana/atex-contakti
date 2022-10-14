@@ -1,0 +1,159 @@
+<div class="modal fade" id="phonbook-contact-modal" tabindex="-1" role="dialog" aria-labelledby="phonbook-contact-modal-dialog">
+
+<div class="modal-dialog phonbook-contact-modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.customer_modal.customer_card') %></h3>
+    </div>
+    <div class="modal-body">
+      <div class="innerLR">
+        <!-- Widget -->
+        <div class="widget widget-tabs border-bottom-none">
+
+          <div class="widget-body">
+            <div class="tab-content">
+              <!-- Tab content -->
+              <div class="tab-pane active" id="account-settings">
+                <%= simple_form_for contact,
+                                    remote: true,
+                                    html: {class: 'form-horizontal'} do |f| %>
+                  <%= hidden_field_tag :locale, params[:locale] %>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <%= f.label :first_name %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <%= f.text_field :first_name,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                          <%= f.label :phone %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <%= f.text_field :phone,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                        </div>
+                        <div class="col-md-6">
+                          <%= f.label :last_name %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <%= f.text_field :last_name,
+                                             class: 'form-control' %>
+                          </div>
+
+                          <div class="separator bottom"></div>
+                          <%= f.label :email %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <%= f.text_field :email,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <%= f.label :website %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-link"></i></span>
+                            <%= f.text_field :website,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                          <%= f.label :address %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-street-view"></i></span>
+                            <%= f.text_field :address,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                          <%= f.label :city %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-university"></i> </span>
+                            <%= f.text_field :city,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                        </div>
+                        <div class="col-md-6">
+                          <%= f.label :vat %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                            <%= f.text_field :vat,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                          <%= f.label :postcode %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker"></i> </span>
+                            <%= f.text_field :postcode,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                          <%= f.label :country %>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                            <%= f.text_field :country,
+                                             class: 'form-control' %>
+                          </div>
+                          <div class="separator bottom"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                      <div class="alert alert-success customer-saved-alert hide">
+                        <%= t('user_dashboard.customer_modal.saved') %>
+                      </div>
+                      <div class="alert alert-success customer-deleted-alert hide">
+                        <%= t('user_dashboard.customer_modal.deleted') %>
+                      </div>
+                      <div class="alert alert-warning customer-warning-alert hide">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="separator top customer-form-bottom-buttons">
+                    <%= button_tag type: :submit, class: 'btn btn-default btn-sm pull-right' do %>
+                        <i class="fa fa-fw fa-check-square-o"></i>
+                        <%= t('user_dashboard.contact_modal.save_contact') %>
+                    <% end %>
+
+                    <%= link_to contact_path(f.object.id, locale: I18n.locale), method: :delete, remote: true, class: 'btn btn-default btn-sm ', data: { confirm: t('user_dashboard.confirm_delete') } do %>
+                      <i class="glyphicon glyphicon-trash"></i>
+                      <%= t('user_dashboard.delete') %>
+                    <% end %>
+
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <!-- // Row END -->
+          </div>
+          <!-- // Tab content END -->
+        </div>
+      </div>
+    </div>
+    <!-- // Widget END -->
+  </div>
+
+
+</div> <!-- modal-body -->
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog -->

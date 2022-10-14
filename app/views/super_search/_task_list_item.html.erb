@@ -1,0 +1,101 @@
+<script type="text/html" id="customer_modal_task_list_item_template">
+  <i class="list-icon fa fa-share"></i>
+  <div class="block block-inline" data-bind="click: toggleMessagesList">
+    <div class="caret"></div>
+    <div class="box-generic">
+      <table class="table task-item">
+        <tr>
+          <td data-bind="css: itemStatusState" class="item-type">
+            <span data-bind="css: iconClass" class="glyphicon channel-type-icon"></span>
+          </td>
+
+          <td class="item-description">
+            <div class="item-title">
+              <span data-bind="if: data.media_channel == 'call'">
+                <span data-bind="text: messages()[0].from" class="caller-number"></span>
+              </span>
+            </div>
+            <section data-bind="if: (data.media_channel == 'call')">
+              <span class="caller-number-link">
+                <span data-bind="if: messages()[0].sms">
+                  <span data-bind="text: messages()[0].from" class="caller-number"></span>
+                </span>
+                <span data-bind="if: call_counter()" class="call-counter pull-right">
+                  <span data-bind="text: call_counter()"></span>
+                </span>
+
+                <span data-bind="if: data.caller_name" class="caller-name">
+                  <span data-bind="text: data.caller_name"></span>
+                </span>
+              </span>
+            </section>
+
+            <section data-bind="if: !(data.media_channel == 'call')">
+              <span data-bind="if: lastMessage()">
+                <span data-bind="if: !lastMessage().sms">
+                  <span data-bind="text: lastMessage().from"></span>
+                </span>
+
+                <span data-bind="if: lastMessage().sms">
+                  <span data-bind="text: lastMessage().to"></span>
+                </span>
+              </span>
+            </section>
+
+            <div class="item-title">
+              <span data-bind="if: data.media_channel == 'call'">
+                <%= I18n.t('user_dashboard.unanswered_call') %>
+              </span>
+
+              <span data-bind="if: !(data.media_channel == 'call')">
+                <span data-bind="if: firstMessage()">
+                  <span data-bind="text: messageTitle"></span>
+                </span>
+              </span>
+            </div>
+
+            <p data-bind="text: lastMessage.description" class="last-message-description"></p>
+          <span data-bind="css: urgentCss">
+            <span class="manage-task-link clearfix">
+              <span class="glyphicon glyphicon-share-alt"></span>
+              <span class="task-list-item-service-channel-name" data-bind="text: serviceChannelName"></span>
+            </span>
+
+            <span class="glyphicon glyphicon-time"></span>
+            <span class="last-message-created-at" data-bind="text: createdAt"></span>
+          </span>
+          </td>
+          <td class="item-progress">
+            <span data-bind="css: clockClass" class="glyphicon glyphicon-time"></span>
+            <p data-bind="if: scheduled" class="time-till-red-alert">
+              <span data-bind="text: timer" class="customer-modal-task-timer"></span>
+              <br>
+              <span data-bind="if: data.red_alert_or_ready_date">
+                <span data-bind="text: redAlertFormatted()"></span>
+              </span>
+            </p>
+            <p data-bind="if: !scheduled" class="time-till-red-alert">&infin;</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <!-- ko if: $data.showMessagesList -->
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="custome-modal-messages-container" data-bind="style: { display: showNote() ? 'block' : 'none' }">
+        <div class="innerAll">
+          <h4><%= I18n.t('user_dashboard.internal_note') %></h4><br>
+          <div class="content" data-bind="text: noteBody"></div><br>
+          <div data-bind="foreach: data.note_attachments">
+            <a class="strong text-regular" data-bind="text: file_name, attr: {href: '/attachments/download_note_attachment/' + note_id + '/' + id}" download></a>
+          </div>
+        </div>
+      </div>
+      <div data-bind="template: { name: 'customer_modal_external_message_item_template', foreach: combinedMessages()}"
+      class="custome-modal-messages-container"></div>
+    </div>
+  </div>
+  <!-- /ko -->
+</script>

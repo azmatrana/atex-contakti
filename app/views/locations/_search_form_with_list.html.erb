@@ -1,0 +1,17 @@
+<%= search_form_for @q, url: search_locations_url, method: :post, remote: true do |f| %>
+  <div class="form-group">
+    <%= link_to new_location_url, { class: 'btn btn-default big-btn btn-block' } do %>
+      <i class="fa fa-plus-circle"></i> <%= t('service_channels.add_location') %>
+    <% end %>
+  </div>
+  <div class="input-group">
+    <%= f.text_field :search_cond_cont, placeholder: t('locations.search'), class: 'form-control', id: 'search-input-box' %>
+
+        <span class="input-group-addon">
+            <i class="fa fa-search"></i>
+        </span>
+  </div>
+  <div class="inbox-preview" id="results">
+    <%= render 'list' %>
+  </div>
+<% end %>

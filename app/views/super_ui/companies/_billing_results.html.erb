@@ -1,0 +1,34 @@
+<table class="table table-striped">
+    <thead>
+    <tr class="colgroups">
+        <th colspan="2"></th>
+        <th colspan="3">Call tasks</th>
+        <th colspan="3">Realized</th>
+    </tr>
+    <tr>
+        <th>Month</th>
+        <th>Active agents</th>
+        <th>Received</th>
+        <th>Name checks</th>
+        <th>SMS Autoreplies</th>
+        <th>SMS Sent</th>
+        <th>SMS Received</th>
+        <th>Name checks</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @stats.each do |stat| %>
+        <tr>
+            <td><%= stat.date.strftime('%B %Y') %></td>
+            <td><%= stat.active_agents %></td>
+            <td><%= stat.call_tasks_received %></td>
+            <td><%= stat.call_task_name_checks %></td>
+            <td><%= stat.call_task_autoreplies %></td>
+            <td><%= stat.sms_sent %></td>
+            <td><%= stat.sms_received %></td>
+            <td><%= stat.name_checks %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+<%= will_paginate @stats %>

@@ -1,0 +1,26 @@
+hostname: 'localhost:3000'
+protocol: http
+host_origin: http://localhost:3000
+
+from_email: admin@netdesk.com
+
+smtp:
+  # Install MailCatcher for local development
+  # See instructions from:
+  # https://mailcatcher.me/
+  address: localhost
+  port: 1025
+  authentication: plain
+  enable_starttls_auto: true
+
+call_media_channel:
+  server_name: host
+  user_name: login
+  password: password
+  port: 993
+  use_ssl: false
+
+channels:
+  always_active: true
+  email:
+    always_active: true

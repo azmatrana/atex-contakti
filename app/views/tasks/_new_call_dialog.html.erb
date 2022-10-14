@@ -1,0 +1,78 @@
+<div class="modal-dialog">
+  <div class="modal-content" id="new-task-modal-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t 'user_dashboard.new_task' %></h3>
+    </div>
+
+    <%= simple_form_for @task, remote: true do |f| %>
+      <div class="modal-body" style="overflow-y: auto">
+        <%= f.simple_fields_for :messages do |ff| %>
+          <%= f.hidden_field :media_channel_id, value: "MediaChannel::Internal" %>
+          <div class="col-xs-12">
+            <label><%= t("user_dashboard.task_name")%>*</label>
+            <%= ff.text_field :title, class: 'form-control new_task_title' %>
+            <br>
+          </div>
+          <div class="col-xs-12">
+            <label><%= t("reports.index.service_channel")%>*</label>
+            <%= f.select :service_channel_id, service_channels_collection, {include_blank: ''}, class: 'form-control new_task_service_channel' %>
+            <br>
+            <label><%= t("user_dashboard.assign_to_agent")%></label>
+            <%= f.select :assigned_to_user_id, agents_collection,{include_blank: ''}, class: 'form-control', disabled: false %>
+            <br>
+          </div>
+
+          <div class="col-xs-12" data-bind="if: showCallFields">
+            <label><%= t("user_dashboard.phone")%></label>
+            <%= ff.text_field :from, class: 'form-control', placeholder: '+358' %>
+          </div>
+
+          <div class="col-xs-12" data-bind="if: showEmailFields">
+            <label><%= t("user_dashboard.email")%></label>
+            <%= ff.text_field :from, class: 'form-control' %>
+          </div>
+
+          <%= hidden_field_tag 'task[type]', class: 'form-control' %>
+
+          <div class="col-xs-12">
+            <label><%= t("user_dashboard.task_message")%></label>
+            <%= ff.text_area :description, class: 'form-control new_task_description' %>
+            <br>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <div class="col-md-8">
+              <div class="fileupload-section pull-left">
+                <%= ff.simple_fields_for :attachments do |fff|%>
+                  <button type="button" class="btn btn-default btn-sm attach-file-btn"><%= I18n.t('user_dashboard.attach_file') %></button>
+                  <div class="fileupload template hidden fileupload-new margin-none">
+                    <span class="btn" data-trigger="fileupload">
+                      <span class="fileupload-new"><%= I18n.t('user_dashboard.select_file') %></span>
+                      <span class="fileupload-exists"><%= I18n.t('user_dashboard.attach_change') %></span>
+                    </span>
+                    <input class="form-control file-field margin-none hidden" id="task_messages_attributes_0_attachments" name="task[messages_attributes][0][attachments][]" type="file">
+                    <span class="fileupload-preview"></span>
+                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                  </div>
+                  <br>
+                  <% end %>
+                </div>
+            <% end %>
+          </div>
+
+          <div class="col-md-4"> 
+            <div class="footer clearfix pull-right">
+              <a role="button" class="btn btn-default btn-sm" data-dismiss="modal"><%= t('user_dashboard.cancel') %></a>
+              <a role="button" class="btn btn-default btn-sm new-task-save" disabled="disabled"><%= t('user_dashboard.ok') %></a>
+            </div>
+          </div>
+        </div> 
+  
+          
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

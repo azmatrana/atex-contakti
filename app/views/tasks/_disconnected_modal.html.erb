@@ -1,0 +1,22 @@
+<div class="modal fade" id="ws_disconnected" tabindex="-1" role="dialog" aria-labelledby="ws-disconnected">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header ws-disconnected">
+        <h4 class="modal-title" id="myModalLabel"><%= I18n.t("user_dashboard.disconnected.title")%></h4>
+      </div>
+      
+      <div class="modal-body">
+        <div class="col-md-12">
+          <div><p><%= I18n.t("user_dashboard.disconnected.body") %></p></div>
+          <br>
+      </div>
+    </div>
+        
+      <div class="modal-footer">
+        <a role="button" class="btn btn-default btn-sm" href="#" onclick="$('#ws_disconnected').modal('hide'); return false;"><i></i><%= I18n.t('layouts.navigation.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span></a>
+        <a role="button" class="btn btn-default btn-sm" href="#" onclick="location.reload(); return false;"><i></i><%= I18n.t('layouts.navigation.reload') %> <span class="glyphicon glyphicon-refresh"></span></a>
+      </div>
+
+  </div>
+</div>
+ 

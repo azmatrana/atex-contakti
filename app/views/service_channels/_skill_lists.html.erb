@@ -1,0 +1,14 @@
+<% @skills.each do |skill| %>
+  <% priority = Priority.find_by(company_id: current_user.company, tag_id: skill.id) %>
+	<tr>
+		<td><span class="taglabel <%= get_skill_priority_class(priority) %>"><%= skill.name %></span></td>
+		<td>
+	       <strong><%= (@skill_counts || {}).fetch(:skills, {}).fetch(skill.name, {}).fetch(:tasks, 0) %></strong>
+	     </td>
+		<td>
+			<%= link_to destroy_skills_service_channel_path(@service_channel, tag: skill.name), class: "btn btn-primary btn-stroke pull-right", method: :delete, remote: true do %>
+				<i class="fa fa-trash"></i>
+			<% end %>
+		</td>
+	</tr>
+<% end %>

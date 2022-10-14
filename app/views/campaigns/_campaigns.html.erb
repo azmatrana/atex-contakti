@@ -1,0 +1,63 @@
+<div class="modal fade" id="campaigns-card-modal" tabindex="-1" role="dialog" aria-labelledby="campaigns-card-modal-dialog">
+<div class="modal-dialog">
+  <div class="modal-content modal-lg" style="width: 90vw; margin: 0 auto;">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.campaign_modal.campaigns_card') %></h3>
+    </div>
+    <div class="modal-body">
+      <div class="innerLR">
+        <!-- Widget -->
+        <div class="widget widget-tabs border-bottom-none">
+          <!-- Widget heading -->
+          <!-- // Widget heading END -->
+            <%= form_tag url_for(controller: "campaigns", action: 'search', locale: I18n.locale), method: :get, remote: true, id: 'campaign-search-form' do |f| %>
+              <%= hidden_field_tag :locale, params[:locale] %>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <input name="search" id="campaign-search-input" class="form-control" type="text" placeholder="<%= t('user_dashboard.campaign_modal.campaign_search_placeholder') %>">
+                </div>
+
+
+                <% if current_user.has_role? :admin %>
+                  <div class="col-md-3">
+                    <%= link_to delete_all_campaigns_path(locale: I18n.locale), method: :delete, remote: true, class: 'btn btn-default btn-sm ', data: { confirm: t('user_dashboard.confirm_delete') } do %>
+                      <i class="glyphicon glyphicon-trash"></i>
+                      <%= t('user_dashboard.campaign_modal.delete_all_campaigns') %>
+                    <% end %>
+                  </div>
+                <% end %>
+
+                <div class="col-md-4">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                      <div class="alert alert-success campaign-saved-alert hide half innerAll text-center">
+                        <%= t('user_dashboard.saved') %>
+                      </div>
+                      <div class="alert alert-success campaign-deleted-alert hide half innerAll text-center">
+                        <%= t('user_dashboard.deleted') %>
+                      </div>
+                      <div class="alert alert-warning campaign-warning-alert hide half innerAll text-center">
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+
+            <% end %>
+            <div id="campaigns-table-wrapper">
+              <%= render 'campaigns/table', campaigns: campaigns %>
+            </div>
+          <!-- // Tab content END -->
+        </div>
+      </div>
+    </div>
+    <!-- // Widget END -->
+  </div>
+
+
+</div> <!-- modal-body -->
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog -->
+</div> <!-- modal -->

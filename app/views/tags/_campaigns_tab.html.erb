@@ -1,0 +1,52 @@
+<div class="row">
+  <!-- Column -->
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <h4><%= I18n.t('tags.attach_campaign_csv') %></h4>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <form id="upload_campaign_item_form">
+    <div class="col-md-3">
+      <div class="input-group btn-block">
+        <input class="form-control attach_csv" type="file" id="attach_campaign_item_csv" name="csv">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-default btn-sm upload_csv" id="upload_campaign_item_submit_button">
+        <%= t('tags.upload') %>
+      </button>
+      <script>
+        $("#upload_campaign_item_submit_button").click( function() {
+          var form = $('#upload_campaign_item_form');
+          var formData = new FormData(form[0]);
+          $.ajax({
+            url: 'campaigns/upload_csv',
+            method: 'POST',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function() {
+              alert('File was imported');
+              $("#attach_campaign_item_csv").val('');
+            },
+            error: function(response){
+              var errors = $.parseJSON(response.responseText).errors;
+              alert(errors);
+            }
+          })
+        });
+      </script>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <a download href="/campaigns/download_template" ><%= I18n.t('tags.download_campaign_template_file') %></a>
+  </div>
+
+  <div class="col-md-3">
+    <%= link_to I18n.t('tags.show_campaigns'), "/#{I18n.locale}/campaigns", remote: true %>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<script type="text/html" id="internal_message_template">
+
+  <div class="message-thread">
+    <!-- INTERNAL MESSAGE FORM -->
+    <form data-bind="attr: {action: '<%= I18n.locale %>/tasks/' + task().id}" id="internal_message_form" method="put" data-remote="true">
+      <div class="message-box reply-box">
+        <div class="header">
+          <br>
+          <div class="reply-to-container">
+            <input type="text" name="reply[to]" class="form-control" placeholder="<%= I18n.t('user_dashboard.send_to') %>"/></br/>
+            <span class="help-block hide"></span>
+          </div>
+          <div class="reply-title-container">
+            <input type="text" name="reply[title]" data-bind="value: (function() { return 'RE/FWD: ' + task().firstMessage().title })()" placeholder="<%= I18n.t('user_dashboard.subject') %>" class="form-control"/>
+            <span class="help-block hide"></span>
+          </div>
+          <input type="hidden" name="reply[is_internal]" value="true"/>
+        </div>
+        <div class="content">
+          <div class="control-group">
+            <div class="controls">
+              <textarea name="reply[description]" class="wysihtml5 col-md-12 form-control" rows="5"/>
+
+              <div class="clearfix"></div>
+              <span class="help-block hide"></span>
+            </div>
+          </div>
+        </div>
+        <div class="footer clearfix">
+          <button type="button" id="cancel_reply_btn" class="btn btn-default" data-bind="click: clearInternalReply">
+            <%= I18n.t('user_dashboard.clear') %> 
+          </button>
+          <button type="button" id="reply_button" class="btn btn-default pull-right send-reply-btn" data-bind="click: sendInternalReply" data-disable-with="Sending internal message...">
+            <%= I18n.t('user_dashboard.send') %> <span class="glyphicon glyphicon-share-alt"></span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div id="internal-messages-container" data-bind="template: {name: 'internal_message_item_template', foreach: task().internalMessages }"></div>
+  </div>
+
+</script>

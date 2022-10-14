@@ -1,0 +1,35 @@
+<% if @sip_settings.sip_widget.present? %>
+  <% sip_widget = @sip_settings.sip_widget %>
+    <div id="sip-widget-wrapper">
+      <div id="widget">
+        <button id="open-widget-cta" title="Sip" style="background-color: <%= sip_widget.widget_button_color %>"><i class="fa fa-phone"></i></button>
+        <div id="phone-wrapper" class="_hide">
+          <div id="phoneUI">
+            <div id="sipClient">
+              <div id="sip-dialpad">
+                <% sip_widget.get_buttons.each do |button| %>
+                <button type="button" class="_sip_button digit" style="color: <%= sip_widget.dial_color %>; background-color: <%= sip_widget.dial_bg_color %>" data-digit="<%= button[:button_extension] %>"><%= button[:button_text] %></button>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div id="in-call-actions" class="_hide">
+            <button type="button" class="_sip_button _red btnHangUp">
+            <i class="fa fa-phone"></i>
+              <!-- End Call -->
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <audio id="ringtone" src="<%= asset_url('/assets/sip/incoming.mp3') %>" loop></audio>
+  <audio id="ringbacktone" src="<%= asset_url('/assets/sip/outgoing.mp3') %>" loop></audio>
+  <audio id="dtmfTone" src="<%= asset_url('/assets/sip/dtmf.mp3') %>"></audio>
+  <audio id="audioRemote"></audio>
+  <audio id="audioLocal"></audio>
+
+<% end %>

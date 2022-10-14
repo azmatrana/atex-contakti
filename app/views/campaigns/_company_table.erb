@@ -1,0 +1,62 @@
+
+<div class="table-responsive overflow-x half innerAll">
+
+    <div class='row innerTB half border-bottom'>
+      <div class='col-xs-3 strong'><%= t('activerecord.attributes.campaign.name') %> </div>
+      <div class='col-xs-3 strong'><%= t('activerecord.attributes.campaign.agent_name') %> </div>
+      <div class='col-xs-2 strong'><%= t('activerecord.attributes.campaign.service_channel') %> </div>
+      <div class='col-xs-2 strong'><%= t('activerecord.attributes.campaign.items_count') %> </div>
+      <div class='col-xs-2 strong'> </div>
+    </div>
+
+    <div class="campaign-data overflow-y-auto" style="max-height: 70vh;">
+
+    <% if @campaigns.length > 0 %>
+      <% service_channels = service_channels_collection_for_campaign %>
+      <% agents = agents_collection %>
+      <% @campaigns.each do |campaign| %>
+
+        <%= form_for campaign,
+            remote: true,
+            html: {class: 'form-horizontal'} do |f| %>
+          <div class='row innerTB half border-bottom'>
+            <div class='col-xs-3'>
+              <%= f.text_field :name, class: 'form-control' %>
+            </div>
+            <div class='col-xs-3'>
+              <div class="multi-select-agents">
+                <%= f.collection_check_boxes(:agent_ids, agents, :last, :first) do |b| %>
+                  <div class="form-check form-check-inline">
+                    <%# debugger %>
+                    <%= b.check_box class: 'form-check-input', id: "campaign_#{campaign.id}_agent_#{b.object.last}" %>
+                    <%= b.label class: 'form-check-label', for: "campaign_#{campaign.id}_agent_#{b.object.last}" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class='col-xs-2'>
+              <%= f.select :service_channel_id, service_channels, {include_blank: ''}, class: 'form-control' %>
+            </div>
+            <div class='col-xs-2 innerTB half'>
+              <%= campaign.campaign_items.length %>
+            </div>
+
+            <div class='col-xs-2 innerTB half'>
+              <%= button_tag '<i class="fa fa-check"></i>'.html_safe, :class => "btn btn-link theme-color" %>
+
+              <%= link_to '<i class="fa fa-eye"></i>'.html_safe, campaign_campaign_items_path(campaign.id), remote: true %>
+              <%#= link_to '<i class="fa fa-trash"></i>'.html_safe, campaign_campaign_items_path(campaign.id), remote: true %>
+            </div>
+
+          </div>
+        <% end %>
+      <% end %>
+
+    <% else %>
+      <div class='row'>
+        <div class='col-xs-12 text-center half innerAll'> <%= t('user_dashboard.campaign_modal.no_campaigns') %> </div>
+      </div>
+    <% end %>
+    </div>
+
+</div>

@@ -1,0 +1,16 @@
+<%= simple_fields_for :manager_template, @manager_template do |manager_template| %>
+  <%= manager_template.hidden_field :service_channel_id, value: @service_channel.id %>
+  <%= manager_template.hidden_field :kind, value: 'manager' %>
+  <div id="select_manager_template">
+    <div class="styled-select form-group">
+      <%= manager_template.collection_select :id, @manager_templates, :id, :title, { prompt: t('service_channels.select_template') } %>
+      <span class="caret"></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control sms-message-input" name="service_channel[<%= prefix %>_attributes][autoreply_text]"
+              placeholder="<%= t('service_channels.placeholder_autoreply_text') %>"><%= autoreply_text %></textarea>
+    <span class="sms-message-counter hide">0/0, 0 messages</span>
+  </div>
+  <%= render partial: '/sms_templates/title_form', locals: { f: manager_template } if @service_channel.persisted? %>
+<% end %>

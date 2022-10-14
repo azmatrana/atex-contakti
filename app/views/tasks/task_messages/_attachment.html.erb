@@ -1,0 +1,34 @@
+
+<%attachments.each do |att| %>
+  <div class="innerAll" id="attachment_<%=att.id%>">
+    <div class="media inline-block margin-none" data-bind="foreach: $data.attachments">
+      <div class="innerLR">
+        <i class="fa fa-file pull-left"></i>
+        <div class="media-body">
+          <div>
+            <a class="strong text-regular"  href="/attachments/<%att.note.id%>/<%att.id%>%" download></a>
+          </div>
+          <a download href="/attachments/download_note_attachment/<%= att.note.id %>/<%= att.id %>" data-bind="text: human_file_size"><%=att.file_name%></a>
+          <a href="#" class="close remove_attachment" onclick="removeAttachment(<%= att.id %>);" style="float: none">×</a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+<%end%>
+
+<script type="text/javascript">
+  function removeAttachment(id) {
+    $.ajax({
+      'url': '/attachments/' + id,
+      'type': 'delete',
+      'data': 'json',
+      success: function(resp){
+        $('#attachment_' + id).remove();
+      },
+      error: function(error){
+        console.log(error);
+      }
+    })
+  }
+</script>

@@ -1,0 +1,181 @@
+<%= simple_form_for @user, :url => @user.persisted? ? agent_path(@user.id) : agents_path, :html => {:class => 'form-horizontal'} do |f| %>
+    <div class="row">
+        <!-- Column -->
+<div class="col-md-12">
+    <div class="col-md-8">
+        <h4><%= t('users.agents.enter_agent_details') %></h4>
+	</div>
+    	<div class="col-md-4">
+    		<div class="pull-right" role="group" aria-label="...">
+        		<% if @user.persisted? %>
+                	<%= link_to agent_path(@user), :method => :delete, :id => 'delete-confirmation-btn', :class => 'btn btn-default btn-sm', data: { confirm: t('service_channels.confirm_delete') } do %>
+                    	<%= t('users.agents.delete') %> <span class="glyphicon glyphicon-trash"></span>
+                	<% end %>
+        		<% end %>
+
+            		<button type="submit" class="btn btn-default btn-sm">
+                	    <%= t('users.agents.save') %> <span class="glyphicon glyphicon-ok"></span>
+            		</button>
+    		</div>
+    	</div>
+</div>
+        <!-- Group -->
+        <div class="col-md-4">
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group">
+                        <%= f.text_field :first_name, :placeholder => t('users.agents.placeholder_first_name'), :class => 'form-control' %>
+                        <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+                    </div>
+                    <%= render :partial => 'field_error', :locals => {:field => :first_name} %>
+                </div>
+            </div>
+            <!-- Group -->
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group">
+                        <%= f.text_field :last_name, :placeholder => t('users.agents.placeholder_last_name'), :class => 'form-control' %>
+                        <span class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <%= render :partial => 'field_error', :locals => {:field => :last_name} %>
+                </div>
+            </div>
+            <div class="form-group margin-none innerB">
+              <div class="col-md-12 padding-none">
+                <div class="input-group">
+                  <%= f.text_field :alias_name, :placeholder => t('users.agents.placeholder_alias_name'), :class => 'form-control' %>
+                  <span class="input-group-addon">
+                              <i class="fa fa-user"></i>
+                          </span>
+                </div>
+                <%= render :partial => 'field_error', :locals => {:field => :alias_name} %>
+              </div>
+            </div>
+            <!-- Group -->
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group">
+                        <%= f.text_field :title, :placeholder => t('users.agents.placeholder_title'), :class => 'form-control' %>
+                        <span class="input-group-addon"><i class="fa fa-list-alt"></i>
+                </span>
+                    </div>
+                    <%= render :partial => 'field_error', :locals => {:field => :title} %>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group -->
+        <div class="col-md-4">
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group">
+                        <%= f.text_field :mobile, :placeholder => t('users.agents.phone'), :class => 'form-control' %>
+                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                    </div>
+                    <%= render :partial => 'field_error', :locals => {:field => :mobile} %>
+                </div>
+            </div>
+            <!-- Group -->
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group">
+                        <%= f.text_field :email, :placeholder => t('users.agents.email'), :class => 'form-control' %>
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    </div>
+                    <%= render :partial => 'field_error', :locals => {:field => :email} %>
+                </div>
+            </div>
+            <!-- Group -->
+            <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                    <div class="input-group ">
+                        <%= f.collection_select :default_location_id, @locations, :id, :name,
+                                                { :include_blank => true },
+                                                { :class => 'form-control', :'data-placeholder' => t('users.agents.default_location') } %>
+                        <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                    </div>
+                    <%= render :partial => 'field_error', :locals => {:field => :default_location} %>
+                </div>
+            </div>
+        </div>
+        <!-- // Column END -->
+    </div>
+    <div class="row">
+
+		<div class="col-md-4">
+            <div class="widget checkbox-set">
+
+                <!-- Widget heading -->
+                <div class="widget-head checkbox-head">
+                    <div class="checkbox">
+                        <label class="checkbox-custom">
+                            <input type="checkbox" data-all-checkboxes="locations-checkboxes-container"/>
+                            <i class="fa fa-fw fa-square-o"></i>
+                            <%= t('users.agents.add_to_locations') %>
+                        </label>
+                    </div>
+                </div>
+                <!-- // Widget heading END -->
+                <div class="widget-body inner-2x" id="locations-checkboxes-container">
+                    <%= f.collection_check_boxes :location_ids, @locations, :id, :name, {:item_wrapper_tag => 'div', :item_label_class => 'checkbox-custom', :item_wrapper_class => 'checkbox'} do |b| %>
+                        <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget checkbox-set">
+
+                <!-- Widget heading -->
+                <div class="widget-head checkbox-head">
+                    <div class="checkbox">
+                        <label class="checkbox-custom">
+                            <input type="checkbox" data-all-checkboxes="service-channels-checkboxes-container"/>
+                            <i class="fa fa-fw fa-square-o"></i>
+                            <%= t('users.agents.add_to_service_channels') %>
+                        </label>
+                    </div>
+                </div>
+                <!-- // Widget heading END -->
+                <div class="widget-body inner-2x" id="service-channels-checkboxes-container">
+                    <%= f.collection_check_boxes :service_channel_ids, @service_channels, :id, :name, {:item_wrapper_tag => 'div', :item_label_class => 'checkbox-custom', :item_wrapper_class => 'checkbox'} do |b| %>
+                        <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="widget checkbox-set">
+
+                <!-- Widget heading -->
+                <div class="widget-head checkbox-head">
+                    <div class="checkbox">
+                        <label class="checkbox-custom">
+                            <input type="checkbox" data-all-checkboxes="media-channels-checkboxes-container"/>
+                            <i class="fa fa-fw fa-square-o"></i>
+                            <%= t('users.agents.add_to_media_channels') %>
+                        </label>
+                    </div>
+                </div>
+                <!-- // Widget heading END -->
+
+                <div class="widget-body inner-2x" id="media-channels-checkboxes-container">
+                    <%= f.collection_check_boxes :media_channel_types, %w(email web_form call chat sms), :to_s,
+                                                 proc { |v| t("users.agents.media_channel_types.#{v}") },
+                                                 {:item_wrapper_tag => 'div', :item_label_class => 'checkbox-custom', :item_wrapper_class => 'checkbox'} do |b| %>
+                        <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                      <% end %>
+                      <input type="hidden" name="user[media_channel_types][]" value="internal" />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<% end %>

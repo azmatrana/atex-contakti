@@ -1,0 +1,148 @@
+<div class="modal" id="create-to-modal-dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title"><%= t('layouts.navigation.edit_layout') %></h3>
+      </div>
+
+      <div class="modal-body" style="overflow-y: auto">
+        <form id="dhasboard_layout_form">
+          <div class="col-xs-12">
+            <div class="col-md-6">
+              <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                  <div class="input-group">
+                    <input id="dashboard_layout_id" name="dashboard_layout[id]" type="hidden">
+                    <input class="form-control" id="dashboard_layout_name" name="dashboard_layout[name]" placeholder="<%= t('layouts.navigation.layout_name') %>" type="text">
+                    <span class="input-group-addon">
+                      <i class="fa fa-dashboard"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="gridster gs-widgets" id="gridster-widgets" style="display: none">
+              <ul>
+                <% DashboardLayout::WIDGETS.each do |w| %>
+                  <%= render partial: "dashboard_layouts/widgets/mocks/#{w}" %>
+                <% end %>
+              </ul>
+            </div>
+
+            <div class="col-md-4 pull-right">
+              <div class="form-group margin-none innerB">
+                <div class="col-md-12 padding-none">
+                  <div class="form-group">
+                    <!-- Single button -->
+                    <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <%= t('layouts.navigation.add_widget') %> <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu widgets-menu" role="menu">
+                      <li data-wg-name="call_channel_stats"><a href="#"> <%= t('reports.summary_report.call') %></a></li>
+                        <li data-wg-name="calls_stats"><a href="#"> <%= t('reports.summary_report.calls') %></a></li>
+                        <li data-wg-name="email_stats"><a href="#"> <%= t('reports.summary_report.email') %></a></li>
+                        <li data-wg-name="web_form_stats"><a href="#"> <%= t('reports.summary_report.web_form') %></a></li>
+                        <li data-wg-name="internal_stats"><a href="#"> <%= t('reports.summary_report.internal') %></a></li>
+                        <li data-wg-name="chat_channel_stats"><a href="#"> <%= t('asreports.summary_report.chat') %></a></li>
+                        <li data-wg-name="chatbot_stats"><a href="#"> <%= t('asreports.summary_report.chatbot') %></a></li>
+                        <li data-wg-name="sms_stats"><a href="#"> <%= t('reports.summary_report.sms') %></a></li>
+                        <li data-wg-name="media_channels_stats"><a href="#"> <%= t('reports.summary_report.media_chanels') %></a></li>
+                        <li data-wg-name="peak_times"><a href="#"> <%= t('reports.summary_report.peak_time') %></a></li>
+                        <li data-wg-name="tasks_by_location"><a href="#"> <%= t('reports.summary_report.tasks_by_location') %></a></li>
+                        <li data-wg-name="tasks_by_service_channel"><a href="#"> <%= t('reports.summary_report.tasks_by_service_channel') %></a></li>
+                        <li data-wg-name="tasks_counter"><a href="#"> <%= t('reports.summary_report.overall_amount_tasks') %></a></li>
+                        <li data-wg-name="sla"><a href="#"> <%= t('reports.summary_report.sla') %></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <div class="col-xs-12 gridster gs-design ready">
+                <input type="hidden" name="dashboard_layout[layout]" id="dashboard_layout_layout">
+                <ul style="width: 560px; position: relative;">
+                </ul>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <div class="btn btn-default btn-sm pull-left">
+          <a id="dashboard_layout_delete">
+            <%= t('layouts.navigation.delete') %> <span class="glyphicon glyphicon-trash">
+          </a>
+        </div>
+
+        <div class="btn-group-block pull-right">
+          <a role="button" class="btn btn-default btn-sm" data-dismiss="modal"><%= t('layouts.navigation.cancel') %> <span class="glyphicon glyphicon-ban-circle"></a>
+          <button class="btn btn-default btn-sm" id="dashboard_layout_save">
+            <%= t('layouts.navigation.save_layout') %> <span class="glyphicon glyphicon-ok"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      window.dashboardDesigner = new window.DashboardDesigner("#gridster-widgets ul", ".gridster.gs-design ul", ".widgets-menu");
+  });
+
+$('#dashboard_layout_save').click(function() {
+    var id = $('#dashboard_layout_id').val();
+    var layout = dashboardDesigner.getLayout();
+    var name = $('#dashboard_layout_name').val();
+
+    if(!name || name == "Default") {
+      $('#dashboard_layout_name').addClass("invalid");
+      return;
+    }
+
+    if(id) {
+      $.ajax({
+        url: '/dashboard_layouts/' + id,
+        method: 'PATCH',
+        data: {
+          'dashboard_layout[name]': name,
+          'dashboard_layout[layout]': layout
+        },
+        success: function() {
+          location.reload()
+        }
+      });
+    } else {
+      $.ajax({
+        url: '/dashboard_layouts',
+        method: 'POST',
+        data: {
+          'dashboard_layout[name]': name,
+          'dashboard_layout[layout]': layout
+        },
+        success: function() {
+          location.reload()
+        }
+      });
+    }
+  });
+
+$('#dashboard_layout_delete').click(function() {
+    var id = $('#dashboard_layout_id').val();
+    if(id) {
+      $.ajax({
+        url: '/dashboard_layouts/' + id,
+        method: 'DELETE',
+        success: function() {
+          location.reload()
+        }
+      });
+    }
+  });
+</script>

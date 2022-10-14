@@ -1,0 +1,14 @@
+$('#skillListData').html('<%= escape_javascript(render('agents/skill_lists')) %>');
+var newOptions = {};
+<% @all_skills.each do |skill| %>
+  newOptions["<%= skill %>"] = "<%= skill %>"
+<% end %>
+
+var $el = $('#tag')
+$el.empty();
+$el.append($("<option></option>").attr("value", "").text("<%= I18n.t('tags.please_select') %>"));
+$.each(newOptions, function(key, value) {
+
+  $el.append($("<option></option>")
+  .attr("value", value).text(key));
+});

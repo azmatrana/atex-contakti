@@ -1,0 +1,17 @@
+<div class="widget border-bottom-none">
+    <h3 class="innerAll handle bg-counter border-bottom margin-bottom-none"><%= t('reports.summary_report.overall_amount_tasks')%></h3>
+    <div class="widget-body">
+      <a href="" class="widget-stats widget-stats-primary widget-stats-1">
+        <div>
+          <div class="clearfix"></div>
+          <span class="overall-amount-tasks-count"><%= @is_for_dashboard ? @data[:total_unsolved_tasks_count] : @data[:total_tasks_count] %></span>
+        </div>
+        <div class="separator top center">
+          <strong>
+            <p><%= t('reports.summary_report.waiting_period')%>: <%= @data[:total_avg_waiting_period] %></p>
+            <p><%= t('reports.summary_report.average_process_time')%>: <%= @data[:total_avg_processing_time] %></p>
+          </strong>
+        </div>
+      </a>
+    </div>
+</div>

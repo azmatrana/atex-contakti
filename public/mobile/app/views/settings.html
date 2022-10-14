@@ -1,0 +1,44 @@
+<div id="result-modal" class="modal fade bottom">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <div class="modal-dialog small" data-bind="if: selectedTask">
+    <div class="modal-content">
+      <!--<div class="modal-header">
+        <h4 class="modal-title">Select result</h4>
+      </div>-->
+      <div class="modal-body container">
+        <div class="row">
+
+
+          <div class="col-xs-3">
+
+          </div>
+          <div class="col-xs-7 button-col">
+
+            
+        </div>
+      </div>
+      <div class="modal-footer">
+      	<div class="pull-left">
+        	<div class="message-actions" data-dismiss="modal" aria-label="Close">
+          		<button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmClose">
+            	<span class="fa fa-times"></span>
+            	<span data-i18n="app:task.action.mark_as_done"></span>
+          		</button>          		
+        	</div>
+        </div>
+      	<div class="pull-right">
+        	<div class="message-actions" data-bind="if: selectedTask">
+          		<button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmClose">
+            	<span class="fa fa-check"></span>
+            	<span data-i18n="app:task.action.mark_as_done"></span>
+          		</button>
+        	</div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -1,0 +1,67 @@
+<div data-bind="css: { disabledContent: disable_controlls() == true }" xmlns="http://www.w3.org/1999/html">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row mb-1">
+        <div class="col-md-7">
+          <input class="form-control" type="text" name="shipment_method_name" id="shipment_method_name_input" data-bind="value: shipmentMethodName" placeholder="<%= t('shipment_methods.name') %>">
+        </div>
+        <div class="col-md-3">
+          <input class="form-control" type="number" name="shipment_method_price" id="shipment_method_price_input" data-bind="value: shipmentMethodPrice" placeholder="<%= t('shipment_methods.price') %>">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-default btn-sm " data-bind="click: createShipmentMethod">
+            <%= t('shipment_methods.create') %>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-8">
+          <input name="search" class="form-control" data-bind="value: shipmentMethodsFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('tags.templates_tab.search') %>">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="alert alert-success data-saved-alert hide" id="shipment_method_success"></div>
+          <div class="alert alert-warning data-warning-alert hide" id="shipment_method_error"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>
+          <%= t('shipment_methods.name') %>
+        </th>
+        <th>
+          <%= t('shipment_methods.price') %>
+        </th>
+        <th>
+          <%= t('shipment_methods.actions') %>
+        </th>
+      </tr>
+      </thead>
+      <tbody data-bind="foreach: filteredShipmentMethodsList()">
+      <tr>
+        <td data-bind="text: name">
+        </td>
+        <td>
+          <div class="col-md-3 p-0">
+            <input class="form-control" type="number" name="shipment_method_price" data-bind="value: $data.price" placeholder="<%= t('shipment_methods.price') %>">
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-default btn-sm" data-bind="click: $parent.updateShipmentMethod">   <%= t('shipment_methods.save') %></button>
+          <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteShipmentMethod(id)">   <%= t('shipment_methods.delete') %></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,195 @@
+<script>
+    <% localize_labels(@data)%>
+    Report = {};
+    Report.peakTimesData = <%== @data[:peak_times].to_json %>;
+    Report.tasksByServiceChannelData = <%== @data[:service_channel_data].to_json %>;
+    Report.tasksByServiceChannelTicks = <%== @data[:service_channel_ticks].to_json %>;
+    Report.tasksByLocationData = <%== @data[:location_data].to_json %>;
+    Report.tasksByLocationTicks = <%== @data[:location_ticks].to_json %>;
+    Report.taskCounters = <%== @data[:tasks_count].to_json %>;
+    Report.totalTasksCount = <%= @data[:total_tasks_count] %>;
+    Report.totalTasksCountForPie = <%= @data[:total_tasks_count_for_pie] %>;
+    Report.tasksByUserData = <%== @data[:tasks_data] %>;
+    Report.tasksByUserTicks = <%== @data[:tasks_ticks] %>;
+    Report.tasksTurnaroundData = <%== @data[:tasks_turnaround_data] %>;
+    Report.tasksTurnaroundTicks = <%== @data[:tasks_turnaround_ticks] %>;
+    Report.pausesData = <%== @data[:pauses_data] %>;
+    Report.pausesTicks = <%== @data[:tasks_ticks] %>;
+    Report.solutionsPercentageData = <%== @data[:solutions_perc_data] %>;
+    Report.solutionsPercentageTicks = <%== @data[:solutions_perc_ticks] %>;
+    Report.sla = <%== @data[:sla].to_json %>;
+    Report.totalNotReadyTasksCount = <%== @data[:total_not_ready_tasks_count].to_json %>;
+    Layouts = <%== @layouts.to_json %>;
+</script>
+
+<% if @report.is_for_dashboard? %>
+<div class="col-xs-12 dashboardLayoutButtons">
+
+  <!--Tools-->
+      <div class="col-md-12 pull-right">
+        <a class="btn btn-default" onclick="goFullscreen()">
+          <i class="fa fa-arrows-alt"></i> <%= t 'dashboard_layouts.fullscreen' %>
+        </a>
+        <a class="btn btn-default" onclick="newDashboardLayout()">
+          <i class="fa fa-plus-circle"></i> <%= t 'dashboard_layouts.add_new' %>
+        </a>
+        <a class="btn btn-default" onclick="editDashboardLayout()">
+          <i class="fa fa-pencil-square-o"></i> <%= t 'dashboard_layouts.edit_layout' %>
+        </a>
+
+        <div class="styled-select">
+            <select type="text" placeholder="All" id="selected-layout">
+                <% @layouts.each do |layout| %>
+                  <option value="<%= layout.id ? layout.id : 'default' %>" <%= 'selected' if layout == @layout %>><%= layout.name %></option>
+                <% end %>
+              </select>
+              <span class="caret"></span>
+        </div>
+        <input class="form-control date-range" type="text" name="dashboard[date_range]" id="dashboard-date-range-select" value="<%= @range %>"/>
+      </div>
+	<!--Tools end-->
+
+</div>
+<% end %>
+
+
+<div class="col-xs-12">
+    <div class="gridster" id="dashboard-gridster">
+      	<ul>
+            <% @layout.layout.each do |l| %>
+                <li data-row="<%= l["row"] %>" data-col="<%= l["col"] %>" data-sizex="<%= l["size_x"] %>" data-sizey="<%= l["size_y"] %>" data-wg-name="<%= l["name"] %>">
+                    <%= render partial: "dashboard_layouts/widgets/#{l["name"]}" %>
+                </li>
+            <% end if @layout && @layout.layout %>
+    	</ul>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function(){
+      //new window.DynamicDashboard($('#dashboard-gridster ul'));
+      window.dynamicDashboard = new window.DynamicDashboard($('#dashboard-gridster ul'));
+
+      $('#selected-layout').change(function() {
+        var id = $('#selected-layout option:selected').val();
+        if(id) {
+          $.ajax({
+            url: '/dashboard_layouts/' + id,
+            method: 'PATCH',
+            data: {
+              'dashboard_layout[dashboard_default]': true
+            },
+            success: function() {
+              location.reload();
+            }
+          });
+        } else {
+        }
+      });
+    });
+
+    function newDashboardLayout() {
+      var selected = null;
+
+      var json = '[]';
+      $('#dashboard_layout_id').val('');
+      $('#dashboard_layout_layout').val(json);
+      $('#dashboard_layout_name').val('');
+      window.dashboardDesigner.clear();
+      window.dashboardDesigner.addWidgetsToDesignPanel();
+
+      $('#create-to-modal-dialog').modal();
+    }
+
+    function editDashboardLayout() {
+      var selected = $('#selected-layout option:selected').val();
+      if(selected == "" || selected == "default") {
+        selected = null;
+      }
+
+      $.each(Layouts, function(index, value) {
+        if(value.id == selected) {
+          var json = JSON.stringify(value.layout);
+          $('#dashboard_layout_id').val(value.id);
+          $('#dashboard_layout_layout').val(json);
+          $('#dashboard_layout_name').val(value.name);
+          window.dashboardDesigner.clear();
+          window.dashboardDesigner.addWidgetsToDesignPanel();
+        }
+      });
+
+      $('#create-to-modal-dialog').modal();
+    }
+
+    function goFullscreen() {
+      var elem = document.getElementById("main_dashboard");
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      }
+    }
+
+    function fullscreenChange() {
+      var fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+      if(fullscreenElement) {
+        if($('body').hasClass('fullscreen')) {
+          return;
+        }
+
+        $('body').addClass('fullscreen');
+
+        $('#dashboard-gridster ul li').each(function(index, e) {
+          var $e = $(e);
+          $e.css('visibility', 'visible');
+
+          if($e.data('row') > 4) {
+            $e.css('visibility', 'hidden');
+          }
+        });
+
+        function CheckWidgetsFit(zoom) {
+          var height = $(window).height();
+          var rv = true;
+          $('#dashboard-gridster ul li').each(function(index, e) {
+            var $e = $(e);
+            if($e.data('row') <= 4 && (($e.position().top + $e.height()) * zoom) > height) {
+              rv = false;
+            }
+          });
+
+          return rv;
+        }
+
+        var i;
+        for(i = 1.0; i > 0.5; i -= 0.05) {
+          if(CheckWidgetsFit(i)) {
+            break;
+          }
+        }
+
+        $('#dashboard-gridster').css('transform', 'scale(' + i + ')');
+        $('#dashboard-gridster').css('transform-origin', 'center top');
+      } else {
+        $('#dashboard-gridster').css('transform', 'scale(1)');
+        $('#dashboard-gridster ul li').each(function(index, e) {
+          $(e).css('visibility', 'visible');
+        });
+
+        $('body').removeClass('fullscreen');
+      }
+    }
+
+    document.addEventListener("fullscreenchange", fullscreenChange, false);
+    document.addEventListener("mozfullscreenchange", fullscreenChange, false);
+    document.addEventListener("webkitfullscreenchange", fullscreenChange, false);
+    document.addEventListener("msfullscreenchange", fullscreenChange, false);
+
+
+</script>
+

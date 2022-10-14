@@ -1,0 +1,5 @@
+<% if @success.present? && @success == true %>
+  toastr.success("<%= @message %>", "<%= I18n.t('tag_notifications.success') %>")
+<% elsif @success.present? %>
+  toastr.error("<%= @message %>", "<%= I18n.t('tag_notifications.failure') %>")
+<% end %>

@@ -1,0 +1,98 @@
+<div id="filter-modal" class="modal fade bottom scroll-modal">
+    <div class="modal-dialog" data-bind="if: filteringActive">
+        <div class="modal-content" data-bind="template: { afterRender: afterTaskFiltersRender }">
+            <form id="sms-form">
+                <div class="modal-body scroll-body">
+                    <div class="form-group">
+                        <label for="filter_categories" data-i18n="app:filter.categories"></label>
+                        <div class="clearfix">
+                            <select multiple class="form-control" id="filter_categories" name="filter_categories"
+                                data-bind="options: filter().availableCategories,
+                                           optionsText: 'name',
+                                           optionsValue: 'key',
+                                           selectedOptions: filter().selectedCategories">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter_status" data-i18n="app:filter.status"></label>
+                        <div class="clearfix">
+                            <select multiple class="form-control" id="filter_status" name="filter_status"
+                                data-bind="options: filter().availableStatuses,
+                                           optionsText: 'name',
+                                           optionsValue: 'key',
+                                           selectedOptions: filter().selectedStatuses">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter_service_channel" data-i18n="app:filter.service_channel"></label>
+                        <div class="clearfix">
+                            <select multiple class="form-control" id="filter_service_channels" name="filter_service_channels"
+                                data-bind="options: serviceChannels,
+                                           optionsText: 'name',
+                                           optionsValue: 'id',
+                                           selectedOptions: filter().selectedServiceChannels">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter_media_channel" data-i18n="app:filter.media_channel"></label>
+                        <div class="clearfix">
+                            <select multiple class="form-control" id="filter_media_channel" name="filter_media_channel"
+                                data-bind="options: filter().availableMediaChannels,
+                                           optionsText: 'name',
+                                           optionsValue: 'key',
+                                           selectedOptions: filter().selectedMediaChannels">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter_priority" data-i18n="app:filter.priority"></label>
+                        <div class="clearfix">
+                            <select multiple class="form-control" id="filter_priority" name="filter_priority"
+                                data-bind="options: filter().availablePriorities,
+                                           optionsText: 'name',
+                                           optionsValue: 'key',
+                                           selectedOptions: filter().selectedPriorities">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter_tags"><span data-i18n="app:filter.tags"></span></label>
+                        <input type="text" class="form-control" autocomplete="off" id="filter_tags" name="filter_tags" data-bind="value: filter().selectedTags" />
+                    </div>
+                    <div class="form-group">
+                        <label for="filter_daterange"><span data-i18n="app:filter.daterange"></span></label>
+                        <select class="form-control" id="filter_daterange" name="filter_daterange"
+                            data-bind="options: filter().availableDateRangeSelections,
+                                       optionsText: 'name',
+                                       optionsValue: 'key',
+                                       selectedOptions: filter().selectedDateRangeSelection">
+                        </select>
+                    </div>
+                    <div data-bind="visible: filter().selectedDateRangeSelection() == 'custom_range'">
+                        <div class="form-group">
+                            <label for="filter_daterange_start"><span data-i18n="app:daterangepicker.from"></span></label>
+                            <input id="filter_daterange_start" type="date" name="filter_daterange_start" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="filter_daterange_end"><span data-i18n="app:daterangepicker.to"></span></label>
+                            <input id="filter_daterange_end" type="date" name="filter_daterange_end" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-right">
+                        <div class="message-actions">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmFilter">
+                                <span class="fa fa-check"></span>
+                                <span data-i18n="app:filter.action.ok"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,147 @@
+<script type="text/html" id="task_messages_reply_form_template">
+  <form data-bind="visible: showFormObservable, attr: {action: attributes().action(), 'data-remote': attributes()['data-remote'], 'method': attributes().formMethod}">
+    <input name="_method" type="hidden" data-bind="value: attributes().method" />
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+
+  <button class="btn btn-sm btn-inverse pull-right hidden-lg hidden-md" id="close-email-details">
+    <i class="fa fa-fw fa-times"></i>
+  </button>
+
+  <div class="message-box" style="display: block;">
+    <div class="header">
+    <h4><%= I18n.t('user_dashboard.send_email') %></h4>
+      <div class="file-container"></div>
+      <br/>
+      <span class="timestamp" data-bind="text: moment().format('DD.MM.YYYY HH:mm')"></span>
+
+      <div class="right-buttons">
+        <div class="footer clearfix innerAll pull-right">
+          <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">
+            <%= I18n.t('user_dashboard.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-sm" data-bind="click: sendForm" data-disable-with="Sending reply...">
+            <%= I18n.t('user_dashboard.send') %> <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ko ifnot: onlyInternal() -->
+        <%= I18n.t('user_dashboard.replying.target') %>
+        <br/>
+        <label style="margin-right: 5px">
+          <input type="radio" name="reply[is_internal]" value="0" onclick="$('#to_field').val(window.userDashboardApp.viewModels.taskContainer.replyToMessage().from);" data-bind="checked: internal, checkedValue: false">
+          <%= I18n.t('user_dashboard.replying.customer') %>
+        </label>
+        <!--<label>
+          <input id="is_internal" type="radio" name="reply[is_internal]" value="1" onclick="$('#to_field').attr('disabled', false); $('#to_field').val(''); $('#to_field').focus();" data-bind="checked: internal, checkedValue: true">
+          <%= I18n.t('user_dashboard.replying.internal') %>
+        </label>-->
+        </br>
+        </br>
+      <!-- /ko -->
+      <%= I18n.t('user_dashboard.send_to') %>:
+      <br/>
+      <input class="form-control" type="text" name="reply[to]" data-bind="value: getReplyToEmails(), disabled: internal" id="to_field"/>
+      <br/>
+      <%= I18n.t('user_dashboard.cc') %>:
+      <input type="text" class="form-control" id="Cc" name="reply[cc]"/>
+      <br/>
+      <%= I18n.t('user_dashboard.bcc') %>:
+      <input type="text" class="form-control" id="Bcc" name="reply[bcc]"/>
+      <br/>
+      <%= I18n.t('user_dashboard.subject') %>:
+      <input type="text" name="reply[title]" data-bind="value: (function() {return 'RE: ' + selectedMessage.title; })()" class="form-control" placeholder="<%= I18n.t('user_dashboard.subject') %>"/>
+      <br/>
+      <%= t("user_dashboard.select_template")%>:
+      <br/>
+      <select data-bind="options: $root.viewModels.sharedViews.basicTemplates.basicTemplatesList, optionsText: 'title',
+                     optionsValue :'text', value: templateText, optionsCaption: '<%= t("user_dashboard.choose_template")%>'" class="form-control">
+      </select>
+
+      <input id="reply_in_reply_to_id" type="hidden" name="reply[in_reply_to_id]" data-bind="value: selectedMessage.id"/>
+      <span class="help-block hide"></span>
+    </div>
+
+    <div class="content">
+      <div class="control-group">
+        <div class="controls">
+          <textarea id="reply_text" name="reply[description]" class="wysihtml5 col-md-12 form-control" rows="5" data-bind="value: messageText()"></textarea>
+
+          <div class="clearfix"></div>
+          <span class="help-block hide"></span>
+        </div>
+      </div>
+    </div>
+
+<div class="row">
+
+   <div class="col-md-5">
+     <div>
+       <div class="fileupload-section">
+         <button type="button" data-bind="click: addAttachment" class="btn btn-default btn-sm"><%= I18n.t('user_dashboard.attach_file') %><span class="glyphicon glyphicon-paperclip"></span></button>
+         <button type="button" class="btn btn-default btn-sm" data-bind="click:showFilesModal"><%= I18n.t('user_dashboard.add_file') %><span class="glyphicon glyphicon-paperclip"></span></button>
+         
+         <div class="fileupload template hidden fileupload-new margin-none" data-provides="fileupload">
+              <span class="btn pl-0" data-trigger="fileupload">
+                  <span class="fileupload-new"><%= I18n.t('user_dashboard.select_file') %></span>
+                  <span class="fileupload-exists"><%= I18n.t('user_dashboard.attach_change') %></span>
+              </span>
+           <input class="form-control file-field margin-none hidden" id="send_email_attachments_file" name="attachments[]" type="file">
+           <span class="fileupload-preview"></span>
+           <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+         </div>
+         <br>
+       </div>
+     </div>
+     <div class="company_files_section pt-1 mb-1">
+         <!-- ko foreach: companyFiles -->
+         <div>
+           <input class="form-control margin-none hidden" data-bind="value: id" id="company_files_ids[]" name="company_files_ids[]" type="text"/>
+           <span class="company_files_list mb-1">
+           <a data-bind="text: file_name, attr: { href: file.url}"></a>
+           <span class="company_file_name" data-bind="click: $parent.removeCompanyFile"><i class="fa fa-close pointer"></i></span>
+         </span>
+         </div>
+         <!-- /ko -->
+       </div>
+     <div>
+       
+     </div>
+   </div>
+
+  <div class="col-md-3">
+      <!--  <label for="Signature" class="col-sm-5"><%#= t('users.details.select_signature') %>:</label> -->
+        <div class="col-sm-12">
+          <select name="reply[signature]"
+                  data-bind="options: loadAllServiceChannels(),
+                            optionsValue: 'signature',
+                            optionsText: 'name',
+                            value: signatureSelected,
+                            event: {}"
+                  id="reply_signature"
+                  class="form-control selectpicker btn">
+          </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="footer clearfix innerAll pull-right pl-0">
+            <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">
+                <%= I18n.t('user_dashboard.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-sm" data-bind="click: sendForm" data-disable-with="Sending reply...">
+                <%= I18n.t('user_dashboard.send') %> <span class="glyphicon glyphicon-send"></span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+  </div>
+    <div class="bg-background">
+      <br>
+    </div>
+</form>
+</script>
+
+
+

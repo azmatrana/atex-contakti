@@ -1,0 +1,30 @@
+<br>
+<div class="row">
+  <div class="col-md-8">
+    <h4><%= t('layouts.application.settings') %></h4>
+  </div>
+  <div class="col-md-4">
+    <div class="pull-right" role="group" aria-label="...">
+      <% if @service_channel.tasks.present? %>
+        <%= link_to delete_service_tasks_service_channel_path(@service_channel.id), method: :delete, class: 'btn btn-default btn-sm' ,data: { confirm: t('service_channels.confirm_delete') } do %>
+          <%= t('service_channels.delete_tasks') %> <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>
+<div class="row mb-3">
+  <label class="col-md-2 control-label"><%= t('users.details.select_signature') %></label>
+    <div class="col-md-8 input-group">
+      <div class="content">
+        <div class="control-group">
+          <div class="controls">
+            <%= f.text_area :signature, class: 'form-control ckeditor', rows: 10 %>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

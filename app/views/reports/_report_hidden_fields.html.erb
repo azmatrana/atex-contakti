@@ -1,0 +1,8 @@
+<% %i[kind title starts_at ends_at dashboard_layout_id].each do |field_name| %>
+  <%= f.hidden_field field_name %>
+<% end %>
+<% %i[location_ids service_channel_ids media_channel_types user_ids].each do |field_name| %>
+  <% @report.__send__(field_name).each do |field_value| %>
+    <%= f.hidden_field field_name, multiple: true, value: field_value %>
+  <% end %>
+<% end %>

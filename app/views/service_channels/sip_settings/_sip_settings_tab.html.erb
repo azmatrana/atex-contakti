@@ -1,0 +1,29 @@
+<div class="row innerAll">
+  <%= t('service_channels.chat_help_text') %>
+</div>
+<div class="row">
+  <%= f.fields_for "sip_media_channel_attributes", media_channel do |ff|%>
+    <div class="form-group">
+      <%= ff.text_field :embed_url, :readonly => true, :class => 'form-control' %>
+    </div>
+    <%= ff.hidden_field :id %>
+    <%= ff.fields_for "sip_settings_attributes", ff.object.sip_settings do |settings| %>
+      <%= settings.hidden_field :id %>
+      <div class="form-group">
+        <%= settings.text_field :title, placeholder: "title", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= settings.text_field :user_name, placeholder: "user name", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= settings.text_field :password, placeholder: "password", class: "form-control", type: 'password' %>
+      </div>
+      <div class="form-group">
+        <%= settings.text_field :domain, placeholder: "domain", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= settings.text_field :ws_server_url, placeholder: "ws server url", class: "form-control" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

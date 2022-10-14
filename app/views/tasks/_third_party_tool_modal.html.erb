@@ -1,0 +1,16 @@
+<div class="modal-dialog" style="width: 90vw;">
+  <div class="modal-content modal-xl" data-bind="with: viewModels.sharedViews.thirdPartyTools">
+    <!-- ko if: selectedTool() -->
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 data-bind="text: selectedTool().title" class="modal-title">
+      </h3>
+    </div>
+    <div class="modal-body ">
+      <pre data-bind="html: selectedTool().content">
+      </pre>
+    </div>
+    <!-- /ko -->
+  </div>
+</div>
+</div>

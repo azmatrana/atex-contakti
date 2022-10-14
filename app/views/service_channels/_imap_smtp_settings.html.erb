@@ -1,0 +1,168 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('service_channels.modal_email_settings')%></h3>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="relativeWrap" >
+        <div class="widget widget-tabs widget-tabs-responsive margin-bottom-none box-shadow-none">
+
+          <div class="widget-head">
+            <ul>
+              <li class="active"><a class="glyphicons message_in" href="#<%= prefix %>_imap" data-toggle="tab"><i></i><%= t('service_channels.incoming_IMAP')%></a></li>
+              <li><a class="glyphicons message_out" href="#<%= prefix %>_smtp" data-toggle="tab"><i></i><%= t('service_channels.outgoing_SMTP')%></a></li>
+              <li><a class="glyphicons bell" href="#<%= prefix %>_sla" data-toggle="tab"><i></i><%= t('service_channels.sla')%></a></li>
+              <li><a class="glyphicons calendar" href="#<%= prefix %>_open_hours" data-toggle="tab"><i></i><%=  t('weekly_schedules.title')%></a></li>
+              <li><a  href="#<%= prefix %>_auto_reply" data-toggle="tab"><i class="fa fa-reply"></i><%=  t('service_channels.auto_reply')%></a></li>
+            </ul>
+          </div>
+
+          <div class="widget-body">
+            <div class="tab-content">
+              <div class="tab-pane active form" id="<%= prefix %>_imap">
+                <div class="row innerAll">
+                  <%= hidden_field_tag "service_channel[#{prefix}_attributes][id]", media_channel.id %>
+                  <%= fields_for "service_channel[#{prefix}_attributes][imap_settings_attributes]", media_channel.imap_settings, html: {id: 'imap_settings_form'} do |imap_form| %>
+                  <div class="form-group hide">
+                    <div class="styled-select">
+                      <select type="text" placeholder="Choose existing">
+                        <option value=""></option>
+                        <% @imap_settings.each do |imap| %>
+                          <option><%= imap.server_name %></option>
+                        <% end %>
+                      </select>
+                      <span class="caret"></span>
+                    </div>
+                  </div>
+                    <%= imap_form.hidden_field :id %>
+                  <div class="form-group">
+                    <%= imap_form.text_field :description, :placeholder => t('service_channels.placeholder_description'), :class => 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= imap_form.text_field :from_email, :placeholder => t('service_channels.placeholder_from_email'), :class => 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= imap_form.text_field :from_full_name, :placeholder => t('service_channels.placeholder_from_name'), :class => 'form-control' %>
+                  </div>
+                  <div class="separator top"></div>
+                  <div class="form-group">
+                    <%= imap_form.text_field :server_name, :placeholder => t('service_channels.placeholder_incoming_mail_server'), :class => 'form-control server-name' %>
+                  </div>
+                  <div class="form-group">
+                    <%= imap_form.text_field :port, :placeholder => t('service_channels.placeholder_port'), :class => 'form-control port' %>
+                  </div>
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label class="checkbox-custom">
+                        <%= imap_form.check_box :use_ssl, :class => 'use-ssl', include_hidden: false %>
+                        <i class="fa fa-fw fa-square-o"></i><%= t('service_channels.use_ssl')%>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <%= imap_form.text_field :user_name, :placeholder => t('service_channels.placeholder_user_name'), :class => 'form-control user-name' %>
+                  </div>
+                  <div class="form-group">
+                    <%= imap_form.text_field :password, :placeholder => t('service_channels.placeholder_password'), :type => 'password', :class => 'form-control password' %>
+                  </div>
+                  <div class="alert alert-dismissable hide">
+                    <!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
+                    <span class="message-text"></span>
+                  </div>
+                  <div class="btn-group-block">
+                    <button type="submit" class="btn btn-default btn-sm test-settings imap" id="test_imap_btn">
+                      <%= t('service_channels.test_btn')%> <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+
+              <div class="tab-pane form" id="<%= prefix %>_smtp">
+                <div class="row innerAll">
+                  <%= fields_for "service_channel[#{prefix}_attributes][smtp_settings_attributes]", media_channel.smtp_settings, html: {id: 'smtp_settings_form'} do |smtp_form| %>
+
+                  <%= smtp_form.hidden_field :id %>
+                  <div class="form-group">
+                    <%= smtp_form.text_field :description, :placeholder => t('service_channels.placeholder_description'), :class => 'form-control' %>
+                  </div>
+                  <div class="form-group">
+                    <%= smtp_form.text_field :server_name, :placeholder => t('service_channels.placeholder_server_name'),
+                                             :class => 'form-control server-name' %>
+                  </div>
+                  <div class="form-group">
+                    <%= smtp_form.text_field :port, :placeholder => t('service_channels.placeholder_port'), :class => 'form-control port' %>
+                  </div>
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label class="checkbox-custom">
+                        <%= smtp_form.check_box :use_ssl, :class => 'use-ssl', include_hidden: false %>
+                        <i class="fa fa-fw fa-square-o"></i> <%= t('service_channels.use_ssl')%>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label class="checkbox-custom">
+                        <%= smtp_form.check_box :use_contakti_smtp, :class => 'use-contakti-smtp' %>
+                        <i class="fa fa-fw fa-square-o"></i> <%= t('service_channels.use_contakti_smtp')%>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="styled-select">
+                      <%= smtp_form.select :auth_method,
+                                           SmtpSettings::AUTH_METHODS.map { |x| [t("service_channels.smtp_auth_methods.#{x}"), x] },
+                                           {}, type: 'text', placeholder: t('service_channels.placeholder_auth_method'),
+                                           class: 'auth-method'
+                      %>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <%= smtp_form.text_field :user_name, :placeholder => t('service_channels.placeholder_user_name'),
+                                             :class => 'form-control user-name' %>
+                  </div>
+                  <div class="form-group">
+                    <%= smtp_form.text_field :password, :placeholder => t('service_channels.placeholder_password'),
+                                             :type => 'password', :class => 'form-control password' %>
+                  </div>
+                  <div class="alert alert-dismissable hide">
+                    <!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
+                    <span class="message-text"></span>
+                  </div>
+                  <div class="btn-group-block">
+                    <button type="submit" id="test_smtp_btn" class="btn btn-default btn-sm test-settings smtp">
+                      <%= t('service_channels.test_btn')%> <span class="glyphicon glyphicon-refresh"></span>
+                    </button>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="<%= prefix %>_sla">
+                  <%= render partial: 'media_channel_sla', locals: { media_channel: media_channel, prefix: prefix } %>
+              </div>
+              <div class="tab-pane" id="<%= prefix %>_open_hours">
+                  <%= fields_for "service_channel[#{prefix}_attributes]", media_channel do |ff| %>
+                      <%= render partial: 'weekly_schedule/schedule_form', locals: { f: ff, entries: media_channel.weekly_open_hours_with_empty } %>
+                  <% end %>
+              </div>
+              <div class="tab-pane" id="<%= prefix %>_auto_reply">
+                <%= render partial: 'auto_reply_settings', locals:{ media_channel: media_channel, prefix: prefix }  %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a role="button" class="btn btn-default btn-sm clear-form-btn"><%= t('service_channels.clear_settings_btn')%><span class="glyphicon glyphicon-remove"></span></a>
+      <a role="button" class="btn btn-default btn-sm save-settings-btn"> <%= t('service_channels.save_setting_btn')%><span class="glyphicon glyphicon-ok"></span></a>
+    </div>
+  </div>
+</div>

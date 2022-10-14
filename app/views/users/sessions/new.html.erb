@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <!-- row-app -->
+  <div class="row row-app">
+    <!-- col -->
+    <!-- col-separator.box -->
+    <div class="col-separator col-unscrollable box">
+      <!-- col-table -->
+      <div class="col-table">
+        <!--<h4 class="innerAll margin-none border-bottom text-center"><i class="fa fa-lock"></i>
+        <% t('users.sessions.login_to_account') %></h4>-->
+        <!-- col-table-row -->
+        <div class="col-table-row">
+          <!-- col-app -->
+          <div class="col-app col-unscrollable">
+            <!-- col-app -->
+            <div class="col-app">
+              <div class="login">
+                <div class="placeholder text-center"><i class="fa fa-lock"></i>
+                </div>
+                <div class="panel panel-default col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-4">
+                  <div class="panel-body">
+                    <%= form_for :user, { :class => 'enter-pass' } do |f| %>
+                      <div class="form-group">
+                        <label><%= t('users.sessions.username') %></label>
+                        <%= f.text_field :email, { :class => 'form-control', :placeholder => t('users.sessions.login_to_account'), :type => 'email' } %>
+                      </div>
+                      <div class="form-group">
+                        <label><%= t('users.sessions.password') %></label>
+                        <%= f.text_field :password, { :class => 'form-control', :placeholder => t('users.sessions.password'), :type => 'password' } %>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <%= f.check_box :remember_me %>
+                          <%= t('users.sessions.remember_me')  %>
+                        </label>
+                      </div>
+                      <% if @login_error %>
+                        <div class="alert alert-danger">
+                          <button type="button" class="close" data-dismiss="alert">×</button>
+                          <%= t('users.sessions.wrong_login') %>
+                        </div>
+                      <% end %>
+                      <button type="submit" class="btn btn-default btn-block"><%= t('users.sessions.login') %></button>
+                      <div class="separator line bottom"></div>
+                      <%- if devise_mapping.recoverable? %>
+                        <%= link_to t('users.sessions.forgot_password'), new_user_password_path, class: 'right' %>
+                      <% end -%>
+                    <% end %>
+                    <form role="form" class="forgot-pass hide">
+                      <div class="form-group">
+                        <h3>
+                          <% t('users.sessions.trouble_sign_in') %></h3>
+
+                        <p>
+                          <% t('users.sessions.how_to_reset') %></p>
+                        <label for="exampleInputEmail1"><%= t('users.sessions.email') %></label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="<%= t('users.sessions.placeholder_email') %>">
+                      </div>
+                      <button type="submit" class="btn btn-default btn-block"><%= t('users.sessions.reset_password_btn') %></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- // END col-app -->
+          </div>
+          <!-- // END col-app.col-unscrollable -->
+        </div>
+        <!-- // END col-table-row -->
+      </div>
+      <!-- // END col-table -->
+    </div>
+    <!-- // END col-separator.box -->
+  </div>
+  <!-- // END row-app -->
+  <!-- Global -->
+</div>

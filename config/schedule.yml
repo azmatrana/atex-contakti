@@ -1,0 +1,21 @@
+fetch_emails:
+  cron: '*/5 * * * *'
+  class: '::FetchEmailsWorker'
+waiting_tasks_unlocker:
+  cron: '*/2 * * * *'
+  class: '::WaitingTasksWorker'
+reports:
+  cron: '*/3 * * * *'
+  class: '::ProcessScheduledReportsWorker'
+#cleanup:
+#  cron: '0 * * * *'
+#  class: '::CleanupWorker'
+stats:
+  cron: '0 * * * *'
+  class: '::CompanyStatsUpdaterWorker'
+agent_online_status:
+  cron: '*/2 * * * *'
+  class: '::AgentOnlineStatusWorker'
+#fetch_facebook:
+#  cron: '* * * * *'
+#  class: '::FetchFacebookWorker'

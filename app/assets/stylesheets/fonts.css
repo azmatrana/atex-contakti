@@ -1,0 +1,41 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require font-awesome
+ *= require twitter/bootstrap
+ *= require ./flags
+ *= require ./icons/glyphicons/glyphicons_regular
+ *= require ./icons/glyphicons/glyphicons_social
+ *= require ./icons/glyphicons/glyphicons_filetypes
+ */
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #FFFFFF !important;
+}
+
+.select2-container--default .select2-selection--multiple {
+  border: solid #FFFFFF 1px !important;
+}
+
+.select2-dropdown {
+  border: 1px solid #FFFFFF !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #FFFFFF !important;
+  border: 1px solid #c6c2c2 !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: solid white 1px !important;
+}

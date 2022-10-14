@@ -1,0 +1,49 @@
+version: '3'
+volumes:
+  postgres-data:
+    driver: local
+  app-gems:
+    driver: local
+  redis-data:
+    driver: local
+  rails-tmp:
+    driver: local
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+     - "3000:3000"
+     - "9292:9292"
+    links:
+      - postgres
+      - redis
+    environment:
+      - RACK_ENV=development
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres://postgres:contakti@postgres:5432/contakti
+      - REDIS_URL=redis://redis:6379
+      - BUNDLE_GEMFILE=/app/Gemfile
+    env_file:
+      - .env.docker
+    volumes:
+      - .:/app
+      - app-gems:/usr/local/bundle
+    tty: true
+    stdin_open: true
+    command: bash -c "bundle install && bundle exec foreman start -f Procfile.dev"
+  postgres:
+    image: "postgres:9.5-alpine"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: contakti
+      POSTGRES_PASSWORD: contakti
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:3.2-alpine
+    ports:
+      - 6379:6379
+    command: redis-server --appendonly yes

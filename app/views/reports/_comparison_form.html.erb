@@ -1,0 +1,65 @@
+<%= simple_form_for @report, html: { class: 'form-horizontal', :id => 'comparison_report_form' } do |f| %>
+<%= f.hidden_field :kind, value: 'comparison' %>
+<div class="row">
+  <div class="col-md-4">
+    <label><%= t('reports.index.report_name')%> </label>
+    <%= f.input_field :title, :class => 'form-control', :placeholder => t('reports.index.placeholder_name')  %>
+    <%= f.error :title %>
+  </div>
+  <div class="col-md-4">
+    <label><%= t('reports.index.choose_time_range')%> </label>
+    
+      <input name="report[date_range]" class="form-control date-range" type="text"
+             autocomplete="off"
+             value="<%= format_date_range(@report) %>"
+      />
+      <%= f.hidden_field :starts_at %>
+      <%= f.hidden_field :ends_at %>
+      <br>
+  
+    <%= f.error :starts_at %>
+  </div>
+  <div class="col-md-4">
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="widget checkbox-set checkbox-set">
+      <div class="widget-head checkbox-head">
+        <div class="checkbox">
+          <label class="checkbox-custom">
+            <input type="checkbox" data-all-checkboxes="agents-checkboxes-container"/>
+            <i class="fa fa-fw fa-square-o"></i>
+              <%= t('reports.index.agents') %>
+          </label>
+        </div>
+      </div>
+      <div class="widget-body inner-2x" id="agents-checkboxes-container">
+      <% @agents.each do |agent| %>
+        <div class="checkbox">
+          <label class="checkbox-custom">
+            <input type="checkbox" name="report[user_ids][]" value="<%= agent.id %>"
+              <%= "checked" if @report.persisted? && @report.users.exists?(agent.id) %>>
+            <i class="fa fa-fw fa-square-o checked"></i>
+            <table>
+              <tr>
+                <td><%= agent.full_name %></td>
+                <td><%= agent.email %></td>
+                <td><%= agent.mobile %></td>
+              </tr>
+            </table>
+          </label>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %> <%# end comparison report form %>
+</div>
+<div class="separator top">
+  <div class="btn-group-block pull-right">
+    <button type="button" class="btn btn-default report-form cancel"> <%= t('reports.index.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span></button>
+    <button type="submit" class="btn btn-default report-form comparison"> <%= t('reports.index.create_report') %> <span class="glyphicon glyphicon-ok"></span></button>
+  </div>
+</div>

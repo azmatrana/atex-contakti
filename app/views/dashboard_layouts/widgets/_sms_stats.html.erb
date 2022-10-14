@@ -1,0 +1,49 @@
+<% tasks_count = @data[:tasks_count][:sms_channel] %>
+    <div class="widget border-bottom-none">
+        <h3 class="innerAll handle bg-email border-bottom margin-bottom-none"><%= t('reports.summary_report.sms') %><span class="pull-right glyphicon glyphicon-send"></span></h3>
+        <div class="widget-body">
+            <%= render :partial => 'sms_channel_stats_piecharts', :locals => { tasks_count: tasks_count } %>
+            <div class="row border-bottom  separator top border-top">
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.sended') %>
+                        <%= tasks_count[:sended] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.received') %>
+                        <%= tasks_count[:received] %>
+                    </p>
+                </div>
+              <div class="col-xs-6 center">
+                <p class="text-small">
+                  <%= t('reports.summary_report.new')%>
+                  <%= tasks_count[:new] %>
+                </p>
+              </div>
+              <div class="col-xs-6 center">
+                <p class="text-small">
+                  <%= t('reports.summary_report.in_progress')%>
+                  <%= tasks_count[:open] %>
+                </p>
+              </div>
+              <div class="col-xs-6 center">
+                <p class="text-small"><%= t('reports.summary_report.waiting')%>
+                  <%= tasks_count[:waiting] %>
+                </p>
+              </div>
+              <div class="col-xs-6 center">
+                <p class="text-small"><%= t('reports.summary_report.hitrate')%>
+                  <%= tasks_count[:hitrate] %>%
+                </p>
+              </div>
+            </div>
+            <div class="separator top center">
+                <strong>
+                <p><%= t('reports.summary_report.waiting_period')%>: <%= tasks_count[:avg_waiting_period] %></p>
+                <p><%= t('reports.summary_report.average_process_time')%>: <%= tasks_count[:avg_processing_time] %></p>
+                </strong>
+            </div>
+        </div>
+    </div>

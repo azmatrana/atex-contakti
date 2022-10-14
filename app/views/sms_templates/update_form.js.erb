@@ -1,0 +1,20 @@
+<% if @sms_template.kind == 'agent' -%>
+  $('#sms_templates_editor').html('<%= escape_javascript(render('/service_channels/sms_templates_editor')) %>');
+  <% if @sms_template.persisted? %>
+    existingTemplate = $.grep(gon.smsTemplates, function(el, i) {
+      el.id.toString() == '<%= @sms_template.id %>'
+    })[0];
+    if(!existingTemplate) {
+      gon.smsTemplates.push(<%== @sms_template.to_json %>);
+    }
+<% end -%>
+window.userDashboardApp.initialise(true);
+<% else -%>
+  <% if @prefix == 'chat_media_channel' -%>
+    $('#chat_manager_template_status_message').html('<%== escape_javascript(render('status_message')) %>');
+  <% else -%>
+    $('#manager_template_status_message').html('<%== escape_javascript(render('status_message')) %>');
+  <% end -%>
+  $('#autoreply_text').html('<%== 
+        escape_javascript(render partial: '/service_channels/autoreply_text', locals: { autoreply_text: @sms_template.text, prefix: @prefix }) %>');
+<% end -%>

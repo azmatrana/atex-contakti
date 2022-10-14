@@ -1,0 +1,8 @@
+2022-07-06 13:11:25.045 PKT [3691] FATAL:  lock file "postmaster.pid" already exists
+2022-07-06 13:11:25.045 PKT [3691] HINT:  Is another postmaster (PID 3681) running in data directory "/usr/local/var/postgres"?
+2022-07-06 13:12:09.428 PKT [3710] FATAL:  lock file "postmaster.pid" already exists
+2022-07-06 13:12:09.428 PKT [3710] HINT:  Is another postmaster (PID 3681) running in data directory "/usr/local/var/postgres"?
+2022-07-06 13:15:09.342 PKT [3767] FATAL:  lock file "postmaster.pid" already exists
+2022-07-06 13:15:09.342 PKT [3767] HINT:  Is another postmaster (PID 3681) running in data directory "/usr/local/var/postgres"?
+2022-07-06 13:15:18.130 PKT [3771] FATAL:  lock file "postmaster.pid" already exists
+2022-07-06 13:15:18.130 PKT [3771] HINT:  Is another postmaster (PID 3681) running in data directory "/usr/local/var/postgres"?

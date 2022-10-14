@@ -1,0 +1,29 @@
+<% @agents.each do |agent| %>
+  <table class="table agent-item <%= get_selected_class(agent) %>" data-id="<%= agent.id %>">
+    <tr>
+
+    <td class="item-description">
+        <h1 class="agent-title"><strong><%= agent.full_name_format %></strong></h1>
+        <h2><%= agent.title %></h2>
+
+
+      <% if agent.is_online? %>
+        <span class="item-status online">
+          <h4><span class="label label-success"><%= t('users.agents.online') %></span></h4>
+        </span>
+      <% else %>
+        <span class="item-status offline">
+          <h4><span class="label label-default"><%= t('users.agents.offline') %></span></h4>
+        </span>
+      <% end %>
+
+	</td>
+
+
+
+    </tr>
+  </table>
+<% end %>
+
+
+

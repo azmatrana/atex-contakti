@@ -1,0 +1,90 @@
+<form id="sms_individual_sending_form">
+  <input type="hidden" name="is_agent_console" value="true">
+  <div class="row innerAll">
+    <div class="styled-select form-group">
+      <%= hidden_field_tag 'locale', locale %>
+      <%= collection_select(nil, :service_channel_id, current_user.service_channels, :id, :name, { prompt: t('user_dashboard.please_select_service_channel') }, { class: 'sms_template_id single_sms_channel', id: 'service_channel_id' }) %>
+      <span class="caret"></span>
+    </div>
+  </div>
+
+  <div>
+    <div class="styled-select form-group">
+      <%= collection_select(nil, :id, @sms_templates, :id, :title, {prompt: t('service_channels.select_template')}, {class: 'sms_template_id'}) %>
+      <span class="caret"></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" name="reply[to]" class="form-control" placeholder="<%= I18n.t('user_dashboard.phone_placeholder') %>" id="reply_from"/>
+    <input type="hidden" name="reply[is_sms]" value="1"/>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control sms-message-input" name="message" placeholder="<%= t('user_dashboard.sms_message') %>"></textarea>
+    <span class="sms-message-counter hide">0/0, 0 messages</span>
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-default btn-sm pull-right"
+            id="sms_individual_sending_submit_button" disabled>
+      <%= t('user_dashboard.send') %>
+    </button>
+  </div>
+  <div class="clearfix"></div>
+</form>
+
+
+<!--<form id="sms_individual_sending_form">-->
+<!--  <input type="hidden" name="is_agent_console" value="true">-->
+<!--  <input name="_method" type="hidden" data-bind="value: attributes().method" />-->
+<%#= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+<!--  <div class="message-box sms-box" style="display: block;">-->
+<!--    <div class="header">-->
+<!--      <span class="timestamp" data-bind="text: moment().format('DD.MM.YYYY HH:mm')"></span>-->
+<!--      <h4><%#= I18n.t('user_dashboard.send_sms') %></h4>-->
+<!--      <br/>-->
+<!--        <div>-->
+<!--          <div class="styled-select form-group">-->
+<%#= collection_select(nil, :id, @sms_templates, :id, :title, {prompt: t('service_channels.select_template')}, {class: 'sms_template_id'}) %>
+<!--            <span class="caret"></span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      <input type="text" name="reply[to]" class="form-control" placeholder="<%#= I18n.t('user_dashboard.phone_placeholder') %>" data-bind="value: number()" id="reply_from" /><br/>-->
+<!--      <input type="hidden" name="reply[is_sms]" value="1"/>-->
+<!--      <span class="help-block hide"></span>-->
+<!--    </div>-->
+
+<!--      <div class="content">-->
+<!--        <div class="control-group">-->
+<!--          <div class="controls">-->
+<!--            <textarea data-bind="value: selectedSmsTemplateText" name="reply[description]" class="col-md-12 form-control sms-message-input" rows="5" placeholder="<%#= I18n.t('user_dashboard.message') %>"/>-->
+<!--            <span class="sms-message-counter">0/0, 0 <%#= I18n.t('user_dashboard.sms_message') %></span>-->
+
+<!--            <div class="clearfix"></div>-->
+<!--            <span class="help-block hide"></span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    <div class="row">-->
+<!--      <div class="col-md-6 pull-right">-->
+<!--        <div class="footer clearfix innerAll pull-right">-->
+<!--          <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">-->
+<!--            <%#= I18n.t('user_dashboard.cancel') %><span class="glyphicon glyphicon-ban-circle"></span>-->
+<!--          </button>-->
+<!--          <button type="button" class="btn btn-default btn-sm" data-bind="click: sendForm" data-disable-with="<%#= I18n.t('user_dashboard.send') %>">-->
+<!--            <%#= I18n.t('user_dashboard.send') %><span class="glyphicon glyphicon-send"></span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--  <!-- footer -->
+<!--  <div class="bg-background">-->
+<!--    <br/>-->
+<!--  </div>-->
+
+<!--  <!-- footer ends -->
+<!--</form>-->
+
+
+

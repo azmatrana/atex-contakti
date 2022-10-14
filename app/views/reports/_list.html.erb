@@ -1,0 +1,23 @@
+<% @reports.each do |report| %>
+  <table class="table report-item <%= get_selected_class(report) %>" data-id="<%= report.id %>"
+         data-show-element="#preview-container"
+         data-loader-element="#preview-loader"
+         data-noselection-element="#no-report-selected">
+         
+    <tr>
+      <td class="item-description report-item">
+        <h1><strong><%= report.title %></strong></h1>
+        <strong><%= t('reports.index.created') %></strong> <%= report.created_at.strftime('%d.%m.%Y') %>
+        	<% if report.scheduled.present? %>
+  
+        		<span class="pull-right"><strong><%= t('reports.index.scheduled') %>: </strong> <%= t("reports.comparison.#{report.scheduled}") %></strong>
+              	</span> 
+      		<% end %>
+      </td>
+      
+    </tr>
+    
+  </table>
+<% end %>
+
+

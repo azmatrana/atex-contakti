@@ -1,0 +1,81 @@
+<div class="tab-pane" id="third_party_tools" data-bind="with: managerAppViews.thirdPartyTools">
+  <div class="row" data-bind="css: { disabledContent: disable_controlls() == true }">
+    <div class="row ml-0 mr-0 mb-2">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-10">
+            <input class="form-control" type="text" data-bind="value: toolTitle" placeholder="<%= t('tags.templates_tab.basic_template_title') %>">
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-12">
+                  <textarea class="form-control" id="new_third_party_tool" >
+                  </textarea>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-4">
+            <button type="button" class="btn btn-default btn-sm " data-bind="click: createTools">
+              <%= t('tags.templates_tab.create') %>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <input name="search" class="form-control" data-bind="value: toolsFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('tags.templates_tab.search') %>">
+      </div>
+    </div>
+
+
+    <div class="row  ml-0 mr-0 mb-2">
+      <div class="col-md-10">
+        <div class="row mt-1">
+          <div class="col-md-10">
+            <div class="alert alert-success data-saved-alert hide" id="third_party_tools_success"></div>
+            <div class="alert alert-warning data-warning-alert hide" id="third_party_tools_error"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ko foreach: { data: filteredTools, afterRender: reinitializeCkEditors, as: 'thirdPartyTools'} -->
+    <hr>
+
+    <div class="row ml-0 mr-0 mt-1 mb-1">
+      <div class="col-md-8">
+        <div>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.third_party_tools_tab.title') %></label>
+              <input class="form-control" type="text" id="order_placed_template_subject" data-bind="value: title" placeholder="<%= I18n.t('tags.third_party_tools_tab.title') %>">
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.third_party_tools_tab.content') %></label>
+              <textarea id="order_placed_template_body" class="form-control ckeditor" data-bind="value: content, attr: { id: 'third_party_tool' + id, name: 'third_party_tool' + id }" type="text" placeholder="<%= I18n.t('tags.third_party_tools_tab.content') %>">
+              </textarea>
+            </div>
+          </div>
+          <br/>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-default btn-sm " data-bind="click: $parent.updateTool">
+          <%= t('tags.third_party_tools_tab.save') %>
+        </button>
+        <button type="button" class="btn btn-default btn-sm " data-bind="click: $parent.deleteTool">
+          <%= t('tags.third_party_tools_tab.delete') %>
+        </button>
+      </div>
+    </div>
+    <hr>
+    <!-- /ko -->
+
+
+  </div>
+</div>

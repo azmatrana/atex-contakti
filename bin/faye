@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+cd /home/app/webapp && bundle exec rackup danthes.ru -s puma -E production -o 0.0.0.0 -p 9292

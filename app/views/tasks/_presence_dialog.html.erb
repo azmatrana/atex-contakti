@@ -1,0 +1,77 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="modal-title"><%= t('user_dashboard.presence_user') %></h3>
+        </div>
+
+        				<div class="col-separator col-separator-first box hasNiceScroll" tabindex="5000" style="overflow-y: hidden; outline: none;">
+                            <div class="innerAll border-bottom">
+                                <div class="pull-left">
+                                    <a href="email.html?lang=en" class=" btn btn-success btn-sm strong"><i class="fa fa-fw icon-paperclip"></i> Save Draft</a> 
+                                </div>
+                                <a href="email.html?lang=en" class="pull-right btn btn-default btn-sm strong"><i class="fa fa-fw icon-outbox-fill"></i> Send Email</a>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="bg-gray innerAll">
+                                <form class="form-horizontal innerR" role="form">
+                                    <div class="form-group">
+                                        <label for="to" class="col-sm-2 control-label">To:</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="to">
+                                                <div class="input-group-btn">
+                                                    <button type="button" data-toggle="collapse" data-target="#cc" class="btn btn-default">CC/BCC
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="cc" class="collapse in" style="height: auto;">
+                                        <div class="form-group">
+                                            <label for="Cc" class="col-sm-2 control-label">Cc:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="Cc">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Bcc" class="col-sm-2 control-label">Bcc:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="Bcc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Bcc" class="col-sm-2 control-label">From:</label>
+                                        <div class="col-sm-6">
+                                            <select class="selectpicker" style="display: none;">
+                                                <option>contact@mosaicpro.biz</option>
+                                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" title="contact@mosaicpro.biz"><span class="filter-option pull-left">contact@mosaicpro.biz</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open" style="max-height: 106px; overflow: hidden; min-height: 0px;"><ul class="dropdown-menu inner selectpicker" role="menu" style="max-height: 104px; overflow-y: auto;"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">contact@mosaicpro.biz</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Bcc" class="col-sm-2 control-label">Signature:</label>
+                                        <div class="col-sm-6">
+                                            <select class="selectpicker" style="display: none;">
+                                                <option>Select Signature</option>
+                                            </select><div class="btn-group bootstrap-select"><button type="button" class="btn dropdown-toggle selectpicker btn-default" data-toggle="dropdown" title="Select Signature"><span class="filter-option pull-left">Select Signature</span>&nbsp;<span class="caret"></span></button><div class="dropdown-menu open"><ul class="dropdown-menu inner selectpicker" role="menu"><li rel="0" class="selected"><a tabindex="0" class="" style=""><span class="text">Select Signature</span><i class="glyphicon glyphicon-ok icon-ok check-mark"></i></a></li></ul></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <hr class="margin-none">
+                            <div class="innerAll inner-2x">
+                                <textarea class="notebook border-none form-control padding-none" rows="8" placeholder="Write your content here..."></textarea>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+        
+
+        <div class="modal-footer">
+            <a role="button" class="btn secondary-btn" data-dismiss="modal"><%= t('user_dashboard.cancel') %></a>
+            <a role="button" data-loading-txt="loading.." class="btn btn-default"><i class="fa fa-spinner"></i> <%= t('users.details.save_details')%></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="row">
+  <%= f.fields_for "sip_media_channel_attributes", media_channel do |ff|%>
+    <%= ff.fields_for "sip_settings_attributes", ff.object.sip_settings do |settings| %>
+      <%= settings.fields_for "sip_widget_attributes", settings.object.try(:sip_widget) do |widget| %>
+        <%= widget.hidden_field :id %>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_1, t("service_channels.webphone_name"), required: false %>
+                <%= widget.text_field :button_1, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_1_extension, t("service_channels.webphone_number"), required: false %>
+                <%= widget.text_field :button_1_extension, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_2, t("service_channels.webphone_name"), required: false %>
+                <%= widget.text_field :button_2, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_2_extension, t("service_channels.webphone_number"), required: false %>
+                <%= widget.text_field :button_2_extension, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_3, t("service_channels.webphone_name"), required: false %>
+                <%= widget.text_field :button_3, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_3_extension, t("service_channels.webphone_number"), required: false %>
+                <%= widget.text_field :button_3_extension, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_4, t("service_channels.webphone_name"), required: false %>
+                <%= widget.text_field :button_4, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_4_extension, t("service_channels.webphone_number"), required: false %>
+                <%= widget.text_field :button_4_extension, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_5, t("service_channels.webphone_name"), required: false %>
+                <%= widget.text_field :button_5, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_5_extension, t("service_channels.webphone_number"), required: false %>
+                <%= widget.text_field :button_5_extension, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_6, t("service_channels.webphone_name"), required: false %>
+                <%= widget.text_field :button_6, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <%= widget.label :button_6_extension, t("service_channels.webphone_number"), required: false %>
+                <%= widget.text_field :button_6_extension, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

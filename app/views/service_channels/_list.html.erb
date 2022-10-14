@@ -1,0 +1,18 @@
+<% @service_channels.each do |channel| %>
+  <table class="table service-channel <%= get_selected_class(channel) %>" data-id="<%= channel.id %>">
+  	 
+  
+    <tr>
+      <td class="item-description">
+        <h1><strong><%= channel.name %></strong></h1>
+        <span>
+          <%= channel.locations.map(&:name).join(', ') %>
+          </br>
+          ( <%= channel.users.count %> <%= t('service_channels.agents') %> )
+        </span>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+

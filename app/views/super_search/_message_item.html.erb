@@ -1,0 +1,106 @@
+<script type="text/html" id="customer_modal_external_message_item_template">
+  <!-- header -->
+  <div class="innerAll border-bottom">
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="media-list">
+          <li class="media no-padding">
+            <div class="media-body">
+              <strong><%= I18n.t('user_dashboard.time') %> :</strong>
+              <span class="timestamp" data-bind="text: moment($data.createdAt).format('DD.MM.YYYY HH:mm')"></span></br>
+
+              <!-- ko if: $data.channel_type == 'call' && !$data.data.sms -->
+              <span class="item-title"><strong><%= I18n.t('user_dashboard.unanswered_call') %> :</strong>
+      															<span data-bind="attr: {href: 'tel:'+$data.from}, text: $data.from"></span><br/>
+      															<strong><%= I18n.t('user_dashboard.call_from') %>
+                                      : </strong><span data-bind="text: $parent.data.caller_name"></span><br/>
+      															<strong><%= I18n.t('user_dashboard.service_channel') %>
+                                      :</strong> <span data-bind="text: $parent.serviceChannelName"></span>
+    														</span>
+
+              <!-- /ko -->
+
+              <!-- ko ifnot: $data.channel_type == 'call' && !$data.data.sms -->
+              <p class="task-message-item-from-to">
+                <!-- ko if: $data.data.sms -->
+                <strong><%= I18n.t('user_dashboard.text_message_sent') %></strong><br/>
+                <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                <span data-bind="text: $data.from"></span><br/>
+                <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span data-bind="text: $data.to"></span><br/>
+                <!-- /ko -->
+                <!-- ko ifnot: $data.data.sms -->
+                <strong><%= I18n.t('user_dashboard.send_from') %> :</strong>
+                <span data-bind="text: $data.from"></span><br/>
+                <!-- ko if: $data.channel_type === 'chat' -->
+                <strong><%= I18n.t('user_dashboard.created') %> :</strong> <span data-bind="text: $data.to"></span>
+                <!-- /ko -->
+                <!-- ko if: $data.channel_type !== 'chat' -->
+                <strong><%= I18n.t('user_dashboard.send_to') %> :</strong> <span data-bind="text: $data.to"></span>
+                <!-- /ko -->
+                <br>
+                <strong><%= t('tasks.subject') %> :</strong> <span data-bind="text: $data.title"></span></br>
+                <!-- /ko -->
+                <strong><%= I18n.t('user_dashboard.service_channel') %> :</strong>
+                <span data-bind="text: $parent.serviceChannelName"></span>
+              </p>
+              <!-- /ko -->
+
+
+              <div class="clearfix"></div>
+
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6 text-right">
+        <!-- ko if: $parent.order_id -->
+          <button type="button" class="btn btn-default mt-1" data-toggle="modal" data-target="#display_order_modal" data-bind="click: function() { $root.viewModels.taskContainer.orderModal.fetchOrder($parent) }">
+            <span class="glyphicon glyphicon-shopping-cart text-primary"></span>
+          </button>
+        <!-- /ko -->
+      </div>
+    </div>
+  </div>
+  <!-- header ends -->
+
+  <!-- content -->
+  <div class="innerAll">
+    <div class="innerAll">
+      <!-- ko ifnot: $data.channel_type == 'call' && !$data.data.sms -->
+      <div class="content">
+        <p class="formatted-message-description" data-bind="html: $data.formattedDescription"></p>
+      </div>
+      <!-- /ko -->
+    </div>
+
+    <!-- ko if: $data.attachments().length -->
+    <div class="innerAll">
+      <div class="innerAll">
+        <div class="media inline-block margin-none" data-bind="foreach: $data.attachments()">
+          <div class="innerLR">
+            <i class="fa fa-file pull-left"></i>
+            <div class="media-body">
+              <div>
+                <a class="strong text-regular" data-bind="text: file_name, attr: {href: '/attachments/' + $parent.id + '/' + id}" download></a>
+              </div>
+              <span data-bind="text: human_file_size"></span>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /ko -->
+  </div>
+  <!-- content ends-->
+
+  <!-- footer -->
+  <div class="bg-background">
+    <br/>
+  </div>
+
+  <!-- footer ends -->
+
+</script>

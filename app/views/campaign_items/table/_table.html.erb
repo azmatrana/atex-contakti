@@ -1,0 +1,36 @@
+<div class="table-responsive overflow-x">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t('activerecord.attributes.campaign_item.first_name') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.last_name') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.phone') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.email') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.address') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.postcode') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.city') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.country') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.last_call_time') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.info_1') %> </th>
+        <th><%= t('activerecord.attributes.campaign_item.info_2') %> </th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @campaign_items.length > 0 %>
+        <% @campaign_items.each do |campaign_item| %>
+          <%= render 'campaign_items/table/data_row', in_call: campaign_item_in_call(campaign_item), campaign_item: campaign_item, is_admin: is_admin %>
+
+        <% end %>
+      <% else %>
+        <tr>
+          <td class="text-center" colspan="11">  <%= t('user_dashboard.campaign_item_modal.no_campaign_items') %> </td>
+        </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+</div>

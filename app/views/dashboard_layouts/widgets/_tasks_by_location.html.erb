@@ -1,0 +1,26 @@
+<div class="widget border-bottom-none">
+    <h3 class="innerAll handle bg-local border-bottom margin-bottom-none"><%= t('reports.summary_report.tasks_by_location')%></h3>
+    <a href="#" class="chart-toggle" data-chart-id="chart_horizontal_bars2">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+    <div class="widget-body">
+        <div class="legend_by_location col-xs-12" style="height: 30px"></div>
+        <div id="chart_horizontal_bars2" class="flotchart-holder col-xs-12 margin-top-none"></div>
+    </div>
+</div>
+<script>
+    function drawBars(){
+        var colors = ["#26828E", "#8dc63f", "#fbd039", "#666666"];
+
+        $.each(Report.tasksByLocationData, function(i){ Report.tasksByLocationData[i]['color'] = colors[i]; });
+        $('#chart_horizontal_bars2').extremiaFlotchart(
+                'summaryReportHorizontal',
+                {
+                    'rawData': Report.tasksByLocationData,
+                    'rawTicks': Report.tasksByLocationTicks,
+                    'render': true
+                }
+        );
+    }
+    setTimeout(drawBars, 100);
+</script>

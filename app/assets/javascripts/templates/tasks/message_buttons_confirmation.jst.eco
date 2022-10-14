@@ -1,0 +1,37 @@
+<div class="row">
+  <form id="task-buttons-confirmation-form">
+    <div class="form-group">
+      <div class="col-md-4">
+
+        <% if @task.may_start: %>
+          <div class="radio">
+            <label>
+              <input type="radio" name="event" value="start"/> <%= I18n.t('user_dashboard.open') %>
+            </label>
+          </div>
+        <% end %>
+        <% if @task.may_restart: %>
+          <div class="radio">
+            <label>
+              <input type="radio" name="event" value="restart"/> <%= I18n.t('user_dashboard.open') %>
+            </label>
+          </div>
+        <% end %>
+        <% if @task.may_pause: %>
+          <div class="radio">
+            <label>
+              <input type="radio" name="event" value="pause"/> <%= I18n.t('user_dashboard.waiting') %>
+            </label>
+          </div>
+        <% end %>
+        <% if @task.may_close: %>
+          <div class="radio">
+            <label>
+              <input type="radio" name="event" value="close"/> <%= I18n.t('user_dashboard.ready') %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,14 @@
+<script type="text/html" id="task_messages_container_template">
+
+<!-- ko if: showReplyForm -->
+  <div id="reply-form-container" data-bind="component: {name: 'replyform-component', params: {task: task, showForm: showReplyForm, replyAll: isReplyAll, onlyInternal: onlyInternal, message: replyToMessage, cancelCallback: cancel }}"></div>
+  <!-- /ko -->
+  <!-- ko if: showForwardForm -->
+  <div id="forward-form-container" data-bind="component: {name: 'forwardform-component', params: {task: task, showForm: showForwardForm, message: replyToMessage}}"></div>
+  <!-- /ko -->
+  <div id="sms-form-container" data-bind="component: {name: 'smsform-component', params: {task: task, showForm: showSmsForm}}"></div>
+  <div id="delete-task-modal" data-bind="template: 'message_item_delete_dialog_template'" class="modal fade"></div>
+  <div id="internal-note-form-container" data-bind="component: {name: 'note-component', params: {task: task, showForm: showInternalNoteForm}}"></div>
+  <div id="external-messages-container" data-bind="template: { name: 'external_message_item_template', foreach: task().combinedMessages }"></div>
+
+</script>

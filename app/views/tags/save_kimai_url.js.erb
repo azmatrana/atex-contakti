@@ -1,0 +1,6 @@
+<% if @current_company.save %>
+  toastr.success("<%= I18n.t('kimai_details.saved') %>")
+<% else %>
+  toastr.error("<%= @current_company.errors.full_messages.to_sentence %>")
+<% end %>
+

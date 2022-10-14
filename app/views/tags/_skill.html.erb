@@ -1,0 +1,57 @@
+<% priority = Priority.find_by(company_id: current_user.company, tag_id: skill.id) %>
+<td><span class="taglabel <%= get_skill_priority_class(priority) %>"><%= skill.name %></span></td>
+<td>
+  <%= form_for( :priority, url: set_priority_tags_path(id: skill.id,company: current_user.company), method: :put, :html => {:class => 'prior'}) do |f| %>
+    <%= f.select :priority_set, [[I18n.t('tags.low'), 1], [I18n.t('tags.medium'), 2], [I18n.t('tags.high'), 3]], {include_blank: I18n.t('tags.please_select'),selected: Priority.find_priority(current_user.company, skill.id) },{:class => 'form-control'} %>
+  <% end %>
+</td>
+<td>
+  <%= form_tag select_time_tag_path(skill), method: :put, class: "expireTimeForm" do %>
+    <%= select_tag :expire_time,
+      options_for_select(
+      [["#{I18n.t("tags.minutes",count: 15)}", 15],
+      ["#{I18n.t("tags.minutes",count: 30)}", 30],
+      ["#{I18n.t("tags.hour",count: 1)}", 60],
+      ["#{I18n.t("tags.hour",count: 1)}, #{I18n.t("tags.minutes",count: 15)}", 75],
+      ["#{I18n.t("tags.hour",count: 1)}, #{I18n.t("tags.minutes",count: 30)}", 90],
+      ["#{I18n.t("tags.hours",count: 2)}", 120],
+      ["#{I18n.t("tags.hours",count: 3)}", 180],
+      ["#{I18n.t("tags.hours",count: 4)}", 240],
+      ["#{I18n.t("tags.hours",count: 5)}", 300],
+      ["#{I18n.t("tags.hours",count: 6)}", 360],
+      ["#{I18n.t("tags.hours",count: 7)}", 420],
+      ["#{I18n.t("tags.hours",count: 8)}", 480],
+      [I18n.t("tags.never", -1),-1]],
+      get_priority_expire_time(skill)), include_blank: I18n.t('tags.select_time'), class: "form-control", :disabled => (Priority.find_by(company_id: current_user.company,tag_id: skill.id).present? ? false : true) %>
+  <% end %>
+</td>
+<td>
+  <% form_model = priority.present? ? priority : :priority %>
+  <%= form_for(form_model, url: update_alarm_receivers_tags_path(id: skill.id,company: current_user.company), method: :put, remote: true) do |f| %>
+    <div class="row">
+      <div class="col-md-8 col-sm-8 col-lg-8">
+        <%= f.text_field :alarm_receivers, class: 'form-control', disabled: priority.present? ? false : true %>
+      </div>
+      <div class="col-md-2 col-sm-2 col-lg-2">
+        <%= button_tag class: "btn btn-primary btn-stroke", disabled: priority.present? ? false : true do %>
+          <i class="fa fa-save"></i>
+        <% end %>
+      </div>
+      <div class="col-md-2 col-sm-2 col-lg-2">
+        <div href="#priority_alarm_details_<%= skill.id %>_<%= current_user.company.id %>" data-toggle="modal" class="btn btn-default" <%= priority.present? ? '' : 'disabled=disabled' %>>
+          <i class="fa fa-bell"></i>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if priority.present? %>
+    <%= render 'alarm_details', skill_id: skill.id, company: current_user.company.id %>
+  <% end %>
+</td>
+<td>
+  <%= form_tag destroy_skills_tags_path, method: :delete do %>
+    <input type="hidden" name="tag" value="<%= skill.name %>">
+    <button type="submit" class="btn btn-primary btn-stroke pull-right">
+      <i class="fa fa-trash"></i></button>
+  <% end %>
+</td>

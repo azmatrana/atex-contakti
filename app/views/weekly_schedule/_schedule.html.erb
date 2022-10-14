@@ -1,0 +1,7 @@
+<%= week_calendar table: {class: "table table-bordered"}, tr: {class: "calendar-row"}, td: {class: "day"}, number_of_weeks: 1, events: entries, title: '', previous_link: '', next_link: '' do |date, entries| %>
+    <% entries.each do |entry| %>
+        <div>
+            <%= l(entry.start_time, format: '%H:%M') %> - <%= l(entry.end_time, format: '%H:%M') %>
+        </div>
+    <% end %>
+<% end %>

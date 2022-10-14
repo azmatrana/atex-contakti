@@ -1,0 +1,39 @@
+---
+sv:
+  devise:
+    confirmations:
+      confirmed: Ert konto är godkänt
+    failure:
+      already_authenticated: Du är redan inloggad
+      inactive: Ditt konto är inte aktiverat än
+      invalid: Fel e-postadress eller lösenord
+      locked: Ditt konto är låst
+      last_attempt: Du har ett försök till innan ert konto blir låst
+      not_found_in_database: Fel e-postadress eller lösenord
+      unconfirmed: Du måste godkänna ditt konto innan du fortsätter
+    mailer:
+      confirmation_instructions:
+        subject: Instruktioner för godkännande
+      reset_password_instructions:
+        subject: Instruktioner för lösenord
+      unlock_instructions:
+        subject: Instruktioner för upplåsning
+    omniauth_callbacks:
+      success: Lyckad autentisiering från
+    passwords:
+      updated: Ditt lösenord är ändrat. Du är nu inloggad
+      updated_not_active: Ditt lösenord är nu ändrat
+    registrations:
+      destroyed: Ditt konto är nu avslutat. Vi hoppas att vi ser er snart igen
+      signed_up_but_unconfirmed: Ett meddelande med en länk för godkännande har skickats
+        till din e-post. Vänligen klicka på länken för att aktivera ditt konto
+      updated: Ditt konto är uppdaterat
+    sessions:
+      signed_out: Utloggad
+  errors:
+    messages:
+      not_found: Ej hittat
+      not_locked: Ej låst
+      not_saved:
+        one: Ett fel hindrade... Från att sparas
+        other: Flera fel hindrade... Från att sparas

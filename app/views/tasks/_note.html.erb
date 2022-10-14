@@ -1,0 +1,58 @@
+<script type="text/html" id="note_template">
+<div class="message-thread">
+  <form data-bind="visible: showFormObservable, attr: {action: (function() {return '/tasks/' + task().id + '/note'; })()}" id="internal_note_form" method="post" data-remote="true">
+    <input name="_method" type="hidden" value="POST" />
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+    <div class="message-box reply-box">
+      <div class="content">
+        <h4><%= I18n.t('user_dashboard.internal_note') %></h4><br>
+        <div class="control-group">
+          <div class="controls">
+            <textarea id="task-note-boxy-container" data-bind="enable: editMode, textInput: task().noteBody" name="note[body]" class="wysihtml5 col-md-12 form-control internal-note" rows="10"></textarea>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="footer clearfix" data-bind="visible: editMode">
+        <button type="button" id="cancel_reply_btn" data-bind="click: clearNote" class="btn btn-default btn-sm">
+          <%= I18n.t('user_dashboard.clear') %> <span class="glyphicon glyphicon-remove"></span>
+        </button>
+        <button type="button" id="reply_button" data-bind="click: saveNote" class="btn btn-default btn-sm">
+          <%= I18n.t('user_dashboard.save') %> <span class="glyphicon glyphicon-ok"></span>
+        </button>
+      </div>
+
+      <div class="footer clearfix" data-bind="visible: editMode">
+        <div class="fileupload-section ml-0">
+            <button type="button" data-bind="click: addAttachment" class="btn btn-default btn-sm"><%= I18n.t('user_dashboard.attach_file') %><span class="glyphicon glyphicon-paperclip"></span></button>
+            <div class="fileupload template hidden fileupload-new margin-none" data-provides="fileupload">
+                <span class="btn" data-trigger="fileupload">
+                    <span class="fileupload-new"><%= I18n.t('user_dashboard.select_file') %></span>
+                    <span class="fileupload-exists"><%= I18n.t('user_dashboard.attach_change') %></span>
+                </span>
+                <input class="form-control file-field margin-none hidden" id="send_email_attachments_file" name="attachments[]" type="file">
+                <span class="fileupload-preview"></span>
+                <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+            </div>
+            <br>
+        </div>
+      </div>
+
+      <div class="footer clearfix" data-bind="visible: readOnlyMode">
+        <button type="button" id="cancel_reply_btn" data-bind="click: enableEdit" class="btn btn-default btn-sm">
+          <%= I18n.t('users.registrations.edit') %> <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+      </div>
+
+      <div id="attachments">
+      </div>
+
+    </div>
+    <div class="bg-background">
+      <br>
+    </div>
+  </form>
+</div>
+</script>

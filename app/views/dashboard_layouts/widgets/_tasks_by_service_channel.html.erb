@@ -1,0 +1,32 @@
+<div class="widget border-bottom-none">
+    <h3 class="innerAll handle bg-service border-bottom margin-bottom-none"><%= t('reports.summary_report.tasks_by_service_channel')%></h3>
+    <a href="#" class="chart-toggle" data-chart-id="chart_horizontal_bars">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
+    <div class="widget-body">
+        <div class="legend_by_service_channel col-xs-12" style="height: 30px"></div>
+        <div id="chart_horizontal_bars" class="flotchart-holder col-xs-12 margin-top-none"></div>
+    </div>
+</div>
+<script>
+    var colors = ["#26828E", "#8dc63f", "#fbd039", "#666666"];
+
+    //for(var n in Report.tasksByServiceChannelData){
+    //console.log(JSON.stringify(Report.tasksByServiceChannelData));
+
+   // }
+    //console.log("Ticks: "+Report.tasksByServiceChannelTicks);
+    function drawBars(){
+
+        $.each(Report.tasksByServiceChannelData, function(i){ Report.tasksByServiceChannelData[i]['color'] = colors[i]; });
+        $('#chart_horizontal_bars').extremiaFlotchart(
+                'summaryReportHorizontal',
+                {
+                    'rawData': Report.tasksByServiceChannelData,
+                    'rawTicks': Report.tasksByServiceChannelTicks,
+                    'render': true
+                }
+        );
+    };
+    setTimeout(drawBars, 100);
+</script>

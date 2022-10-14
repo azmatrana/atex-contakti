@@ -1,0 +1,469 @@
+<div class="modal-dialog contact-card-modal-dialog">
+
+    <div class="modal-content" id="customer-contact-card-modal-dialog">
+        <div class="modal-header">
+            <div class="contact-card-modal-header">
+                <label>Contact Card</label>
+                <button type="button" class="close contact-card-modal-header-button" data-dismiss="modal" aria-hidden="true">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="modal-body" style="overflow-y: auto">
+            <div class="styled-select contact-card-modal-type-select">
+                <select type="text" id="contact-type-select">
+                    <option value="company">Company</option>
+                    <option value="customer">Customer</option>
+                </select>
+                <span class="caret"></span>
+            </div>
+            <!--COMPANY BODY HERE-->
+            <div class="innerLR padding-none tab-pane active" id="company_modal_body">
+                <div class="widget widget-tabs border-bottom-none contact-card-customer">
+                    <div class="contact-card-customer-header">Company</div>
+                    <div class="widget-head">
+                        <ul>
+                            <li class="active">
+                                <a data-toggle="tab" href="#company_basic_info">Basic information</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#company_customers">Customers</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#company_tasks">Tasks</a>
+                            </li>
+                            <!--
+                            <li>
+                                <a data-toggle="tab" href="#company_calls">Calls</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#company_emails">Email</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#company_chats">Chats</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#company_sms">SMS</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#company_web_forms">Web Forms</a>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                    <div class="widget-body">
+                        <div class="tab-content">
+
+                            <!-- COMPANY BASIC INFORMATION HERE -->
+                            <div id="company_basic_info" class="tab-pane active">
+                                <%= simple_form_for CustomerCompany.new, :html => {:class => 'form-horizontal'} do |f| %>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <h3 class="contact-card-header">Basic Information</h3>
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Company Name</label>
+                                                  <%= f.text_field :name, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>First Name of Primary Contact Person</label>
+                                                  <input type="text" class="form-control"/>
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Business Number</label>
+                                                  <%= f.text_field :code, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Last Name of Primary Contact Person</label>
+                                                  <input type="text" class="form-control"/>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <span class="contact-card-divider"></span>
+
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Address</label>
+                                                  <%= f.text_field :street_address, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Postal code</label>
+                                                  <%= f.text_field :zip_code, class: 'form-control' %>
+                                              </div>
+                                              <div class="input-group">
+                                                  <label>City</label>
+                                                  <%= f.text_field :city, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <span class="contact-card-divider"></span>
+
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Email Address</label>
+                                                  <%= f.text_field :email, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Phone number</label>
+                                                  <%= f.text_field :phone, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <span class="contact-card-divider"></span>
+
+                                      <div class="col-md-12">
+                                          <div class="form-group innerB contact-card-bs-save-button-div">
+                                              <div class="input-group">
+                                                  <button class="btn btn-default contact-card-bs-button" type="submit">
+                                                      <i class="fa fa-floppy-o"></i>
+                                                      <br/>
+                                                      <span>Save</span>
+                                                  </button>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+                                <% end %>
+                            </div>
+
+                            <!-- COMPANY CUSTOMERS HERE -->
+                            <div id="company_customers" class="tab-pane">
+                                qweqweqweqweqweqweqw
+                            </div>
+
+                            <!-- COMPANY TASKS HERE -->
+                            <div id="company_tasks" class="tab-pane contact-card-tasks">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="contact-card-header">Tasks history</h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <ul data-bind="foreach: companyTasks">
+                                            <li data-bind="css: css_border_class + ( !content_hidden ? (' ' + css_opened_task) : '')" class="row">
+                                                <div class="col-md-12">
+                                                    <i data-bind="css: content_hidden ? css_arrow_down : css_arrow_up" class="fa"></i>
+                                                    <div class="pull-left">
+                                                        <span data-bind="css: icon_class" class="glyphicon contact-card-tasks-glyphicon"></span>
+                                                        <span data-bind="text: name, click: $root.taskClicked" class="task-name-header"></span>
+                                                    </div>
+                                                    <span data-bind="text: date" class="pull-right"></span>
+                                                </div>
+                                                <div data-bind="visible: !content_hidden" class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                                            <div>
+                                                                <label for="date_created_span">Date created: </label><span data-bind="text: date" id="date_created_span"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 contact-card-tasks-content-column">
+                                                            <div>
+                                                                <label for="agent_fullname_span_">From: </label><span data-bind="text: agent.full_name" id="agent_fullname_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="to_span">To: </label><span data-bind="text: to_info" id="to_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="duration_span">Duration: </label><span data-bind="text: duration" id="duration_span"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 contact-card-tasks-content-column">
+                                                            <div>
+                                                                <label for="media_channel_span">Media Channel: </label><span data-bind="text: media_channel.name" id="media_channel_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="service_channel_span">Service Channel: </label><span data-bind="text: service_channel.name" id="service_channel_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="reminder_textarea">Reminder set for: </label><span data-bind="text: reminder.date" id="reminder_date_span"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                                            <div class="input-group">
+                                                                <label for="reminder_textarea">Reminder:</label>
+                                                                <textarea class="form-control" data-bind="text: reminder.text" id="reminder_textarea" rows="5" readonly></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                                            <label for="internal_notes">Internal Notes:</label>
+                                                            <textarea data-bind="text: internal_notes.text" class="form-control" id="internal_notes" rows="5" readonly></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- COMPANY CALLS HERE -->
+                            <div id="company_calls" class="tab-pane">
+                            </div>
+
+                            <!-- COMPANY EMAILS HERE -->
+                            <div id="company_emails" class="tab-pane">
+                            </div>
+
+                            <!-- COMPANY CHATS HERE -->
+                            <div id="company_chats" class="tab-pane">
+                            </div>
+
+                            <!-- COMPANY SMS HERE -->
+                            <div id="company_sms" class="tab-pane">
+                            </div>
+
+                            <!-- COMPANY WEB FORMS HERE -->
+                            <div id="company_web_forms" class="tab-pane">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--COMPANY BODY HERE ENDS-->
+
+            <!--CUSTOMER BODY HERE-->
+            <div style="display: none" class="innerLR padding-none tab-pane" id="customer_modal_body">
+                <div class="widget widget-tabs border-bottom-none contact-card-customer">
+                    <div class="contact-card-customer-header">Customer</div>
+                    <div class="widget-head">
+                        <ul>
+                            <li class="active">
+                                <a data-toggle="tab" href="#customer_basic_info">Basic information</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#customer_tasks">Tasks</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#customer_calls">Calls</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#customer_emails">Emails</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#customer_chats">Chats</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#customer_sms">SMS</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#customer_web_forms">Web Forms</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="widget-body">
+                        <div class="tab-content">
+
+                            <!-- CUSTOMER BASIC INFORMATION HERE -->
+                            <div id="customer_basic_info" class="tab-pane active">
+                                <%= simple_form_for Customer.new, :html => {:class => 'form-horizontal'} do |f| %>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <h3 class="contact-card-header"><%= t('users.agents.enter_agent_details') %></h3>
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>First Name</label>
+                                                  <%= f.text_field :first_name, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Company</label>
+                                                  <input type="text" class="form-control"/>
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Last Name</label>
+                                                  <%= f.text_field :last_name, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Work title</label>
+                                                  <%= f.text_field :work_title, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <span class="contact-card-divider"></span>
+
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Address 1</label>
+                                                  <%= f.text_field :street_address, class: 'form-control' %>
+                                              </div>
+                                              <div class="input-group">
+                                                  <label>Address 2</label>
+                                                  <%= f.text_field :street_address_second, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Postal code</label>
+                                                  <%= f.text_field :zip_code, class: 'form-control' %>
+                                              </div>
+                                              <div class="input-group">
+                                                  <label>City</label>
+                                                  <%= f.text_field :city, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <span class="contact-card-divider"></span>
+
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Email Address</label>
+                                                  <%= f.text_field :email, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group margin-none innerB">
+                                              <div class="input-group">
+                                                  <label>Phone number</label>
+                                                  <%= f.text_field :phone, class: 'form-control' %>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <span class="contact-card-divider"></span>
+
+                                      <div class="col-md-12">
+                                          <div class="form-group innerB contact-card-bs-save-button-div">
+                                              <div class="input-group">
+                                                  <button class="btn btn-default contact-card-bs-button" type="submit">
+                                                      <i class="fa fa-floppy-o"></i>
+                                                      <br/>
+                                                      <span>Save</span>
+                                                  </button>
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                  </div>
+                                <% end %>
+                            </div>
+
+                            <!-- CUSTOMER TASKS HERE -->
+                            <div id="customer_tasks" class="tab-pane contact-card-tasks">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="contact-card-header"><%= t('users.agents.enter_agent_details') %></h3>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <ul data-bind="foreach: customerTasks">
+                                            <li data-bind="css: css_border_class" class="row">
+                                                <div class="col-md-12">
+                                                    <i data-bind="css: content_hidden ? css_arrow_down : css_arrow_up" class="fa"></i>
+                                                    <div class="pull-left">
+                                                        <span data-bind="css: icon_class" class="glyphicon contact-card-tasks-glyphicon"></span>
+                                                        <span data-bind="text: name, click: $root.taskClicked" class="task-name-header"></span>
+                                                    </div>
+                                                    <span data-bind="text: date" class="pull-right"></span>
+                                                </div>
+                                                <div data-bind="visible: !content_hidden" class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                                            <div>
+                                                                <label for="date_created_span">Date created: </label><span data-bind="text: date" id="date_created_span"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 contact-card-tasks-content-column">
+                                                            <div>
+                                                                <label for="agent_fullname_span_">From: </label><span data-bind="text: agent.full_name" id="agent_fullname_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="to_span">To: </label><span data-bind="text: to_info" id="to_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="duration_span">Duration: </label><span data-bind="text: duration" id="duration_span"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 contact-card-tasks-content-column">
+                                                            <div>
+                                                                <label for="media_channel_span">Media Channel: </label><span data-bind="text: media_channel.name" id="media_channel_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="service_channel_span">Service Channel: </label><span data-bind="text: service_channel.name" id="service_channel_span"></span>
+                                                                <div class="clearfix"></div>
+                                                                <label for="reminder_textarea">Reminder set for: </label><span data-bind="text: reminder.date" id="reminder_date_span"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                                            <div class="input-group">
+                                                                <label for="reminder_textarea">Reminder:</label>
+                                                                <textarea class="form-control" data-bind="text: reminder.text" id="reminder_textarea" rows="5" readonly></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                                            <label for="internal_notes">Internal Notes:</label>
+                                                            <textarea data-bind="text: internal_notes.text" class="form-control" id="internal_notes" rows="5" readonly></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CUSTOMER CALLS HERE -->
+                            <div id="customer_calls" class="tab-pane">
+                            </div>
+
+                            <!-- CUSTOMER EMAILS HERE -->
+                            <div id="customer_emails" class="tab-pane">
+                            </div>
+
+                            <!-- CUSTOMER CHATS HERE -->
+                            <div id="customer_chats" class="tab-pane">
+                            </div>
+
+                            <!-- CUSTOMER SMS HERE -->
+                            <div id="customer_sms" class="tab-pane">
+                            </div>
+
+                            <!-- CUSTOMER WEB FORMS HERE -->
+                            <div id="customer_web_forms" class="tab-pane">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--CUSTOMER BODY HERE ENDS-->
+
+        </div>
+
+    </div>
+</div>

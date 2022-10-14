@@ -1,0 +1,78 @@
+<% chatbot_stat = @data[:chatbot_stat] %>
+    <div class="widget border-bottom-none">
+        <h3 class="innerAll handle bg-chat border-bottom margin-bottom-none"><%= t('reports.summary_report.chatbot') %><span class="pull-right glyphicon glyphicon-comment"></span></h3>
+        <div class="widget-body">
+            <div class="row ">
+                <div class="col-xs-6 padd1">
+                    <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+                        <div data-percent="<%= percentage_division(chatbot_stat[:successful_chats], chatbot_stat[:total_chats]) %>" class="easy-pie primary">
+                          <span class="value">
+                            <%= percentage_division(chatbot_stat[:successful_chats], chatbot_stat[:total_chats]) %>%
+                          </span>
+                        </div>
+                        <span class="txt"><%= t('reports.summary_report.successful')%></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+                <div class="col-xs-6 padd1">
+                    <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+                        <div data-percent="<%= percentage_division(chatbot_stat[:unsuccessful_chats], chatbot_stat[:total_chats]) %>" class="easy-pie primary">
+                          <span class="value">
+                            <%= percentage_division(chatbot_stat[:unsuccessful_chats], chatbot_stat[:total_chats]) %>%
+                          </span>
+                        </div>
+                        <span class="txt"><%= t('reports.summary_report.unsuccessful')%></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row border-bottom  separator top border-top">
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.successful') %>
+                        <%= chatbot_stat[:successful_chats] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.unsuccessful') %>
+                        <%= chatbot_stat[:unsuccessful_chats] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.orders') %>
+                        <%= chatbot_stat[:orders] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.tickets') %>
+                        <%= chatbot_stat[:tickets] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.replies_rate') %>
+                        <%= percentage_division(chatbot_stat[:answered_msgs], chatbot_stat[:total_msgs]) %>%
+                        <%#= number_to_percentage(chatbot_stat[:replies_rate], precision: 2) %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.failure_rate') %>
+                        <%= percentage_division(chatbot_stat[:unanswered_msgs], chatbot_stat[:total_msgs]) %>%
+                        <%#= number_to_percentage(chatbot_stat[:failure_rate], precision: 2) %>
+                    </p>
+                </div>
+            </div>
+            <div class="row separator top center">
+                <strong>
+                <p><%= t('reports.summary_report.total_chats')%>: <%= chatbot_stat[:total_chats] %></p>
+                <p><%= t('reports.summary_report.average_process_time')%>: <%= chatbot_stat[:average_dealing_time] %></p>
+                </strong>
+            </div>
+        </div>
+    </div>
+

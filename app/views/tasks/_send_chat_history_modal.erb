@@ -1,0 +1,30 @@
+<script type="text/html" id="send_chat_history_template">
+  <!-- Modal -->
+  <form data-bind="attr: {action: (function() {return '/tasks/send_chat_history'; })()}" method="post" data-remote="true">
+    <div class="modal fade" id="send-chat-history" tabindex="-1" role="dialog" aria-labelledby="send-chat-history">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><%= t("user_dashboard.task_state")%></h4>
+          </div>
+          <div class="modal-body innerAll">
+            <div class="col-md-12">
+              Model Open
+            </div>
+            <div class="clearfix"></div><br>
+          </div>
+          <div class="modal-footer">
+            <div class="pull-right">
+
+                <input type="hidden" name="cancel" id="cancel-manage" value="0"/>
+                <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelManagement"><%= t('user_dashboard.cancel') %><span class="glyphicon glyphicon-remove"></span></button>
+                <button type="submit" class="btn btn-default btn-sm" data-bind="click: saveManagement"><%= t('user_dashboard.save') %> <span class="glyphicon glyphicon-ok"></span></button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</script>

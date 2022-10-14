@@ -1,0 +1,108 @@
+<div id="contakti-chat-main" class="row">
+  <div id="contakti-msg-box" class="msg_box" style="right: 20px; bottom: -9999px">
+    <div id="contakti-msg-head" class="msg_head" style="background-color: <%= color %>">
+      <% if logo.present? %>
+        <div id="contakti-logo-container">
+          <img src="<%= image_url(logo) %>">
+        </div>
+      <% end %>
+      <span id="contakti-user-name" style="color: <%= text_color %>"><%= t('user_dashboard.clientheading_chat') %></span>
+      <!-- <span>
+        <a id="download_chat_history">
+          <%#= "Download" %>
+        </a>
+      </span>
+      <span>
+        <a id="send_chat_history" style="margin-left: 5px;">
+          <%#= "Send" %>
+        </a>
+      </span> -->
+      <span id="cart_show_button"  style="margin: 5px;" hidden ><i class="fa fa-shopping-cart mt-1"></i></span>
+
+      <div class="dropdown chat-setting d--inline-block" id="chat-setting-dropdown" style="display: none;">
+          <button class="dropdown-toggle" onclick="toggle_dropdown(this);" style="color: <%= text_color %>"><i class="fa fa-cog"></i></button>
+          <ul class="chatsetting-dropdown-menu" id="chat-setting-dropdown-menu">
+            <li>
+              <a id="download_chat_history" style="color: <%= color %>; background-color: <%= text_color %>;" onmouseover="mouseoverdownload()" onmouseout="mouseoutdownload()">
+               <%= I18n.t('user_dashboard.download_txt_file') %>
+              </a>
+            </li>
+            <li>
+              <a id="send_chat_history" style="color: <%= color %>; background-color: <%= text_color %>;" onmouseover="mouseoversend()" onmouseout="mouseoutsend()">
+                <%= I18n.t('user_dashboard.send_to_email') %>
+              </a>
+            </li>
+            <li>
+              <a id="contakti-msg-close-chat" style="color: <%= color %>; background-color: <%= text_color %>;" onmouseover="mouseovercancel()" onmouseout="mouseoutcancel()">
+                <%= I18n.t('user_dashboard.end_chat') %>
+              </a>
+              <a id="contakti-msg-start-chat" style="display: none; color: <%= color %>; background-color: <%= text_color %>;" onmouseover="mouseoverstart()" onmouseout="mouseoutstart()">
+                <%= I18n.t('user_dashboard.start_new_chat') %>
+              </a>
+            </li>
+          </ul>
+      </div>
+      <!--            <div id="contakti-msg-close"><span class="fa-stack"><i class="fa fa-stack-1x fa-times" style="top: -2px; left: 0px"></i></span></div>-->
+      <div id="contakti-msg-minimize" class="hide">
+        <span class="fa-stack" style="color: <%= text_color %>"><i class="fa fa-stack-2x fa-angle-down" style="top: 3px; left: 0px"></i></span>
+      </div>
+    </div>
+    <div>
+    </div>
+
+    <div id="contakti-msg-container" class="msg_wrap">
+      <div id="contakti-chat-agent-details" class="msg_agent" style="display: none; background-color: <%= color %>; color: <%= text_color %>">
+        <div class="msg_agent_name" id="contakti-chat-agent-name"></div>
+      </div>
+      <div id="contakti-msg-body" class="msg_bodyclient">
+        <div id="contakti-user-details">
+          <label><%= t('user_dashboard.name_chat') %></label>
+          <input type="text" class="form-control-start" id="contakti-input-name">
+
+          <label><%= t('user_dashboard.email_chat') %></label>
+          <input type="text" class="form-control-start" id="contakti-input-email">
+
+          <label><%= t('user_dashboard.phone_chat') %></label>
+          <input type="text" class="form-control-start" id="contakti-input-phone"><br>
+          <input type="submit" id="contakti-input-details-submit" class="btn btn-default btn-block" value="<%= t('user_dashboard.start_chat') %>" style="background-color: <%= color %>">
+          <div class="center"><br>
+            Powered by <a href="http://contakti.com" target="_blank">contakti.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="contakti-msg-indicator" class="msg_indictor"> </div>
+
+      <div id="contakti-msg-footer" class="msg_footer" style="display: none">
+        <div class="block-row">
+          <div class="input-block">
+            <textarea id="contakti-chat-text-input" class="msg_input form-control" placeholder="<%= t('user_dashboard.type_message') %>" rows="3" ></textarea>
+          </div>
+          <div class="button-block">
+            <a id="contakti-chat-send-btn" style="color: <%= text_color %>!important; background-color:<%= color %>!important">
+              <span class="fa fa-send">
+            </a>
+          </div>
+        </div>
+        <div class="block-row mb-1">
+          <div class="pull-left">
+            <button id="custom_action_button" hidden></button>
+          </div>
+        </div>
+        <div class="block-row mb-10">
+          <div class="pull-left">
+            <a data-bind="click: OpenFile" id="contakti-open-file"><%= t('user_dashboard.attachment_chat') %></a>
+          </div>
+          <div class="pull-right">
+            Powered by <a href="http://contakti.com" target="_blank" style="margin-right: 10px;">contakti.com</a>
+          </div>
+        </div>
+        <form id="contakti-file-upload-form" style="display: none">
+          <input type="file" id="contakti-file-upload-input" name="upload">
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>

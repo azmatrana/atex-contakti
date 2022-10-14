@@ -1,0 +1,111 @@
+
+<div class="container-fluid details">
+  <div class="row">
+
+    <div class="col-md-3" id="search-form-container">
+      <%= render partial: 'search_form_with_list' %>
+    </div>
+
+    <div class="col-md-9 preview-content agent-admin">
+      <div class="innerLR">
+
+        <!-- Widget -->
+        <% if @show_form || @user.persisted? %>
+        <div class="widget widget-tabs border-bottom-none">
+          <!-- Widget heading -->
+          <div class="widget-head">
+            <ul>
+              <li class="active">
+                <a id="user_details_tab" href="#user_details" data-toggle="tab">
+                  <i class="fa fa-user"></i><%= t('users.agents.agent_profile') %>
+                </a>
+              </li>
+
+              <% if @user.persisted? %>
+                <li>
+                  <a class="" href="#user_imap" data-toggle="tab">
+                    <i class="fa fa-envelope"></i>
+                    <%= t("service_channels.email_settings") %>
+                  </a>
+                </li>
+                 <li>
+                  <a class="" href="#user_sip" data-toggle="tab">
+                    <i class="fa fa-phone"></i>
+                    <%= t("service_channels.sip_settings") %> 
+                  </a>
+                </li>
+            <!-- <li>
+                  <a class="" href="#user_activity" data-id="<%= @user.id %>" data-toggle="tab">
+                    <i class="fa fa-history"></i>
+                    <%= t('users.agents.agent_activity') %>
+                  </a>
+                </li>
+                <li>
+                  <a class="" href="#user_messages" data-toggle="tab">
+                    <i class="fa fa-calendar"></i>
+                    <%= t('users.agents.agent_history') %>
+                  </a>
+                </li>-->
+                <li>
+                  <a class="" href="#user_tags" data-toggle="tab">
+                    <i class="fa fa-crosshairs"></i>
+                    <%= t('layouts.application.skills') %>
+                  </a>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="widget-body">
+            <div class="tab-content">
+              <div class="tab-pane fill-bg active %>" id="user_details">
+                <%= render partial: 'form' %>
+              </div>
+
+              <% if @user.persisted? %>
+                <div class="tab-pane fill-bg" id="user_imap">
+                  <%= render partial: 'imap_settings'%>
+                </div>
+                <div class="tab-pane fill-bg" id="user_sip">
+                  <%= render partial: 'sip_settings'%>
+                </div>
+                <div class="tab-pane fill-bg" id="user_activity">
+                  <%= render partial: 'activity' %>
+                </div>
+                <div class="tab-pane fill-bg" id="user_messages">
+                  <%= render partial: 'message_history' %>
+                </div>
+                <div class="tab-pane fill-bg" id="user_tags">
+                  <%= render partial: 'tag' %>
+                </div>
+              <% end%>
+            </div>
+          </div>
+        </div>
+        <% else %>
+          <div class="no-selection">
+            <p class="center size24">
+              <i class="fa fa-user"></i>
+            </p>
+            <div class="center"><%= t('users.nothing_selected_state.no_agent') %></div>
+          </div>
+        <% end %>
+        <!-- // Widget END -->
+      </div>
+    </div>
+  </div>
+  <!-- // Content END -->
+
+</div>
+
+<script>
+
+  function ResizeToFit() {
+    var GetHeight = $(window).height();
+    $('.agent-admin .tab-pane').height(GetHeight - 150);
+    $('.inbox-preview').height(GetHeight - 200);
+  }
+  $(document).ready(function () {
+    ResizeToFit();
+    $(window).bind('resize', ResizeToFit);
+  });
+</script>

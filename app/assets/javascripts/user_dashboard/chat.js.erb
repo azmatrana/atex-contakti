@@ -1,0 +1,683 @@
+// TODO: subscribe to all mediachannel control channels.
+localStorage.removeItem('indicator_state_admin')
+UserDashboardApp.Chat = function(dashboard) {
+  var self = this;
+  this.activeChannel = ko.observable(null);    // Observable!
+  this.messageFactory = new UserDashboardApp.ChatMessageFactory({ username: UserDashboardApp.currentUserName });
+  this.channels = new UserDashboardApp.ChatChannels();
+  this.mediaChannels = [];
+  this.serviceChannels = UserDashboard.serviceChannels;
+  this.dashboard = dashboard;
+  this.notification_sound = new Audio("<%= audio_path 'notification.mp3' %>");
+  var chat_sound = new Audio("<%= audio_path 'notification.mp3' %>");
+
+  this.activeChannel.subscribe(function() {
+    self.messageFactory.channel = self.activeChannel();
+  });
+
+  this._setClientConnectedFlag = function(ch){
+    $.ajax({
+      url: `/api/v1/chat/set_client_connected?channel_id=${ch}`,
+      dataType: 'json'
+    });
+  }
+
+  this.initialise = function() {
+    _.each(UserDashboard.mediaChannels, this._subscribeToMediaChannelControlChannel);
+
+    $.ajax({
+      url: '/chat/invites/control',
+      dataType: 'json',
+      success: function(sub) {
+        Danthes.sign(_.extend(sub, {
+          callback: self._incomingControlMessage,
+          connect: true
+        }));
+      }
+    });
+
+    $.ajax({
+      url: '/tasks/subscribe_agents',
+      dataType: 'json',
+      success: function(sub) {
+        Danthes.sign(_.extend(sub, {
+          callback: self._agentsChanged,
+          connect: true
+        }));
+      }
+    });
+  };
+
+  this._agentsChanged = function() {
+      self.channels.agentsChanged();
+  };
+
+  this._subscribeToMediaChannelControlChannel = function(media_channel, index) {
+    if(!(media_channel.type == 'MediaChannel::Chat') || media_channel.chat_control_channel === null) {
+      return;
+    }
+    self.mediaChannels.push(media_channel);
+
+    $.ajax({
+      url: media_channel.chat_control_channel,
+      dataType: 'json',
+      success: function(sub) {
+        Danthes.sign(_.extend(sub, {
+          callback: self._incomingControlMessage,
+          connect: true
+        }));
+      }
+    });
+  };
+  this._incomingControlMessage = function(data, channel) {
+    if(data.type === 'invite') {
+      if(window.UserDashboard.currentUserId == data.recipient) {
+
+        existingChannel = self.channels.getChannel(data.client_channel);
+
+        if(!existingChannel) {
+          serviceChannel = _.find(self.serviceChannels, function(ch) { return ch.id == data.service_channel_id; }),
+          channelName = serviceChannel.name,
+          channelId = serviceChannel.id,
+          newChannel = new UserDashboardApp.ChatChannel(
+              { channel: data.client_channel,
+                  state: 'incoming',
+                  control_channel: channel,
+                  media_channel_name: channelName,
+                  service_channel_id: channelId,
+                  client_info: data.client_info,
+                  username: window.UserDashboard.currentUserName,
+                  title: window.UserDashboard.currentTitle,
+                  chat: self,
+                  invitation_from: data.from});
+
+          self.channels.addChannel(newChannel);
+
+        }
+      }
+    } else if(data.type === 'incoming') {
+      var mediaChannel = _.find(self.mediaChannels, function(ch) { return ch.chat_control_channel === channel; }),
+          serviceChannel = _.find(self.serviceChannels, function(ch) { return ch.id == mediaChannel.service_channel_id; });
+
+      if(window.UserDashboard.current_user_service_channels.find(ch => ch.id === serviceChannel.id) == undefined) {
+        return false;
+      }
+      var channelName = serviceChannel.name,
+          channelId = serviceChannel.id,
+          newChannel = new UserDashboardApp.ChatChannel(
+              { channel: data.client_channel,
+                  state: 'incoming',
+                  control_channel: channel,
+                  media_channel_name: channelName,
+                  service_channel_id: channelId,
+                  client_info: data.client_info,
+                  chat_display_fields: data.chat_display_fields,
+                  is_ad_finland_company: data.is_ad_finland_company,
+                  username: window.UserDashboard.currentUserName,
+                  title: window.UserDashboard.currentTitle,
+                  welcome_message: mediaChannel.chat_settings.welcome_message,
+                  chat: self});
+
+      if (data.message) { //Initial message
+        var initialMsg = self.messageFactory.newMessage(data.message, data.from);
+        newChannel.addMessage(initialMsg);
+      }
+      chat_sound.play();
+      var bodyMessage = I18n.t('service_channels.service_channel_title') + ": " + channelName + "  \n";
+      bodyMessage += I18n.t('reports.index.media_channel') + ": " + I18n.t('users.agents.media_channel_types.' + 'chat');
+
+      notify.createNotification(I18n.t('reports.summary_report.chat'), {body: bodyMessage, icon: "notification.png"});
+      self.channels.addChannel(newChannel);
+    } else if (data.type === 'assign') {
+      // Another agent took this chat?!
+      var chan = self.channels.getChannel(data.client_channel);
+      if(chan.state() === 'incoming') {
+        // If this is our control message, we should've already set the state to 'active'
+        self.channels.removeChannel(data.client_channel);
+      }
+    } else if(data.type == 'abort') { // User closed the chat before someone else accepted it
+      var chan = self.channels.getChannel(data.client_channel);
+      self.channels.removeChannel(data.client_channel);
+    }
+  };
+
+  this._acceptChat = function(channel) { var chan = channel;
+    if(typeof channel === 'string') {
+      chan = {};
+      chan.channel = channel;
+    }
+    var chanObj = self.channels.getChannel(chan.channel);
+    chanObj._acceptChat();
+    self._setClientConnectedFlag(channel)
+    chanObj._checkIfClientHasLeft();
+  };
+
+
+  this.addAsTask = function(data) {
+    $('#task_type').val('chat');
+    $('#task_media_channel_id').val('MediaChannel::Chat').select().trigger('change');
+    $('#task_service_channel_id').val(data.serviceChannelId).select().trigger('change');
+    $('#task_assigned_to_user_id').val(UserDashboard.currentUserId).select().trigger('change');
+    $('#chat_from').val(data.clientInfo.email);
+    $('#chat_from_phone').val(data.clientInfo.phone);
+
+    var messages = _.filter(data.messages(), function(m) { return m.type != "join" });
+
+    var $newTaskForm = $('#new_task');
+    $newTaskForm.find('input[name="task[chat_attachments][]"]').remove();
+    var $input = $('<input type="hidden" name="task[chat_attachments][]">');
+    _.forEach(data.messages(), function (message) {
+      if (message.type === 'file' && message.file_path) {
+        var $chatAttachmentInput = $input.clone();
+        $chatAttachmentInput.val(message.file_path);
+        $newTaskForm.append($chatAttachmentInput);
+      }
+    });
+
+    let editorData = "";
+    data.chatDisplayFields().forEach(field => {
+      editorData += `<label>${field.label}:</label> ${field.value} <br> `
+    })
+    editorData += `<hr><hr>`
+    if (window.userSignature) {
+      CKEDITOR.instances['task_messages_attributes_0_description'].setData(
+        editorData + _.map(messages, function (m) {
+          return '[' + moment(m.timestamp).format('D.M.YYYY HH.mm') + '] ' + (m.from || UserDashboard.currentUserName) + ": " + m.message;
+        }).join('<hr>') + "<br><br>" + window.userSignature
+      );
+    } else {
+      CKEDITOR.instances['task_messages_attributes_0_description'].setData(
+        editorData + _.map(messages,function(m) { return '[' + moment(m.timestamp).format('D.M.YYYY HH.mm') + '] ' + (m.from || UserDashboard.currentUserName) +": " +m.message; }).join('<hr>')
+      );
+    }
+
+  };
+
+  this.closeChat = function(data) {
+    Danthes.unsubscribe(data.channel, true);
+    data.closeChat(); // Send quit/tms
+    self.channels.removeChannel(data.channel);
+
+    if(this.numAgents == 1 && this.state() != "incoming") {
+      $('#chat_mark_as_done_modal').data('channel_id', data.channel);
+      $('#chat_mark_as_done_modal').modal();
+    }
+  };
+
+};
+
+UserDashboardApp.ChatChannel = function(params) {
+  var self = this;
+  this.channel = params.channel;
+  this.chat = params.chat;
+  this.channelSettingsId = params.settingsId;
+  this.state = ko.observable(params.state);
+  this.messages = ko.observableArray([]);
+  this.fromUser = params.username;
+  this.fromTitle = params.title;
+  this.clientInfo = params.client_info;
+  this.typedText = ko.observable();
+  this.controlChannel = params.control_channel;
+  this.mediaChannelName = params.media_channel_name;
+  this.serviceChannelId = params.service_channel_id;
+  this.chatDisplayFields = ko.observableArray(params.chat_display_fields);
+
+  this.templateText = params.template_text
+  this.templateID = params.template_id
+  this.messageFactory = new UserDashboardApp.ChatMessageFactory({ username: UserDashboardApp.currentUserName, channel: this.channel });
+  this.menuVisible = ko.observable(false);
+  this.agents = ko.observableArray([]);
+  this.searchQuery = ko.observable('').extend({ rateLimit: { timeout: 250, method: "notifyWhenChangesStop" } });
+  this.welcomeMessage = params.welcome_message;
+  this.minimized = ko.observable(false);
+  this.activity = ko.observable(false);
+  this.invitationFrom = ko.observable(params.invitation_from);
+  this.numAgents = 0;
+  this.typing_indication = ko.observable(false);
+  this.timeoutInstance = 0;
+  this.interval = 0;
+  this.isAdFinlandCompany =  ko.observable($("#is_ad_finland_company").val() == "true")
+
+  this.showVehicleDetailsModal = function(){
+    if (this.isAdFinlandCompany() == true && self.chatDisplayFields().length > 0)
+    {
+      window.userDashboardApp.viewModels.sharedViews.vehicleDetailModal.getVehicleDetails( self.chatDisplayFields()[0].value )
+    }
+  }
+
+  this.addMessage = function(chatMessage) {
+    self.messages.push(chatMessage);
+    console.log(self.messages());
+    $('.contakti-chat-message-container').trigger('contakti.chatMessageAdded');
+  };
+
+  this.addMessages = function(chatMessages) {
+    _.each(chatMessages, function(chatMessage) {
+      self.messages.push(chatMessage);
+      $('.contakti-chat-message-container').trigger('contakti.chatMessageAdded');
+    });
+  }
+
+  this.sendIndicator = function(data, event) {
+    if (event.keyCode !== 13) {
+      self.onKeyIndicator();
+    }
+  }
+  this.sendText = function(data, event){
+    if (event.keyCode === 13) {
+      self.sendMessage();
+    }
+  }
+
+  this.onKeyIndicator = function() {
+    var message = this.typedText();
+    var data = this.messageFactory.newMessage(message, this.fromUser);
+
+     $.ajax({
+      url: this.channel + '/send_indicator',
+      method: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function() {
+      }
+    });
+  }
+
+  this.sendMessage = function(messageText) {
+    var message = this.typedText();
+    if(messageText !== undefined  && typeof messageText === "string") {
+      message = messageText;
+    }
+    var data = this.messageFactory.newMessage(message, this.fromUser);
+
+    $.ajax({
+      url: this.channel + '/send_msg',
+      method: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function() {
+        self.typedText('');
+      }
+    });
+  };
+
+    this.sendToChat = function(id){
+        $.ajax({
+            url: 'template_replies/' + id,
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                self.sendMessage(data.text);
+            }
+        });
+
+
+    }
+
+  this.minimize = function(object, event) {
+    this.menuVisible(false);
+    this.minimized(true);
+    event.stopImmediatePropagation();
+  };
+
+  this.maximize = function(object, event) {
+    this.minimized(false);
+    this.activity(false);
+  };
+
+  this.OpenFile = function(object, event) {
+    $(event.target).closest('.msg_box').find('.upload').click();
+  };
+
+  this.toggleMenu = function() {
+    if(this.state() != 'incoming') {
+      this.menuVisible(!this.menuVisible());
+    }
+  };
+
+  this.searchAgents = function(q) {
+    $.ajax({
+      url: '/tasks/search_agents?q=' + q + '&sc=' + self.serviceChannelId,
+      method: 'GET',
+      dataTYpe: 'json',
+      success: function(result) {
+        result = _.map(result, function(agent) { agent.invited = false; return agent; });
+        self.agents(result);
+      }
+    });
+  };
+
+  this.fileSelected = function(object, event) {
+    var formData = new FormData(event.target.parentElement);
+    console.log(211);
+    $.ajax({
+      url: '/api/v1/chat/uploadfile',
+      method: 'POST',
+      processData: false,
+      contentType: false,
+      dataType: 'json',
+      data: formData,
+      success: function(response) {
+        var data = self.messageFactory.newFileMessage(response.file_url, response.file_path, self.fromUser);
+        $.ajax({
+          url: self.channel + '/send_msg',
+          method: 'POST',
+          dataType: 'json',
+          data: data,
+          success: function() {} // TODO: add some visual indicator of success?
+        });
+      }
+    });
+  };
+
+  this.searchAgents('');
+  this.searchQuery.subscribe(this.searchAgents);
+
+  this.inviteAgent = function(id) {
+    var agent = ko.utils.arrayFirst(this.agents(), function(agent) { return agent.id == id; });
+    var newagent = JSON.parse(JSON.stringify(agent));
+    newagent.invited = true;
+    this.agents.replace(agent, newagent);
+    var data = this.messageFactory.newInviteMessage(id, this.clientInfo, this.serviceChannelId, this.fromUser);
+    $.ajax({
+      url: '/chat/invites/control',
+      method: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function() {}
+    });
+  };
+
+  this.scrollToBottom = function(domNode, index, element) {
+    domNode.parentElement.scrollTop = domNode.parentElement.scrollHeight;
+  };
+  // publish quit message if client has closed tor reloaded the page
+  this._sendQuitMessage = function(message) {
+    $.ajax({
+      url: `/api/v1/chat/send_quit`,
+      method: 'POST',
+      dataType: 'application/json',
+      data: message
+    });
+  };
+
+// Check if client has closed or reloaded the page..
+  this._checkIfClientHasLeft = function (){
+    self.interval = setInterval(function(){
+      $.ajax({
+        url: `/api/v1/chat/has_client_left?channel_id=${self.channel}`,
+        dataType: 'json',
+        success: function(res) {
+          if (res["left"]){
+            clearInterval(self.interval);
+            let msg = {}
+            msg.from = self.clientInfo.name;
+            msg.channel_id = self.channel;
+            msg.type = 'quit';
+            msg.message = 'Quitting.';
+            self._sendQuitMessage(msg)
+          }
+        }
+      });
+    }, 10000);
+  }
+  this._acceptChat = function() {
+    var self = this;
+
+
+   if(self.invitationFrom()) {
+      $.ajax({
+        url: self.channel + '/log',
+        dataType: 'json',
+        success: function(data) {
+          _.each(data, function(message) {
+            self._incomingChatMessage(message, self.channel);
+          });
+
+          $.ajax({
+            url: self.channel + '/join',
+            dataType: 'json',
+            success: function(sub) {
+              self.state('active');
+              self.joinChat();
+              Danthes.sign(_.extend(sub, {
+                callback: self._incomingChatMessage.bind(self),
+                connect: true
+              }));
+            }
+          });
+        }
+      });
+   }
+   else{
+    $.ajax({
+      url: self.channel + '/log',
+      dataType: 'json',
+      success: function(data) {
+        _.each(data, function(message) {
+          self._incomingChatMessage(message, self.channel);
+        });
+         $.ajax({
+           url: self.channel + '/join',
+           dataType: 'json',
+           success: function(sub) {
+             self.state('active');
+             self.joinChat();
+             self._sendChatAcceptedControlMessage();
+             Danthes.sign(_.extend(sub, {
+               callback: self._incomingChatMessage.bind(self),
+               connect: true
+             }));
+           }
+         });
+         }
+      });
+   }
+
+  };
+
+  this._incomingChatMessage = function(data, channel) {
+    if(this.minimized()) {
+      this.activity(true);
+    }
+
+    if(data.type == 'message' || data.type == 'file') {
+      this.chat.notification_sound.play();
+      this.addMessage(this.messageFactory.newMessage(data.message, data.from, data.type, data.timestamp, data.file_path));
+
+      if (this.fromUser != data.from) {
+        this.typing_indication(false);
+      }
+    }
+    if (data.type == 'bot_message_with_file'){
+      this.chat.notification_sound.play();
+      this.addMessage(this.messageFactory.newMessageWithFiles(data.message, data.from, data.type, data.timestamp, data.files ));
+
+      if (this.fromUser != data.from) {
+        this.typing_indication(false);
+      }
+     }
+
+    if(data.type == 'join') {
+      this.numAgents += 1;
+    }
+    if(data.type == 'retry') {
+      this.addMessage(this.messageFactory.newMessage(I18n.t('user_dashboard.retry_message'), data.from, "message", data.timestamp));
+    }
+
+    if(data.type == 'quit' &&data.message == '') {
+      this.numAgents -= 1;
+    }
+
+    // Only users send an actual message with it
+    if(data.type == 'quit' && data.message == 'Quitting.') {
+      // Agent stops looking that client has left or not.
+      clearInterval(self.interval)
+      this.addMessage(this.messageFactory.newMessage(data.message, data.from, data.type, data.timestamp, data.file_path));
+      this.state('inactive');
+    }
+
+    if(data.type == 'indicator') {
+      var has_cookies = localStorage.getItem('indicator_state_admin')
+      if (!has_cookies) {
+        localStorage.setItem('indicator_state_admin', 'true')
+        this.typing_indication(true);
+        this.timeoutInstance = setTimeout(function() {
+          self.typing_indication(false);
+          localStorage.removeItem('indicator_state_admin');
+        }, 5000);
+      }
+    }
+  };
+
+  this._sendChatAcceptedControlMessage = function() {
+    // This does not need to go through rails app?
+    // Or do we need to keep track of this? No?
+    var data = this.messageFactory.newAssignToMeMessage();
+    $.ajax({
+      url: this.controlChannel,
+      method: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function() {}
+    });
+  };
+
+  this.joinChat = function() {
+    var data = this.messageFactory.newJoinMessage(this.fromUser, this.fromTitle);
+    $.ajax({
+      url: data.channel_id + '/send_msg',
+      method: 'POST',
+      dataType: 'json',
+      data: data,
+      success: function() {}
+    });
+  };
+
+  this.closeChat = function() {
+    if(this.state() == 'active') {
+      var data = this.messageFactory.newQuitMessage(this.fromUser);
+      $.ajax({
+        url: data.channel_id + '/send_msg',
+        method: 'POST',
+        dataType: 'json',
+        data: data,
+        success: function(resp) {
+        },
+        error: function() {
+
+        }
+      });
+      clearInterval(self.interval);
+    }
+  };
+
+  this.agentsChanged = function() {
+      this.searchAgents(this.searchQuery());
+  };
+};
+
+UserDashboardApp.ChatChannels = function() {
+  var self = this;
+  this.channels = ko.observableArray([]);
+  this.filteredChannels = ko.computed(function() {
+    return self.channels().slice(0, 4);
+  });
+
+  this.addChannel = function(channel) {
+    this.channels.push(channel);
+  };
+
+  this.removeChannel = function(channel_id) {
+    this.channels(_.without(this.channels(), _.findWhere(this.channels(), {channel: channel_id})));
+  };
+
+  this.getChannel = function(channel_id) {
+    return _.find(this.channels(), { 'channel': channel_id });
+  };
+
+  this.agentsChanged = function() {
+    _.each(this.channels(), function(channel) {
+        channel.agentsChanged();
+    });
+  };
+};
+
+
+UserDashboardApp.ChatMessageFactory = function(options) {
+  this.from = options.username;
+  this.channel = options.channel;
+  this.type = 'message';
+  this.baseMessage = new UserDashboardApp.ChatMessage();
+  this.baseMessage.from = options.username;
+  this.baseMessage.channel_id = options.channel;
+};
+
+UserDashboardApp.ChatMessageFactory.prototype.newMessage = function(message, from_user, type, timestamp, file_path) {
+  var msg = $.extend({}, this.baseMessage);
+  msg.from = from_user;
+  msg.type = type || this.type;
+  msg.message = message;
+  msg.timestamp = timestamp;
+  msg.file_path = file_path;
+  return msg;
+};
+
+UserDashboardApp.ChatMessageFactory.prototype.newMessageWithFiles = function(message, from_user, type, timestamp, files) {
+  var msg = $.extend({}, this.baseMessage);
+  msg.from = from_user;
+  msg.type = type;
+  msg.message = message;
+  msg.timestamp = timestamp;
+  msg.files = files;
+  return msg;
+};
+
+
+UserDashboardApp.ChatMessageFactory.prototype.newQuitMessage = function(from_user) {
+  var msg = $.extend({}, this.baseMessage);
+  msg.from = from_user
+  msg.type = 'quit';
+  msg.message = '';
+  return msg;
+};
+
+UserDashboardApp.ChatMessageFactory.prototype.newJoinMessage = function(from_user, from_title) {
+  var msg = $.extend({}, this.baseMessage);
+  msg.type = 'join';
+  msg.message = JSON.stringify({name: from_user, title: from_title});
+  msg.from = from_user;
+  return msg;
+};
+
+UserDashboardApp.ChatMessageFactory.prototype.newAssignToMeMessage = function() {
+  var msg = $.extend({}, this.baseMessage);
+  msg.type = 'assign';
+  msg.message = "I TOOK IT :D";
+  return msg;
+};
+
+UserDashboardApp.ChatMessageFactory.prototype.newInviteMessage = function(recipient, client_info, service_channel_id, from) {
+  var msg = $.extend({}, this.baseMessage);
+  msg.type = 'invite';
+  msg.recipient = recipient;
+  msg.client_info = client_info;
+  msg.service_channel_id = service_channel_id;
+  msg.from = from;
+  return msg;
+};
+
+UserDashboardApp.ChatMessageFactory.prototype.newFileMessage = function(file_url, file_path, from_user) {
+  var msg = $.extend({}, this.baseMessage);
+  msg.type = 'file';
+  msg.message = file_url;
+  msg.file_path = file_path;
+  msg.from = from_user;
+  return msg;
+};
+
+UserDashboardApp.ChatMessage = function() {
+  this.from = '';
+  this.channel_id = '';
+};

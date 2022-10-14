@@ -1,0 +1,3 @@
+<% if @user && !@user.errors[field].empty? %>
+  <p class="has-error help-block"><%= @user.errors[field].first %></p>
+<% end %>

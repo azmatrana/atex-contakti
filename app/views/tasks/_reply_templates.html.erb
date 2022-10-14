@@ -1,0 +1,39 @@
+
+<div id="create_search_answer_template">
+  <div class="col-md-12">
+    <div id="create_template">
+      <input name="search" id="template_input" class="form-control" data-bind="value: replyTemplate.templatesFilterForAgent, valueUpdate: 'keyup'" type="text" placeholder="<%= t('user_dashboard.reply_template.template_search')%>">
+      <button id="create_template-button" class="btn btn-default btn-sm" data-bind="click:()=> { replyTemplate.templateText(replyTemplate.templatesFilter());
+      replyTemplate.createReplyTemplate();}"><%= t('user_dashboard.reply_template.create_template')%>
+      </button>
+    </div>
+    <div class="separator bottom"></div>
+
+  <table class="table template-replies">
+    <thead>
+    <tr>
+      <th>
+        <%= t('user_dashboard.reply_template.templates_heading') %>
+      </th>
+    </tr>
+    </thead>
+  </table>
+    <div id="templates_table">
+      <table class="table template-replies table-layout">
+        <tbody data-bind="foreach: replyTemplate.filteredTemplatesListForAgent">
+        <tr>
+          <td class="break-word" data-bind='html: text.replace(/\r?\n/g, "<br/>"), attr: {"data-id": id}'></td>
+          <td class="action-items">
+            <span data-bind='click: () => $parent.parent.sendToChat(id)' class="glyphicon glyphicon-send"></span>
+          </td>
+          <td class="action-items">
+            <span data-bind='click: () => $parent.replyTemplate.deleteTemplate(id)' class="glyphicon glyphicon-trash mr-1"></span>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

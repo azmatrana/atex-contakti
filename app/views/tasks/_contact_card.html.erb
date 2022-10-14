@@ -1,0 +1,28 @@
+<script type="text/html" id="contact_card_template">
+    <div class="message-thread contact-card-modal-dialog">
+
+        <div class="contact-card-modal-header">
+            <label><%= t('user_dashboard.contact_card.contact_card') %></label>
+        </div>
+
+        <div class="modal-body" style="overflow-y: auto">
+            <div class="styled-select contact-card-modal-type-select">
+                <select data-bind="options: ['Company', 'Customer'], value: customerCompanyTabChanger" id="contact-type-select"></select>
+                <span class="caret"></span>
+            </div>
+
+            <!--COMPANY BODY HERE-->
+            <div data-bind="visible: customerCompanyTabChanger() == 'Company'" class="innerLR padding-none tab-pane active" id="company_modal_body">
+                <%= render "tasks/knockout_templates/contact_card_templates/contact_card_company" %>
+            </div>
+            <!--COMPANY BODY HERE ENDS-->
+
+            <!--CUSTOMER BODY HERE-->
+            <div data-bind="visible: customerCompanyTabChanger() == 'Customer'" class="innerLR padding-none tab-pane" id="customer_modal_body">
+                <%= render "tasks/knockout_templates/contact_card_templates/contact_card_customer" %>
+            </div>
+            <!--CUSTOMER BODY HERE ENDS-->
+        </div>
+
+    </div>
+</script>

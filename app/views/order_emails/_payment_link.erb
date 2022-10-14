@@ -1,0 +1,3 @@
+<% I18n.locale = order.try(:preferred_language) || :en %>
+
+<%= link_to I18n.t('service_channels.payment'), order.chatbot_paytrail_payment.url %>

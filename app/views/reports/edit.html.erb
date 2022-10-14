@@ -1,0 +1,70 @@
+<div class="container-fluid details reports-index-container">
+  <div class="row">
+    <div class="col-md-12 agent-admin">
+      <div class="innerLR">
+        <div id="report_form" class="hideable" style="<%= @report.kind.blank? ? 'display: none;' : '' %>">
+              <div class="widget widget-tabs border-bottom-none">
+                  <div class="widget-head">
+                      <ul>
+                          <li class="active">
+                              <a href="#service_channel" data-toggle="tab"><i class="fa fa-bar-chart-o"></i><%= t('reports.index.report')%></a>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="widget-body">
+                      <div class="tab-content">
+                          <div class="tab-pane fill-bg active" id="service_channel">
+                              <div class="innerLR padding-none">
+                                  <div class="widget widget-tabs border-bottom-none">
+                                      <div class="widget-head">
+                                          <ul>
+                                              <li class="<%= get_report_tab_class(@report, 'summary') %>">
+                                                  <a href="#summary_report" data-toggle="tab" class="glyphicons stats"><i></i><%= t('reports.index.summary_report')%> </a>
+                                              </li>
+                                              <li class="<%= 'active' if @report.comparison? %> <%= 'hide' if @report.summary? %>">
+                                                  <a href="#comparation_report" data-toggle="tab" class="glyphicons charts"><i></i><%= t('reports.index.comparison_report')%> </a>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div class="widget-body">
+                                          <div class="tab-content">
+                                              <div class="tab-pane clearfix <%= get_report_tab_class(@report, 'summary') %>" id="summary_report">
+                                                  <%= render partial: 'summary_form' if @report.summary? || @report.kind.blank? %>
+                                              </div>
+
+                                              <div class="tab-pane clearfix <%= get_report_tab_class(@report, 'comparison') %>" id="comparation_report">
+                                                  <%= render partial: 'comparison_form' if @report.comparison? || @report.kind.blank? %>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    <% if @report.starts_at && @report.ends_at %>
+      $('input[name="report[date_range]"]').data('daterangepicker').setStartDate(moment('<%= @report.starts_at %>'));
+      $('input[name="report[date_range]"]').data('daterangepicker').setEndDate(moment('<%= @report.ends_at %>'));
+    <% end %>
+    function ResizeToFit() {
+      var GetHeight = $(window).height();
+//      $('.reports_index .tab-pane:first').height(GetHeight - 150);
+      $('.reports_index .tab-pane .form-horizontal').height(GetHeight - 250);
+      $('.inbox-preview').height(GetHeight - 200);
+    }
+    $(document).ready(function() {
+      ResizeToFit();
+      $(window).bind('resize', ResizeToFit);
+
+    });
+  });
+</script>

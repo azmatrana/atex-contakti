@@ -1,0 +1,9 @@
+<%= fields_for "service_channel[#{prefix}_attributes]", media_channel do |ff| %>
+  <div class="form-group margin-none marginB10 col-md-4 col-sm-4 padding-none">
+    <div class="input-group">
+      <%= ff.text_field :sms_sender, value: media_channel.sms_sender, placeholder: t('service_channels.sms_sender'), class: 'form-control' %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <%= render partial: '/shared/field_error', locals: { record: media_channel, field: :sms_sender } %>
+<% end %>

@@ -1,0 +1,277 @@
+{
+  "language": {
+    "en": "English",
+    "fi": "Finnish"
+  },
+  "offline": {
+    "title": "Connection offline",
+    "reconnect": "Reconnect"
+  },
+  "daterangepicker": {
+    "ranges": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "last_x_days": "Last {{days}} days",
+      "this_month": "This month",
+      "last_month": "Last month"
+    },
+    "no_time": "Choose",
+    "cancel": "Clear",
+    "close": "Close",
+    "next_month": "Next month",
+    "prev_month": "Previous month",
+    "select_month": "Select a month",
+    "select_year": "Select a year",
+    "apply": "Apply",
+    "from": "From",
+    "to": "To",
+    "custom_range": "Custom range",
+    "days_of_week": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ],
+    "month_names": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "sign_in": "Login",
+    "sign_out": "Logout",
+    "remember_me": "Keep me logged in"
+  },
+  "app_settings": {
+    "first_name": "First name",
+    "last_name": "Last name",
+    "title": "Title",
+    "mobile": "Phone number",
+    "email": "Email",
+    "password": "Password",
+    "password_confirmation": "Repeat password",
+    "empty_if_no_change": "Leave empty if you don't want to change",
+    "language": "Choose language",
+    "user_signature": "Add signature",
+    "section": {
+      "personal_details": "Settings",
+      "settings": "Settings"
+    },
+    "action": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "new_item": {
+    "header": "Create new",
+    "task": "Task",
+    "email": "Email"
+  },
+  "new_task": {
+    "header": "Ticket",
+    "title": "Title",
+    "service_channel": "Service channel",
+    "agent": "Move to agent",
+    "description": "Message",
+    "attach_file": "Attach",
+    "select_file": "Select",
+    "attach_change": "Change",
+    "action": {
+      "cancel": "Cancel",
+      "ok": "Save"
+    }
+  },
+  "new_email": {
+    "header": "Email",
+    "service_channel_agent": "Agent",
+    "recipient": "Recipient",
+    "ccbcc": "CC/BCC",
+    "cc": "CC",
+    "bcc": "BCC",
+    "subject": "Subject",
+    "from": "From",
+    "message": "Message",
+    "attach_file": "Attach",
+    "select_file": "Select",
+    "attach_change": "Change",
+    "action": {
+      "cancel": "Cancel",
+      "ok": "Send"
+    }
+  },
+  "tasks": {
+    "sending": "Sending",
+    "internal_note": "Internal note",
+    "add_internal_note": "Add internal note",
+    "saved": "Saved successfully",
+    "footer": {
+      "home": "Home",
+      "filter": "Filter",
+      "bookmarks": "Bookmarks",
+      "settings": "Settings"
+    },
+    "association_filter": {
+      "open_to_all": "open",
+      "created_by_me": "my own",
+      "assigned_to_me": "assigned"
+    },
+    "search": "Search tasks",
+    "media_channel": {
+      "call": "Call back",
+      "email": "Email",
+      "web_form": "Web form",
+      "sip": "SIP Call",
+      "chat": "Chat",
+      "internal": "Internal",
+      "sms": "SMS"
+    },
+    "state": {
+      "new": "New",
+      "open": "Open",
+      "waiting": "Waiting",
+      "ready": "Ready"
+    },
+    "type": {
+      "unanswered_call": "Callback",
+      "sms": "SMS"
+    },
+    "view_task": "View Task",
+    "filtering": {
+      "category": {
+        "open_to_all": "Open to all",
+        "created_by_me": "Created by me",
+        "assigned_to_me": "Assigned to me",
+        "assigned_to_other": "Assigned to others",
+        "i_am_following": "I am following"
+      },
+      "status": {
+        "new": "New",
+        "open": "Open",
+        "waiting": "Waiting",
+        "ready": "Ready"
+      },
+      "priority": {
+        "red_alert": "Delayed",
+        "yellow_alert": "Waiting",
+        "urgent": "Urgent"
+      }
+    }
+  },
+  "task": {
+    "task": "Task",
+    "tasks": "Tasks",
+    "internal_communications": "Internal communications",
+    "from": "From",
+    "to": "To",
+    "subject": "Subject",
+    "caller_name": "Caller",
+    "name": "Name",
+    "date": "Date",
+    "service_channel": "Service channel",
+    "agent_name": "Agent",
+    "unanswered_call": "Unanswered call",
+    "chat_callback_title": "Callback Request",
+    "text_message_sent": "Text message sent",
+    "text_message_inbound": "Inbound text message",
+    "name_chat": "Name",
+    "created": "Created",
+    "send_to_bcc": "BCC",
+    "send_to_cc": "CC",
+    "sender": "Sender",
+    "caller": "Caller",
+    "time": "Time",
+    "closed_by": "Closed by",
+    "confirmation": "Are you sure you want to delete this task?",
+    "select_state_for_this_task": "Select state for this task",
+    "action": {
+      "lock": "Lock",
+      "mark_as_done": "Mark as Done",
+      "reply": "Reply",
+      "forward": "Forward",
+      "send_sms": "Send SMS",
+      "delete": "Delete"
+    },
+    "results": {
+      "header": "Mark as done",
+      "positive": "Positive",
+      "neutral": "Neutral",
+      "negative": "Negative"
+    }
+  },
+  "filter": {
+    "categories": "Categories",
+    "status": "Status",
+    "service_channel": "Service channel",
+    "media_channel": "Media channel",
+    "priority": "Priority",
+    "tags": "Tags",
+    "daterange": "Time",
+    "action": {
+      "ok": "OK"
+    }
+  },
+  "settings": {
+    "header": "Settings",
+    "priority": "Priority",
+    "priority_normal": "Normal",
+    "priority_urgent": "Urgent",
+    "tags": "Tags",
+    "move_to_service_channel": "Move to service channel",
+    "assign_to_agent": "Assign to agent",
+    "action": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "sms": {
+    "header": "SMS Message",
+    "phone_number": "Phone number",
+    "template": "Message template",
+    "message": "Message",
+    "select_template": "Select existing template",
+    "action": {
+      "cancel": "Cancel",
+      "send": "Send"
+    }
+  },
+  "email": {
+    "response_type": "Response type",
+    "response_type_client": "Client",
+    "response_type_internal": "Forward",
+    "to": "Recipient",
+    "title": "Title",
+    "message": "Message",
+    "attach_file": "Attach file",
+    "select_file": "Select file",
+    "attach_change": "Change",
+    "action": {
+      "cancel": "Cancel",
+      "send": "Send",
+      "save": "Save"
+    }
+  },
+  "time": {
+    "short": {
+      "hour": "t",
+      "min": "min",
+      "day": "pv",
+      "month": "kk",
+      "year": "v"
+    }
+  }
+}

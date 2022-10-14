@@ -1,0 +1,72 @@
+<script type="text/html" id="task_messages_sms_form_template">
+  <form data-bind="visible: showFormObservable, attr: {action: attributes().action(), 'data-remote': attributes()['data-remote'], 'method': attributes().formMethod}">
+    <input name="_method" type="hidden" data-bind="value: attributes().method" />
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+<div class="message-box sms-box" style="display: block;">
+  <div class="header">
+    <span class="timestamp" data-bind="text: moment().format('DD.MM.YYYY HH:mm')"></span>
+    <div class="right-buttons">
+      <div class="footer clearfix innerAll pull-right">
+        <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">
+          <%= I18n.t('user_dashboard.cancel') %><span class="glyphicon glyphicon-ban-circle"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-sm" data-bind="click: sendForm" data-disable-with="<%= I18n.t('user_dashboard.send') %>">
+          <%= I18n.t('user_dashboard.send') %><span class="glyphicon glyphicon-send"></span>
+        </button>
+      </div>
+    </div>
+    <br/>
+    <h4><%= I18n.t('user_dashboard.send_sms') %></h4>
+    <br/>
+    <!-- ko if: task().data.service_channel.agent_sms_templates && task().data.service_channel.agent_sms_templates.length > 0 -->
+      <div class="styled-select form-group">
+        <select type="text" class="choose-template" data-bind="value: selectedSmsTemplate" placeholder="<%= I18n.t('service_channels.select_template') %>">
+         <option value=""><%= I18n.t('service_channels.select_template') %></option>
+         <!-- ko foreach: task().data.service_channel.agent_sms_templates -->
+           <option data-bind="value: $data.id, text: $data.title" ></option>
+         <!-- /ko -->
+        </select>
+        <span class="caret"></span>
+      </div>
+    <!-- /ko -->
+    <input type="text" name="reply[to]" class="form-control" placeholder="<%= I18n.t('user_dashboard.phone_placeholder') %>" data-bind="value: number()" id="reply_from" /><br/>
+    <input type="hidden" name="reply[is_sms]" value="1"/>
+    <span class="help-block hide"></span>
+  </div>
+
+  <div class="content">
+    <div class="control-group">
+      <div class="controls">
+        <textarea data-bind="value: selectedSmsTemplateText" name="reply[description]" class="col-md-12 form-control sms-message-input" rows="5" placeholder="<%= I18n.t('user_dashboard.message') %>"/>
+        <span class="sms-message-counter">0/0, 0 <%= I18n.t('user_dashboard.sms_message') %></span>
+
+        <div class="clearfix"></div>
+        <span class="help-block hide"></span>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col-md-6 pull-right">
+        <div class="footer clearfix innerAll pull-right">
+			<button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">
+                <%= I18n.t('user_dashboard.cancel') %><span class="glyphicon glyphicon-ban-circle"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-sm" data-bind="click: sendForm" data-disable-with="<%= I18n.t('user_dashboard.send') %>">
+                <%= I18n.t('user_dashboard.send') %><span class="glyphicon glyphicon-send"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+</div>
+	<!-- footer -->
+		<div class="bg-background">
+			<br/>
+    </div>
+	<!-- footer ends -->
+</form>
+</script>
+
+
+

@@ -1,0 +1,49 @@
+<div class="modal fade" id="campaign_items-card-modal" tabindex="-1" role="dialog" aria-labelledby="campaign_items-card-modal-dialog">
+
+<div class="modal-dialog">
+  <div class="modal-content modal-lg" style="width: 90vw; margin: 0 auto;">
+    <div class="modal-header">
+      <button type="button" class="close campaign-items-modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.campaign_item_modal.campaign_items_card') %></h3>
+    </div>
+    <div class="modal-body">
+      <div class="innerLR">
+        <!-- Widget -->
+        <div class="widget widget-tabs border-bottom-none">
+          <!-- Widget heading -->
+          <!-- // Widget heading END -->
+            <%= form_tag url_for(controller: "campaign_items", action: 'search', locale: I18n.locale), method: :get, remote: true, id: 'campaign_item-search-form' do |f| %>
+              <%= hidden_field_tag :locale, params[:locale] %>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <input name="search" id="campaign_item-search-input" class="form-control" type="text" placeholder="<%= t('user_dashboard.campaign_item_modal.search_placeholder') %>">
+                </div>
+
+                <% if current_user.has_role? :admin %>
+                  <div class="col-md-3">
+                    <%= link_to campaign_path(campaign, locale: I18n.locale), method: :delete, remote: true, class: 'btn btn-default btn-sm', data: { confirm: t('user_dashboard.confirm_delete') } do %>
+                      <i class="glyphicon glyphicon-trash"></i>
+                      <%= t('user_dashboard.campaign_item_modal.delete_all') %>
+                    <% end %>
+                  </div>
+                <% end %>
+
+              </div>
+
+            <% end %>
+            <div id="campaign_items-table-wrapper">
+              <%= render 'campaign_items/table/table', campaign_items: campaign_items, campaign: campaign, is_admin: is_admin %>
+            </div>
+          <!-- // Tab content END -->
+        </div>
+      </div>
+    </div>
+    <!-- // Widget END -->
+  </div>
+
+
+</div> <!-- modal-body -->
+</div> <!-- modal-content -->
+</div> <!-- modal-dialog -->
+</div> <!-- modal -->

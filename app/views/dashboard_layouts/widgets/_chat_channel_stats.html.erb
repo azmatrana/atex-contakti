@@ -1,0 +1,75 @@
+<% tasks_count = @data[:tasks_count][:chat_channel] %>
+    <div class="widget border-bottom-none">
+        <h3 class="innerAll handle bg-chat border-bottom margin-bottom-none"><%= t('reports.summary_report.chat') %><span class="pull-right glyphicon glyphicon-comment"></span></h3>
+        <div class="widget-body">
+            <div class="row ">
+                <div class="col-xs-6 padd1">
+                    <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+                        <div data-percent="<%= percentage_division(tasks_count[:unanswered], tasks_count[:total]) %>" class="easy-pie primary">
+                          <span class="value">
+                            <%= percentage_division(tasks_count[:unanswered], tasks_count[:total]) %>%
+                          </span>
+                        </div>
+                        <span class="txt"><%= t('reports.summary_report.unanswered')%></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+                <div class="col-xs-6 padd1">
+                    <a href="" class="widget-stats widget-stats-gray widget-stats-2 widget-stats-easy-pie txt-single">
+                        <div data-percent="<%= percentage_division(tasks_count[:answered], tasks_count[:total]) %>" class="easy-pie primary">
+                          <span class="value">
+                            <%= percentage_division(tasks_count[:answered], tasks_count[:total]) %>%
+                          </span>
+                        </div>
+                        <span class="txt"><%= t('reports.summary_report.answered')%></span>
+                        <div class="clearfix"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row border-bottom  separator top border-top">
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.answered') %>
+                        <%= tasks_count[:answered] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.unaswered') %>
+                        <%= tasks_count[:unanswered] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('user_dashboard.task_result.positive')%>
+                        <%= tasks_count[:positive] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('user_dashboard.task_result.negative') %>
+                        <%= tasks_count[:negative] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small"><%= t('user_dashboard.task_result.neutral') %>
+                        <%= tasks_count[:neutral] %>
+                    </p>
+                </div>
+                <div class="col-xs-6 center">
+                    <p class="text-small">
+                        <%= t('reports.summary_report.tasks')%>
+                        <%= tasks_count[:tasks] %>
+                    </p>
+                </div>
+            </div>
+            <div class="separator top center">
+                <strong>
+                <p><%= t('reports.summary_report.waiting_period')%>: <%= tasks_count[:avg_waiting_period] %></p>
+                <p><%= t('reports.summary_report.average_process_time')%>: <%= tasks_count[:avg_processing_time] %></p>
+                </strong>
+            </div>
+        </div>
+    </div>
+

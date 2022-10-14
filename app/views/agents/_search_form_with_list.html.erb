@@ -1,0 +1,17 @@
+<%= search_form_for @q, url: search_agents_url, remote: true, method: :post do |f| %>
+  <div class="form-group">
+    <%= link_to new_agent_url, { class: 'btn btn-default big-btn btn-block' } do %>
+      <i class="fa fa-plus-circle"></i>  <%= t('users.agents.add_new_agent') %>
+    <% end %>
+  </div>
+  <div class="input-group">
+    <%= f.text_field :search_cond_cont, placeholder: t('users.agents.search'), class: 'form-control', id: 'search-input-box' %>
+
+        <span class="input-group-addon">
+            <i class="fa fa-search"></i>
+        </span>
+  </div>
+  <div class="inbox-preview" id="results">
+    <%= render 'list' %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<% if @success.present? && @success == true %>
+  toastr.success("<%= @message %>", "<%= I18n.t('tag_notifications.success') %>")
+<% elsif @success.present? %>
+  toastr.error("<%= @message %>", "<%= I18n.t('tag_notifications.failure') %>")
+<% end %>
+
+$("#skill_<%= @skill.id %>").html("<%= escape_javascript(render 'tags/skill', skill: @skill) %>");
+
+CKEDITOR.replace('email_template_<%= @skill.id %>', {
+  language: I18n.currentLocale(),
+  removePlugins: 'elementspath',
+  resize_enabled: false
+});

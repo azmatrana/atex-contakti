@@ -1,0 +1,29 @@
+<h1>Super Admins</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admins.each do |admin| %>
+      <tr>
+        <td><%= admin.username %></td>
+        <td><%= admin.email %></td>
+        <td><%= admin.current_role %></td>
+        <td><%= link_to 'Edit', edit_super_ui_admin_path(admin), class:"btn btn-default" %></td>
+        <td><%= link_to 'Delete', super_ui_admin_path(admin), method: :delete, data: { confirm: 'Are you sure?' } , class:"btn btn-default"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Super Admin', new_super_ui_admin_path, class:"btn btn-default" %>

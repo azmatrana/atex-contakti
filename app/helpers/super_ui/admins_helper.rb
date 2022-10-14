@@ -1,0 +1,2 @@
+module SuperUi::AdminsHelper
+end

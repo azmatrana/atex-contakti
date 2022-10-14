@@ -1,0 +1,68 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="innerAll border-bottom">
+      <div class="pull-left">
+        <a href="#" class="btn btn-default btn-sm" data-dismiss="modal" aria-hidden="true"><i class="fa fa-fw fa-arrow-left"></i> <%= I18n.t('users.registrations.back') %></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="modal-body padding-none">
+
+      <form class="form-vertical" role="form">
+        <div class="bg-gray innerAll border-bottom">
+          <div class="innerLR">
+            <!-- ko if: task().data.is_not_call || (!task().data.is_not_call && task().data.may_restart) -->
+              <div class="form-group task-management-state-container row marginB10">
+                <label class="col-sm-4 control-label task-management-state-label"><%= I18n.t('user_dashboard.task_state') %></label>
+
+                <div class="styled-select col-sm-8">
+                  <select type="text" id="change_state_to" placeholder="All">
+                    <option/>
+                    <!-- ko if: task().data.may_start -->
+                      <option value="start"><%= I18n.t('user_dashboard.task_actions.start') %></option>
+                    <!-- /ko -->
+                    <!-- ko if: task().data.may_restart -->
+                      <option value="restart"><%= I18n.t('user_dashboard.task_actions.restart') %></option>
+                    <!-- /ko -->
+                    <!-- ko if: task().data.may_pause && task().data.assigned_to_user_id != null -->
+                      <option value="pause"><%= I18n.t('user_dashboard.task_actions.pause') %></option>
+                    <!-- /ko -->
+                    <!-- ko if: task().data.may_close && task().data.assigned_to_user_id != null -->
+                      <option value="close"><%= I18n.t('user_dashboard.task_actions.close') %></option>
+                    <!-- /ko -->
+                    <!-- ko if: task().may_archive -->
+                      <option value="archive"><%= I18n.t('user_dashboard.task_actions.archive')%></option>
+                    <!-- /ko -->
+                  </select>
+                  <span class="caret"></span>
+                </div>
+              </div>
+            <!-- /ko -->
+
+            <div class="form-group row">
+              <label class="col-sm-4 control-label task-management-service-channel-label"><%= I18n.t('user_dashboard.move_to_service_channel') %></label>
+
+              <div class="styled-select col-sm-8">
+                <select id="move_to_service_channel" placeholder="<%= I18n.t('user_dashboard.move_to_service_channel') %>" data-bind="disabled: task().state == 'open'">
+                  <option/>
+                  <!-- ko foreach: userDashboardApp.filteredserviceChannels[$parent.task().data.media_channel] -->
+                      <%# $parent.task() because foreach creates new context and task() is at $parent. %>
+                    <!-- ko ifnot: Number($data.id) == Number($parent.task().data.service_channel_id) -->
+                      <option data-bind="value: $data.id, text: $data.name">
+                      </option>
+                    <!-- /ko -->
+                  <!-- /ko -->
+                </select>
+                <span class="caret"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="modal-dialog" id="vehicles_data_modal_dialog">
+  <div class="modal-content modal-lg">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.vehicles_data.modal_title') %>
+      </h3>
+    </div>
+    <div class="modal-body ">
+      <strong > <%= t('user_dashboard.vehicles_data.reg_num') %>: </strong> <span data-bind="text: vehicleNumber" id="reg_num"></span>
+      <div id="vehicles_data_table_wrapper" style="min-height: 40px;">
+        <div id="vehicles_data_table">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

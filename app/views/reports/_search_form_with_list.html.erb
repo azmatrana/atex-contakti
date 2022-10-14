@@ -1,0 +1,18 @@
+<%= search_form_for @q, url: reports_search_url, method: :post, remote: true do |f| %>
+  <div class="form-group">
+    <button type="button" class="btn btn-default big-btn btn-block new-report" data-show-element="#report_form" data-noselection-element="#no-report-selected">
+      <i class="fa fa-plus-circle"></i> <%= t('reports.index.new_report') %>
+    </button>
+  </div>
+  <div class="input-group">
+    
+    <%= f.text_field :title_cont, placeholder: t('reports.index.search'), class: 'form-control', id: 'search-input-box' %>
+
+        <span class="input-group-addon">
+            <i class="fa fa-search"></i>
+        </span>
+  </div>
+  <div class="inbox-preview" id="results">
+    <%= render 'list' %>
+  </div>
+<% end %>

@@ -1,0 +1,165 @@
+<div class="modal-dialog" id="email-to-modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('user_dashboard.user_dashboard_mailer.send_email') %></h3>
+    </div>
+    <%= simple_form_for :send_email, url: "/tasks/send_email", remote: true, html: {id: :send_email_form_id}, data: {type: :json} do |f| %>
+      <% f.simple_fields_for :attachments do |fff| %>
+
+        <div class="col-separator col-separator-first box hasNiceScroll" tabindex="5000" style="outline: none;">
+          <div class="modal-body innerAll">
+            <form class="form-horizontal innerR" role="form">
+              <div class="hidden">
+                <%= f.select :email_lang, %w[en fi sv].map {|s| [t("user_dashboard.languages.#{s}"), s]}, {:include_blank => false}, {:class => 'styled-select new-task-modal-languages'} %>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="to" class="col-sm-3 control-label"><%= t('user_dashboard.send_to') %>:</label>
+                  <div class="col-sm-9">
+                    <div class="input-group">
+                      <input type="text" data-bind="value: emailsTextField, valueUpdate: 'afterkeydown'" class="form-control recepient_emails_for_email" autocomplete="off" name="send_email[recipient]">
+                      <span class="input-group-addon bg-gray pointer" data-toggle="collapse" data-target="#email_cc">
+                        <%= t('user_dashboard.cc_bcc') %>
+                        <span class="caret"></span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="email_cc" class="collapse">
+                <div class="form-group">
+                  <div class="row">
+                    <label for="Cc" class="col-sm-3 control-label"><%= t('user_dashboard.cc') %>:</label>
+                    <div class="col-sm-9">
+                      <input data-bind="value: emailsCcField, valueUpdate: 'afterKeyDown'" type="text" class="form-control" id="Cc" name="send_email[cc]"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <label for="Bcc" class="col-sm-3 control-label"><%= t('user_dashboard.bcc') %>:</label>
+                    <div class="col-sm-9">
+                      <input data-bind="value: emailsBccField, valueUpdate: 'afterKeyDown'" type="text" class="form-control" id="Bcc" name="send_email[bcc]"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="Subject" class="col-sm-3 control-label"><%= t('user_dashboard.subject') %>:</label>
+                  <div class="col-sm-9">
+                    <input data-bind="value: emailsSubjectField, valueUpdate: 'afterKeyDown'" type="text" class="form-control" id="Subject" name="send_email[email_subject]" autocomplete="off"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="From" class="col-sm-3 control-label"><%= t('user_dashboard.send_from') %>:</label>
+                  <div class="col-sm-6">
+                    <select name="send_email[service_channel]"
+                            data-bind="options: serviceChannels,
+                                      optionsValue: 'id',
+                                      optionsText: 'name',
+                                      value: serviceChannelSelected,
+                                      event: {}"
+                            id="send_email_service_channels"
+                            class="form-control selectpicker btn">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" data-bind="if: serviceChannelSelected() == 'agent_false'">
+                <div class="row">
+                  <label for="From" class="col-sm-3 control-label"><%= t('user_dashboard.service_channel') %>:</label>
+                  <div class="col-sm-6">
+                    <select name="send_email[agent_service_channel]"
+                            data-bind="options: agentServiceChannels,
+                                      optionsValue: 'id',
+                                      optionsText: 'name',
+                                      value: agentServiceChannelSelected,
+                                      event: {}"
+                            class="form-control selectpicker btn">
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <label for="Signature" class="col-sm-3 control-label"><%= t('users.details.select_signature') %>:</label>
+                  <div class="col-sm-6">
+                    <select name="send_email[signature]"
+                            data-bind="options: signatures,
+                                      optionsValue: 'signature',
+                                      optionsText: 'name',
+                                      value: signatureSelected,
+                                      event: {}"
+                            id="send_email_signature"
+                            class="form-control selectpicker btn">
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <label for="Template" class="col-sm-3 control-label"><%= t("user_dashboard.select_template")%>:</label>
+                  <div class="col-sm-6">
+                    <select data-bind="options: $root.viewModels.sharedViews.basicTemplates.basicTemplatesList, optionsText: 'title',
+                     optionsValue :'text', value: templateText, optionsCaption: '<%= t("user_dashboard.choose_template")%>', event: {change: setTextFromTemplate } " class="form-control">
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+          <div class="modal-body innerAll">
+            <textarea name="send_email[email_message]" id="send_email_email_message" class="notebook border-none form-control padding-none" rows="8" placeholder="Write your content here..."></textarea>
+            <div class="clearfix"></div>
+          </div>
+          <div class="modal-footer">
+
+              <div class="col-md-4">
+                <div class="fileupload-section">
+                  <button type="button" class="pull-left btn btn-default btn-sm"><%= I18n.t('user_dashboard.attach_file') %>
+                    <span class="glyphicon glyphicon-paperclip"></span></button>
+                  <br>
+                  <div class="fileupload template hidden fileupload-new margin-none pull-left" data-provides="fileupload">
+              <span class="btn" data-trigger="fileupload">
+                <span class="fileupload-new"><%= I18n.t('user_dashboard.select_file') %></span>
+                <span class="fileupload-exists"><%= I18n.t('user_dashboard.attach_change') %></span>
+              </span>
+                    <input class="form-control file-field margin-none hidden" id="send_email_attachments[]" name="send_email[attachments][]" type="file">
+                    <span class="fileupload-preview"></span>
+                    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            <div class="col-md-4">
+              <button type="button" class="pull-left btn btn-default btn-sm" data-bind="click:showFilesModal"><%= I18n.t('user_dashboard.add_file') %><span class="glyphicon glyphicon-paperclip"></span></button>
+              <!-- ko foreach: companyFiles -->
+              <div class="company_files_list">
+                <input class="form-control margin-none hidden" data-bind="value: id" id="send_email_company_files_ids[]" name="send_email[company_files_ids][]" type="text" />
+                <span class="pull-left company_file_name"><a data-bind="text: file_name, attr: { href: file.url}"></a>
+                  <span data-bind="click: $parent.removeCompanyFile"><i class="fa fa-close pointer"></i></span>
+                </span>
+              </div>
+              <!-- /ko -->
+            </div>
+            <div class="col-md-4">
+              <div class="fileupload-section">
+                <a role="button" class="btn btn-default btn-sm" data-dismiss="modal"><%= t('user_dashboard.cancel') %>
+                  <span class="glyphicon glyphicon-ban-circle"></span></a>
+                <a role="button" data-loading-txt="loading..." id="send_email_button" class="pull-right btn btn-default btn-sm"><%= I18n.t('user_dashboard.send') %>
+                  <span class="glyphicon glyphicon-send"></span></a>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>

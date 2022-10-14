@@ -1,0 +1,32 @@
+<script type="text/html" id="task_header_template">
+  <div class="innerAll border-bottom tickets">
+    <div class="row">
+      <div class="col-sm-10">
+        <ul class="media-list">
+          <li class="media">
+            <div class="media-body">
+                <div class="col-md-10 col-xs-12" style="padding:2px 0px 6px 0px" data-bind="foreach: task().skills()">
+                    <skill-tag-component params="skill: $data"></skill-tag-component>
+                </div>
+                <div class="col-md-10 col-xs-12" style="padding:2px 0px 6px 0px" data-bind="foreach: task().generic_tags()">
+                    <generic-tag-component params="generic_tag: $data"></generic-tag-component>
+                </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+        <!-- buttons -->
+        <div class="col-sm-2">
+          <button class="btn btn-sm btn-default pull-right" id="close-email-details" data-bind="click: closeTaskClicked" onclick="window.userDashboardApp.viewModels.taskContainer.cancel()"><i class="fa fa-fw fa-times"></i></button>
+        </div>
+        <!-- buttons ends -->
+
+      </div>
+      <div data-bind="template: {name: 'assign_to_agent_template', afterRender: addTagsClicked}"></div>
+    </div>
+  </div>
+</script>
+
+
+

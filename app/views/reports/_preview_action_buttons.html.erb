@@ -1,0 +1,14 @@
+<div class="col-md-12 btn-group">
+    <div class="col-md-12">
+        <span>
+            <button type="button" class="btn btn-default btn-sm view-report" data-id="<%= @report.id %>">
+                <%= t('reports.index.view_report') %> <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </span>
+        <span>
+            <%= link_to @report, method: :delete, class: "btn btn-default btn-sm", data: { confirm: t('reports.index.confirm_delete'), locale: I18n.locale } do %>
+                <%= t('reports.comparison.delete') %> <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+        </span>
+    </div>
+</div>

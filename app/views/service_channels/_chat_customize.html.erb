@@ -1,0 +1,243 @@
+<%= fields_for "service_channel[#{prefix}_attributes][chat_settings_attributes]", media_channel.chat_settings, html: {id: 'media_channel_form'} do |f| %>
+  <%#= fields_for media_channel.chat_settings, html: {id: 'media_channel_form'} do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="form-group">
+          <p><%= t('service_channels.initial_msg') %></p>
+          <%= f.text_field :initial_msg, :class => 'form-control', :placeholder => t('service_channels.initial_msg') %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <p><%= t('service_channels.chat_box_color') %></p>
+          <%= f.color_field :color, :class => 'form-control' %>
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <p><%= t('service_channels.chat_format') %></p>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :format, 'classic' , {:class => " chat-format chat-format-classic "} %>
+            <%= t('service_channels.chat_classic') %>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :format, 'inquiry', {:class => " chat-format chat-format-inquiry "} %>
+            <%= t('service_channels.chat_form') %>
+          </label>
+        </div>
+      </div>
+
+
+
+      <div class="col-md-12">
+        <% if media_channel.try(:chat_settings) %>
+          <div id="inquiry_fields" style="display: <%= media_channel.chat_settings.format == "inquiry" ? 'block' : 'none' %>">
+            <p> <%= t('service_channels.inquiry_fields') %></p>
+            <%= f.fields_for :chat_inquiry_fields, html: { id: 'chat_inquiry_fields_form' } do |inquiry_form| %>
+              <%= inquiry_form.text_field :title, class: 'form-control mb-1' %>
+            <% end %>
+          <br/>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="col-md-12">
+        <p><%= t('service_channels.enable_cart') %></p>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :enable_cart, true %>
+            <%= t('service_channels.enable_chatbot_yes') %>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :enable_cart, false %>
+            <%= t('service_channels.enable_chatbot_no') %>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <p><%= t('service_channels.chat_logo') %></p>
+          <% if media_channel.try(:chat_settings).try(:file?) %>
+            <%= image_tag(media_channel.chat_settings.file_url, id: 'chat_settings_logo_preview') %>
+          <% else %>
+            <img id="chat_settings_logo_preview" src="#" alt="your image" class="hide"/>
+          <% end %>
+          <%= f.file_field :file, class: 'form-control', onchange: "readURL(this, 'chat_settings_logo_preview')" %>
+        </div>   
+      </div>
+
+      <div class="col-md-12">
+        <p><%= t('service_channels.checkout_format') %></p>
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :checkout_paytrail %>
+            <%= t('service_channels.checkout_paytrail') %>
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :checkout_ticket %>
+            <%= t('service_channels.checkout_ticket') %>
+          </label>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <p><%= t('service_channels.paytrail_success_url') %></p>
+          <%= f.text_field :paytrail_payment_success_url, :class => 'form-control', :placeholder => t('service_channels.paytrail_success_url') %>
+        </div>
+        <div class="form-group">
+          <p><%= t('service_channels.paytrail_failure_url') %></p>
+          <%= f.text_field :paytrail_payment_failure_url, :class => 'form-control', :placeholder => t('service_channels.paytrail_failure_url') %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="form-group">
+          <p><%= t('service_channels.welcome_message') %></p>
+          <%= f.text_field :welcome_message, :class => 'form-control', :placeholder => t('service_channels.welcome_message') %>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <p> <%= t('service_channels.chat_text_color') %> </p>
+          <%= f.color_field :text_color, :class => 'form-control' %>
+        </div>
+
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <p><%= t('service_channels.chat_title') %></p>
+          <%= f.text_field :chat_title, :class => 'form-control', :placeholder => t('service_channels.bot_alias') %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-12">
+            <p><%= t('service_channels.enable_chatbot') %></p>
+            <div class="radio">
+              <label>
+                <%= f.radio_button :enable_chatbot, true %>
+                <%= t('service_channels.enable_chatbot_yes') %>
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <%= f.radio_button :enable_chatbot, false %>
+                <%= t('service_channels.enable_chatbot_no') %>
+              </label>
+            </div>
+          </div>
+        </div>
+         <div class="row">
+           <div class="col-md-12">
+             <div class="form-group">
+               <p><%= t('service_channels.bot_alias') %></p>
+               <%= f.text_field :bot_alias, :class => 'form-control', :placeholder => t('service_channels.bot_alias') %>
+             </div>
+           </div>
+        </div>
+
+      </div>
+      <div class="col-md-12">
+        <p><%= t('service_channels.enable_initial_chat_buttons') %></p>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :enable_initial_buttons, true ,  {:class => " enable-chat-buttons enable-chat-buttons-yes "}%>
+            <%= t('service_channels.enable_chatbot_yes') %>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <%= f.radio_button :enable_initial_buttons, false,  {:class => "enable-chat-buttons enable-chat-buttons-no"} %>
+            <%= t('service_channels.enable_chatbot_no') %>
+          </label>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-12">
+         <% if media_channel.try(:chat_settings) %>
+          <div id="chat_initial_buttons" style="display: <%= media_channel.chat_settings.enable_initial_buttons ? 'block' : 'none' %>">
+            <div class="row pb-1">
+              <div class="col-md-6">
+                <%= t('service_channels.initial_buttons') %></p>
+              </div>
+              <div class="col-md-6">
+                <%= link_to "#", id: "add_new_button" do %>
+                  <i class="fa fa-plus"></i> <%= t('service_channels.add_more_initial_button') %>
+                <% end %>
+              </div>
+            </div>
+            <% index = 0 %>
+            <%= f.fields_for :chat_initial_buttons, html: { id: 'chat_initial_buttons_input' } do |buttons_form| %>
+              <%= render 'chat_initial_button', id: buttons_form.object.id, title: buttons_form.object.title, index: index %>
+              <% index += 1 %>
+            <% end %>
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+<!--  <div>-->
+<!--    <p><%#= t('service_channels.chat_format') %></p>-->
+<!--    <input type="checkbox"-->
+<!--    class="make-switch"-->
+<!--    name="<%#= "service_channel[#{prefix}_attributes][chat_settings_attributes][format]" %>"-->
+<!--    data-on="0"-->
+<!--    data-off="1"-->
+<!--    data-on-label="<%#= t('service_channels.chat_classic') %>"-->
+<!--    data-off-label="<%#= t('service_channels.chat_form') %>"-->
+<!--    >-->
+<!--   </div>-->
+  <div class="clearfix"></div>
+  <% if media_channel.try(:chat_settings) %>
+    <script>
+      $(document).ready(function () {
+        $(".chat-format").on("change", function () {
+          $("#inquiry_fields").toggle($(this).hasClass("chat-format-inquiry"));
+        });
+
+        $(".enable-chat-buttons").on("change", function () {
+          $("#chat_initial_buttons").toggle($(this).hasClass("enable-chat-buttons-yes"));
+        });
+
+        $(document).on('click', 'body .remove_fields', function(){
+          $(this).closest('.fields-row').find('input[type=hidden].destroy_field').val(true)
+          $(this).closest('.fields-row').hide()
+          event.preventDefault()
+        });
+        $("#add_new_button").click(function () {
+          let dynamic_field_index = Date.now();
+          $("#chat_initial_buttons").append($("#new_chat_initial_button_hidden_nested_fields").html().replaceAll('__dynamic_id_dummy__', dynamic_field_index))
+
+          let selector = `#service_channel_chat_media_channel_attributes_chat_settings_attributes_chat_initial_buttons_attributes_${dynamic_field_index}__destroy`
+          $("#chat_initial_buttons").find(selector).val(false)
+        });
+      })
+    </script>
+  <% end %>
+
+<% end %>
+
+

@@ -1,0 +1,176 @@
+<!-- navbar -->
+<nav class="navbar hidden-print main" role="navigation">
+  <div class="navbar-header pull-left">
+    <div class="user-action user-action-btn-navbar pull-left">
+      <button class="btn btn-sm btn-navbar"><i class="fa fa-bars fa-2x"></i></button>
+    </div>
+  </div>
+  <% if user_signed_in? %>
+    <ul class="main pull-right">
+      <% if current_user.has_role?(:agent) && @task_page %>
+        <!--  THIRD PARTY TOOLS START -->
+        <!-- ko if: $root.viewModels.sharedViews.thirdPartyTools.toolsList().length > 0 -->
+        <li class="dropdown username" style="margin-right: 60px" data-bind="with: $root.viewModels.sharedViews.thirdPartyTools">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">
+            <strong><%= t('tags.third_party_tools_tab.tab_title') %></strong>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <!-- ko foreach: toolsList() -->
+            <li>
+              <a href='' data-bind="click: $parent.setSelectedTool, text: title">
+              </a>
+            </li>
+            <!-- /ko -->
+          </ul>
+        </li>
+        <!-- /ko -->
+
+
+        <!--  THIRD PARTY TOOLS END -->
+
+
+
+<!-- SIP CLIENT START -->
+        <li class="dropdown">
+          <div id="sip_client_wrapper" class="hide">
+            <%= render 'layouts/phone/sip_phone'  %>
+            <!-- CALL LOG ENDS -->
+          </div>
+        </li>
+
+
+<!-- SIP CLIENT ENDS -->
+
+
+        <li>
+            <a data-toggle="modal" data-target="#new_task_modal" id="new_task_link">
+                <span class="fa fa-tag"></span>
+                <%= t('user_dashboard.new_task') %>
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="modal" data-target="#send_email_modal">
+                <span class="fa fa-envelope"></span>
+                <%= t('user_dashboard.new_email') %>
+            </a>
+        </li>
+
+        <li>
+          <a href="#sms_templates_editor" data-toggle="modal" id="new_sms_link">
+            <span class="glyphicon glyphicon-send"></span>
+            <%= t('reports.summary_report.sms') %>
+          </a>
+        </li>
+
+        <li>
+          <a data-toggle="modal" data-target="#company_modal" id="company_modal_link">
+            <span class="fa fa-user"></span>
+            <%= t('user_dashboard.new_customer') %>
+          </a>
+        </li>
+
+        <% if current_user.company.have_chatbot? %>
+          <li>
+            <a data-toggle="modal" data-target="#training-modal" id="training_modal_link">
+              <span class="fa fa-commenting"></span>
+              <%= t('user_dashboard.training.training_title') %>
+            </a>
+          </li>
+        <% end %>
+
+      <% end %>
+      <li class="dropdown username">
+        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+        <strong><%= current_user.full_name %></strong>
+        <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu pull-right">
+          <li>
+            <a href="<%= details_path %>" class="glyphicons settings"><i></i><%= t('layouts.navigation.my_details') %></a>
+          </li>
+          <li>
+            <a href="<%= destroy_user_session_path %>" data-method="delete" class="glyphicons lock no-ajaxify"><i></i><%= t('layouts.navigation.logout') %></a>
+          </li>
+
+          <% if current_user.has_role?(:admin) && !@relogin_as_admin  %>
+            <li>
+              <a href class="glyphicons user" data-toggle="modal" data-target="#switch_user_modal"><i></i><%= t('users.switch_user') %> </a>
+            </li>
+          <% end %>
+
+          <% if @relogin_as_admin %>
+            <li>
+              <a href="/change_user/back" class="glyphicons cogwheel"><i></i><%= t('users.switch_back') %></a>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+
+
+
+      <% if current_user.tracker_details_present? && current_user.has_role?(:agent) && @task_page %>
+        <li id="time-tracker-item-list">
+          <a data-toggle="modal" data-target="#time_tracker" id="time_tracker_link" data-bind="click: $root.viewModels.timeTracker.formDetails">
+            <button type="button" class="btn btn-default startTimeTracker" id="startTimeTracker" style="display: none" data-bind="tooltip: {title: '<%= I18n.t('time_tracker.open_modal') %>'}"
+                    data-tooltip="true" >
+              <span class="glyphicon glyphicon-play"></span>
+              <span>00:00</span>
+            </button>
+          </a>
+          <div id="timer" class="display-block-inline">
+            <button type="button" class="pauseTimeTracker btn btn-default" id="pauseTimeTracker" data-bind="click: $root.viewModels.timeTracker.stopRequest" style="display: none" data-bind="tooltip: {title: '<%= I18n.t('time_tracker.pause_timer') %>'}"
+                    data-tooltip="true" data-container="body">
+              <span class="glyphicon glyphicon-pause"></span>
+              <span id="duration" class="timer">00:00</span>
+            </button>
+
+            <button type="button" class="stopTimeTracker btn btn-default" id="stopTimeTracker" data-bind="click: $root.viewModels.timeTracker.stopRequestAndReset" style="display: none" data-bind="tooltip: {title: '<%= I18n.t('time_tracker.stop_timer') %>'}"
+                    data-tooltip="true" data-container="body">
+              <span class="glyphicon glyphicon-stop"></span>
+            </button>
+
+            <button type="button" class="restartTimeTracker btn btn-default" id="restartTimeTracker" data-bind="click: $root.viewModels.timeTracker.restartRequest" style="display: none" data-bind="tooltip: {title: '<%= I18n.t('time_tracker.restart_timer') %>'}"
+                    data-tooltip="true" data-container="body">
+              <span class="glyphicon glyphicon-repeat"></span>
+            </button>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+  <% end %>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="navbar-brand">
+        <a class="no-cursor">
+          <img src=<%== asset_path "logo.png" %>>
+        </a>
+      </li>
+      <% if current_user.try(:has_role?, :agent) && @task_page %>
+      <li>
+        <%= render 'layouts/super_search' %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+<!-- // END navbar -->
+
+
+<div class="modal fade" id="mdlError" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Virhe</h4>
+      </div>
+      <div class="modal-body text-center text-danger">
+        <h3><i class="fa fa-3x fa-ban"></i></h3>
+        <p class="lead">Puhelimen rekisteröinti epäonnistui.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

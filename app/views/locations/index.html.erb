@@ -1,0 +1,209 @@
+<div class="container-fluid details">
+  <div class="row">
+    <div class="col-md-3" id="search-form-container">
+      <%= render partial: 'search_form_with_list' %>
+    </div>
+
+    <div class="col-md-9 agent-admin">
+      <div class="innerLR">
+        <!-- Widget -->
+        <% if @show_form || @location.persisted? %>
+        <div class="widget widget-tabs border-bottom-none">
+          <!-- Widget heading -->
+          <div class="widget-head">
+            <ul>
+              <li class="active"><a href="#location_details" data-toggle="tab"><i class="fa fa-globe"></i><%= t('locations.details') %></a></li>
+            </ul>
+          </div>
+          <!-- // Widget heading END -->
+          <div class="widget-body">
+            <%= simple_form_for @location, html: { :class => 'form-horizontal' } do |f| %>
+              <div class="tab-content">
+                <!-- Tab content -->
+                <div class="tab-pane active" id="location_details">
+                  <!-- Row -->
+                  <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-12">
+                    	<div class="col-md-8">
+                    		<h4><%= t('locations.enter_location_details') %></h4>
+						</div>    
+		
+		
+		
+						                
+                <div class="col-md-4">
+                
+                    <div class="pull-right" role="group" aria-label="...">
+                    <% if @location.persisted? %>
+                        <%= link_to location_path(@location), method: :delete, class: 'btn btn-default btn-sm', data: { confirm: t('service_channels.confirm_delete') } do %>
+                          <%= t('users.agents.delete') %> <span class="glyphicon glyphicon-trash"></span>
+                        <% end %>
+
+                    <% end %>
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <%= t('locations.save') %> <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div> 
+                </div>
+                
+                
+                
+                  
+                 </div> 
+                </div>
+                
+                
+                  
+                  <div class="row">
+                    <!-- Group -->
+                    <div class="col-md-6">
+                      <div class="form-group margin-none innerB">
+                        <div class="col-md-12 padding-none">
+                          <div class="input-group">
+                            <%= f.text_field :name, :class => 'form-control', :placeholder => t('locations.location_name') %>
+                            <span class="input-group-addon" data-toggle="tooltip" data-container="body" data-placement="top"
+                                  data-original-title=
+                            <% t('locations.mandatory_tip') %>><i class="fa fa-building-o"></i>
+                            </span>
+                          </div>
+                          <%= render partial: 'field_error', locals: { field: :name } %>
+                        </div>
+                      </div>
+                      <!-- Group -->
+                      <div class="form-group margin-none innerB">
+                        <div class="col-md-12 padding-none">
+                          <div class="input-group">
+                            <%= f.text_field :street_address, :class => 'form-control', :placeholder => t('locations.street_address') %>
+                            <span class="input-group-addon" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title=
+                            <% t('locations.mandatory_tip') %>><i class="fa fa-building-o"></i></span>
+                          </div>
+                          <%= render partial: 'field_error', locals: { field: :street_address } %>
+                        </div>
+                      </div>
+                      <!-- Group -->
+                      <div class="form-group margin-none padding-none col-md-6 innerB">
+                        <div class="input-group">
+                          <%= f.text_field :zip_code, :class => 'form-control', :placeholder => t('locations.zip') %>
+                          <span class="input-group-addon" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title=
+                          <% t('locations.mandatory_tip') %>><i class="fa fa-building-o"></i></span>
+                        </div>
+                        <%= render partial: 'field_error', locals: { field: :zip_code } %>
+                      </div>
+                      <!-- Group -->
+                      <div class="form-group margin-none padding-right-none col-md-6 innerB">
+                        <div class="input-group">
+                          <%= f.text_field :city, :class => 'form-control', :placeholder => t('locations.city') %>
+                          <span class="input-group-addon" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title=
+                          <% t('locations.mandatory_tip') %>><i class="fa fa-building-o"></i></span>
+                        </div>
+                        <%= render partial: 'field_error', locals: { field: :city } %>
+                      </div>
+                    </div>
+                    <!-- // Column END -->
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="widget checkbox-set">      
+
+                        <!-- Widget heading -->
+                        <div class="widget-head checkbox-head">
+                          <div class="checkbox">
+                            <label class="checkbox-custom">
+                              <input type="checkbox" data-all-checkboxes="managers-checkboxes-container"/>
+                              <i class="fa fa-fw fa-square-o"></i>
+                                <%= t('locations.managers') %>
+                            </label>
+                          </div>
+                        </div>
+                        <!-- // Widget heading END -->
+
+                        <div class="widget-body inner-2x" id="managers-checkboxes-container">
+                          <%= f.collection_check_boxes :manager_ids, @managers, :id, :full_name, { item_wrapper_tag: 'div', item_label_class: 'checkbox-custom', item_wrapper_class: 'checkbox' } do |b| %>
+                            <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                          <% end %>
+                          <%= render partial: 'field_error', locals: { field: :manager_id } %>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="widget checkbox-set">
+
+						<!-- Widget heading -->
+                        <div class="widget-head checkbox-head">
+                          <div class="checkbox">
+                            <label class="checkbox-custom">
+                              <input type="checkbox" data-all-checkboxes="agents-checkboxes-container"/>
+                              <i class="fa fa-fw fa-square-o"></i>
+                                <%= t('locations.agents_head') %>
+                            </label>
+                          </div>
+                        </div>
+                        <!-- // Widget heading END -->
+
+                        <div class="widget-body inner-2x" id="agents-checkboxes-container">
+                          <%= f.collection_check_boxes :user_ids, @agents, :id, :full_name, { item_wrapper_tag: 'div', item_label_class: 'checkbox-custom', item_wrapper_class: 'checkbox' } do |b| %>
+                            <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="widget checkbox-set">
+
+                          <!-- Widget heading -->
+                          <div class="widget-head checkbox-head">
+                              <div class="checkbox">
+                                  <label class="checkbox-custom">
+                                      <input type="checkbox" data-all-checkboxes="service-channels-checkboxes-container"/>
+                                      <i class="fa fa-fw fa-square-o"></i>
+                                      <%= t('layouts.application.service_channels') %>
+                                  </label>
+                              </div>
+                          </div>
+                          <!-- // Widget heading END -->
+
+                          <div class="widget-body inner-2x" id="service-channels-checkboxes-container">
+                              <%= f.collection_check_boxes :service_channel_ids, @service_channels, :id, :name, { item_wrapper_tag: 'div', item_label_class: 'checkbox-custom', item_wrapper_class: 'checkbox' } do |b| %>
+                                  <%= b.check_box + '<i class="fa fa-fw fa-square-o checked"></i>'.html_safe + b.text %>
+                              <% end %>
+                              <%= render partial: 'field_error', locals: { field: :manager_id } %>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                    
+                  <!-- // Form actions END -->
+                </div> <!-- Tab pane -->
+                
+                <!-- Tab content -->
+              </div>
+            <% end %> <%# form end %>
+          </div>
+        </div>
+        <% else  %>
+          <div class="no-selection">
+            <p class="center size24">
+              <i class="fa fa-globe"></i>
+            </p>
+            <div class="center"><%= t('users.nothing_selected_state.no_location') %></div>
+          </div>
+        <% end %>
+        <!-- // Widget END -->
+      </div>
+    </div>
+  </div>
+  <!-- // Content END -->
+</div>
+<script>
+  function ResizeToFit() {
+    var GetHeight = $(window).height();
+    $('.locations_index .tab-pane').height(GetHeight - 160);
+    $('.inbox-preview').height(GetHeight - 200);
+  }
+  $(document).ready(function () {
+    ResizeToFit();
+    $(window).bind('resize', ResizeToFit);
+  });
+</script>

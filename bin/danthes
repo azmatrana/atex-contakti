@@ -1,0 +1,2 @@
+#!/bin/bash
+exec bundle exec puma danthes.ru -e development -p 9292 -t 4:16

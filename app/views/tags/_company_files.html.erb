@@ -1,0 +1,65 @@
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="row">
+      <form id="company_files_upload_form">
+        <div class="col-md-6">
+          <div class="input-group btn-block">
+            <input class="form-control file-input-form" type="file" name="file" id="company_file_input">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <button type="button" class="btn btn-default btn-sm upload_csv" data-bind="click: uploadFiles">
+            <%= t('tags.upload') %>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <input name="search"  class="form-control" data-bind="value: filesFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('company_files.search') %>">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="alert alert-success data-saved-alert hide" id="file_success">
+    </div>
+    <div class="alert alert-warning data-warning-alert hide" id="file_error"></div>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>
+        <%= t('company_files.files') %>
+      </th>
+      <th>
+        <%= t('company_files.size') %>
+      </th>
+      <th>
+        <%= t('company_files.type') %>
+      </th>
+      <th>
+        <%= t('company_files.actions') %>
+      </th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: filteredFilesList()">
+    <tr>
+      <td> <a data-bind="attr: { href: file.url }, text: file_name" download></a>
+      </td>
+      <td data-bind="text: humanize_file_size"></td>
+      <td data-bind="text: file_type"></td>
+      <td>
+        <button class="btn btn-default btn-sm" data-bind="click: () => $parent.deleteFile(id)">   <%= t('tags.delete') %></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

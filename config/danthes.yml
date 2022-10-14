@@ -1,0 +1,28 @@
+development:
+  adapter: puma
+  server: <%= ENV.fetch("DANTHES_SERVER") { 'http://127.0.0.1:9292' } %>
+  secret_token: DEVELOPMENT_SECRET_TOKEN
+  signature_expiration: 600
+  mount: '/faye'
+
+test:
+  adapter: puma
+  server: http://127.0.0.1:9291
+  secret_token: DEVELOPMENT_SECRET_TOKEN
+  signature_expiration: 600
+  mount: '/faye'
+
+production:
+  adapter: puma
+  server: <%= ENV["DANTHES_SERVER"] %>
+  secret_token: <%= ENV["DANTHES_SECRET"] %>
+  signature_expiration: 600
+  mount: '/faye'
+
+
+staging:
+  adapter: puma
+  server: <%= ENV["DANTHES_SERVER"] %>
+  secret_token: <%= ENV["DANTHES_SECRET"] %>
+  signature_expiration: 600
+  mount: '/faye'

@@ -1,0 +1,368 @@
+#sipClient
+{
+  background-color: #fff;
+  font-size: 13px;
+  line-height: 1.42857143;
+  border: 1px solid #cccccc;
+  height: 560px;
+  .container-fluid{
+    background: none;
+  }
+  p {
+    margin: 0;
+    padding: 0 0 10px 0;
+    line-height: 18px;
+  }
+  .sipStatus {
+    padding: 10px 5px;
+    background-color: #26828E;
+    color: #fff;
+    height: 45px;
+  }
+  #txtCallStatus {
+    color: #fff;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  #sip-dialpad {
+    width: 346px;
+    padding: 36px 20px;
+  }
+  #sip-dialpad .col-xs-4 {
+    text-align: center;
+  }
+  .digit {
+    height: 66px;
+    width: 72px;
+    margin: 10px 14px !important;
+    background-color: #ffffff;
+    font-weight: 300;
+    font-size: 24px;
+    border-radius: 8px;
+    line-height: 21px;
+    padding-top: 9px;
+    float: left;
+  }
+  .digit span {
+    display: block;
+    color: #333333;
+    font-size: 10px;
+    font-weight: normal;
+  }
+  .sip-panel h3 {
+    margin-top: 22px;
+  }
+  #sip-splash {
+    height: 270px;
+  }
+  #sip-splash .fa {
+    margin-bottom: 15px;
+  }
+  #sip-splash .fa-circle {
+    color: #26828E;
+  }
+  #sip-log .panel-heading {
+    padding: 10px 8px;
+    background-color: #ffffff;
+  }
+  #sip-logitems {
+    height: 308px;
+    overflow: auto;
+    width: 100%;
+  }
+  #sldVolume {
+    width: 140px;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+  .sip-logitem {
+    padding: 8px 8px;
+    cursor: pointer;
+  }
+  #numDisplay::-webkit-input-placeholder {
+    color: #bbb;
+  }
+  #numDisplay::-moz-placeholder {
+    color: #bbb;
+  }
+  #numDisplay::-ms-input-placeholder {
+    color: #bbb;
+  }
+  #numDisplay::-moz-placeholder {
+    color: #bbb;
+  }
+
+.btn-dial {
+    color: #fff;
+    background-color: #26828e;
+    border-color: #26828e;
+}
+
+.btn-options {
+    color: #26828e;
+    background-color: #ffffff;
+    border-color: #26828e;
+}
+
+.list-group-calls {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+  }
+.list-group-item-ringing {
+    color: #26828e;
+    background-color: #ffffff;
+}
+
+.list-group-item-aswered {
+    color: #26828e;
+    background-color: #ffffff;
+}
+
+.list-group-item-missed {
+    color: #9f2531;
+    background-color: #ffffff;
+}
+
+.list-group-item-calls {
+    color: #525252;
+    background-color: #ffffff;
+}
+
+  .sip-settings {
+    width: 292px;
+    padding: 16px 20px;
+  }
+
+  .footer {
+    margin: 0 15px 15px 15px;
+    padding: 5px 15px;
+    background-color: #fff;
+    color: #fff;
+  }
+
+  .input-group-functions {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+    padding-left: 100px;
+  }
+
+  .input-digit {
+    height: 50px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #525252;
+    border-color: #fff;
+  }
+
+  .number-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    margin-top: 5px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #fff;
+    border-radius: 4px;
+  }
+
+  .btn-functions {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    background: #fff;
+    color: #26828E;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .btnCall{
+    background-color: #26828E;
+    border-color: #26828E;
+    border-radius: 4px;
+  }
+
+    .btn-recordingstart {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    background: #ffffff;
+    color: #c60216;
+    line-height: 1.42857143;
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid #525252;
+    border-radius: 4px;
+  }
+
+  .btn-recordingend {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    background: #ffffff;
+    color: #525252;
+    line-height: 1.42857143;
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid #525252;
+    border-radius: 4px;
+  }
+
+  .btn-createtask {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    background: #ffffff;
+    color: #525252;
+    line-height: 1.42857143;
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid #525252;
+    border-radius: 4px;
+}
+  .sip-video {
+    width: 346px;
+    padding: 16px 20px;
+  }
+
+
+
+  .file-chooser-hack {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
+  .file-chooser-hack > input.file-choose-button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  .file-chooser-hack:hover > button.file-choose-button.dark-gray-bg {
+    background-color: rgb(85,91,93);
+  }
+  .file-chooser-hack:hover > button.file-choose-button.dark-gray-bg {
+    background-color: rgb(85,91,93);
+  }
+  .btn-filter{
+    cursor: pointer;
+    color: #26828E;
+    margin-left: 10px;
+    font-size: 16px;
+    padding: 3px;
+    border-radius: 3px;
+
+    &.active{
+      background: #e1dede;
+      padding: 5px 5px 5px 5px;
+      background-color: #26828E;
+      color: #ffffff;
+    }
+
+  }
+  .settings-buttons{
+    button.btn.digit{
+      &.is_active{
+        background: #8bbf61;
+        border-color: #8bbf61;
+        color: white;
+        span{
+          color: white;
+        }
+      }
+
+      &:focus,
+      &:active,
+      {
+        background-color: #26828E;
+        border-color: #26828E;
+        color: white;
+        span{
+          color: white;
+        }
+      }
+
+    }
+  }
+  #recordingTimer{
+    margin-left: 10px;
+  }
+}
+
+.panel-sip {
+    border-color: #ffffff;
+}
+
+.list-sip {
+    box-shadow: 0 3px 0 0 #ffffff;
+    -moz-box-shadow: 0 3px 0 0 #ffffff;
+    -webkit-box-shadow: 0 3px 0 0 #ffffff;
+}
+
+.btn-playpause {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    background: #ffffff;
+    color: #525252;
+    line-height: 1.42857143;
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    border: 1px solid #525252;
+    border-radius: 4px;
+  }
+.agent-call-phonebook{
+  #contacts-table-wrapper{
+    table{
+      tr{
+        td:last-child,
+        th:last-child{
+          width: 55px;
+        }
+        .contact-call-btn{
+          display: inline !important;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+.send-message-to-log{
+  color: #26828e;
+  margin-right: 5px;
+}

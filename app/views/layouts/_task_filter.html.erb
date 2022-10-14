@@ -1,0 +1,105 @@
+<div class="input-group bootstrap-select">
+  <div class="styled-select"><br>
+    <label>
+      <%= I18n.t('user_dashboard.task_filters.association') %>
+    </label>
+    <select data-bind="event: { 'change' : associationFilterChanged }" id="filter_task_by_association" type="text" multiple="multiple" autocomplete="off">
+      <%= options_for_select association_task_filter_collection, association_task_filter_collection(true).map(&:last) %>
+    </select>
+    <script>
+      $("#filter_task_by_association").select2({ hideSelectionFromResult: true });
+    </script>
+  </div>
+  <br>
+  <div class="styled-select">
+    <label>
+      <%= I18n.t('user_dashboard.task_filters.state') %>
+    </label>
+    <select data-bind="event: { 'change' : stateFilterChanged }" id="filter_task_by_state" type="text" multiple="multiple"
+    autocomplete="off">
+      <%= options_for_select state_collection, ['new', 'open', 'waiting'] %>
+    </select>
+    <script>
+      $("#filter_task_by_state").select2();
+    </script>
+  </div>
+  <br>
+  <div class="styled-select">
+    <label>
+      <%= I18n.t('user_dashboard.task_filters.service_channel') %>
+    </label>
+    <select data-bind="event: { 'change' : serviceChannelFilterChanged }" id="filter_task_by_service_channel" type="text"
+    autocomplete="off" multiple="multiple">
+      <%= options_for_select service_channels_collection, service_channels_collection.map(&:last) %>
+    </select>
+    <script>
+      $("#filter_task_by_service_channel").select2();
+    </script>
+  </div>
+  <br>
+  <div class="styled-select">
+    <label>
+      <%= I18n.t('user_dashboard.task_filters.media_channel') %>
+    </label>
+    <select data-bind="event: { 'change' : mediaChannelFilterChanged }" id="filter_task_by_media_channel" type="text" autocomplete="off" multiple="multiple">
+      <%= options_for_select media_channels_for_filter_collection, media_channels_for_filter_collection.map(&:last) %>
+    </select>
+    <script>
+      $("#filter_task_by_media_channel").select2();
+    </script>
+  </div>
+  <br>
+  <div class="styled-select">
+    <label>
+      <%= I18n.t('user_dashboard.task_filters.sla') %>
+    </label>
+    <select data-bind="event: { 'change' : slaFilterChanged }" id="filter_task_by_sla" type="text" autocomplete="off" multiple="multiple">
+      <%= options_for_select ['yellow_alert', 'red_alert', 'urgent'].collect { |s| [t('user_dashboard.task_filters.sla_levels.' + s), s] } %>
+    </select>
+    <script>
+      $("#filter_task_by_sla").select2();
+    </script>
+  </div>
+  <br>
+  <div class="styled-select">
+    <label>
+      <%= I18n.t('user_dashboard.task_filters.tags') %>
+    </label>
+    <input type="text" class="form-control" autocomplete="off" id="filter_task_by_tag" name="tags" autocomplete="off" data-bind="event: { 'change' : tagFilterChanged }">
+    <script>
+      $(document).ready(function() {
+        window.addEventListener("load", function(){
+          $('#filter_task_by_tag').tokenfield({
+            autocomplete: {
+              source: window.userDashboardApp.tagList,
+              delay: 100
+            },
+            showAutocompleteOnFocus: true
+          })
+        });
+
+        if (window.userDashboardApp && window.userDashboardApp.tagList)
+        $('#filter_task_by_tag').on('tokenfield:createdtoken', function(e) {
+          var target = $(e.relatedTarget);
+          var targetText = target.text();
+          targetText = targetText.substring(0, targetText.length - 1);
+          $.each(window.userDashboardApp.tagList, function(index, item) {
+            if (item.label === targetText && item.category === 'skills') {
+              target.css('background-color', '#FFFFFF');
+            }
+          });
+        })
+      });
+    </script>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="styled-select" id="task-filter-date-range-container">
+    <label>
+      <%= t('user_dashboard.time') %>
+    </label>
+    <input id="task-filter-date-range" type="text" name="daterange" class="form-control date-range" autocomplete="off" data-bind="event: { 'change' : tagFilterChanged }">
+  </div>
+  <br>
+</div>

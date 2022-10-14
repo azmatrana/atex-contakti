@@ -1,0 +1,22 @@
+<% content_for(:head) do %>
+  <%= render partial: '/layouts/template_head' %>
+<% end %>
+
+<div>
+  <h4><%= @report.title %> <%= @report.starts_at.strftime '%d.%m.%Y' %> - <%= @report.ends_at.strftime '%d.%m.%Y' %></h4>
+  </br>
+</div>
+ 
+<%= render partial: 'summary_report' %>
+
+<%= javascript_include_tag 'init' %>
+
+<% unless @is_email %>
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        window.print()
+      }, 3000);
+     });
+  </script>
+<% end %>

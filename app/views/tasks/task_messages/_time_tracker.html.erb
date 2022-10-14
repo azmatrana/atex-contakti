@@ -1,0 +1,59 @@
+<div class="modal-dialog" role="document" id='tracker' data-bind="with: $root.viewModels.timeTracker">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="trackerModalLabel"><%= I18n.t('time_tracker.title_time_tracker') %></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+    </div>
+    <div class="modal-body">
+      <div class="customers form-group">
+        <label class="control-label customersDropdown" for="customersDropdown"><%= I18n.t('time_tracker.customer') %>
+          (<%= I18n.t('time_tracker.required') %>)</label>
+
+        <select id="customers" data-bind="options: filteredCustomers(), optionsText: 'name',
+         optionsValue :'id', optionsCaption : '<%= I18n.t('time_tracker.select_default') %>', value: customer" class="form-control">
+        </select>
+
+      </div>
+      <div class="projects form-group">
+        <label class="control-label" for="projectsDropdown"><%= I18n.t('time_tracker.projects') %>
+          (<%= I18n.t('time_tracker.required') %>)</label>
+
+        <select id="customers" data-bind="options: filteredProjects(), optionsText: 'name',
+         optionsValue :'id', optionsCaption : '<%= I18n.t('time_tracker.select_default') %>', value: project" class="form-control">
+        </select>
+      </div>
+      <div class="activities form-group">
+        <label class="control-label activitiesDropdown" for="activitiesDropdown"><%= I18n.t('time_tracker.activities') %>
+          (<%= I18n.t('time_tracker.required') %>)</label>
+
+        <select id="customers" data-bind="options: filteredActivities(), optionsText: 'name',
+         optionsValue :'id', optionsCaption : '<%= I18n.t('time_tracker.select_default') %>', value: activity" class="form-control">
+        </select>
+      </div>
+      <div class="description form-group">
+        <label class="control-label description" for="description"><%= I18n.t('time_tracker.description') %></label>
+        <textarea id="tracker_description" name="description" class="form-control"></textarea>
+      </div>
+    </div>
+    <div>
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="alert alert-warning data-warning-alert hide" id="timesheet_project_error"></div>
+        <div class="alert alert-warning data-warning-alert hide" id="timesheet_activity_error"></div>
+      </div>
+      <div class="col-md-10">
+
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" id='startTimeTracker' class="startTimeTracker btn btn-primary" data-bind="css: { disabledContent: disable_controlls() == true }, click: startRequest"><%= I18n.t('time_tracker.start') %>
+        <span class="glyphicon glyphicon-play"></span></button>
+    </div>
+  </div>
+</div>
+<!--</div>-->
+<!--</div>-->

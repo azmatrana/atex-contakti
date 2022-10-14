@@ -1,0 +1,207 @@
+<div  data-bind="css: { disabledContent: disable_controlls() == true }">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row mb-1">
+        <div class="col-md-10">
+          <input class="form-control" type="text" id="product_title_input" data-bind="value: productTitle" placeholder="<%= t('products.product_title') %>">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-md-10">
+          <textarea rows="2" class="form-control" type="text" id="product_description_input" data-bind="value: productDescription" placeholder="<%= t('products.product_description') %>"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label><%= t('products.price') %></label>
+          <input class="form-control" type="number" step="0.1" id="product_price_input" data-bind="value: productPrice" placeholder="<%= t('products.price') %>">
+        </div>
+        <div class="col-md-3">
+          <label><%= t('products.type') %></label>
+          <div class="radio m-0">
+            <label>
+              <input type="radio" data-bind="checkedValue: true, checked: productWithVat">
+              <%= t('products.with_vat') %>
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" data-bind="checkedValue: false, checked: productWithVat">
+              <%= t('products.without_vat') %>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label><%= t('products.vat') %></label>
+          <select class="form-control" data-bind="options: companyVats,
+            value: productVat,
+            optionsValue: 'id',
+            optionsText: function(vat) {
+                return vat.vat_percentage + '%'
+            }">
+          </select>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col-md-5">
+          <label><%= t('products.images') %></label>
+          <input class="form-control" type="file" id="product_images_input" data-bind="value: productImages" placeholder="<%= t('products.images') %>" accept="image/*" multiple>
+        </div>
+        <div class="col-md-5">
+          <label><%= t('products.files') %> </label>
+          <input class="form-control" type="file" id="product_files_input" data-bind="value: productFiles" placeholder="<%= t('products.files') %>" multiple>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="visibility-hidden"><%= t('products.actions') %></label>
+          <br>
+          <button type="button" class="btn btn-default btn-sm " data-bind="click: createProduct">
+            <%= t('tags.templates_tab.create') %>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-8">
+          <input name="search" class="form-control" data-bind="value: productsFilter, valueUpdate: 'keyup'" type="text" placeholder="<%= t('tags.templates_tab.search') %>">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-8">
+          <label><%= t('vats.create_vat') %></label>
+          <div>
+            <div class="col-md-8">
+              <input class="form-control" type="number" step="1" name="vat_percentage_input" id="vat_percentage_input" data-bind="value: vat_percentage" placeholder="<%= t('products.vat') %>">
+            </div>
+            <div class="col-md-2">
+              <button type="button" class="btn btn-default btn-sm " data-bind="click: createVat">
+                <%= t('products.create') %>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-8" data-bind="foreach: companyVats()">
+          <div class="col-md-8 mb-1">
+            <input class="form-control" type="number" data-bind="value: $data.vat_percentage" placeholder="<%= t('products.vat') %>">
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="btn btn-default btn-sm " data-bind="click: $parent.updateVat">
+              <i class="fa fa-save"></i>
+            </button>
+            <button type="button" class="btn btn-default btn-sm " data-bind="click: () => $parent.deleteVat(id)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="alert alert-success data-saved-alert hide" id="vat_success"></div>
+          <div class="alert alert-warning data-warning-alert hide" id="vat_error"></div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="alert alert-success data-saved-alert hide" id="product_success">
+          </div>
+          <div class="alert alert-warning data-warning-alert hide" id="product_error"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>
+          <%= t('products.product_title') %>
+        </th>
+        <th>
+          <%= t('products.price') %>
+        </th>
+        <th>
+          <%= t('products.type') %>
+        </th>
+        <th>
+          <%= t('products.vat') %>
+        </th>
+        <th>
+          <%= t('products.product_description') %>
+        </th>
+        <th>
+          <%= t('products.images') %>
+        </th>
+        <th>
+          <%= t('products.files') %>
+        </th>
+        <th>
+          <%= t('company_files.actions') %>
+        </th>
+      </tr>
+      </thead>
+      <tbody data-bind="foreach: filteredProductsList()">
+      <tr>
+        <td data-bind="text: title">
+        </td>
+        <td>
+          <span data-bind="text: displayPrice($data.price)"></span><!--
+       --><span data-bind="text: $parent.productCurrency"></span>
+        </td>
+        <td>
+          <!-- ko if: $data.with_vat -->
+          <span><%= t('products.with_vat') %></span>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.with_vat -->
+          <span><%= t('products.without_vat') %></span>
+          <!-- /ko -->
+        </td>
+        <td>
+          <!-- ko if: $data.vat && $data.vat.vat_percentage -->
+          <span data-bind="text: vat.vat_percentage"></span><!--
+       --><span>%</span>
+          <!-- /ko -->
+          <!-- ko ifnot: $data.vat && $data.vat.vat_percentage > 0 -->
+          <span>0%</span>
+          <!-- /ko -->
+        </td>
+        <td class="description_cell" data-bind="text: description"></td>
+        <td>
+          <!-- ko if: images&&images.length > 0 -->
+          <div class="images_cell" data-bind=" foreach:images">
+            <div class="images_item_cell">
+              <img data-bind="attr:{src: file.url}" class="img-thumbnail">
+            </div>
+          </div>
+          <!-- /ko -->
+        </td>
+        <td data-bind=" foreach:attachments">
+            <div>
+              <a data-bind="text:file_name, attr:{href: file.url}" download></a>
+            </div>
+        </td>
+        <td>
+          <button class="btn btn-default btn-sm" data-bind="click: $parent.deleteProduct">   <%= t('tags.delete') %></button>
+          <button class="btn btn-default btn-sm" data-bind="click: $parent.showEditProductModal">   <%= t('products.edit') %></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <%= render 'tags/product_edit' %>
+
+<script>
+  $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+  });
+</script>

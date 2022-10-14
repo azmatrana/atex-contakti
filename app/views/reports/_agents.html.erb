@@ -1,0 +1,12 @@
+<div class="col-md-6">
+  <div class="widget margin-bottom-none">
+    <div class="widget-head">
+      <h4 class="heading"><%= t('reports.comparison.selected_agents')%>: </h4>
+    </div>
+    <div class="widget-body">
+      <% @report.users.each do |agent| %>
+        <span class="tagbadge"><%= agent.full_name %></span>
+      <% end %>
+    </div>
+  </div>
+</div>

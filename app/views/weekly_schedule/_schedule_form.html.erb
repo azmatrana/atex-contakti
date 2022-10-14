@@ -1,0 +1,49 @@
+<%= f.fields_for :weekly_schedule, f.object.weekly_schedule do |schedule_fields| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="radio minimal-height">
+        <label>
+          <%= schedule_fields.hidden_field :id %>
+          <%= schedule_fields.radio_button :open_full_time, true %> <%= t 'weekly_schedules.open_full_time' %>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="radio minimal-height">
+        <label>
+          <%= schedule_fields.radio_button :open_full_time, false %> <%= t 'weekly_schedules.use_entries' %>
+        </label>
+      </div>
+    </div>
+    <%= week_calendar weekly_schedule_options(entries, true, f) do |date, entries| %>
+      <% entries.each do |entry| %>
+        <div class="">
+          <%= schedule_fields.fields_for :schedule_entries, entry do |entry_fields| %>
+            <div class="bootstrap-timepicker">
+              <%= entry_fields.hidden_field :id %>
+              <%= entry_fields.text_field :start_time,
+                                          value: entry.start_time.present? ? l(entry.start_time, format: '%H:%M') : nil,
+                                          class: 'timepicker start-time form-control',
+                                          disabled: entry.start_time.blank?
+              %>
+            </div>
+            <div class="text-center">
+              -&nbsp;
+            </div>
+            <div class="bootstrap-timepicker">
+              <%= entry_fields.text_field :end_time,
+                                          value: entry.end_time.present? ? l(entry.end_time, format: '%H:%M') : nil,
+                                          class: 'timepicker end-time form-control',
+                                          disabled: entry.start_time.blank? %>
+            </div>
+            <%= entry_fields.hidden_field :weekday %>
+            <%= entry_fields.hidden_field :_destroy, value: entry.start_time.present? ? 0 : 1, class: 'destroy-schedule-entry' %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </div>
+<% end %>

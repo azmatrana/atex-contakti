@@ -1,0 +1,62 @@
+<div id="contakti-chat-main" class="row">
+  <div id="contakti-msg-box" class="msg_box" style="right: 15px; bottom: -9999px">
+    <div id="contakti-msg-head" class="msg_head" style="background-color: <%= color %>">
+      <% if logo.present? %>
+        <div id="contakti-logo-container">
+          <img src="<%= image_url(logo) %>">
+        </div>
+      <% end %>
+      <span id="contakti-user-name" style="color: <%= text_color %>"><%= t('user_dashboard.clientheading_chat') %></span>
+      <!--            <div id="contakti-msg-close"><span class="fa-stack"><i class="fa fa-stack-1x fa-times" style="top: -2px; left: 0px"></i></span></div>-->
+      <div id="contakti-msg-minimize" class="hide">
+        <span class="fa-stack" style="color: <%= text_color %>"><i class="fa fa-stack-2x fa-angle-down" style="top: +3px; left: 0px"></i></span>
+      </div>
+    </div>
+    <div></div>
+
+    <div id="contakti-msg-container" class="msg_wrap">
+      <div id="contakti-msg-body" class="msg_body" style="right: 15px;">
+        <div id="contakti-user-details">
+          <label><%= t('user_dashboard.callback_chat') %></label>
+
+          <div>
+            <div style="width: 100%; float: left; box-sizing: border-box; padding-right: 20px">
+              <div class="small-label"><%= t('user_dashboard.cbnumber_chat') %></div>
+              <input type="text" placeholder="<%= t('user_dashboard.cbnumber_chat') %>" name="phone" class="form-control callback-control" id="messagebox-callback-number">
+            </div>
+            <div style="clear: both"></div>
+          </div>
+
+          <div>
+            <div class="small-label"><%= t('user_dashboard.time_chat') %></div>
+            <div style="clear: both"></div>
+
+            <div style="width: 50%; float: left; box-sizing: border-box; padding-right: 20px">
+              <input type="date" id="messagebox-date-field" name="date">
+            </div>
+
+            <div style="width: 50%; float: left; box-sizing: border-box; padding-right: 20px">
+              <input type="time" id="messagebox-time-field" name="time">
+            </div>
+
+
+            <div style="clear: both"></div>
+          </div>
+
+          <label><%= t('user_dashboard.message_chat') %></label>
+          <input type="email" name="email" placeholder="<%= t('user_dashboard.messageemail_chat') %>" class="form-control callback-control" id="messagebox-email">
+          <br>
+          <textarea placeholder="<%= t('user_dashboard.messagemsg_chat') %>" class="form-control" rows="4" id="messagebox-message"></textarea>
+          <br>
+          <div class="send-button-container pull-left">
+            <button id="messagebox-send" class="send" style="background-color: <%= color %>" disabled><span class="fa fa-send"></span></button>
+          </div>
+          <div class="pull-right">
+            Powered by <a href="http://contakti.com" target="_blank" style="position: relative">contakti.com</a>
+          <div class="send-button-container pull-left">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

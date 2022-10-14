@@ -1,0 +1,1384 @@
+---
+en:
+  views:
+    login:
+      logged_in_message: Successfully logged in
+    service_channels:
+      imap_settings:
+        test_success: Connection successful
+        test_error: 'Cannot establish connection to IMAP server: %s'
+      smtp_settings:
+        test_success: Connection successful
+        test_error: 'Cannot establish connection to SMTP server: %s'
+  activerecord:
+    models:
+      task:
+        states:
+          new: New
+          open: Open
+          waiting: Waiting
+          ready: Ready
+        association_types:
+          created_by_me: Created by me
+          assigned_to_me: Assigned to me
+          assigned_to_other: Assigned to others
+          open_to_all: Open to all
+          i_am_following: I am following
+    attributes:
+      company:
+        kimai_tracker_api_url: Url
+      message:
+        to: 'Recipient'
+        description: 'Message'
+      question:
+        text: Question
+      intent:
+        text: Intent
+      answer:
+        text: Answer
+      answer_buttons:
+        text: Answer Buttons Text
+      entity:
+        name: Entity
+      template_reply:
+        text: Text
+      contact:
+        first_name: First Name
+        last_name: Last Name
+        phone: Phone
+        email: Email
+        website: Website
+        address: Address
+        city: City
+        country: Country
+        vat: Vat
+        postcode: Postcode
+      campaign:
+        name: Name
+        agent_name: Agent Name
+        service_channel: Service channel
+        items_count: Campaign items
+      campaign_item:
+        first_name: First Name
+        last_name: Last Name
+        phone: Phone
+        email: Email
+        address: Address
+        city: City
+        country: Country
+        postcode: Postcode
+        last_call_time: Last Call Time
+        info_1: Info 1
+        info_2: Info 2
+
+    errors:
+      models:
+        intent:
+          attributes:
+            text:
+              invalid: only use 2+ alphanumeric and underscore characters when naming your intent. The intent name cannot start with a number.
+        service_channel:
+          attributes:
+            red_alert_hours:
+              required: Please set red alert limit
+              inconsistent_data: Yellow alert limit should be less than red alert limit
+            yellow_alert_hours:
+              required: Please set yellow alert limit
+            locations:
+              blank: Please select at least one location
+  errors:
+    messages:
+      improbable_phone: 'Please check that the phone number is in international format (e.g. +358401234567)'
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: not valid
+      empty: can't ne empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: busy
+      greater_than: must be higher than %{count}
+      greater_than_or_equal_to: must be higher than or equal to %{count}
+      inclusion: not found in list
+      invalid: invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: not a number
+      not_an_integer: not an integer
+      odd: must be odd
+      record_invalid: ! 'Validation error: %{errors}'
+      taken: already in use
+      too_long: too long (must be less than %{count} characters)
+      too_short: too short (must be greater than %{count} characters)
+      wrong_length: wrong length (must be exactly %{count} characters)
+      sms_sender: Please add sms sender in service channel !
+      csv_not_present: Please add csv file !
+  devise:
+    passwords:
+      forgot_password: Forgot your password?
+      send_instructions: We'll send password reset instructions.
+      reset: Reset Password
+      email: email address
+    registrations:
+      edit: Edit
+      waiting_conformation: Currently waiting confirmation for
+      leave_blank: Leave these fields blank if you don't want to change your password.
+      enter_password: You must enter your current password to make changes.
+      cancel_account: Cancel my account
+      unhappy: Unhappy? We'll be sad to see you go.
+      sign_up: Sign up
+      sure: Are you sure?
+      update: Update
+    sessions:
+      login: Log in
+    shared:
+      sign_in: Sign in
+      sign_up: Sign up
+      forgot_password: Forgot your password?
+      no_confirm_instructions_received: Didn't receive confirmation instructions?
+      no_unlock_instructions_received: Didn't receive unlock instructions?
+      sign_in_with: Sign in with
+  layouts:
+    navigation:
+      lang_en: English
+      more: More
+      lang_fi: Finnish
+      lang_sv: Swedish
+      my_details: Settings
+      company_detals: Company details
+      logout: Logout
+      notifications: Notifications
+      edit_layout: Edit Layout
+      add_new: Add New
+      fullscreen: Fullscreen
+      add_widget: Add New Widget
+      layout_name: Layout name
+      delete: Delete
+      cancel: Cancel
+      save_layout: Save
+      reload: Reconnect
+    application:
+      dashboard: Dashboard
+      reporting: Reports
+      agents: Agents
+      service_channels: Service channels
+      locations: Locations
+      tags: Tags
+      skills: Skills
+      ai: AI
+      settings: Settings
+    super_ui:
+      dashboard: Dashboard
+      companies: Companies
+      managers: Managers
+      tags: Tags
+  tags:
+    skills: Skills
+    contacts: Customer cards
+    campaigns: Campaigns
+    company_files: Files
+    templates: Templates
+    products: Products
+    shipment_method: Shipment Method
+    save: Save
+    add: Add new skills..
+    add_tags: Add new tags..
+    cleanup: Not useful
+    upgrade: Convert to skill
+    delete: Delete
+    suggestion: Suggestion
+    management: Skills Management
+    attach_scv: Attach csv
+    attach_phonebook_csv: Attach phonebook csv
+    attach_campaign_csv: Attach campaign csv
+    show_contacts: show phonebook
+    show_campaigns: show campaigns
+    upload: Upload
+    download_template_file: Download template file
+    download_phonebook_template_file: Download template file
+    download_campaign_template_file: Download template file
+    low: Low
+    medium: Medium
+    high: High
+    please_select: Please Select
+    select_time: Select Time
+    select_skill: Select skill
+    hour: 1 Hour
+    hours: '%{count} Hours'
+    minute: Minute
+    minutes: '%{count} Minutes'
+    never: Never
+    alarm: Receiver
+    email: Email
+    sms: SMS
+    message: Alarm Messages
+    saved_successfully: Saved successfully.
+    order_placed: Order Placed
+    payment_link: Payment Link
+    terms_and_conditions: Terms and Conditions
+    templates_tab:
+      chat: Chat Templates
+      basic_template: Basic Templates
+      chat_templates: Chat Templates
+      basic_templates: Basic Templates
+      create: Create
+      chat_template_text: Chat Template Text
+      search: Search
+      actions: Actions
+      template_save_success: Template Saved Successfully.
+      template_update_success: Template Updated Successfully.
+      template_delete_success: Template Deleted Successfully.
+      basic_template_title: Title
+      basic_template_text: Text
+      agent_basic_templates: Agent Ticket Templates
+      send_ticket: Send Ticket
+    cart_email_template_tab:
+      order_placed: Order placed template
+      payment_link: Payment link template
+      terms_and_conditions: Order Terms And Conditions
+      terms_checkbox_text: Terms checkbox text
+      title: Orders Templates
+      subject: Subject
+      body: Body
+    third_party_tools_tab:
+      tab_title: Software
+      delete: Delete
+      save: Save
+      add_more: Add More Tools
+      title: Title
+      content: Content
+
+
+  company_files:
+    files: Files
+    size: Size
+    type: Type
+    actions: Actions
+    file_create_success: File Uploaded Successfully.
+    file_delete_success: File Deleted Successfully.
+    select: Select
+    search: Search Files
+
+  products:
+    title: Online Shop
+    product_title: Title
+    product_description: Description
+    currency: Currency
+    price: Price
+    vat: VAT
+    type: Product type
+    with_vat: With VAT
+    without_vat: Without VAT
+    create: Create
+    delete: Delete
+    actions: Actions
+    create_success: Product Created Successfully
+    delete_success: Product Deleted Successfully
+    update_success: Product Updated Successfully
+    images: Images
+    files: Files
+    edit: Edit
+    edit_product: Edit Product
+    close: Close
+    save: Save
+
+  vats:
+    create_vat: Create VAT
+    create_success: VAT Created Successfully
+    update_success: VAT Updated Successfully
+    delete_success: VAT Deleted Successfully
+
+  shipment_methods:
+    title: Shipment Method
+    name: Shipment Method Name
+    price: Price
+    select: Select
+    search: Search...
+    actions: Actions
+    create: Create
+    save: Save
+    delete: Delete
+    create_success: Shipment Method created successfully
+    update_success: Shipment Method updated successfully
+    delete_success: Shipment Method deleted successfully
+
+  locations:
+    sort_by: Sort
+    date: Date
+    subject: Subject
+    email: Email address
+    phone: Phone number
+    search: Search...
+    agents: agents
+    details: Details
+    enter_location_details: Enter location details
+    location_name: Location name
+    mandatory_tip: This field is mandatory
+    street_address: Street address
+    zip: Zip code
+    city: City
+    online: Online
+    offline: Offline
+    agents_head: Agents
+    managers: Managers
+    save: Save
+    location_saved: Location saved
+    name: Name
+  preferences:
+    skills_management: Skills Management
+    new_task: New Task
+    email_sender: Email
+    customer_registry: Customer Registry
+  reports:
+    summary_report:
+      default: Default
+      sla: SLA
+      sla_red: Red
+      sla_yellow: Yellow
+      sla_no_alert: No alert
+      email: Email
+      calls: Calls
+      tickets: Tickets
+      sales: Sales
+      free: Free
+      busy: Busy
+      sms: SMS
+      waiting_period: Waiting period
+      successful: Successful
+      unsuccessful: Unsuccessful
+      total_chats: Total Chats
+      replies_rate: Replies rate
+      failure_rate: Failure rate
+      sended: Sended
+      received: Received
+      solved: Solved
+      unsolved: Unsolved
+      new: New
+      in_progress: Open
+      waiting: Waiting
+      hitrate: Hit rate
+      answered: Answered
+      unaswered: Unanswered
+      average_process_time: Average processing time
+      minutes: m
+      web_form: Web form
+      call: Callback
+      callback: Callback
+      peak_time: Peak times
+      media_channels: Media channels
+      overall_amount_tasks: Tasks
+      tasks_by_service_channel: Tasks by service channel
+      tasks_by_location: Tasks by location
+      messages: messages
+      report_scope: Report scope
+      report_scopes:
+        all: Include all tasks
+        closed: Include only completed tasks
+      chat: Chat
+      chatbot: Chatbot
+      internal: Ticket
+      orders: Orders
+    comparison:
+      comparison_report: Comparison report
+      edit: Edit
+      print: Print
+      save: Save
+      delete: Delete
+      selected_agents: Selected agents
+      schedule_report: Schedule report sending
+      daily: Daily
+      weekly: Weekly
+      monthly: Monthly
+      send_report_email: Send report by email
+      separate_by_comma: Separate email addresses by comma
+      send_now: Send Now
+      tasks: Tasks
+      turnaround: Turnaround
+      pauses: Pauses
+      solutions: Solutions
+      report_updated: Report updated
+      report_sent: Report sent
+      solved_tasks: Solved tasks
+      tasks_turnaround: Tasks turnaround
+      solved_tasks_by_user: Solved tasks by user
+      pauses_percentage: Pauses percentage
+      solutions_percentage: Solutions percentage
+    index:
+      view_report: View report
+      new_report: New report
+      loading_preview: Loading preview
+      sort_by: Sort
+      date: Date
+      subject: Subject
+      email: Email address
+      phone: Phone number
+      search: Search...
+      created: Created
+      type: Type
+      author: Author
+      scheduled: Scheduled
+      report: Report
+      summary_report: Summary report
+      comparison_report: Comparison report
+      report_name: Report name
+      placeholder_name: Name
+      choose_time_range: Choose time range
+      location: Location
+      service_channel: Service Channel
+      media_channel: Media Channel
+      agents: Agents
+      update: Update
+      create: Create
+      create_report: Create report
+      cancel: Cancel
+      deleted_report: Successfully deleted report
+      cannot_delete_report: Cannot delete report
+      confirm_delete: Are you sure you want to permanently delete the report?
+      select_all: Select all
+      unselect_all: Unselect all
+      report_locale: Raport locale
+      report_locale_tooltip: This is language that used in email sendings
+      report_locales:
+        en: English
+        fi: Finnish
+        sv: Swedish
+    summary:
+      summary_report: Summary report
+      edit: Edit
+      print: Print
+      save: Save
+      delete: Delete
+      starts: Starts
+      selected_locations: Selected locations
+      schedule_report: Schedule report sending
+      send_report_email: Send report by email
+      separate_by_comma: Separate email addresses by comma
+      send: Send
+    generic:
+      please_save_first: Please save the report first
+      type:
+        summary: summary
+        comparison: comparison
+  service_channels:
+    webphone_header: Settings
+    webphone_dial: Speed dial
+    webphone_name: Name
+    webphone_number: Number
+    widget_button_color: Widget button color
+    dial_color: Button font color
+    dial_bg_color: Button background color
+    sip: Web phone
+    sms: SMS
+    group_sms: Group SMS
+    attach_csv: Attach csv
+    create tasks: Create tasks
+    service_channel_saved: Service channel saved
+    add_new_channel: Add new service channel
+    sort_by: Sort
+    date: Date
+    subject: Subject
+    email: Email
+    phone: Phone number
+    agents: Agents
+    details: Details
+    service_channel_title: Service channel
+    agents_title: Agents
+    basic_info: Basic info
+    send_report: Send report
+    name: Name
+    add_location: Add location
+    alert_limits: Alert limits
+    days: days
+    hours: h
+    minutes: min
+    media_channels: Media channels
+    email_settings: Settings
+    call_settings: Settings
+    web_form_settings: Settings
+    modal_internal_settings: Settings
+    web_form: Web form
+    call: Callback
+    not_configured: 'Not configured'
+    save_details: Save
+    agents_in_channel: Agents in service channel
+    format: Format
+    format_excel: Excel
+    format_csv: CSV
+    format_pdf: PDF
+    receivers: Receivers
+    delivery_interval: Delivery interval
+    delivery_time: Delivery time
+    delivery_days: Delivery days
+    modal_email_settings: email settings
+    email_settings: Email
+    email_setting: Email
+    incoming_IMAP: Incoming mail (IMAP)
+    outgoing_SMTP: Outgoing email (SMTP)
+    sla: Alert limits
+    auto_reply: Auto Reply
+    sender: Sender
+    sms_sender: sender number
+    modal_call_settings: Call settings
+    placeholder_autoreply: Auto Reply Text
+    placeholder_description: Description
+    placeholder_from_email: From email address
+    placeholder_from_name: From full name
+    placeholder_incoming_mail_server: Incoming mail server
+    placeholder_port: Port
+    placeholder_title: Description
+    use_auto_reply: Use Auto Reply
+    use_ssl: Use Secure Sockets Layer (SSL)
+    use_contakti_smtp: Use Contakti SMTP
+    placeholder_auth_method: Authentication method
+    placeholder_user_name: User name
+    placeholder_password: Password
+    placeholder_domain: Domain
+    placeholder_title: Title
+    placeholder_ws_server_url: WebSocket server url
+    test_btn: Test
+    placeholder_server_name: Outgoing server
+    save_setting_btn: Save
+    clear_settings_btn: Clear
+    smtp_auth_methods:
+      login: Login auth method
+      NTLM: NTLM (default for MS Exchange)
+      plain: Plain
+    call_media_channel_settings:
+      name_check: Automated name search
+    modal_call_settings: Callback settings
+    placeholder_call_group_id: Call group id
+    placeholder_autoreply_text: SMS autoreply text
+    save_call_setting_btn: Save
+    placeholder_multi_address: Email addresses separated by comma
+    placeholder_name: Name
+    search: Search...
+    sms_autoreply: SMS autoreply
+    automatic_mark_as_done: Automatic mark as done
+    payment: Payment
+    automated_namesearch: Automated Name Search
+    on: ON
+    off: OFF
+    select_template: Select existing template
+    save_template: Save
+    close: Close
+    edit_sms_tempalte: Edit agent SMS templates
+    agent_sms_templates: Agent SMS templates
+    save_sms_template: Save
+    placeholder_template_text: SMS template text
+    placeholder_template_title: Template title
+    sms_template_saved: SMS template saved
+    sms_template_confirm_delete: Are you sure you want to permanently delete this SMS template?
+    sms_template_deleted: SMS template deleted
+    cannot_delete_template: Can not delete template that is not saved yet
+    please_save_first: Please save the service channel first
+    sms_template_visibility: Select template visibility
+    template_visibility_types:
+      service_channel: Service channel
+      company: Company
+      location: Location
+    select_location: Select location
+    proceed_overwriting_template: 'Are you sure you want to replace the existing template: {{name}}?'
+    confirm_delete: 'Do you want to permanently delete all the data related to this Service Channel?'
+    will_be_removed: 'Service channel will be removed in a few minutes'
+    sip_settings: Voice
+    sip_setting: Settings
+    not_registered: Not registered
+    in_call: In call
+    incoming_call: Incoming call
+    not_connected: Not connected
+    registered: Registered
+    delete_tasks: Delete tasks
+    chat_text_color: Chat text color
+    chat_modal_header: Chat settings
+    modal_chat_settings: Chat settings
+    modal_sip_settings: SIP settings
+    modal_sip_speed_dials: Speed Dials
+    chat_modal_save: Save
+    chat_modal_need_save: You need to save this channel before you can use it.
+    chat_settings: settings
+    facebook_settings: settings
+    modal_facebook_settings: Facebook settings
+    facebook_modal_header: Facebook settings
+    facebook_modal_save: Save
+    facebook_modal_need_save: You need to save service channel settings before you can change chat settings.
+    facebook_help_text: Get your app ID and secret from facebook.developers.com/apps. Get your page ID and Access token from developers.facebook.com/tools/explorer. On the top right, select the FB App you created from the "Application" drop down list. Use "Get Token" button to get a new user access token (make sure to grant permissions for publish_actions and manage_pages ). Then write "me/accounts" in the query below and press submit. Your app id and short-lived app access_token will be returned by the query. Convert this short-lived access token into a long-lived one by making this Graph API call oauth/access_token?client_id=your FB App ID&client_secret=your FB App secret&grant_type=fb_exchange_token&fb_exchange_token=your short-lived access token
+    facebook_app_id : App ID
+    facebook_app_secret : App Secret
+    chat_help_text : Copy the following lines to your web site right before closing body tag.
+    customize : Customize
+    chat_whitelist: "Whitelisted referer domains (comma seperated). Example: contakti.com, facebook.com"
+    welcome_message : Automatic Agent Reply
+    initial_msg: Automatic Initial Reply
+    bot_alias: Bot Alias
+    Color : Color
+    chat_format : Chat format
+    checkout_format : Checkout Format
+    enable_chatbot : Enable Chatbot
+    enable_chatbot_yes : 'Yes'
+    enable_chatbot_no : 'No'
+    chat_classic : Classic
+    checkout_paytrail : Paytrail
+    checkout_ticket : Ticket
+    paytrail_success_url: Payment Success URL
+    paytrail_failure_url: Payment Failure URL
+    chat_form : Inquiry
+    chat_logo : Logo
+    private_agent_channel_name: Private Agent Channel
+    signature: Signature
+    enable_cart: Enable Shopping Cart
+    inquiry_fields: Inquiry Fields
+    initial_buttons: Chat Initial Buttons
+    chat_title: Chat Title
+    enable_initial_chat_buttons: Enable Initial Chat Buttons
+    add_more_initial_button: Add more
+
+  paytrail_payment:
+    success: Thank You! Your Order has been paid successfully.
+    failure:  Oh! Your Order payment has been failed due to some reason.
+    notification: The Order has been notified.
+    payment_status: Payment Status
+    payment_pending: pending
+    payment_paid: paid
+    payment_failed: failed
+    payment_time: Paid at
+
+  tasks:
+    from: From
+    name: Name
+    subject: Subject
+    default_from: Unknown
+
+  user_dashboard:
+    welcome: How can I help?
+    ticket: Agent
+    reply_template:
+      reply_template_modal_tab: "Reply Templates"
+      templates_heading: "Templates"
+      create_template: "Create Template"
+      template_search: "Search or Create Templates"
+      template_delete_message: Template Deleted Successfully
+    training:
+      training_title: Chatbot
+      action: Actions
+      delete: Delete
+      training_modal_title: Trainings
+      create_questions_tab: Create Questions For Bot
+      create_answers_tab: Create Answers For Bot
+      create_intent: Create Intent
+      create_intent_label: Create Intent If Not In Above List
+      create_question_label: Create Question
+      create_answer_label: Create answer
+      search_intent: Search
+      intent: Intent
+      question: Question
+      answer: Answer
+      answer_delete_message: Answer Deleted Successfully
+      question_delete_message: Question Deleted Successfully
+      intent_delete_message: Intent Deleted Successfully.
+      question_create_success: Question Created Successfully.
+      answer_create_success: Answer Saved Successfully
+      intent_create_success: Intent Created Successfully. Please Click below button to create Question.
+      intent_already_present: "Intent was already present."
+      question_input: Question Text
+      answer_input: Answer Text
+      questions: Questions
+      answers: Answers
+      intents: Intents
+      search_question: Search Question
+      search_answer: Search Answer
+      no_intent_selected: Please Create an Intent first.
+      entities: Entities
+      entity: Entity
+      synonyms: Synonyms
+      entity_text: Entity Text
+      key_words: Key Words
+      entity_save_success: Entity Saved Successfully.
+      entity_create_success: Entity Created Successfully.
+      keyword_empty: Keyword can not be Empty.
+      no_keyword: Please add a keyword first.
+      name: Name
+      save_entity: Save
+      add_keywords: + Keywords
+      create_entity: Create Entity
+      search_entities: Search Entities
+      search: Search...
+      understandings: Understandings
+      delete_all: Delete All
+      question_template_delete_success: Deleted sucessfully.
+      entity_delete_success: Entity deleted successfully
+      files: Files
+      file: File
+      add_files: Add File
+      custom_action_button_text: Custom Action Button Text
+      custom_action_flag: Show Custom Action Button
+      add_option_button: Add Option Button
+      option_button_text: Option Button Text
+      option_button_link: Option Button Link
+      option_buttons: Option Buttons
+      custom_action_text: Custom Action Text
+      add_products: Add Products
+      choose_products: Choose Products
+      products: Products
+      assign_intent: Assign Intent
+      intent_empty: Please Select an Intent before Saving.
+      understanding_to_question: Question Created Successfully for bot.
+      select_intent: Select Intent
+      images: Images
+      edit: Edit
+      edit_answer: Edit Answer
+      save: Save
+    third_party_tools:
+      create_success: Software created successfully
+      update_success: Software saved successfully
+      delete_success: Software Deleted successfully
+    shopping_cart:
+      order: Order
+      cart_title: Shopping Cart
+      quantity: Quantity
+      items: items
+      product_title: Product
+      price: Price
+      vat: VAT
+      price_without_taxes: Price without taxes
+      taxes: Taxes
+      including: including
+      excluding: excluding
+      action: Delete
+      total: Total
+      checkout_method: Checkout Method
+      shipment_method: Shipment Method
+      shipment_charges: Shipment charges
+      checkout: Checkout
+      checkout_button_paytrail: Checkout
+      checkout_button_ticket: Order
+      product_details: Product Details
+      close: Close
+      order: Order
+      order_products: Order Products
+      thanks_for_order: "Thank you, We have received your order <br><br> We will reply to you as soon as possible."
+      thanks_for_contact: "Thank you, we have received your request. <br><br> We will get back to you as soon as possible."
+      note_for_order_payment: "We have sent you a link to your email. <br><br> Please follow the instructions for payment."
+      order_details: Ordered Products Details
+      terms_modal_heading: Terms and conditions
+      accept: Accept
+      customer:
+        title: Customer Details
+        full_name: Full Name
+        email: Email
+        phone_number: Phone Number
+        street_address: Street Address
+        zip_code: Zip Code
+        city: City
+
+    bot_chat: "How Can I Help?"
+    template_delete_message: Template Deleted Successfully
+    typing_text: " typing"
+    ask_human_to_help: "Wait, I'm asking a colleague"
+    retry_message: "I didn’t understand your question, can you rewrite it?"
+    typing_indicator_chat: "Customer typing"
+    release_time: "The task opens to all"
+    call_from: "Caller"
+    invalid_service_channel: "Can't send message because service channel is broken."
+    options: "Options"
+    text_message_sent: 'Text message sent'
+    text_message_inbound: 'Inbound text message'
+    chat_not_available: "Sorry, we're not available right now, "
+    chat_leave_a_message_link:  "please leave a message."
+    priority: "Priority"
+    normal: "Normal"
+    urgent: "Urgent"
+    add_tags: "Add Tags"
+    open_to_all: "Open to all"
+    type_message: "Type your message here and press Enter..."
+    attachment_chat: "Attach file"
+    join_chat: "has joined the conversation"
+    quit_chat: "has quit the conversation"
+    upload_chat: "has uploaded a file"
+    name_chat: "Name"
+    email_chat: "Email"
+    phone_chat: "Phone"
+    start_chat: "Start chat"
+    invitation_chat: "Invitation from"
+    search_chat: "Search..."
+    options_chat: "OPTIONS"
+    addtask_chat: "Create ticket"
+    accept_chat: "Accept"
+    waiting_chat: "Awaiting response..."
+    signature: "Signature"
+    online: "Online"
+    offline: "Offline"
+    busy: "Busy"
+    dnd: "DND"
+    voicemail: "Voicemail"
+    acd: "ACD"
+    followme: "Follow"
+    transfercalls: "Transfer"
+    activate: "Activate"
+    startscreen: "Enter the number or SIP address to make the call."
+    calllist: "Calls"
+    downloadaudio: "Download audio file"
+    translation: "Translation"
+    vehicles_data:
+      reg_num: "Registration Number"
+      details: "Details"
+      modal_title: "Vehicle Details"
+      no_data: "Not available"
+
+
+    callin: "Answered"
+    callout: "Called"
+    callername: "Caller"
+    calltime: "Time"
+    callernumber: "Number"
+    calltype: "Call type"
+    callto: "Called"
+    duration: "Duration"
+
+    number: "Number..."
+    call: "Call"
+    mute: "Mute"
+    unmute: "Unmute"
+    hold: "Hold"
+    hangup: "Hangup"
+    answer: "Answer"
+    decline: "Decline"
+    volume: "Volume"
+    incoming: "Incoming call"
+    from: "From"
+    deskphone: "Phone"
+    calllog: "Call history"
+    extensions: "Agent"
+
+    onlineagents: "Online agents"
+    clientheading_chat: "CHAT"
+    callback_message_title: "Contact request"
+    chat_history: "Chat History"
+    callback_chat: "Request a callback"
+    cbnumber_chat: "Callback number"
+    time_chat: "Choose time and date"
+    message_chat: "Leave us a message"
+    send_chat_history_title: "Send chat history"
+    messageheading_chat: "CONTACT US"
+    messageemail_chat: "Your email address..."
+    messagemsg_chat: "Your message"
+    messagesend_chat: "Send"
+    messagesend_cancel: "Cancel"
+    thanks_chat: "Thank you"
+    sentmessage_chat: "Your Request Has Been Sent Successfully!<br><br>We will reply to you as soon as possible."
+    chat_history_send: "Email has been sent"
+    disconnected:
+      title: Disconnected
+      body: Connection to the server has been disconnected. Reconnect to avoid potential problems.
+    task_filters:
+      association: Category
+      state: Status
+      service_channel: Service channels
+      media_channel: Media channels
+      sla: Priority
+      tags: Tags
+      sla_levels:
+        red_alert: Delayed
+        yellow_alert: Waiting
+        urgent: Urgent
+    all: All
+    channels: Channels
+    no_channels: No channels
+    all_channels: All channels
+    service_channel: Service Channel
+    closed_by: Closed by
+    management: Management
+    time: Time
+    new: New
+    new_email: Email
+    new_customer: Customer
+    create: New
+    open: Open
+    waiting: Waiting
+    ready: Ready
+    sort_by: Sort
+    date: Date
+    presence_user: Presence
+    presence_select: Status
+    presence_available: Available
+    presence_busy: Busy
+    presence_disturb: Do Not Disturb
+    presence_away: Respite
+    presence_notavailable: Not Available
+    presence_type: Type your Status
+    presence_reply: Send auto reply
+    send_email: Reply to email
+    forward_email: Forward email
+    subject: Subject
+    email: Email address
+    select_template: Select Template
+    choose_template: Choose a Template..
+    phone: Phone number
+    phone_placeholder: Mobile Phone Number (e.g. +358401234567)
+    move_to_service_channel: Move to Service Channel
+    moved_to_service_channel: Moved task to service channel "{{name}}"
+    mark_as_done: Mark as done
+    mark_as_new: Renew
+    restart: Reopen
+    follow: Follow this task
+    unfollow: Unfollow this task
+    lock: Lock
+    unlock: Unlock
+    reply: Reply
+    reply_all: Reply All
+    tickets_filter_title: Filter same email tickets.
+    domain_filter_title: Filter same domain tickets.
+
+    replying:
+      target: Reply type
+      internal: Internal
+      customer: Customer
+    forward: Forward
+    mark_as_spam: Delete
+    archive: Archive
+    confirm_mark_as_spam: Deleting will remove the task from this view and from all reports. Are you sure?
+    send_sms: Send SMS
+    print: Print
+    cancel: Cancel
+    created: Created
+    send_to: To
+    send_to_bcc: BCC
+    send_to_cc: CC
+    send_from: From
+    subject: Subject
+    cc: CC
+    bcc: BCC
+    cc_bcc: CC/BCC
+    clear: Clear
+    send: Send
+    save: Save
+    delete: Delete
+    task: Task
+    tasks: Tasks
+    alarm: Alarm
+    internal_communication: Internal Communications
+    internal_note: Internal note
+    download_txt_file: Download txt file
+    send_to_email: Send it to email
+    end_chat: End chat
+    start_new_chat: Start new Chat
+    task_skills: Skills Requirement
+    task_management: Task management
+    message: Message
+    sms_message: message
+    sms_messages: messages
+    search: Search task ...
+    searchcustomer: Search customer...
+    attach_file: Attach file
+    select_file: Select file
+    email_to: Email to
+    email_to_message: Message
+    please_select_service_channel: Please select service channel
+    agents_loading: Agents loading...
+    attach_change: Change
+    forwarding: Forwarding message...
+    sending_sms: Sending SMS...
+    agent: Agent
+    add_file: Add File
+    assign_to_agent: Assign to agent
+    task_result:
+      negative: Negative
+      neutral: Neutral
+      positive: Positive
+    task_state: Task state
+    task_states:
+      new: new
+      open: open
+      waiting: waiting
+      ready: ready
+      archived: archived
+    task_actions:
+      start: Open
+      restart: Reopen
+      pause: Set waiting
+      close: Close
+      archive: Archive
+    new_task_mailer:
+      header: "New task created"
+      body: "Below is tasks information"
+      task_name: "Task name: "
+      task_id: "Task id: "
+      agent: "Agent: "
+      media_channel: "Media channel: "
+      service_channel: "Service channel: "
+      creators_message: "Creators message: "
+      timestamp: "Timestamp: "
+    user_dashboard_mailer:
+      send_email: "Send email"
+      subject: "Subject"
+      recipient: "To"
+      service_channel: "Service Channel"
+      message: "Message"
+      agent: "Agent"
+      email: "Email"
+      cc: "cc"
+      bcc: "bcc"
+      best_regards: "Best regards"
+      msg_sent_to: "Message sent to"
+      sms_sent_to: "SMS sent to"
+      error_msg_sent_to: "Error sending message to"
+    languages:
+      en: "English"
+      fi: "Finnish"
+      sv: "Swedish"
+    super_search:
+      all: All
+      unsolved: Unsolved
+      archived: Archived
+      task_id: Id
+      agent: Agent
+      task: Task
+      customer: Customer
+      company: Company
+    unanswered_call: 'Unanswered call'
+    chat_callback_title: "Callback request"
+    sender: 'Sender'
+    caller: 'Caller'
+    no_any_tasks: "No tasks available"
+    no_tasks_selected: "No task selected"
+    are_you_sure_want_close_call_task: "Are you sure you want to mark the task as done?"
+    are_you_sure_want_task_to_be_marked_new: "Are you sure you want to mark the task as new?"
+    are_you_sure_want_close_task: "Are you sure you want to mark the task as done?"
+    select_state_for_this_task: "Select state for this task"
+    task_is_already_in_work: "Selected task is already being processed by %{agent}"
+    rate_this_chat: "Rate this chat"
+    ok: "OK"
+    select_task_result: "Select result"
+    new_task: Ticket
+    new_tasks: New tasks
+    mark_as_seen: Mark as seen
+    waiting_time_out_dialog: "This task you have locked is about to be unlocked soon."
+    waiting_time_out_modal_title: "Task's waiting time about to expire"
+    keep_working: "Continue locking"
+    contact_card:
+      company: Company
+      basic_information: Basic Information
+      customers: Customers
+      tasks: Tasks
+      calls: Calls
+      emails: Emails
+      chats: Chats
+      sms: SMS
+      web_forms: Web Forms
+      company_basic_information: Company Basic Information
+      loading: Loading...
+      company_name: Company Name
+      business_number: Business Number
+      address: Address
+      primary_contact_person: Primary Contact Person
+      postal_code: Postal Code
+      city: City
+      email_address: Email Address
+      phone_number: Phone Number
+      deleting: Deleting...
+      delete: Delete
+      save: Save
+      task_history: Tasks History
+      date_created: Date Created
+      from: From
+      media_channel: Media Channel
+      service_channel: Service Channel
+      reminder: Reminder
+      internal_notes: Internal Notes
+      customer: Customer
+      customer_basic_information: Customer Basic Information
+      first_name: First Name
+      last_name: Last Name
+      work_title: Work Title
+      second_address: Second Address
+      contact_card: Contact Card
+      saving: Saving...
+    customer_modal:
+      customer_card: Customer card
+      open_tickets: Open tickets
+      customer_details: Customer details
+      task_history: Task history
+      customer_name: Name
+      address: Address
+      city: City
+      vat: VAT or Social security number
+      postcode: Postcode
+      country: Country
+      contact: Contact
+      phone: Phone
+      email: Email
+      website: Website
+      facebook: Facebook
+      twitter: Twitter
+      skype_id: Skype ID
+      first_name: First name
+      last_name: Last name
+      saved: Saved successfully
+      deleted: Deleted successfully
+      phone_invalid: Phone is invalid
+      phone_already_in_use: Phone is already in use
+      email_already_in_use: Email is already in use
+      contact_person: Contact person
+      contact_info: Contact details
+      customer: Customer
+      clear: Clear
+    contact_modal:
+      contact_search_placeholder: Search contact ...
+      delete_all_contacts: Delete phonebook
+      no_contacts: No contacts
+      save_contact: Save
+      phonebook_card: Phonebook card
+      phone_invalid: Phone is invalid
+      phone_already_in_use: Phone is already in use
+      email_already_in_use: Email is already in use
+    campaign_modal:
+      campaign_search_placeholder: Search campaign ...
+      delete_all_campaigns: Delete all campaigns
+      no_campaigns: No campaigns
+      save_campaign: Save
+      campaigns_card: Campaigns
+      phone_invalid: Phone is invalid
+      phone_already_in_use: Phone is already in use
+      email_already_in_use: Email is already in use
+    campaign_item_modal:
+      save_campaign_item: Save
+      search_placeholder: Campaign item...
+      campaign_items_card: Campaign item
+      delete_all: Delete all
+      no_campaign_items: No campaign items
+    confirm_delete: Are you sure you want to delete?
+    delete_success: Deleted successfully
+    saved: Saved
+    deleted: Deleted successfully
+    answers_associated: Number of answers associated with this product is
+
+
+  daterangepicker:
+    ranges:
+      today: Today
+      yesterday: Yesterday
+      last_x_days: 'Last {{days}} days'
+      this_month: This month
+      last_month: Last month
+    cancel: Clear
+    apply: Apply
+    from: From
+    to: To
+    custom_range: Custom range
+    days_of_week:
+      - Su
+      - Mo
+      - Tu
+      - We
+      - Th
+      - Fr
+      - Sa
+    month_names:
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+  users:
+    log_in_as: Choose a user
+    switch_user: Change user
+    switch_back: Admin
+    resend_instructions: Resend confirmation instructions
+    mailer:
+      welcome: Welcome
+      paragraph_text: You can confirm your account email through the link below
+      hello: Hello
+      link_text: Set my password
+      set_password: You have requested to change your password on Contakti-service.
+        Please click the below link to change your password
+      declaration: You received this email because we received a request for password reset for your account. If you didn't request password reset you can safely delete this email.
+      unlock_text_html: "<p>Your account has been locked due to an excessive number
+        of unsuccessful sign in attempts.</p> <p>Click the link below to unlock your account:</p>"
+      reset_button: Change Password
+    passwords:
+      change_pass: Change your password
+      new_pass: New password
+      confirm_pass: Confirm your new password
+      change_pass_btn: Change my password
+      forgot_pass: Forgot your password?
+      send_reset_instructions: Send
+      forgot_pass_header: Did you forget your password? Please provide your email
+        address and we will send you a link to change your password.
+      email_not_found: Sorry, we could not find your email address
+      instructions_sent: Sent reset password instructions to %{email}
+    registrations:
+      edit: Edit
+      waiting_for: Currently waiting confirmation for
+      cancel_account: Cancel my account
+      unhappy: Unhappy?
+      sure: Are you sure?
+      back: Back
+      update: Update
+      pass_hint_1: leave it blank if you don't want to change it
+      pass_hint_2: we need your current password to confirm your changes
+      sign_up: Sign up
+    sessions:
+      login_to_account: Login to your Account
+      password: Password
+      wrong_login: Wrong login or password
+      login: Login
+      forgot_password: Forgot password?
+      trouble_sign_in: Having trouble signing in?
+      how_to_reset: To reset your password, enter the email address you use to sign
+        in to CONTAKTI.
+      email: Email address
+      username: Username
+      placeholder_email: Enter email
+      reset_password_btn: Reset password
+      remember_me: Remember me
+    unlocks:
+      resend_unlock_instructions:
+    user:
+      change_role: Change role
+      close: Close
+    agents:
+      sort_by: Sort
+      date: Date
+      subject: Subject
+      email: Email address
+      phone: Phone number
+      add_new_agent: Add new agent
+      search: Search ..
+      online: Online
+      offline: Offline
+      agent_profile: Profile
+      agent_activity: Activities
+      agent_history: Message history
+      enter_agent_details: Enter agent details
+      placeholder_first_name: First name
+      placeholder_last_name: Last name
+      placeholder_alias_name: Chat alias
+      placeholder_title: Title
+      placeholder_phone: Phone number
+      placeholder_email: Email address
+      placeholder_minutes_until_offline: Minutes until offline
+      add_to_service_channels: Add to service channels
+      add_to_locations: Add to locations
+      add_to_media_channels: Add to media channels
+      mandatory_tip: This field is mandatory
+      save: Save
+      user_activity_report: User activity report
+      tasks: Tasks
+      turnaround: Turnaround
+      pauses: Pauses
+      solutions: Solutions
+      all: All
+      today: Today
+      open: Open
+      waiting: Waiting
+      ready: Ready
+      from: From
+      choose_period: Choose activity period
+      delete: Delete
+      name: Full name
+      added_agent: Added agent
+      updated_agent: Updated agent
+      deleted_agent: Deleted agent
+      not_deleted_agent: Cannot delete agent
+      media_channel_types:
+        email: Email
+        web_form: Web form
+        call: Callback
+        internal: Ticket
+        chat: Chat
+      empty_message_history: No message history available.
+      default_location: "Cost center"
+      select_default_location: "Select default location"
+      minutes_to_offline_tooltip: "Minutes until other sessions stay online if user logs out"
+    details:
+      my_account: Settings
+      account_details: Personal information
+      phonebook: Phonebook
+      first_name: First name
+      last_name: Last name
+      title: Title
+      phone: Phone
+      email: Email
+      password: Password
+      leave_empty_option: Leave empty for no change
+      repeat_password: Repeat password
+      cancel: Cancel
+      save_details: Save
+      mandatory_tip: This field is mandatory
+      updated_details: Updated user details
+      select_signature: Add a signature
+    index:
+      users: Users
+      user_name: User name
+      email: Email
+      registered: Registered
+      role: Role
+      change_role: Change role
+      delete_user: Delete user
+      sure: Are you sure?
+    show:
+      user: User
+      email: Email
+      edit_account: Edit account
+    nothing_selected_state:
+      no_agent: Please select an agent or create a new one
+      no_location: Please select a location or create a new one
+      no_report: Please select a report or create a new one
+      no_service_channel: Please select a service channel or create a new one
+  weekly_schedules:
+    title: Open hours
+    open_full_time: "Open 24/7"
+    use_entries: "Use defined hours"
+  search:
+    results:
+      one: '1 result'
+      other: '%{count} results'
+  date:
+    abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
+  tag_notifications:
+    time_success: Priority open time was successfully updated for
+    time_failure: Priority open time update was failed for
+    priority_success: Priority was successfully updated for
+    priority_failure: Priority update was failed for
+    priority_add: Priority was successfully added for
+    priority_add_failure: Priority creation failed for
+    alarm_receivers_success: Alarm receivers was successfully updated for
+    alarm_receivers_failure: Alarm receivers update was failed for
+    email_template_success: Email template was successfully updated for
+    email_template_failure: Email template update was failed for
+    sms_template_success: SMS template was successfully updated for
+    sms_template_failure: SMS template update was failed for
+    success: SUCCESS!
+    failure: FAILURE
+  time_tracker:
+    customer: Customers
+    projects: Projects
+    activities: Activities
+    description: Description
+    select_default: Select
+    title_time_tracker: Time Tracker
+    start: Start
+    required: required
+    open_modal: Open Modal
+    pause_timer: Pause
+    stop_timer: Stop
+    restart_timer: Restart
+    error_timesheet: Timesheet is not created
+    customer_not_found_with_contact: 'Unable to find customer with contact: %{contact}'
+    activity_and_project_must_present: 'Make sure we have project with name "Call" in tracking software with for customer (%{customer}) and also activity with name "call"'
+
+  kimai_details:
+    kimai_details: Time tracking
+    tracker_email: User Email
+    tracker_auth_token: Token key
+    kimai_tracker_api_url: URL
+    save: save
+    tracker_email_placeholder: Enter Authentication Mail
+    tracker_auth_token_placeholder: Enter Authentication Token
+    kimai_tracker_api_url_placeholder: https://time.contakti.com
+    saved: Saved successfully

@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>
+      <%= content_for?(:title) ? yield(:title) : 'Contakti' %>
+    </title>
+
+    <style>
+      body {
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 1em;
+        font-weight: normal;
+        border-bottom: 1px solid #ccc;
+        display: block;
+        margin: 0;
+        padding: 10px 0;
+      }
+      .message {
+        margin: 20px 0;
+      }
+      .float-right {
+        float:right
+      }
+      .print-logo {
+        margin: 20px 0;
+        border:none;
+      }
+      body {
+        zoom: 0.7;
+      }
+    </style>
+    <%= content_for?(:head) ? yield(:head) : '' %>
+  </head>
+  <body class="print">
+    <img class="print-logo" src="<%== asset_path 'logo_tekstilla_200w.png' %>" >
+    <%= yield %>
+    <script>
+      I18n.locale = '<%= I18n.locale %>';
+    </script>
+  </body>
+</html>

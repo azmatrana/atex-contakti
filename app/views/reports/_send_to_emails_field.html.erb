@@ -1,0 +1,24 @@
+<div class="widget widget-gray margin-bottom-none marginT10">
+  <div class="widget-head">
+    <h4 class="heading"><%= t('reports.summary.send_report_email')%></h4>
+  </div>
+  <div class="widget-body">
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.text_field :send_to_emails, placeholder: t('reports.comparison.separate_by_comma'), class: 'form-control' %>
+        <p class="send-to-emails has-error help-block <%= 'hide' if @report.errors.empty? %>">
+          <%= @report.errors[:send_to_emails].first %>
+        </p>
+      </div>
+      <div class="col-md-12">
+        <div class="clearfix marginT10">
+          <span class="<%= 'tooltip-wrapper' unless @report.persisted? %>">
+            <button type="button" class="send-report-btn <%= get_btn_class(@report) %>" data-id="<%= @report.id %>">
+              <%= t('reports.comparison.send_now')%> <span class="glyphicon glyphicon-share-alt"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="msg-panel">
+    <div class="fixed-hdr">
+        <div class="row" id="msg-hdr">
+            <div class="col-md-12">
+				<h4><%= t('users.agents.agent_history') %></h4>
+            </div>
+        </div>
+    </div>
+    <div id="fxd-thrd">
+        <div class="message-thread" >
+            <% if @user_messages.count > 0 %>
+                <% @user_messages.each do |user_message| %>
+                    <div class="message-history">
+                        <div class="header">
+                            <span class="timestamp"><%= user_message.created_at.strftime('%d.%m.%y at %H:%M') %></span>
+
+                            <p><%= t('users.agents.from') %> <a><%= user_message.from %></a></p>
+
+                            <h1 class="item-title"><%= user_message.title %></h1>
+                        </div>
+                        <div class="content">
+                            <p><%== user_message.formatted_description %></p>
+                        </div>
+                    </div>
+                <% end %>
+            <% else %>
+                <% # TODO: Makes text gray   %>
+                <%= t('users.agents.empty_message_history') %>
+            <% end %>
+        </div>
+    </div>
+</div>

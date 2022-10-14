@@ -1,0 +1,2 @@
+module SuperUi::SessionsHelper
+end

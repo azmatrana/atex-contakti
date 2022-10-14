@@ -1,0 +1,11 @@
+$('#sms_templates_editor').html('<%= escape_javascript(render('/tasks/agent_sms_template_editor')) %>');
+<% if @sms_template.persisted? %>
+  existingTemplate = $.grep(gon.smsTemplates, function(el, i) {
+    el.id.toString() == '<%= @sms_template.id %>'
+  })[0];
+  if(!existingTemplate) {
+    gon.smsTemplates.push(<%== @sms_template.to_json %>);
+  }
+<% end %>
+
+window.userDashboardApp.initialise(true);

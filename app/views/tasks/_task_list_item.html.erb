@@ -1,0 +1,121 @@
+<script type="text/html" id="task_list_item_template">
+  <table class="table task-item" data-bind="click: $parent.taskClicked, css: { selected: selected }" onclick="window.userDashboardApp.viewModels.taskContainer.cancel()">
+    <tr data-bind="css: priorityClass" >
+      <td data-bind="css: itemStatusState" class="item-type">
+        <span data-bind="css: iconClass" class="glyphicon"></span>
+      </td>
+
+      <td class="item-description" data-bind="css: urgentCss">
+        <section data-bind="if: (data.media_channel == 'call')">
+          <a class="caller-number-link">
+            <span data-bind="if: call_counter()" class="call-counter pull-right">
+              <span data-bind="text: call_counter()"></span>
+            </span>
+            <!-- ko if: messages().length && messages()[0].data.sms && !messages()[0].data.inbound -->
+            <!-- <span><%#= I18n.t('user_dashboard.text_message_sent') %></span><br> -->
+            <!-- /ko -->
+            <!-- ko if: messages().length && messages()[0].data.sms && messages()[0].data.inbound -->
+            <!-- <span><%#= I18n.t('user_dashboard.text_message_inbound') %></span><br> -->
+            <!-- /ko -->
+            <span>
+              <span data-bind="text: lastMessage() && lastMessage().from" class="caller-number"></span><br>
+            </span>
+
+            <span data-bind="if: data.data.caller_name" class="caller-name">
+              <span data-bind="text: data.data.caller_name"></span>
+            </span>
+          </a>
+        </section>
+
+        <section data-bind="if: data.media_channel !== 'call' && data.media_channel !== 'sms'">
+          <span data-bind="if: lastMessage()">
+            <span data-bind="if: !lastMessage().sms">
+              <span data-bind="text: notCallnotSmsFrom()"></span>
+            </span>
+
+            <span data-bind="if: lastMessage().sms">
+              <span data-bind="text: lastMessage().to"></span>
+            </span>
+          </span>
+        </section>
+
+        <!-- ko if: data.media_channel === 'sms' -->
+        <section>
+          <!-- ko if: messages()[0].data.inbound -->
+            <span data-bind="text: messages()[0].data.from"></span><br>
+
+            <span class="call-counter pull-right">
+              <span data-bind="text: missingSmsCounter()"></span>
+            </span>
+          <!-- /ko -->
+          <span data-bind="if: data.data.caller_name" class="caller-name">
+            <span data-bind="text: data.data.caller_name"></span>
+          </span>
+        </section>
+        <!-- /ko -->
+
+        <!-- ko if: data.media_channel === 'call' -->
+          <!-- ko if: lastMessage().data.sms && lastMessage().data.inbound -->
+          <span><%= I18n.t('user_dashboard.text_message_inbound') %></span>
+          <!-- /ko -->
+          <!-- ko if: lastMessage().data.sms && !lastMessage().data.inbound -->
+          <span><%= I18n.t('user_dashboard.text_message_sent') %></span>
+          <!-- /ko -->
+        <!-- /ko -->
+        <h1 class="item-title">
+          <span data-bind="if: data.media_channel === 'call'">
+            <span data-bind="if: isCallback()">
+              <%= I18n.t('user_dashboard.unanswered_call') %>
+            </span>
+
+            <span data-bind="if: !isCallback()">
+              <%= I18n.t('user_dashboard.chat_callback_title') %>
+            </span>
+          </span>
+
+          <span data-bind="if: data.media_channel !== 'call' && data.media_channel !== 'sms'">
+            <span data-bind="text: messageSubject"></span>
+          </span>
+
+          <span data-bind="if: data.media_channel === 'sms'">
+            <!-- ko if: !messages()[0].data.inbound -->
+              <span><%= I18n.t('user_dashboard.text_message_sent') %></span>
+            <!-- /ko -->
+            <!-- ko if: messages()[0].data.inbound -->
+              <span><%= I18n.t('user_dashboard.text_message_inbound') %></span>
+            <!-- /ko -->
+          </span>
+        </h1>
+        <p data-bind="text: lastMessage.description" class="last-message-description"></p>
+        <!-- ko if: !messages()[0].data.inbound -->
+          <span data-bind="if: data.media_channel === 'sms'">
+            <span class="manage-task-link clearfix">
+              <span class="task-list-item-service-channel-name task-number" data-bind="text: recieverNumber"></span>
+            </span>
+          </span>
+        <!-- /ko -->
+        <span class="manage-task-link clearfix">
+          <span class="glyphicon glyphicon-share-alt"></span>
+          <span class="task-list-item-service-channel-name" data-bind="text: serviceChannelName"></span>
+        </span>
+
+        <span class="glyphicon glyphicon-time"></span>
+        <span class="last-message-created-at" data-bind="text: createdAt"></span>
+        <!-- ko if: !_.isEmpty($data.noteBody()) -->
+          <span class="task-list-item-note-present glyphicon glyphicon-file"></span>
+        <!-- /ko -->
+      </td>
+      <td class="item-progress">
+        <span data-bind="css: clockClass" class="glyphicon glyphicon-time"></span>
+        <p data-bind="if: scheduled" class="time-till-red-alert">
+          <span data-bind="text: timer"></span>
+          <br>
+          <span data-bind="if: data.red_alert_or_ready_date">
+            <span data-bind="text: redAlertFormatted()"></span>
+          </span>
+        </p>
+        <p data-bind="if: !scheduled" class="time-till-red-alert">&infin;</p>
+      </td>
+    </tr>
+  </table>
+</script>

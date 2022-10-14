@@ -1,0 +1,4 @@
+<h3><%= t('users.show.user')%></h3>
+<p><%= t('users.show.user')%>: <%= @user.name %></p>
+<p><%= t('users.show.email')%>: <%= @user.email if @user.email %></p>
+<%= link_to t('users.show.edit_account'), edit_user_path %>

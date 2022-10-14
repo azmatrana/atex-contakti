@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= t('users.log_in_as') %></h3>
+    </div>
+    <div class="modal-body" style="overflow-y: auto">
+      <div class="form-group">
+        <ul>
+          <% if @switchable_users %>
+            <% @switchable_users.each do |user| %>
+              <li>
+                <a href="/change_user/<%= user.id %>">
+                  <%= user.full_name_format %>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a role="button" class="btn secondary-btn" data-dismiss="modal">
+        <%= t('user_dashboard.cancel') %>
+      </a>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,35 @@
+<div data-bind="with: viewModels.sipClientViewModel">
+  <!-- Slide client open START -->
+  <div id="open_sip_client" data-bind="visible: phoneHidden">
+    <button data-bind="click: slidePhone.bind($data, 'open')" class="btn btn-navi fa fa-phone"> <%= t('user_dashboard.deskphone') %></button>
+  </div>
+  <!-- Slide client open STOP-->
+
+  <div class="container" id="sip_client_main">
+    <!-- Client header row start -->
+    <div class="row status-row" >
+        <div id="sipClient" class="col-md-12">
+          <div class="clearfix sipStatus row">
+
+            <div class="col-xs-3">
+              <button class="pull-left btn-naviclose" onclick="document.getElementById('sip_client_toggle').classList.toggle('d-none');" href="#">
+                <i class="fa fa-bars"></i>
+              </button>
+            </div>
+            <!-- <div class="col-xs-4 text-center" id="txtCallStatus" class="pull-right">&nbsp;</div> -->
+            <div class="col-xs-8 pull-left" id="txtCallStatus">&nbsp;</div>
+            <div class="col-xs-1 phone-slide">
+              <span class="pull-right btn-naviclose fa fa-close" data-bind="click: slidePhone.bind($data, 'close')"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" >
+              <%= render 'layouts/phone/phone' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= render 'layouts/phone/settings_and_logs' %>
+</div>

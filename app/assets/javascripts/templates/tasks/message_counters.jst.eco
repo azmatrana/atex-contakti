@@ -1,0 +1,52 @@
+<li data-bind="click: function(data, event) {filterClicked('new') }" class="new" id="tasks_counter_block_new">
+  <font size="4">
+    <span data-bind="text: taskCounterNew"></span>
+  </font>
+  <br>
+  <div style="background-color: #26828E">
+    <font color="#ffffff">
+      <%= I18n.t('user_dashboard.new')%>
+    </font>
+  </div>
+</li>
+
+<li data-bind="click: function(data, event) {filterClicked('new') }" class="open" id="tasks_counter_block_open">
+  <font size="4">
+    <span data-bind="text: taskCounterOpen"></span>
+  </font>
+  <br>
+  <div style="background-color: #8dc63f">
+    <%= I18n.t('user_dashboard.open')%>
+    </div>
+</li>
+
+<li data-bind="click: function(data, event) {filterClicked('new') }" class="waiting" id="tasks_counter_block_waiting">
+  <font size="4">
+    <span data-bind="text: taskCounterWaiting"></span>
+  </font>
+  <br>
+  <div style="background-color: #fbd039">
+    <%= I18n.t('user_dashboard.waiting')%>
+  </div>
+</li>
+
+<li data-bind="click: function(data, event) {filterClicked('new') }" class="ready" id="tasks_counter_block_ready">
+  <font size="4">
+    <span data-bind="text: taskCounterReady, click: filterClicked"></span>
+  </font>
+  <br>
+  <div style="background-color: #666666">
+    <font color="#ffffff">
+      <%= I18n.t('user_dashboard.ready')%>
+    </font>
+  </div>
+</li>
+
+<li data-bind="click: function(data, event) {filterClicked('new') }" class="all pull-right" id="tasks_counter_block_all">
+  <font size="4">
+    <span data-bind="text: tasks().length"></span>
+  </font>
+  <br>
+  <%= I18n.t('user_dashboard.all')%>
+</li>
+

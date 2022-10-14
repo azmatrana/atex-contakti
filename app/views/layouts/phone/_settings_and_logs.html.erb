@@ -1,0 +1,34 @@
+<div class="call-popup d-none" id="sip_client_toggle">
+  <div class="center calllogheader">
+    <span class="text-center strong"><%= t('user_dashboard.extensions') %></span>
+  </div>
+
+
+  <div class="call_history agent-inbox-preview">
+    <div data-bind="foreach: companyAgents">
+      <table class="table">
+        <tr>
+          <td class="item-description">
+            <h1 class="agent-title"><strong><label data-bind="text: full_name_format"></label></strong><label>&nbsp;<span data-bind="text: sip_user_name"></label></h1>
+            <h2><label data-bind="text: title"></h2>
+
+            <span class="item-status" data-bind="if: is_online && !in_call">
+              <h4><span class="label label-success"><%= t('user_dashboard.online') %></span></h4>
+            </span>
+
+
+            <span class="item-status" data-bind="if: is_online && in_call">
+              <h4><span class="label label-danger"><%= t('user_dashboard.busy') %></span></h4>
+            </span>
+
+            <span class="item-status" data-bind="if: !is_online">
+              <h4><span class="label label-default"><%= t('user_dashboard.offline') %></span></h4>
+            </span>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>

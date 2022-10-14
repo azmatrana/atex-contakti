@@ -1,0 +1,10 @@
+<h1>Manager</h1>
+<label>First Name:</label> <%= @manager.first_name %><br/>
+<label>Last Name:</label> <%= @manager.last_name %><br/>
+<label>Title:</label> <%= @manager.title %><br/>
+<label>Email:</label> <%= @manager.email %><br/>
+<label>Mobile:</label> <%= @manager.mobile %><br/>
+<label>Company:</label> <%= @manager.company.name if @manager.company %><br/>
+
+<%= link_to 'Edit', edit_super_ui_manager_path(@manager), :class => 'btn btn-default' %>
+

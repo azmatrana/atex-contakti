@@ -1,0 +1,76 @@
+<div class="container-fluid details">
+  <div class="row">
+    <div class="col-md-12 agent-admin preview-content">
+      <div class="innerLR">
+        <div class="widget widget-tabs border-bottom-none">
+          <div class="widget-head">
+            <ul>
+              <li class="active">
+                <a class="glyphicons stats" href="#summary_report" data-toggle="tab"><i></i><%= t('reports.summary.summary_report')%></a>
+              </li>
+            </ul>
+          </div>
+          <div class="widget-body">
+            <%= form_for @report, url: { action: :update }, method: :put, html: { :class => 'form-horizontal' } do |f| %>
+              <% unless @report.persisted? %>
+                <%= render partial: 'report_hidden_fields', locals: { f: f } %>
+              <% end %>
+              <div class="tab-content">
+                <div class="tab-pane fill-bg active" id="summary_report">
+                  <div class="row">
+                      <%= render partial: 'action_buttons' %>
+                      <div class="col-md-6 marginB10">
+                        <span class="btn-cosplay btn-default full-width">
+                            <span class="pull-left title-lang-span" >
+                                <%= @report.title %>
+                            </span>
+                            <span class="pull-right">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                <%= @report.starts_at.strftime('%d.%m.%Y') %> -
+                                <%= @report.ends_at.strftime('%d.%m.%Y') %>
+                            </span>
+                        </span>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <%= render partial: 'locations' %>
+                    <div class="col-md-6">
+                      <div class="widget widget-gray margin-bottom-none">
+                        <div class="widget-head">
+                          <h4 class="heading"><%= t('reports.summary.schedule_report')%></h4>
+                        </div>
+                        <div class="widget-body">
+                          <div class="scheduler-div">
+                            <div class="styled-select scheduler-select-div">
+                                <%= f.select :scheduled, %w[daily weekly monthly].map { |s| [t("reports.comparison.#{s}"), s] }, include_blank: I18n.t('tags.please_select'), class: "form-control"  %>
+                                <span class="caret"></span>
+                            </div>
+                            <label><%= t('reports.summary.starts')%></label>
+                            <div class="input-group date scheduler-start-date-picker">
+
+                              <%= start_sending_at_helper(@report, f) %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="innerLR padding-none">
+                    <div class="row">
+                      <div class="col-md-12 send-to-emails">
+                        <%= render partial: 'send_to_emails_field', locals: { f: f } %>
+                      </div>
+                    </div>
+                    <div class="row marginT10">
+                      <%= render partial: 'summary_report' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,550 @@
+X-Apparently-To: dotpromotest1@yahoo.com via 98.139.214.242; Tue, 30 Sep 2014 18:18:56 +0000
+Return-Path: <bounce@bounce4.communications.yahoo.com>
+Received-SPF: pass (domain of bounce4.communications.yahoo.com designates 67.195.83.92 as permitted sender)
+X-YMailISG: j3tDYuUWLDsDMgMRsA97X8qlL3MLJte1x9CkC72LvqyhFA0m
+ UjKcokvynMeCEM_Mr2KorOw6Smma_9DFuRv8rsuoCjldjvtQw4rMbcv6OJ2G
+ qUH7qMD4b6fysL3g9K1DQNPummiGtUa0oedOHWd4fie80OWK2k0qPEw.XA4C
+ Q4.zAz2cROxTqJK72ZcLxvcWpEB.1MSVEGwD0lQ5utM3THED9J4hZ2QjcshI
+ Jc203YhPTQKrIsX_BjEhdSiy1BKckLMA8J65RnbITvQvtFz6T2GkLey32iIq
+ fou0TDv3mLfoHeCJFQbStde28yJNVKxPcK7YOfjZ.19dBlhvBLvH.scF14ZP
+ wqr9pS0GcLOVUuEeVLR4jySucYh_YZMOipAZUpNuwFClvdqBn73pD.CRMmJB
+ ttrUiPrU7HYwsN3whgxIJiRRzqxt1IGfhoPwqK2oWc0WwrFU14jF6fgwWiiZ
+ K8.vsl9ufiXMgjgCPSZblMpYTlA.0AF8ESKH_AKz__gUQwTEG.0sZ.zV4CH8
+ vDgAzQ1A3lHpejnFhMjrDbuhQXNeV_U.h0XRQzDBCFKPM8m4EkTO9q0VJrrx
+ IHjEBpeo6lLAb.bdyakPkCWBJUrXB4FV0CSUM8i4NbNeUcghBasR2uObYGO2
+ 7ez7gaTJWcgptiX1puOupRfSLxjaAYSsgeenQ_X0k1X8TJkC.zNbKT7TiN2l
+ Uozhyy57iSSy41ItarhxvKTcuIrU314bPibmTB.0fanOLGZAiNGtZVgfJeYQ
+ LNlB.0uigDRtOX3QhGufwBOLmK7d6PRyHsTsopR1jBxU8ioWbLgqnJ9ZFhki
+ dah8olQaMSySdxA4WlUJ9JOYjcTBs.Pb63hRzx6QcsW2XsqMaQpyx1puoL1n
+ NXeDoyb7Kklnt9Zye8NLH08G1YmnIpp8uq7_GmiqHRtzVWGf30SeQ7LhEWe8
+ PXb7F2_SA1iVXRKGTzSLVWUkiJxDGNTlKoKjgbuJv120kRNCosJDmsJg7Xcv
+ ncpHunM4MUhWTkRZlszQz0AsuKOsjiE4QvUOP.tERcpyYv4l5YxaNVF0mcHd
+X-Originating-IP: [67.195.83.92]
+Authentication-Results: mta1571.mail.bf1.yahoo.com  from=communications.yahoo.com; domainkeys=neutral (no sig);  from=communications.yahoo.com; dkim=pass (ok)
+Received: from 127.0.0.1  (EHLO mta29.communications.yahoo.com) (67.195.83.92)
+  by mta1571.mail.bf1.yahoo.com with SMTP; Tue, 30 Sep 2014 18:18:56 +0000
+Received: from localhost ([127.0.0.1])
+	by mta29.communications.yahoo.com (-); Tue, 30 Sep 2014 18:17:59 +0000
+X-VirtualServer: marketing, mta29.communications.yahoo.com, 67.195.83.92
+X-VirtualServerGroup: marketing
+X-MailingID: 67116863::602500::352034::61400::ver**1**GUID**W4SAQM27E6UF6ZAFVA5MDVBBWU_14892000004_dotpromotest1#r3::556608_56801025_0
+X-SMHeaderMap: mid="X-MailingID"
+X-Destination-ID: dotpromotest1@yahoo.com
+X-SMFBL: ZG90cHJvbW90ZXN0MUB5YWhvby5jb20=
+DKIM-Signature: v=1; a=rsa-sha1; c=simple;
+	d=communications.yahoo.com; s=201402-std-mrk;
+	i=@communications.yahoo.com; h=Content-Transfer-Encoding:
+	Content-Type:Reply-To:MIME-Version:Message-ID:X-ReportingKey:
+	Subject:Date:To:From; bh=Rj81+qpSdQo9XFSRgF8EIdALpuo=; b=2xJD/8b
+	9iPVTSs/g2oqN5ICe0KI8nnt4Sb8/HHh9RtQVJSpmpVi91q6D6F/5ed6Yf90oX3B
+	T+PCdcr2/uIsmXduZN/enKuy2iZ6YnxGG5gV89iynfsbbA2y1rod6cEaflNG4iZk
+	tH38CGGW//4+J9anb/M7DOLQH+ZUkRMq6Jvo=
+Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_A15_B910_6817ADC9.0ED37481"
+Reply-To: replies@communications.yahoo.com
+MIME-Version: 1.0
+Message-ID: <67116863.556608@communications.yahoo.com>
+X-ReportingKey: LJ4BFIT8I1U2D63LKN133JJJ452GMJ13HG4AV::dotpromotest1@yahoo.com::ver**1**GUID**W4SAQM27E6UF6ZAFVA5MDVBBWU_14892000004_dotpromotest1#r3
+Subject: =?UTF-8?Q?Get=20the=20most=20out=20of=20Yahoo=20Mail=3A=20Volume=202?=
+Date: Tue, 30 Sep 2014 18:17:59 +0000
+To: dotpromotest1@yahoo.com
+From: "=?UTF-8?Q?Yahoo=20Mail?=" <Yahoo@communications.yahoo.com>
+Content-Length: 31801
+
+
+------=_NextPart_A15_B910_6817ADC9.0ED37481
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Search smarter
+
+
+--------------------------------------------------------------------
+
+=0A=0AFeatures=0AVol. 2=0A  =0AYAHOO MAIL=0A  =0AYahoo Mail helps you fin=
+d what you're looking for.=0A  =0AWork more efficiently with our smart se=
+arch =0Asuggestions, enhanced results page, and more. =0A  =0AGo to your =
+inbox:=0Ahttps://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B=
+03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~=
+r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D5~p&6=3D&i=3Dqk=
+2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE7=
+13ACD2C413DDF4F48423295C019F6D=0A  =0A-----------------------------------=
+---------------------------------=0A  =0ASmart search=0A  =0AYahoo Mail s=
+earch makes it simple to find files you need=0Afrom a specific person.=0A=
+=09=09=0A1. Type a name into the search box and you'll see a =0Alist of s=
+uggestions based on who you email with the most.=0A  =0A2. Once you selec=
+t the person, our search results page =0Ahelps you sort and find emails, =
+photos, and =0Afiles sent from your contact.=0Ahttps://svtracking1.commun=
+ications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**=
+PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyi=
+xdxknj2s_7Rqfx.Txd&u=3D5~q&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jn=
+R0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D=0A  =
+=0A--------------------------------------------------------------------=0A=
+   =0ACheck out this video to learn more about smart search:=0Ahttps://sv=
+tracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYba=
+aaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2=
+s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D5~2&6=3D&i=3Dqk2g://5n5.pxl2lkV.lf=
+v/njklY?4=3Db2@PRsuG1SVAE604C3E21BEA09ED28729E007EA811238E0D76115902057A5=
+4609E43039D711=0A  =0A---------------------------------------------------=
+-----------------=0A  =0ADownload the YAHOO MAIL App:=0Ahttps://svtrackin=
+g1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D=
+4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=
+=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D5~w&6=3D&i=3Dqk2g1://pqf.lfv/wpj7D023BD595=
+A6B2D3270E85C0DEB610773B3D589C91058B4EF227E8D2A42D3A97=0A=0A-------------=
+-------------------------------------------------------
+
+Manage Subscriptions
+https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ=
+4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Ux=
+kyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D6gvR0&6=3D&i=3Dqk2g1://j=
+3S1T0ZkV.7Rqfx.Txd/1YxnjTlf3e2E7C6F0657476C346928B5BC53D6FBF6571D6E276103=
+7A6252B54DD4BBF1BA3FF
+
+Privacy Policy=20
+https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ=
+4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Ux=
+kyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D6gvSS&6=3D&i=3Dqk2g1://Z=
+wWx.pjYxf.lfv/g0Z4Rlp/3j/7Rqfx/UnkjZuj.qkvc0AEA0BE1C786DE09FED28958994A4D=
+8B4824B880DD79719293915A0B72C1A289
+
+--------------------------------------------------------------------
+
+This message was sent to the account of dotpromotest1@yahoo.com.  If you =
+do not want to receive emails from Yahoo Mail about staying in touch with=
+ friends and participating in online communities, please unsubscribe.
+
+https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ=
+4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Ux=
+kyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D6h3KZ&6=3D&i=3Dqk2g1://j=
+3S1T0ZkV.7Rqfx.Txd/3e1lk@pvT?n=3D~2nrwBF1YQR6eOktFxwAE7nPOZ1H&.crU=3D-vF0=
+~r9r9rB&.R2k0=3Ddj&.m=3D-30352EC53550772B53990FE369D891DDB2102328EA3FD294=
+496C56708872CD10
+
+--------------------------------------------------------------------
+
+Yahoo is located at 701 First Avenue, Sunnyvale, CA 94089.
+
+RefID: ma-14892000004
+
+=0A
+------=_NextPart_A15_B910_6817ADC9.0ED37481
+Content-Type: text/html;
+	charset="UTF-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www=
+.w3.org/TR/REC-html40/loose.dtd">=0A<html>=0A<head> =20
+  =0A<title>Yahoo</title>=0A<style type=3D"text/css">=0Ahtml {=0A=09-webk=
+it-text-size-adjust: none;=0A}=0Abody {=0A=09width: 100%;=0A=09margin: 0 =
+auto;=0A=09padding: 0;=0A}=0A.ReadMsgBody {=0A=09width: 100%;=0A}=0A.Exte=
+rnalClass {=0A=09width: 100%;=0A}=0A.ExternalClass * {=0A=09line-height: =
+100%;=0A}=0A</style>=0A<!--[if gte mso 9]>=0A<style type=3D"text/css">=0A=
+    div {mso-line-height-rule: exactly;}=0A</style>=0A<![endif]-->=0A</he=
+ad>=0A<body><IMG SRC=3D"https://svtracking1.communications.yahoo.com/t/db=
+jbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e=
+3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D=
+" WIDTH=3D"1" HEIGHT=3D"1" STYLE=3D"border-width:0; border-style:hidden;"=
+ ALT=3D""/>
+
+
+=0A<table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" width=3D"100%"=
+ align=3D"center" bgcolor=3D"#ffffff">=0A  <tr>=0A    <td align=3D"center=
+" valign=3D"top"><table cellpadding=3D"0" cellspacing=3D"0" border=3D"0" =
+width=3D"500" align=3D"center" style=3D"min-width:500px;">=0A        <tr>=
+=0A          <td align=3D"center" valign=3D"top">=0A          <!--Prehead=
+er-->=0A=09<!-- Preheader Space Start-->
+=09<table width=3D"500" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+=09<tr><td height=3D"18">&nbsp;</td></tr>
+=09=09<tr>
+=09=09=09<td style=3D"font-family:Arial, Helvetica, sans-serif; font-size=
+:11px; line-height:14px;" align=3D"center">Search smarter</td>
+=09=09</tr>
+=09=09<tr><td height=3D"5" style=3D"font-size:5px; line-height:5px">&nbsp=
+;</td></tr>
+=09</table>
+=09<!-- Preheader Space End-->=0A<!--Preheader End-->=0A =0A<!-- View As =
+Webpage Start-->=0A<!-- View As Webpage Start-->
+=09=09<table width=3D"500" border=3D"0" cellspacing=3D"0" cellpadding=3D"=
+0">
+=09=09<tr>
+=09=09<td style=3D"font-family:Arial, Helvetica, sans-serif; font-size:11=
+px; line-height:14px;" align=3D"center">Can't see images? View as a <a hr=
+ef=3D"https://svtracking1.communications.yahoo.com/t/dfjbJnSMMeCAAHZ9B03y=
+KXZcaQ4SaBWFNYbaaaaKXZcQ4Sa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@=
+-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&nV=3Dmf2g0fvf2=
+V1k-_pjYxf.lfv&c=3DMPJ42&o=3D&0=3DY2ky://pjYxf.lfv/mrS0556E774B830AA9634D=
+41F7DADE05AC2FAE890AFD86EDEE52B1AB2ED87C2D20D" style=3D"font-family: Aria=
+l,Helvetica,sans-serif; font-size: 11px; text-decoration: none; color: rg=
+b(0, 51, 153);">webpage</a></td>
+=09=09</tr>
+        <tr><td height=3D"5" style=3D"font-size:5px; line-height:5px">&nb=
+sp;</td></tr>
+=09=09</table>
+<!-- View As Webpage End-->=0A<!-- View As Webpage End-->=0A<!-- lockup/h=
+ero -->   =0A            <table cellspacing=3D"0" cellpadding=3D"0" borde=
+r=3D"0" width=3D"500" bgcolor=3D"#7d6393">=0A              <tr>=0A       =
+         <td width=3D"20"><a href=3D"https://svtracking1.communications.y=
+ahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3=
+ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7=
+Rqfx.Txd&u=3D4Ah&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7=
+B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" target=3D"_bl=
+ank"><img src=3D"https://s.yimg.com/sd/14892/20717/h1.gif" style=3D"displ=
+ay:block; border:0;" width=3D"20" height=3D"84" alt=3D"Yahoo MAIL"></a></=
+td>=0A                <td width=3D"104" align=3D"center" valign=3D"top" b=
+gcolor=3D"#400090"><div style=3D"font-family:Helvetica, sans-serif; font-=
+size:20px; line-height:24px; color:#ffffff; font-weight:100;">=0A        =
+            <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A  =
+                    <tr>=0A                        <td height=3D"26" styl=
+e=3D"line-height:26px; font-size:26px;"><img src=3D"https://s.yimg.com/sd=
+/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D"display:block; bor=
+der:0;"></td>=0A                      </tr>=0A                    </table=
+>=0A                    <a href=3D"https://svtracking1.communications.yah=
+oo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD=
+~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rq=
+fx.Txd&u=3D4Ai&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B4=
+27B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" target=3D"_blan=
+k" style=3D"text-decoration:none; color:#ffffff;">Features<br>=0A        =
+            Vol. 2</a> </div></td>=0A                <td width=3D"376"><a=
+ href=3D"https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B=
+03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~=
+r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Aj&6=3D&i=3Dqk=
+2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE7=
+13ACD2C413DDF4F48423295C019F6D" target=3D"_blank"><img src=3D"https://s.y=
+img.com/sd/14892/20717/logo.gif" style=3D"display:block; border:0; font-f=
+amily:Helvetica; color:#ffffff;" width=3D"376" height=3D"84" alt=3D"Yahoo=
+ MAIL"></a></td>=0A              </tr>=0A              <tr>=0A           =
+     <td width=3D"500" height=3D"256" colspan=3D"3" align=3D"center" vali=
+gn=3D"top" background=3D"https://s.yimg.com/sd/14892/20717/herobg.gif"><t=
+able cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A                =
+    <tr>=0A                      <td height=3D"22" style=3D"line-height:2=
+2px; font-size:22px;"><img src=3D"https://s.yimg.com/sd/14892/20717/sp.gi=
+f" height=3D"1" width=3D"1" style=3D"display:block; border:0;"></td>=0A  =
+                  </tr>=0A                  </table>=0A                  =
+<div style=3D"font-family:Helvetica, sans-serif; font-size:45px; line-hei=
+ght:50px; color:#ffffff; font-weight:100;"> <a href=3D"https://svtracking=
+1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D=
+4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=
+=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Ak&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.l=
+fv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019=
+F6D" target=3D"_blank" style=3D"text-decoration:none; color:#ffffff;"><sp=
+an style=3D"font-weight:bold;">Yahoo Mail</span><br>=0A                  =
+  helps you find what<br>=0A                    you&rsquo;re looking for.=
+</a> </div>=0A                  <table cellspacing=3D"0" cellpadding=3D"0=
+" border=3D"0">=0A                    <tr>=0A                      <td he=
+ight=3D"17" style=3D"line-height:17px; font-size:17px;"><img src=3D"https=
+://s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D"di=
+splay:block; border:0;"></td>=0A                    </tr>=0A             =
+     </table>=0A                  <div style=3D"font-family:Helvetica, sa=
+ns-serif; font-size:20px; line-height:24px; color:#ffffff; font-weight:10=
+0; padding-left:10px; padding-right:10px;"> <a href=3D"https://svtracking=
+1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D=
+4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=
+=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Al&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.l=
+fv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019=
+F6D" target=3D"_blank" style=3D"text-decoration:none; color:#ffffff;">Wor=
+k more efficiently with our smart search suggestions, enhanced results pa=
+ge, and more.</a> </div></td>=0A              </tr>=0A              <tr>=0A=
+                <td colspan=3D"3" width=3D"500"><table cellspacing=3D"0" =
+cellpadding=3D"0" border=3D"0">=0A                    <tr>=0A            =
+          <td width=3D"151"><a href=3D"https://svtracking1.communications=
+.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fv=
+b3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s=
+_7Rqfx.Txd&u=3D4Am&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21=
+B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" target=3D"_=
+blank"><img src=3D"https://s.yimg.com/sd/14892/20717/h2.gif" style=3D"dis=
+play:block; border:0;" width=3D"151" height=3D"40" alt=3D"Yahoo MAIL"></a=
+></td>=0A                      <td width=3D"195" height=3D"40" align=3D"c=
+enter" valign=3D"middle" background=3D"https://s.yimg.com/sd/14892/20717/=
+cta.gif" bgcolor=3D"#400090"><div style=3D"font-family:Helvetica, sans-se=
+rif; font-size:18px; line-height:20px; color:#ffffff;"><strong><a href=3D=
+"https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZca=
+Q4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@U=
+xkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4An&6=3D&i=3Dqk2g1://f4=
+V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C4=
+13DDF4F48423295C019F6D" target=3D"_blank" style=3D"text-decoration:none; =
+color:#ffffff;">Go to your inbox</a></strong></div></td>=0A              =
+        <td width=3D"154"><a href=3D"https://svtracking1.communications.y=
+ahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3=
+ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7=
+Rqfx.Txd&u=3D4Ao&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7=
+B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" target=3D"_bl=
+ank"><img src=3D"https://s.yimg.com/sd/14892/20717/h3.gif" style=3D"displ=
+ay:block; border:0;" width=3D"154" height=3D"40" alt=3D"Yahoo MAIL"></a><=
+/td>=0A                    </tr>=0A                  </table></td>=0A    =
+          </tr>=0A              <tr>=0A                <td width=3D"500" =
+colspan=3D"3"><a href=3D"https://svtracking1.communications.yahoo.com/t/d=
+cjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8=
+e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D=
+4Ap&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF2=
+41BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" target=3D"_blank"><img src=
+=3D"https://s.yimg.com/sd/14892/20717/h4.gif" style=3D"display:block; min=
+-width:500px; border:0;" width=3D"500" height=3D"40" alt=3D"Yahoo MAIL"><=
+/a></td>=0A              </tr>=0A            </table>=0A            <!-- =
+/lockuphero --><!-- body 1-->=0A            <table cellpadding=3D"0" cell=
+spacing=3D"0" border=3D"0" width=3D"500" bgcolor=3D"#f4f4f7">=0A         =
+     <tr>=0A                <td width=3D"20"></td>=0A                <td =
+align=3D"left" valign=3D"top"><table cellspacing=3D"0" cellpadding=3D"0" =
+border=3D"0">=0A                    <tr>=0A                      <td heig=
+ht=3D"28" style=3D"line-height:28px; font-size:28px;"><img src=3D"https:/=
+/s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D"disp=
+lay:block; border:0;"></td>=0A                    </tr>=0A               =
+   </table>=0A                  <div style=3D"font-family:Helvetica, sans=
+-serif; font-size:24px; line-height:26px; color:#400090; text-align:left;=
+"><a href=3D"https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAA=
+HZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-=
+vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Aq&6=3D&i=3D=
+qk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627E=
+E713ACD2C413DDF4F48423295C019F6D" target=3D"_blank" style=3D"text-decorat=
+ion:none; color:#400090;"><strong>Smart search</strong></a></div>=0A     =
+             <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A =
+                   <tr>=0A                      <td height=3D"13" style=3D=
+"line-height:13px; font-size:13px;"><img src=3D"https://s.yimg.com/sd/148=
+92/20717/sp.gif" height=3D"1" width=3D"1" style=3D"display:block; border:=
+0;"></td>=0A                    </tr>=0A                  </table>=0A    =
+              <div style=3D"font-family:Helvetica, sans-serif; font-size:=
+17px; line-height:20px; color:#454958; font-weight:100; text-align:left;"=
+><a href=3D"https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAH=
+Z9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-v=
+F0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4A2&6=3D&i=3D=
+qk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627E=
+E713ACD2C413DDF4F48423295C019F6D" target=3D"_blank" style=3D"text-decorat=
+ion:none; color:#454958;">Yahoo Mail search makes it simple to find files=
+ you need<br>=0A                    from a specific person.</a></div>=0A =
+                 <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=
+=0A                    <tr>=0A                      <td height=3D"16" sty=
+le=3D"line-height:16px; font-size:16px;"><img src=3D"https://s.yimg.com/s=
+d/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D"display:block; bo=
+rder:0;"></td>=0A                    </tr>=0A                  </table>=0A=
+                  <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0"=
+>=0A                    <tr>=0A                      <td width=3D"36" ali=
+gn=3D"left" valign=3D"top"><table cellspacing=3D"0" cellpadding=3D"0" bor=
+der=3D"0">=0A                          <tr>=0A                           =
+ <td height=3D"1" style=3D"line-height:1px; font-size:1px;"><img src=3D"h=
+ttps://s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D=
+"display:block; border:0;"></td>=0A                          </tr>=0A    =
+                    </table>=0A                        <a href=3D"https:/=
+/svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFN=
+Ybaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxk=
+nj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Aw&6=3D&i=3Dqk2g1://f4V0mrV5.d=
+jZu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F4=
+8423295C019F6D" target=3D"_blank"><img src=3D"https://s.yimg.com/sd/14892=
+/20717/1.gif" style=3D"display:block; border:0;" width=3D"36" height=3D"3=
+6" alt=3D"Yahoo MAIL"></a></td>=0A                      <td width=3D"19">=
+</td>=0A                      <td align=3D"left" valign=3D"top"><div styl=
+e=3D"font-family:Helvetica, sans-serif; font-size:16px; line-height:18px;=
+ color:#454958; font-weight:100; text-align:left;"><a href=3D"https://svt=
+racking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaa=
+aa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s=
+%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Ax&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.=
+pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423=
+295C019F6D" target=3D"_blank" style=3D"text-decoration:none; color:#45495=
+8;">Type a name into the search box and you&rsquo;ll see a list of sugges=
+tions based on who you email with the most.</a></div></td>=0A            =
+        </tr>=0A                  </table>=0A                  <table cel=
+lspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A                    <tr>=
+=0A                      <td height=3D"20" style=3D"line-height:20px; fon=
+t-size:20px;"><img src=3D"https://s.yimg.com/sd/14892/20717/sp.gif" heigh=
+t=3D"1" width=3D"1" style=3D"display:block; border:0;"></td>=0A          =
+          </tr>=0A                  </table>=0A                  <table c=
+ellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A                    <t=
+r>=0A                      <td width=3D"1"></td>=0A                      =
+<td width=3D"226" bgcolor=3D"#473242"><a href=3D"https://svtracking1.comm=
+unications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s=
+**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxk=
+yixdxknj2s_7Rqfx.Txd&u=3D4Ay&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23=
+jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" t=
+arget=3D"_blank"><img src=3D"https://s.yimg.com/sd/14892/20717/a1.gif" st=
+yle=3D"display:block; border:0;" width=3D"226" height=3D"130" alt=3D"Yaho=
+o MAIL"></a></td>=0A                      <td width=3D"11"></td>=0A      =
+                <td width=3D"225" bgcolor=3D"#473242"><a href=3D"https://=
+svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNY=
+baaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxkn=
+j2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4Az&6=3D&i=3Dqk2g1://f4V0mrV5.dj=
+Zu.pjYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48=
+423295C019F6D" target=3D"_blank"><img src=3D"https://s.yimg.com/sd/14892/=
+20717/a2.gif" style=3D"display:block; border:0;" width=3D"225" height=3D"=
+130" alt=3D"Yahoo MAIL"></a></td>=0A                      <td width=3D"18=
+"></td>=0A                    </tr>=0A                  </table>=0A      =
+            <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A  =
+                  <tr>=0A                      <td height=3D"18" style=3D=
+"line-height:18px; font-size:18px;"><img src=3D"https://s.yimg.com/sd/148=
+92/20717/sp.gif" height=3D"1" width=3D"1" style=3D"display:block; border:=
+0;"></td>=0A                    </tr>=0A                  </table>=0A    =
+              <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A=
+                    <tr>=0A                      <td width=3D"36" align=3D=
+"left" valign=3D"top"><table cellspacing=3D"0" cellpadding=3D"0" border=3D=
+"0">=0A                          <tr>=0A                            <td h=
+eight=3D"3" style=3D"line-height:3px; font-size:3px;"><img src=3D"https:/=
+/s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D"disp=
+lay:block; border:0;"></td>=0A                          </tr>=0A         =
+               </table>=0A                        <a href=3D"https://svtr=
+acking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaa=
+a?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%=
+230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4A0&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.p=
+jYxf.lfv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F484232=
+95C019F6D" target=3D"_blank"><img src=3D"https://s.yimg.com/sd/14892/2071=
+7/2.gif" style=3D"display:block; border:0;" width=3D"36" height=3D"36" al=
+t=3D"Yahoo MAIL"></a></td>=0A                      <td width=3D"18"></td>=
+=0A                      <td align=3D"left" valign=3D"top"><div style=3D"=
+font-family:Helvetica, sans-serif; font-size:16px; line-height:18px; colo=
+r:#454958; font-weight:100; text-align:left;"><a href=3D"https://svtracki=
+ng1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D=
+4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=
+=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4BR&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.l=
+fv/%23jnR0Tq4F21B7B427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019=
+F6D" target=3D"_blank" style=3D"text-decoration:none; color:#454958;">Onc=
+e you select the person, our search results page helps you sort and find =
+emails, photos, and files sent from your contact.</a></div></td>=0A      =
+                <td width=3D"20"></td>=0A                    </tr>=0A    =
+              </table>=0A                  <table cellspacing=3D"0" cellp=
+adding=3D"0" border=3D"0">=0A                    <tr>=0A                 =
+     <td height=3D"16" style=3D"line-height:16px; font-size:16px;"><img s=
+rc=3D"https://s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" =
+style=3D"display:block; border:0;"></td>=0A                    </tr>=0A  =
+                </table>=0A                  <table cellspacing=3D"0" cel=
+lpadding=3D"0" border=3D"0">=0A                    <tr>=0A               =
+       <td width=3D"461"><a href=3D"https://svtracking1.communications.ya=
+hoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3Z=
+D~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7R=
+qfx.Txd&u=3D4BS&6=3D&i=3Dqk2g1://f4V0mrV5.djZu.pjYxf.lfv/%23jnR0Tq4F21B7B=
+427B29A95DF241BCC0EB2627EE713ACD2C413DDF4F48423295C019F6D" target=3D"_bla=
+nk"><img src=3D"https://s.yimg.com/sd/14892/20717/a3.gif" style=3D"displa=
+y:block; border:0;" width=3D"461" height=3D"283" alt=3D"Yahoo MAIL"></a><=
+/td>=0A                    </tr>=0A                  </table>=0A         =
+         <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A     =
+               <tr>=0A                      <td height=3D"30" style=3D"li=
+ne-height:30px; font-size:30px;"><img src=3D"https://s.yimg.com/sd/14892/=
+20717/sp.gif" height=3D"1" width=3D"1" style=3D"display:block; border:0;"=
+></td>=0A                    </tr>=0A                  </table></td>=0A  =
+            </tr>=0A            </table>=0A            <!-- /b1--><!-- bo=
+dy 3 -->=0A            <table cellspacing=3D"0" cellpadding=3D"0" border=3D=
+"0" width=3D"500" bgcolor=3D"#ffffff">=0A              <tr>=0A           =
+     <td width=3D"21"></td>=0A                <td align=3D"left" valign=3D=
+"top"><table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">=0A        =
+            <tr>=0A                      <td height=3D"16" style=3D"line-=
+height:16px; font-size:16px;"><img src=3D"https://s.yimg.com/sd/14892/207=
+17/sp.gif" height=3D"1" width=3D"1" style=3D"display:block; border:0;"></=
+td>=0A                    </tr>=0A                  </table>=0A          =
+        <div style=3D"font-family:Helvetica, sans-serif; font-size:17px; =
+line-height:20px; color:#454958; font-weight:100; text-align:left;"><a hr=
+ef=3D"https://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03y=
+KXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r=
+9rB@Uxkyixdxknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D4BT&6=3D&i=3Dqk2g:=
+//5n5.pxl2lkV.lfv/njklY?4=3Db2@PRsuG1SVAE604C3E21BEA09ED28729E007EA811238=
+E0D76115902057A54609E43039D711" target=3D"_blank" style=3D"text-decoratio=
+n:none; color:#454958;">Check out this video to learn more about smart se=
+arch:</a></div>=0A                  <table cellspacing=3D"0" cellpadding=3D=
+"0" border=3D"0">=0A                    <tr>=0A                      <td =
+height=3D"16" style=3D"line-height:16px; font-size:16px;"><img src=3D"htt=
+ps://s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D"=
+display:block; border:0;"></td>=0A                    </tr>=0A           =
+       </table>=0A                  <a href=3D"https://svtracking1.commun=
+ications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**=
+PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyi=
+xdxknj2s_7Rqfx.Txd&u=3D4BU&6=3D&i=3Dqk2g://5n5.pxl2lkV.lfv/njklY?4=3Db2@P=
+RsuG1SVAE604C3E21BEA09ED28729E007EA811238E0D76115902057A54609E43039D711" =
+target=3D"_blank"><img src=3D"https://s.yimg.com/sd/14892/20717/video.gif=
+" style=3D"display:block; border:0;" width=3D"460" height=3D"259" alt=3D"=
+Yahoo MAIL"></a>=0A                  <table cellspacing=3D"0" cellpadding=
+=3D"0" border=3D"0">=0A                    <tr>=0A                      <=
+td height=3D"21" style=3D"line-height:21px; font-size:21px;"><img src=3D"=
+https://s.yimg.com/sd/14892/20717/sp.gif" height=3D"1" width=3D"1" style=3D=
+"display:block; border:0;"></td>=0A                    </tr>=0A          =
+        </table></td>=0A              </tr>=0A            </table>=0A    =
+        <!-- /b3 --><!-- app -->=0A            <table cellspacing=3D"0" c=
+ellpadding=3D"0" border=3D"0" bgcolor=3D"#687080">=0A              <tr>=0A=
+                <td width=3D"500"><a href=3D"https://svtracking1.communic=
+ations.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0**s**PL=
+R6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DUxkyixd=
+xknj2s_7Rqfx.Txd&u=3D4BV&6=3D&i=3Dqk2g1://pqf.lfv/wpj7D023BD595A6B2D3270E=
+85C0DEB610773B3D589C91058B4EF227E8D2A42D3A97" target=3D"_blank"><img src=3D=
+"https://s.yimg.com/sd/14892/20717/app_banner.gif" style=3D"display:block=
+; border:0;" width=3D"500" height=3D"94" alt=3D"Download the Yahoo MAIL A=
+pp"></a></td>=0A              </tr>=0A            </table>=0A            =
+<!-- /app -->=0A             <!--Footer-->=0A<table cellpadding=3D"0" cel=
+lspacing=3D"0" border=3D"0" width=3D"500" align=3D"center">
+<tr>
+<td height=3D"10"></td>
+</tr>
+<tr>
+<td style=3D"font-family: Arial,Helvetica,sans-serif; font-size: 11px; co=
+lor: rgb(102, 102, 102);" align=3D"left">=09<a href=3D"https://svtracking=
+1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D=
+4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=
+=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D6gvRz&6=3D&i=3Dqk2g1://j3S1T0ZkV.7Rqfx.Txd=
+/1YxnjTlf3e2E7C6F0657476C346928B5BC53D6FBF6571D6E2761037A6252B54DD4BBF1BA=
+3FF" style=3D"font-family: Arial, Helvetica, sans-serif; font-size: 11px;=
+ text-decoration: none; color: rgb(0, 51, 153);">Manage Subscriptions</a>=
+
+
+&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;=09<a href=3D"https://svtracking1.co=
+mmunications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBWFNYbaaaa?l=3D4V0*=
+*s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixdxknj2s%230u&n=3DU=
+xkyixdxknj2s_7Rqfx.Txd&u=3D6gvSR&6=3D&i=3Dqk2g1://ZwWx.pjYxf.lfv/g0Z4Rlp/=
+3j/7Rqfx/UnkjZuj.qkvc0AEA0BE1C786DE09FED28958994A4D8B4824B880DD7971929391=
+5A0B72C1A289" style=3D"font-family: Arial, Helvetica, sans-serif; font-si=
+ze: 11px; text-decoration: none; color: rgb(0, 51, 153);">Privacy Policy<=
+/a>
+
+</td>
+</tr>
+<tr>
+<td height=3D"10"></td>
+</tr>
+</table>
+
+
+
+<table width=3D"500" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ali=
+gn=3D"center">
+<tr>
+<td style=3D"font-family: Arial,Helvetica,sans-serif; font-size: 11px; co=
+lor: rgb(102, 102, 102);" align=3D"left">
+This message was sent to the account of dotpromotest1@yahoo.com.  If you =
+do not want to receive emails from Yahoo Mail about staying in touch with=
+ friends and participating in online communities, please <a href=3D"https=
+://svtracking1.communications.yahoo.com/t/dcjbJnSMMeCAAHZ9B03yKXZcaQ4SaBW=
+FNYbaaaa?l=3D4V0**s**PLR6**fvb3ZD~yNxd8DQJ8e3CDMMK4fL@-vF0~r9r9rB@Uxkyixd=
+xknj2s%230u&n=3DUxkyixdxknj2s_7Rqfx.Txd&u=3D6h3KZ&6=3D&i=3Dqk2g1://j3S1T0=
+ZkV.7Rqfx.Txd/3e1lk@pvT?n=3D~2nrwBF1YQR6eOktFxwAE7nPOZ1H&.crU=3D-vF0~r9r9=
+rB&.R2k0=3Ddj&.m=3D-30352EC53550772B53990FE369D891DDB2102328EA3FD294496C5=
+6708872CD10" style=3D"font-family: Arial, Helvetica, sans-serif; font-siz=
+e: 11px; text-decoration: none; color: rgb(0, 51, 153);">unsubscribe</a>.=
+
+<br/><br/>
+Yahoo is located at 701 First Avenue, Sunnyvale, CA 94089.
+<br/><br></td>
+</tr>
+</table>
+
+<table width=3D"500" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" ali=
+gn=3D"center">
+<tr>
+<td style=3D"font-family: Arial, Helvetica, sans-serif; font-size: 9px; c=
+olor: rgb(102, 102, 102);" align=3D"left">RefID:&nbsp;ma-14892000004</td>=
+
+</tr>
+<tr>
+<td height=3D"10" ></td>
+</tr>
+</table>=0A<!--Footer End--></td>=0A        </tr>=0A    </table></td>=0A =
+ </tr>=0A</table>=0A</body>=0A</html>=0A<div id=3D"1489220717_addimg" sty=
+le=3D"visibility:hidden; display:none" data=3D"https://s.yimg.com/sd/1489=
+2/20717/app_banner.gif,https://s.yimg.com/sd/14892/20717/a4.gif,https://s=
+.yimg.com/sd/14892/20717/herobg.gif,https://s.yimg.com/sd/14892/20717/usl=
+.gif,https://s.yimg.com/sd/14892/20717/2.gif,https://s.yimg.com/sd/14892/=
+20717/a1.gif,https://s.yimg.com/sd/14892/20717/1.gif,https://s.yimg.com/s=
+d/14892/20717/a2.gif,https://s.yimg.com/sd/14892/20717/video.gif,https://=
+s.yimg.com/sd/14892/20717/bullet.gif,https://s.yimg.com/sd/14892/20717/h1=
+.gif,https://s.yimg.com/sd/14892/20717/cta.gif,https://s.yimg.com/sd/1489=
+2/20717/a3.gif,https://s.yimg.com/sd/14892/20717/sp.gif,https://s.yimg.co=
+m/sd/14892/20717/h3.gif,https://s.yimg.com/sd/14892/20717/h4.gif,https://=
+s.yimg.com/sd/14892/20717/usr.gif,https://s.yimg.com/sd/14892/20717/h2.gi=
+f,https://s.yimg.com/sd/14892/20717/logo.gif"></div>=0A
+------=_NextPart_A15_B910_6817ADC9.0ED37481--
+

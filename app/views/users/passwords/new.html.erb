@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <!-- row-app -->
+  <div class="row row-app">
+    <!-- col -->
+    <!-- col-separator.box -->
+    <div class="col-separator col-unscrollable box">
+      <!-- col-table -->
+      <div class="col-table">
+        <h4 class="innerAll margin-none border-bottom text-center"><i class="fa fa-lock"></i>
+        <%= t('users.passwords.forgot_pass_header') %></h4>
+        <!-- col-table-row -->
+        <div class="col-table-row">
+          <!-- col-app -->
+          <div class="col-app col-unscrollable">
+            <!-- col-app -->
+            <div class="col-app">
+              <div class="login">
+                <div class="placeholder text-center"><i class="fa fa-lock"></i>
+                </div>
+                <div class="panel panel-default col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-4">
+                  <div class="panel-body">
+                    <%= simple_form_for(resource, as: resource_name, url: user_password_path, html: { method: :post }) do |f| %>
+                      <%= f.error_notification %>
+
+                      <div class="form-inputs">
+                        <%= f.input :email, label: t('devise.passwords.email'), required: true, autofocus: true %>
+                      </div>
+
+                      <div class="form-actions">
+                        <%= f.button :submit, t('users.passwords.send_reset_instructions') %>
+                      </div>
+                    <% end %>
+
+                    <%= render "users/shared/links" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- // END col-app -->
+          </div>
+          <!-- // END col-app.col-unscrollable -->
+        </div>
+        <!-- // END col-table-row -->
+      </div>
+      <!-- // END col-table -->
+    </div>
+    <!-- // END col-separator.box -->
+  </div>
+  <!-- // END row-app -->
+  <!-- Global -->
+</div>

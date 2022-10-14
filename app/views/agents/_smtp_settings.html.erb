@@ -1,0 +1,129 @@
+
+<div class="col-md-6">
+
+
+<%= simple_form_for @user, :url => @user.persisted? ? agent_path(@user.id) : agents_path, :html => {:class => 'form-horizontal'} do |f| %>
+  <%= f.fields_for :smtp_settings, @user.smtp_settings do |smtp_form| %>
+    <div class="row">
+      <div class="col-md-12">
+      	<h4><%= t("service_channels.incoming_IMAP") %></h4>
+        <div class="form-group margin-none innerB">
+          <%= smtp_form.text_field :description, :placeholder => t('service_channels.placeholder_description'), :class => 'form-control' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= smtp_form.text_field :server_name, :placeholder => t('service_channels.placeholder_server_name'),
+                                   :class => 'form-control server-name' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= smtp_form.text_field :port, :placeholder => t('service_channels.placeholder_port'), :class => 'form-control port' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <div class="checkbox">
+            <label class="checkbox-custom">
+              <%= smtp_form.check_box :use_ssl, :class => 'use-ssl', include_hidden: false %>
+              <i class="fa fa-fw fa-square-o"></i> <%= t('service_channels.use_ssl')%>
+            </label>
+          </div>
+        </div>
+        <div class="form-group margin-none innerB">
+          <div class="styled-select">
+            <%= smtp_form.select :auth_method,
+                                 SmtpSettings::AUTH_METHODS.map { |x| [t("service_channels.smtp_auth_methods.#{x}"), x] },
+                                 {}, type: 'text', placeholder: t('service_channels.placeholder_auth_method'),
+                                 class: 'auth-method'
+            %>
+          </div>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= smtp_form.text_field :user_name, :placeholder => t('service_channels.placeholder_user_name'),
+                                   :class => 'form-control user-name' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= smtp_form.text_field :password, :placeholder => t('service_channels.placeholder_password'),
+                                   :type => 'password', :class => 'form-control password' %>
+        </div>
+        <div class="alert alert-dismissable hide">
+          <!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
+          <span class="message-text"></span>
+        </div>
+
+        <div class="btn-group-block">
+          <button type="submit" id="test_smtp_btn" class="btn btn-default test-settings smtp">
+            <i class="fa fa-fw fa-play-circle-o"></i> <%= t('service_channels.test_btn')%>
+          </button>
+          &nbsp;
+          <a role="button" class="btn secondary-btn clear-form-btn pull-left">Clear</a>
+        </div>
+
+        <div class="btn-group-block pull-right">
+          <button type="submit" class="btn btn-default">
+            <i class="fa fa-fw fa-check-square-o"></i><%= t('users.agents.save') %>
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+</div>
+
+<div class="col-md-6">
+
+<%= simple_form_for @user, :url => @user.persisted? ? agent_path(@user.id) : agents_path, :html => {:class => 'form-horizontal'} do |f| %>
+  <%= f.fields_for :imap_settings, @user.imap_settings do |imap_form| %>
+    <div class="row">
+      <div class="col-md-12">
+      <h4><%= t("service_channels.outgoing_SMTP") %></h4>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :description, :placeholder => t('service_channels.placeholder_description'), :class => 'form-control' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :from_email, :placeholder => t('service_channels.placeholder_from_email'), :class => 'form-control' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :from_full_name, :placeholder => t('service_channels.placeholder_from_name'), :class => 'form-control' %>
+        </div>
+        <div class="separator top"></div>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :server_name, :placeholder => t('service_channels.placeholder_incoming_mail_server'), :class => 'form-control server-name' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :port, :placeholder => t('service_channels.placeholder_port'), :class => 'form-control port' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <div class="checkbox">
+            <label class="checkbox-custom">
+              <%= imap_form.check_box :use_ssl, :class => 'use-ssl', include_hidden: false %>
+              <i class="fa fa-fw fa-square-o"></i><%= t('service_channels.use_ssl')%>
+            </label>
+          </div>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :user_name, :placeholder => t('service_channels.placeholder_user_name'), :class => 'form-control user-name' %>
+        </div>
+        <div class="form-group margin-none innerB">
+          <%= imap_form.text_field :password, :placeholder => t('service_channels.placeholder_password'), :type => 'password', :class => 'form-control password' %>
+        </div>
+        <div class="alert alert-dismissable hide">
+          <!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
+          <span class="message-text"></span>
+        </div>
+
+        <div class="btn-group-block">
+          <button type="submit" id="test_imap_btn" class="btn btn-default test-settings imap">
+            <i class="fa fa-fw fa-play-circle-o"></i> <%= t('service_channels.test_btn')%>
+          </button>
+        </div>
+
+        <div class="btn-group-block pull-right">
+          <button type="submit" class="btn btn-default">
+            <i class="fa fa-fw fa-check-square-o"></i><%= t('users.agents.save') %>
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
+</div>

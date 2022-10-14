@@ -1,0 +1,23 @@
+<div class="widget border-bottom-none">
+  <h3 class="innerAll handle bg-media border-bottom margin-bottom-none">
+    <%= t('reports.summary_report.sla')%>
+    <span class="pull-right glyphicon glyphicon-time"></span>
+  </h3>
+
+  <div class="widget-body">
+    <div id="sla_floatchart" class="flotchart-holder"></div>
+  </div>
+</div>
+
+<script>
+  $('#sla_floatchart').extremiaFlotchart(
+    'summaryReportPie',
+    {
+      'rawData': {
+        'by_alert_type': Report.sla,
+        'total': Report.totalNotReadyTasksCount
+      },
+      'render': true
+    }
+  );
+</script>

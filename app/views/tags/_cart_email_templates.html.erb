@@ -1,0 +1,137 @@
+<div class="tab-pane" id="cart_email_template" data-bind="with: managerAppViews.cartEmailTemplates">
+  <div class="row" data-bind="css: { disabledContent: disable_controlls() == true }">
+    <div class="row ml-0 mr-0 mb-2">
+      <div class="col-md-8">
+        <div>
+          <div class="row">
+            <div class="col-md-10">
+              <h4><%= I18n.t('tags.cart_email_template_tab.order_placed') %></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.cart_email_template_tab.subject') %></label>
+              <input class="form-control" type="text" id="order_placed_template_subject" data-bind="value: templateSubject" placeholder="<%= I18n.t('tags.cart_email_template_tab.subject') %>">
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.cart_email_template_tab.body') %></label>
+              <textarea id="order_placed_template_body" class="form-control" type="text" name="order_placed_template_body" placeholder="<%= I18n.t('tags.cart_email_template_tab.body') %>">
+              </textarea>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-4">
+              <button type="button" class="btn btn-default btn-sm " data-bind="click: createOrderPlacedTemplate">
+                <%= t('tags.save') %>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row mt-1">
+          <div class="col-md-10">
+            <div class="alert alert-success data-saved-alert hide" id="cart_email_templates_success"></div>
+            <div class="alert alert-warning data-warning-alert hide" id="cart_email_templates_error"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row ml-0 mr-0 mt-2 mb-2">
+      <div class="col-md-8">
+        <div>
+          <div class="row">
+            <div class="col-md-10">
+              <h4><%= I18n.t('tags.cart_email_template_tab.payment_link') %></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.cart_email_template_tab.subject') %></label>
+              <input class="form-control" type="text" id="order_payment_link_template_subject" data-bind="value: orderPaymentLinkTemplateSubject" placeholder="<%= I18n.t('tags.cart_email_template_tab.subject') %>">
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.cart_email_template_tab.body') %></label>
+              <textarea id="order_payment_link_template_body" class="form-control" type="text" name="order_payment_link_template_body" placeholder="<%= I18n.t('tags.cart_email_template_tab.body') %>">
+              </textarea>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-4">
+              <button type="button" class="btn btn-default btn-sm " data-bind="click: createPaymentLinkTemplate">
+                <%= t('tags.save') %>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row mt-1">
+          <div class="col-md-10">
+            <div class="alert alert-success data-saved-alert hide" id="payment_link_success"></div>
+            <div class="alert alert-warning data-warning-alert hide" id="payment_link_error"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row ml-0 mr-0 mt-2">
+      <div class="col-md-8">
+        <div>
+          <div class="row">
+            <div class="col-md-10">
+              <h4><%= I18n.t('tags.cart_email_template_tab.terms_and_conditions') %></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.cart_email_template_tab.terms_checkbox_text') %></label>
+              <input class="form-control" type="text" id="order_terms_and_conditions_template_heading" data-bind="value: termsAndConditionsHeading" placeholder="<%= I18n.t('tags.cart_email_template_tab.terms_checkbox_text') %>">
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-10">
+              <label><%= I18n.t('tags.cart_email_template_tab.body') %></label>
+              <textarea id="order_terms_and_conditions_template_body" class="form-control" type="text" name="order_terms_and_conditions_template_body" placeholder="<%= I18n.t('tags.cart_email_template_tab.body') %>">
+              </textarea>
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-4">
+              <button type="button" class="btn btn-default btn-sm " data-bind="click: createTermsAndConditionsTemplate">
+                <%= t('tags.save') %>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="row mt-1">
+          <div class="col-md-10">
+            <div class="alert alert-success data-saved-alert hide" id="terms_and_conditions_success"></div>
+            <div class="alert alert-warning data-warning-alert hide" id="terms_and_conditions_error"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

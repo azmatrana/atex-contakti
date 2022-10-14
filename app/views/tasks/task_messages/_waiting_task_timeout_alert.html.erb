@@ -1,0 +1,44 @@
+<script type="text/html" id="waiting_task_timeout_alert_template">
+<div>
+  <div class="unlock-preview inbox-preview-modal height-auto">
+      <table class="table">
+      <tr>
+          <td data-bind="css: cssType" class="item-type ">
+            <span data-bind="css: iconClass" class="glyphicon"></span>
+          </td>
+          <td class="item-description">
+            <!-- ko if: task().firstMessage.channel_type == 'call' -->
+              <a class="caller-number-link">
+                <span class="caller-number" data-bind="text: firstMessage.from"></span>
+                <!-- ko if: task().data.call_counter -->
+                  <span class="call-counter pull-right" data-bind="text: (function(){ return '(' + task().data.call_counter + ')'})()"></span><br>
+                <!-- /ko -->
+                <!-- ko if: task().data.caller_name -->
+                  <span class="caller-name" data-bind="text: task().data.caller_name"></span>
+                <!-- /ko -->
+              </a>
+            <!-- /ko -->
+            <!-- ko ifnot: task().firstMessage.channel_type == 'call' -->
+              <!-- ko if: task().firstMessage.sms -->
+                <span><%= @message.to %></span>
+              <!-- /ko -->
+              <!-- ko ifnot: task().firstMessage.sms -->
+                <span><%= @message.from_email %></span>
+              <!-- /ko -->
+            <!-- /ko -->
+            <h1 class="item-title">
+              <% if @message.channel_type == 'call': %>
+                <%= I18n.t('user_dashboard.unanswered_call') %>
+              <% else: %>
+                <%= @firstMessage.title %>
+              <% end %>
+            </h1>
+            <p class="last-message-description"><%- @message.description %></p>
+            <span class="manage-task-link clearfix"><span class="glyphicon glyphicon-share-alt"></span> <span class="task-list-item-service-channel-name"><%= @task.service_channel.name %></span></span>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>
+
+</script>

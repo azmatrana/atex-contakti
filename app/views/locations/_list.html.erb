@@ -1,0 +1,18 @@
+<% @locations.each do |location| %>
+<table class="table location-item <%= get_selected_class(location) %>" data-id="<%= location.id %>">
+  <tr>
+    <td colspan="2" class="item-description">
+      <address>
+      <h1><strong><%= location.name %></strong></h1> 
+      <%= location.street_address %>
+        </br>
+      <%= location.zip_code %> <%= location.city %>
+      </address>
+      ( <%= location.users.count %> <%= t('locations.agents') %> )
+    </td>
+  </tr>
+</table>
+<% end %>
+
+
+

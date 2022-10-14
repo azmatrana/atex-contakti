@@ -1,0 +1,23 @@
+<div class="widget border-bottom-none">
+  <h3 class="innerAll handle bg-media border-bottom margin-bottom-none">
+    <%= t('reports.summary_report.media_channels')%>
+    <span class="pull-right glyphicon glyphicon-adjust"></span>
+  </h3>
+
+  <div class="widget-body">
+    <div id="chart_donut" class="flotchart-holder"></div>
+  </div>
+</div>
+
+<script>
+  $('#chart_donut').extremiaFlotchart(
+    'summaryReportPie',
+    {
+      'rawData': {
+        'by_channel': Report.taskCounters,
+        'total': Report.totalTasksCount
+      },
+      'render': true
+    }
+  );
+</script>

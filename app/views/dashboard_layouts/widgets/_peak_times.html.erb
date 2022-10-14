@@ -1,0 +1,58 @@
+<div class="widget border-bottom-none">
+    <h3 class="innerAll handle bg-peak border-bottom margin-bottom-none"><%= t('reports.summary_report.peak_time')%></h3>
+    <div class="widget-body">
+        <div id="containerlegend" class="col-xs-12 legend" style="height:100px;"></div>
+        <div id="chart_lines_fill_nopoints_2" class="flotchart-holder"></div>
+    </div>
+</div>
+<script>
+
+    var data = null, timeOut = null;
+
+    function plotByChoice(doAll)
+    {
+        data = {};
+
+        if (doAll != null)
+        {
+            $.each(Report.peakTimesData, function(key, val) {
+                data[key]= val;
+            });
+        }
+        else
+        {
+            $('#chart_lines_fill_nopoints_2 .legendCB').each(
+                    function(){
+                        var $this = $(this);
+                        if ($this.find('.checkbox').is(':checked'))
+                        {
+                            data[$this.data('key')] = Report.peakTimesData[$this.data('key')];
+                        }
+                        else
+                        {
+                            data[$this.data('key')] = [];
+                        }
+                    }
+            );
+        }
+        $('#chart_lines_fill_nopoints_2').extremiaFlotchart(
+                'summaryReportLines',
+                {
+                    'rawData': data,
+                    'render': true,
+                    'redraw': !doAll
+                }
+        );
+
+        $('#chart_lines_fill_nopoints_2').on('click','.legendCB',function(){
+            if (timeOut) clearTimeout(timeOut);
+            timeOut = setTimeout(plotByChoice,100);
+        });
+    }
+    
+    //plotByChoice(true);
+    //timeOut = setTimeout(plotByChoice,100);
+    setTimeout(plotByChoice.bind(null, true), 100);
+   // window.onload = function(){plotByChoice(true);};
+
+</script>

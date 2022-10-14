@@ -1,0 +1,173 @@
+<div id="sip_client_wrapper">
+  <div data-bind="with: viewModels.sipClientViewModel">
+
+    <!-- Incoming call buttons START -->
+    <div data-bind="visible: incomingCall" id="sip_client_incoming_overlay">
+      <div class="row header-row">
+        Incoming call
+      </div>
+      <div class="row">
+        From: <span data-bind="text: callFrom" id="sip_client_incoming_call_from"></span>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <button data-bind="click: acceptCall" class="btn btn-default">Accept</button>
+        </div>
+        <div class="col-md-6">
+          <button data-bind="click: rejectCall" class="btn btn-danger">Reject</button>
+        </div>
+      </div>
+    </div>
+    <!-- Incoming call buttons STOP -->
+
+    <!-- Slide client open START -->
+    <div id="open_sip_client" data-bind="visible: phoneHidden">
+      <button data-bind="click: slidePhone.bind($data, 'open')" class="pull-left btn btn-default glyphicon glyphicon-chevron-left"></button>
+    </div>
+    <!-- Slide client open STOP-->
+
+    <div class="container" id="sip_client_main">
+      <!-- Client header row start -->
+      <div class="row status-row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-8">
+          <span class="text-center" data-bind="text: statusText"></span>
+        </div>
+        <div class="col-md-2 phone-slide text-center">
+          <button class="glyphicon glyphicon-chevron-right btn btn-default" data-bind="click: slidePhone.bind($data, 'close')"></button>
+        </div>
+      </div>
+      <!-- Client header row stop -->
+      <!-- IN call view -->
+      <div data-bind="if: inCall">
+        <div class="row number-row">
+          <div class="col-md-2">
+            <span class="glyphicon glyphicon-earphone phone"></span>
+          </div>
+          <div class="col-md-10">
+            <div class="call-from" class="row">
+              <span data-bind="text: callFrom" class="center"></span>
+            </div>
+            <div class="call-duration" class="row">
+              <span data-bind="text: callDuration" class="pull-right"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row volume-row">
+          <div class="col-md-12">
+            <input data-bind="value: audioVolume" type='range' id='audio_volume' min=0 value=0.5 max=1 step=0.01>
+          </div>
+        </div>
+        <div class="row button-row">
+          <div class="col-md-4">
+            <!-- ko ifnot: muted -->
+            <button data-bind="click: muteCall" class="btn btn-default">Mute</button>
+            <!-- /ko -->
+            <!-- ko if: muted -->
+            <button data-bind="click: unmuteCall" class="btn btn-default">Unmute</button>
+            <!-- /ko -->
+          </div>
+          <div class="col-md-4">
+            <button data-bind="click: holdCall" class="btn btn-default">Hold</button>
+          </div>
+          <div class="col-md-4">
+            <button data-bind="click: hangUpCall" class="btn btn-danger">Hang up</button>
+          </div>
+        </div>
+      </div>
+      <!-- end in call view -->
+
+      <!-- NOT in call view -->
+      <div data-bind="ifnot: inCall ">
+        <div class="row number-row">
+          <div class="col-md-2">
+            <span class="glyphicon glyphicon-earphone phone"></span>
+          </div>
+          <div class="col-md-10">
+            <input class="form-control" data-bind="value: toNumber" type="text" placeholder="Number to call" value="">
+          </div>
+        </div>
+
+        <div id="sip_client_call_log" data-bind="foreach: completedCalls">
+          <div class="row">
+            <div class="col-md-1">
+              <div data-bind="if: incoming">
+                <span data-bind="if: incoming" class="glyphicon glyphicon-arrow-left"></span>
+              </div>
+              <div data-bind="ifnot: incoming">
+                <span data-bind="ifnot: incoming" class="glyphicon glyphicon-arrow-right"></span>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <span data-bind="text: remote"></span>
+            </div>
+            <div class="col-md-2">
+              <span data-bind="text: duration"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row button-row">
+          <div class="col-md-9">
+          </div>
+          <div class="col-md-3">
+            <button data-bind="click: makeCall" class="btn btn-default">Call</button>
+          </div>
+        </div>
+      </div>
+      <!-- end not in call view -->
+
+    </div>
+
+    <!-- Create task START -->
+    <div id="sip_client_create_task" data-bind="visible: createTask" class="container">
+
+      <div class="row header-row">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10">
+          New SIP task
+        </div>
+        <div class="col-md-1 cursor-pointer">
+          <span class="glyphicon glyphicon-remove" data-bind="click: function(data,event) { createTask(false); }"></span>
+        </div>
+      </div>
+      <%= simple_form_for @task, remote: true, :html => {:id => :new_sip_task, 'data-no-turbolinks' => 'true'} do |f| %>
+      <% f.simple_fields_for :messages do |ff|%>
+
+      <%= ff.input :title, :as => :hidden, :input_html => { :value => "SIP call completed" } %>
+
+      <%= f.input :media_channel_id, :as => :hidden, :input_html => { 'data-bind' => 'value: mediaChannelId' } %>
+      <%= f.input :assigned_to_user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+      <%= hidden_field_tag :sip_task, true %>
+      <%= hidden_field_tag :call_from, '', {'data-bind' => 'value: lastCallFrom'} %>
+      <%= hidden_field_tag :call_to, '', {'data-bind' => 'value: lastCallTo'} %>
+
+      <div class="row">
+        <div class="col-md-12">
+          <label>Message</label>
+          <%= ff.text_area :description %>
+          <!--<textarea id="" placeholder="Description of the call"></textarea>-->
+        </div>
+      </div>
+      <div class="row bottom-button-row">
+        <div class="col-md-9">
+        </div>
+        <div class="col-md-3">
+          <input type="submit" value="Save task" name="commit" class="btn btn-default" data-bind="click: saveTaskClicked, clickBubble: true"></input>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+    </div>
+    <!-- Create task STOP -->
+  </div>
+
+  <audio loop src="/assets/ringtone.mp3" id="sip_client_ringtone"></audio>
+  <audio id="sip-client-remote-audio"></audio>
+  <audio id="sip-client-local-audio" muted="muted"></audio>
+</div>

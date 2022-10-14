@@ -1,0 +1,62 @@
+<div class="modal fade" id="priority_alarm_details_<%= skill_id %>_<%= company %>" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title" id="close-task-modal-title"><%= t('tags.message') %></h3>
+      </div>
+
+      <div class="modal-body">
+        <div class="widget widget-tabs border-bottom-none">
+          <div class="widget-head">
+            <ul>
+              <li class="active"><a href="#email_<%= skill_id %>_<%= company %>" data-toggle="tab"><i class="fa fa-envelope"></i><%= t('tags.email') %></a></li>
+              <li><a href="#sms_<%= skill_id %>_<%= company %>" data-toggle="tab" class="glyphicons send sms-tab"><i></i><%= t('tags.sms') %></a></li>
+            </ul>
+          </div>
+
+          <div class="widget-body">
+            <div class="tab-content">
+              <div class="tab-pane active clearfix" id="email_<%= skill_id %>_<%= company %>">
+                <div class="modal-body innerAll">
+                  <% priority = Priority.find_by(company_id: company, tag_id: skill_id) %>
+                  <% form_model = priority.present? ? priority : :priority %>
+                  <%= form_for(form_model, url: update_email_template_tags_path(id: skill_id, company: company), method: :put, remote: true) do |f| %>
+                    <%= f.text_area :email_template, id: "email_template_#{skill_id}", class: "notebook border-none form-control padding-none", placeholder: "" %>
+                    <div class="clearfix"></div><br>
+                    <%= button_tag type: "submit", class: "btn btn-default btn-sm pull-right" do %>
+                      <%= I18n.t('user_dashboard.save') %> <span class="glyphicon glyphicon-ok"></span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="tab-pane clearfix" id="sms_<%= skill_id %>_<%= company %>">
+                <div class="form-group" ID="sms_template_form">
+                  <%= form_for(form_model, url: update_sms_template_tags_path(id: skill_id, company: company), method: :put, remote: true) do |f| %>
+                    <%= f.text_area :sms_template, class: "form-control sms-message-input", placeholder: "" %>
+                    <span class="sms-message-counter hide">0/0, 0 messages</span>
+                    <div class="clearfix"></div>
+                    <%= button_tag type: "submit", class: "btn btn-default btn-sm pull-right" do %>
+                      <%= I18n.t('user_dashboard.save') %> <span class="glyphicon glyphicon-ok"></span>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  CKEDITOR.replace('email_template_<%= skill_id %>', {
+    language: '<%= I18n.locale %>',
+    removePlugins: 'elementspath',
+    resize_enabled: false
+  });
+</script>
+

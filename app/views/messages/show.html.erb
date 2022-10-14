@@ -1,0 +1,13 @@
+<% @messages.each_with_index do |message, index| %>
+  <p class="timestamp float-right"><%= message.formatted_created_at %><p>
+  <h3><span class="bold"><%= t('tasks.from') %>: </span><%= message.from %></h3>
+  <h3><span class="bold"><%= t('tasks.subject') %>: </span><%= message.title %></h3>
+  <div class="message"><%== message.formatted_description %></div>
+    <% if @task.note.try(:body) && index.eql?(0) %>
+      <div class="message"><b><%= t('user_dashboard.internal_note') %> : </b> <%= @task.note.body %></div>
+    <% end %>
+  <div></div>
+<% end %>
+<script>
+    window.print();
+</script>

@@ -1,0 +1,20 @@
+hostname: 'stage.contakti.com'
+protocol: https
+host_origin: 'https://stage.contakti.com'
+
+from_email: 'support@contakti.com'
+
+smtp:
+  address: smtp.mailgun.org
+  port: 2525
+  user_name: postmaster@contakti.com
+  password: 025bc2cdeeeb1927b825d117a6eb17d8
+  authentication: plain
+  enable_starttls_auto: true
+
+call_media_channel:
+  server_name: host
+  user_name: login
+  password: password
+  port: 993
+  use_ssl: true

@@ -1,0 +1,19 @@
+modules:
+  - name: 'main'
+wrap: true
+paths:
+  "text": "../bower_components/requirejs-text/text",
+  "durandal": "../bower_components/durandal/js",
+  "plugins": "../bower_components/durandal/js/plugins",
+  "transitions": "../bower_components/durandal/js/transitions",
+  "knockout": "../bower_components/knockout/dist/knockout",
+  "bootstrap": "../bower_components/bootstrap/js",
+  "pickadate": "../bower_components/pickadate/lib/compressed/picker",
+  "pickadate-date": "../bower_components/pickadate/lib/compressed/picker.date",
+  "tokenfield": "../bower_components/bootstrap-tokenfield/js/bootstrap-tokenfield",
+  "select2": "../bower_components/select2/select2.min",
+  "jquery": "../bower_components/jquery/dist/jquery",
+  "jquery-ui": "../bower_components/jquery-ui/jquery-ui.min",
+  "i18next": "../bower_components/i18next/i18next.amd.withJQuery",
+  "moment": "../bower_components/moment/moment-with-locales",
+  "faye": "../bower_components/faye/include"

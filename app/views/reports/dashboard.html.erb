@@ -1,0 +1,23 @@
+<div class="container-fluid" id="main_dashboard">
+  <div class="row">
+    <%= render partial: 'dashboard_layouts/show', locals: { default_layout: @layout, is_for_dashboard: true, range: @range} %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    window.refreshDashboard = function() {
+      var startDate = $('#dashboard-date-range-select').data('daterangepicker').startDate.format("DD/MM/YYYY");
+      var endDate = $('#dashboard-date-range-select').data('daterangepicker').endDate.format("DD/MM/YYYY");
+
+      $.ajax({
+        url: '/' + I18n.locale + '/main_dashboard.js?startDate=' + encodeURIComponent(startDate) + "&endDate=" + encodeURIComponent(endDate) + '&t=' + (new Date()).getTime(),
+        method: 'get'
+      });
+    };
+
+    setInterval(refreshDashboard, 1000 * 60);
+    refreshDashboard();
+  });
+
+</script>

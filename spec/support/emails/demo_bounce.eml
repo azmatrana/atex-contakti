@@ -1,0 +1,197 @@
+Delivered-To: user@example.com
+Received: by 10.112.129.226 with SMTP id nz2csp418271lbb;
+        Tue, 21 Oct 2014 07:50:15 -0700 (PDT)
+X-Received: by 10.152.204.76 with SMTP id kw12mr34572149lac.37.1413903014802;
+        Tue, 21 Oct 2014 07:50:14 -0700 (PDT)
+Return-Path: <demo@contakti.com>
+Received: from web102.webhotelli.fi (web102.webhotelli.fi. [217.149.52.102])
+        by mx.google.com with ESMTPS id g7si2214857lbs.0.2014.10.21.07.50.13
+        for <alex@simonov.me>
+        (version=TLSv1 cipher=RC4-SHA bits=128/128);
+        Tue, 21 Oct 2014 07:50:13 -0700 (PDT)
+Received-SPF: none (google.com: demo@contakti.com does not designate permitted sender hosts) client-ip=217.149.52.102;
+Authentication-Results: mx.google.com;
+       spf=neutral (google.com: demo@contakti.com does not designate permitted sender hosts) smtp.mail=demo@contakti.com
+Received: from netdesk.fastdeployers.net ([46.165.233.143]:39541 helo=localhost.localdomain)
+	by web102.webhotelli.fi with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.82)
+	(envelope-from <demo@contakti.com>)
+	id 1XgalF-0005UV-He
+	for alex@simonov.me; Tue, 21 Oct 2014 17:50:13 +0300
+Date: Tue, 21 Oct 2014 16:50:05 +0200
+From: Asiakaspalvelu Espoo <demo@contakti.com>
+To: user@example.com
+Message-ID: <5446729d3e558_4de76643ec542bf@netdesk.fastdeployers.net.mail>
+Subject: Fwd: Mail delivery failed: returning message to sender
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - web102.webhotelli.fi
+X-AntiAbuse: Original Domain - example.me
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - contakti.com
+X-Get-Message-Sender-Via: web102.webhotelli.fi: authenticated_id: demo@contakti.com
+X-Source:
+X-Source-Args:
+X-Source-Dir:
+
+This message was created automatically by mail delivery software.
+
+A message that you sent could not be delivered to one or more of its
+recipients. This is a permanent error. The following address(es) failed:
+
+  marttinen@contakti.com
+    No Such User Here"
+
+------ This is a copy of the message, including all the headers. ------
+
+Return-path: <demo@contakti.com>
+Received: from netdesk.fastdeployers.net ([46.165.233.143]:55900 helo=3Dl=
+ocalhost.localdomain)
+	by web102.webhotelli.fi with esmtpsa (TLSv1:DHE-RSA-AES256-SHA:256)
+	(Exim 4.82)
+	(envelope-from <demo@contakti.com>)
+	id 1XgYFe-0002eR-1D
+	for marttinen@contakti.com; Tue, 21 Oct 2014 15:09:22 +0300
+Date: Tue, 21 Oct 2014 14:09:17 +0200
+From: Contakti =3D?UTF-8?B?VGVzdGl5bXDDpHJpc3TDtg=3D=3D?=3D <demo@contakt=
+i.com>
+To: marttinen@contakti.com
+Message-ID: <54464cedf1cb5_4de781dfbc54018@netdesk.fastdeployers.net.mail=
+>
+Subject: =3D?UTF-8?Q?Fwd:_[Uutiskirje]_=3DE2=3D9C=3DBF_=3DE2=3D99=3DAB_Sy=
+mbolien?=3D
+ =3D?UTF-8?Q?_k=3DC3=3DA4ytt=3DC3=3DB6_s=3DC3=3DA4hk=3DC3=3DB6postin_aihe=
+essa_=3DE2=3D9D=3DA4?=3D
+ =3D?UTF-8?Q?_=3DE2=3D9C=3D88?=3D
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=3DUTF-8
+Content-Transfer-Encoding: quoted-printable
+
+[Uutiskirje] =3DE2=3D9C=3DBF =3DE2=3D99=3DAB Symbolien k=3DC3=3DA4ytt=3DC=
+3=3DB6 s=3DC3=3DA4hk=3DC3=3DB6=3D
+postin aiheessa =3DE2=3D9D=3DA4 =3DE2=3D9C=3D88
+
+Symbolien k=3DC3=3DA4ytt=3DC3=3DB6 s=3DC3=3DA4hk=3DC3=3DB6postin aiheessa=
+ - Katso viesti =3D
+selaimessa
+[1]
+
+[2]
+
+Creamailerin uutiskirje - lokakuu 2014
+
+[3]
+
+SYMBOLIEN K=3DC3=3D84YTT=3DC3=3D96 S=3DC3=3D84HK=3DC3=3D96POSTIN AIHEESSA=
+ [4]
+
+S=3DC3=3DA4hk=3DC3=3DB6postimarkkinoijille on t=3DC3=3DA4rke=3DC3=3DA4=3D=
+C3=3DA4 saada viesti=3D
+t n=3DC3=3DA4kyville
+vastaanottajan postilaatikossa. N=3DC3=3DA4kyvyyden saamiseksi markkinoij=
+at
+testaavat jatkuvasti uusia keinoja s=3DC3=3DA4hk=3DC3=3DB6postilaatikossa=
+
+erottautumiselle. Lue lis=3DC3=3DA4=3DC3=3DA4 =3DE2=3D86=3D92 [5]
+
+TUTKIMUS: ASIAKKAAT SUOSIVAT S=3DC3=3D84HK=3DC3=3D96POSTIMARKKINOINTIA [6=
+]
+
+S=3DC3=3DA4hk=3DC3=3DB6postimarkkinointi on edelleen markkinoinnin suosit=
+uin kana=3D
+va.
+Puolet kuluttajista siirtyiv=3DC3=3DA4t markkinointiviestin lukemisen j=3D=
+C3=3DA4=3D
+lkeen
+tekem=3DC3=3DA4=3DC3=3DA4n ostoksia. Lue lis=3DC3=3DA4=3DC3=3DA4 =3DE2=3D=
+86=3D92 [7]
+
+CREAMAILERILLE KORKEIN AAA-LUOTTOLUOKITUS [8]
+
+Bisnode on luokitellut Creamailerin luottokelpoisuutta mittaavassa
+j=3DC3=3DA4rjestelm=3DC3=3DA4ss=3DC3=3DA4 AAA-kategoriaan. AAA-luokitus o=
+n korkein
+mahdollinen, jonka yritys voi saada. Lue lis=3DC3=3DA4=3DC3=3DA4 =3DE2=3D=
+86=3D92 [9]
+
+KUUKAUDEN KYSYMYS
+
+Aiotko kokeilla symbolien k=3DC3=3DA4ytt=3DC3=3DB6=3DC3=3DA4?
+
+KYLL=3DC3=3D84 [10]
+
+EI [11]
+
+EDELLISESS=3DC3=3D84 UUTISKIRJEESS=3DC3=3D84 KYSYIMME:
+
+AIOTKO K=3DC3=3D84YTT=3DC3=3D84=3DC3=3D84 UUSITTUA TILAA UUTISKIRJE -LOMA=
+KETTA KILPAI=3D
+LUIDEN JA
+TAPAHTUMIEN J=3DC3=3D84RJEST=3DC3=3D84MISEN YHTEYDESS=3DC3=3D84?
+
+Kyll=3DC3=3DA4 100%
+
+Ei 0%
+
+[12]
+Tykk=3DC3=3DA4=3DC3=3DA4 meist=3DC3=3DA4
+Facebookissa[13]
+Seuraa meit=3DC3=3DA4
+Twitteriss=3DC3=3DA4
+
+Poistu postituslistalta [14] | K=3DC3=3DA4ytt=3DC3=3DB6 ja yksityisyys [1=
+5] |
+Osoitel=3DC3=3DA4hde: asiakkaat, demo- ja uutiskirjetilaajat
+
+Creamailer Oy, Lautatarhankatu 6, 00580 Helsinki
+
+
+
+Linkit:
+------
+[1] http://creamailer.creamailer.fi/ac/aHR0cDovL2NyZWFtYWlsZXIuY3JlYW1haW=
+=3D
+xlci5maS9lbWFpbC81NDQxMGEyODllMDBi/MTA3MDk2MDN8MzQwMzF8MTF8MQ--
+[2] http://www.creamailer.fi
+[3]
+http://www.creamailer.fi/blogi/symbolien-kaytto-sahkopostin-aiheessa/
+[4]
+HTTP://WWW.CREAMAILER.FI/BLOGI/SYMBOLIEN-KAYTTO-SAHKOPOSTIN-AIHEESSA/
+[5]
+http://www.creamailer.fi/blogi/symbolien-kaytto-sahkopostin-aiheessa/
+[6]
+HTTP://WWW.CREAMAILER.FI/TUTKIMUKSET/TUTKIMUS-ASIAKKAAT-HALUAVAT-SAHKOPOS=
+=3D
+TIMARKKINOINTIA/
+[7] http://www.creamailer.fi/blogi/automaattiset-ankkurilinkit/
+[8]
+HTTP://WWW.CREAMAILER.FI/CREAMAILER/CREAMAILERILLE-KORKEIN-AAA-LUOTTOLUOK=
+=3D
+ITUS/
+[9]
+http://www.creamailer.fi/creamailer/creamailerille-korkein-aaa-luottoluok=
+=3D
+itus/
+[10] http://creamailer.creamailer.fi/ac/aHR0cDovL2NyZWFtYWlsZXIuY3JlYW1ha=
+=3D
+Wxlci5maS9xdWl6LzUwNzVkZWZiNjk0NzkvNTQ0MTBhMjg5ZTAwYi82NWJjYTQzMTllNzkwYT=
+=3D
+c4Y2Y4YTI3MTQ2NDRmZGYxZQ--/MTA3MDk2MDN8MzQwMzF8MTF8MQ--
+[11] http://creamailer.creamailer.fi/ac/aHR0cDovL2NyZWFtYWlsZXIuY3JlYW1ha=
+=3D
+Wxlci5maS9xdWl6LzUwNzVkZjAxMzk0OGMvNTQ0MTBhMjg5ZTAwYi82NWJjYTQzMTllNzkwYT=
+=3D
+c4Y2Y4YTI3MTQ2NDRmZGYxZQ--/MTA3MDk2MDN8MzQwMzF8MTF8MQ--
+[12] http://www.facebook.com/Creamailer
+[13] http://twitter.com/Creamailer
+[14] http://creamailer.creamailer.fi/ac/aHR0cDovL2NyZWFtYWlsZXIuY3JlYW1ha=
+=3D
+Wxlci5maS91bnN1YnNjcmliZS80ZDVhNzlkMzQ3YTVlLzU0NDEwYTI4OWUwMGI-/MTA3MDk2M=
+=3D
+DN8MzQwMzF8MTF8MQ--
+[15] http://www.creamailer.fi/kaytto-ja-yksityisyys/

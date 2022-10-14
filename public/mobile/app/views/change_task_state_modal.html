@@ -1,0 +1,62 @@
+<div id="change-task-state-modal" class="modal fade bottom scroll-modal">
+  <div class="modal-dialog" data-bind="if: changeTaskStateMessage">
+    <div class="modal-content">
+      <form id="change-task-state-form">
+        <div class="modal-body scroll-body">
+          <h4 data-i18n="app:task.select_state_for_this_task"></h4>
+          <input type="hidden" name="id" data-bind="value: selectedTask().messages()[0].id"/>
+          <div class="row">
+            <form id="task-buttons-confirmation-form">
+              <div class="form-group">
+                <div class="col-md-4">
+                  <div class="radio" data-bind="if: selectedTask().canStart()" style="display: none">
+                    <label>
+                      <input type="radio" name="task[state]" value="start"/> <span data-i18n="app:tasks.state.open">
+                    </label>
+                  </div>
+                  
+                  <div class="radio" data-bind="if: selectedTask().canRestart()" style="display: none">
+                    <label>
+                      <input type="radio" name="task[state]" value="restart"/> <span data-i18n="app:tasks.state.open">
+                    </label>
+                  </div>
+                  
+                  <div class="radio" data-bind="if: selectedTask().canPause()">
+                    <label>
+                      <input type="radio" name="task[state]" value="pause"/> <span data-i18n="app:tasks.state.waiting">
+                    </label>
+                  </div>
+                  
+                  <div class="radio" data-bind="if: selectedTask().canClose()">
+                    <label>
+                      <input type="radio" name="task[state]" value="close"/> <span data-i18n="app:tasks.state.ready">
+                    </label>
+                  </div>                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <div class="pull-left">
+            <div class="message-actions" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="btn btn-primary btn-sm" data-bind="click: onCancelChangeTaskState">
+                <span class="fa fa-times"></span>
+                <span data-i18n="app:email.action.cancel"></span>
+              </button>
+            </div>
+          </div>
+          <div class="pull-right">
+            <div class="message-actions" data-bind="if: selectedTask">
+                <button type="button" class="btn btn-primary btn-sm"
+                      data-bind="click: onConfirmChangeTaskState">
+                <span class="fa fa-check"></span>
+                <span data-i18n="app:email.action.save"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

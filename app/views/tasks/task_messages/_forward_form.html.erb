@@ -1,0 +1,115 @@
+<script type="text/html" id="task_messages_forward_form_template">
+
+  <form data-bind="visible: showFormObservable, attr: {action: attributes().action(), 'data-remote': attributes()['data-remote'], 'method': attributes().formMethod}">
+    <input name="_method" type="hidden" data-bind="value: attributes().method" />
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+
+  <div class="message-box forward-box" style="display: block;" data-bind="visible: showFormObservable">
+    <div class="header">
+    <h4><%= I18n.t('user_dashboard.forward_email') %></h4>
+      <span class="timestamp" data-bind="text: moment().format('DD.MM.YYYY HH:mm')"></span>
+
+      <div class="right-buttons">
+        <div class="footer clearfix innerAll pull-right">
+          <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">
+            <%= I18n.t('user_dashboard.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-stroke btn-sm" data-bind="click: sendForm" data-disable-with="Sending reply...">
+            <%= I18n.t('user_dashboard.send') %> <span class="glyphicon glyphicon-send"></span>
+          </button>
+        </div>
+      </div>
+
+      <br/>
+      <div class="reply-to-container">
+        <%= I18n.t('user_dashboard.send_to') %>
+        <input type="text" name="reply[to]" class="form-control"/><br/>
+        <span class="help-block hide"></span>
+      </div>
+
+      <div class="reply-cc-container">
+        <%= t('user_dashboard.cc') %>
+        <input type="text" name="reply[cc]" class="form-control"/><br/>
+        <span class="help-block hide"></span>
+      </div>
+
+
+      <div class="reply-bcc-container">
+        <%= t('user_dashboard.bcc') %>
+        <input type="text" name="reply[bcc]" class="form-control"/><br/>
+        <span class="help-block hide"></span>
+      </div>
+
+      <div class="reply-title-container">
+      	<%= I18n.t('user_dashboard.subject') %>
+        <input type="text" name="reply[title]" data-bind="value: (function() {return 'Fwd: ' + selectedMessage.title; })()"class="form-control" placeholder="<%= I18n.t('user_dashboard.subject') %>"/><br/>
+        <span class="help-block hide"></span>
+      </div>
+
+
+      <div class="reply-signature-container">
+        <%= t('users.details.select_signature') %>
+        <select name="reply[signature]"
+                data-bind="options: signatures,
+                          optionsValue: 'signature',
+                          optionsText: 'name',
+                          value: signatureSelected,
+                          event: {}"
+                id="send_email_signature_forward"
+                class="form-control selectpicker">
+        </select>
+      </div>
+      <input type="hidden" name="reply[is_internal]" value="true"/>
+      <input type="hidden" name="reply[is_forward]" value="true"/>
+      <input type="hidden" name="reply[in_reply_to_id]" data-bind="value: selectedMessage.id"/>
+    </div>
+
+    <div class="content">
+      <div class="control-group">
+        <div class="controls">
+          <textarea id="forward-description" name="reply[description]" class="wysihtml5 col-md-12 form-control" rows="5" data-bind="html: messageText"/>
+
+          <div class="clearfix"></div>
+          <span class="help-block hide"></span>
+        </div>
+      </div>
+    </div>
+
+
+<div class="row"> 
+   
+   <div class="col-md-6">
+      <div class="fileupload-section">
+          <button type="button" data-bind="click: addAttachment" class="btn btn-default btn-stroke btn-sm"><%= I18n.t('user_dashboard.attach_file') %><span class="glyphicon glyphicon-paperclip"></span></button>
+          <div class="fileupload template hidden fileupload-new margin-none" data-provides="fileupload">
+              <span class="btn" data-trigger="fileupload">
+                  <span class="fileupload-new"><%= I18n.t('user_dashboard.select_file') %></span>
+                  <span class="fileupload-exists"><%= I18n.t('user_dashboard.attach_change') %></span>
+              </span>
+              <input class="form-control file-field margin-none hidden" id="send_email_attachments_file" name="attachments[]" type="file">
+              <span class="fileupload-preview"></span>
+              <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+          </div>
+          <br>
+      </div>
+    </div>
+    
+    <div class="col-md-6"> 
+        <div class="footer clearfix innerAll pull-right">
+            <button type="button" class="btn btn-default btn-sm" data-bind="click: cancelClicked">
+                <%= I18n.t('user_dashboard.cancel') %> <span class="glyphicon glyphicon-ban-circle"></span> 
+            </button>
+            <button type="button" class="btn btn-default btn-stroke btn-sm" data-bind="click: sendForm" data-disable-with="Sending reply...">
+                <%= I18n.t('user_dashboard.send') %> <span class="glyphicon glyphicon-send"></span>
+            </button>
+        </div>
+    </div> 
+    
+</div>
+    
+  </div>
+    <div class="bg-background">
+      <br>
+    </div>
+</form>
+</script>

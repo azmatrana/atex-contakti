@@ -1,0 +1,37 @@
+<h1>Companies</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Active Users Total</th>
+      <th>Active Users Last Month</th>
+      <th colspan="4">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.name %></td>
+        <td><%= company.code %></td>
+        <td><%= @active_users_by_company[company.id] || 0 %></td>
+        <td><%= @active_last_month_by_company[company.id] || 0 %></td>
+        <td><%= link_to 'Show', super_ui_company_path(company), :class => 'btn btn-default' %></td>
+        <td><%= link_to 'Edit', edit_super_ui_company_path(company), :class => 'btn btn-default' %></td>
+        <td><%= link_to 'Billing', billing_super_ui_company_path(company), class: 'btn btn-default' %></td>
+          <% if company.active? %>
+              <td><%= link_to 'Deactivate', deactivate_super_ui_company_path(company), method: :delete, :class => 'btn btn-default', data: { confirm: 'Are you sure?' } %></td>
+          <% else %>
+              <td><%= link_to 'Activate', activate_super_ui_company_path(company), method: :post, :class => 'btn btn-default', data: { confirm: 'Are you sure?' } %></td>
+              <td><%= link_to 'Remove entirely', super_ui_company_path(company), method: :delete, :class => 'btn btn-default', data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company', new_super_ui_company_path, :class => 'btn btn-default' %>

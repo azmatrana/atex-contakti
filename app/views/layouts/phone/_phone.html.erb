@@ -1,0 +1,297 @@
+<div class="container-fluid">
+
+   <!--  <div class="clearfix sipStatus">
+        <div id="txtCallStatus" class="pull-right">&nbsp;</div>
+        <div id="txtRegStatus"></div>
+    </div>
+ -->
+    <div class="form-group" id="phoneUI">
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button class="btn-functions dropdown-toggle dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-2x fa-th"></i>
+                </button>
+                <div id="sip-dialpad" class="dropdown-menu">
+                    <button type="button" class="btn btn-default digit" data-digit="1">1<span>&nbsp;</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="2">2<span>ABC</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="3">3<span>DEF</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="4">4<span>GHI</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="5">5<span>JKL</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="6">6<span>MNO</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="7">7<span>PQRS</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="8">8<span>TUV</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="9">9<span>WXYZ</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="*">*<span>&nbsp;</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="0">0<span>+</span></button>
+                    <button type="button" class="btn btn-default digit" data-digit="#">#<span>&nbsp;</span></button>
+                    <div class="clearfix"></div>
+                    <button class="btn btn-dial btn-block btnCall">
+                        <i class="fa fa-phone"></i>
+                    </button>
+                </div>
+            </div>
+            <input type="text" name="number" id="numDisplay" class="number-control text-center input-digit" placeholder="<%= t('user_dashboard.number') %>" autocomplete="on" />
+            <div class="input-group-btn input-group-btn-sm">
+                <button class="btn-functions dropdown-toggle" id="btnVol" data-toggle="dropdown">
+                    <i class="fa fa-2x fa-gear"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="sip-video settings-buttons">
+                      <button
+                        type="button"
+                        data-bind="click: ()=>setLastAction('is_dnd_active'), css: { is_active: inDnd() == true }"
+                        class="btn btn-default digit btn-dnd"
+                        data-digit="*76"><i class="fa fa-minus-circle"></i><span><%= t('user_dashboard.dnd') %></span>
+                      </button>
+
+                      <button
+                        type="button"
+                        data-bind="click: ()=>setLastAction('is_transfer_active'), css: { is_active: inTransfercalls() == true }"
+                        class="btn btn-default digit btn-transfercalls"
+                        data-digit="*96"><i class="fa fa-mail-forward"></i><span><%= t('user_dashboard.transfercalls') %></span>
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn btn-default digit btn-voicemail"
+                        data-digit="*97"><i class="fa fa-volume-up"></i><span><%= t('user_dashboard.voicemail') %></span>
+                      </button>
+
+                      <button
+                        type="button"
+                        data-bind="click: ()=>setLastAction('is_follow_active'), css: { is_active: inFollowme() == true }"
+                        class="btn btn-default digit btn-followme"
+                        data-digit="*21"><i class="fa fa-search"></i><span><%= t('user_dashboard.followme') %></span>
+                      </button>
+
+                      <button
+                        type="button"
+                        data-bind="click: ()=>setLastAction('is_acd_active'), css: { is_active: inAcd() == true }"
+                        class="btn btn-default digit btn-acd"
+                        data-digit="*46"><i class="fa fa-group"></i><span><%= t('user_dashboard.acd') %></span>
+                      </button>
+
+                      <div class="clearfix"></div>
+                      <button
+                        data-bind="click: onCallSettings"
+                        class="btn btn-dial btn-block btnCall">
+                          <%= t('user_dashboard.activate') %>
+                      </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="well-sip">
+
+
+        <div id="sip-log" class="panel panel-sip">
+          <div class="panel-heading">
+            <div>
+              <div class="btn-group pull-left">
+                <%= link_to '<i class="fa fa-user"></i>'.html_safe, "/#{I18n.locale}/contacts?call_icon=true", remote: true %>
+                <%= link_to '<i class="fa fa-users"></i>'.html_safe, public_phonebook_contacts_path(locals: I18n.locale, call_icon: true), remote: true, style: 'margin-left: 5px;' %>
+
+                <%= link_to '<i class="fa fa-bullhorn"></i>'.html_safe, campaigns_path(locals: I18n.locale), remote: true, style: 'margin-left: 5px;', class: "all-campaing-link" %>
+
+                <%= link_to '<i class="fa fa-bullhorn"></i>'.html_safe, "", remote: true, style: 'margin-left: 5px;', class: "hide last-campaign-openend" %>
+
+                <i class="fa fa-flag text-primary pointer" data-bind="click: showPhoneCustomer, css: { hide: !customerId() }" style='margin-left: 5px;'></i>
+
+              </div>
+              <div class="btn-group pull-right">
+                <i class="fa fa-phone btn-filter filter-calls" data-filter-calls='all'></i>
+                <i class="fa fa-arrow-down btn-filter filter-calls" data-filter-calls='inbound'></i>
+                <i class="fa fa-arrow-up btn-filter filter-calls" data-filter-calls='outbound'></i>
+                <i class="fa fa-ban btn-filter filter-calls" data-filter-calls='unanswered'></i>
+                <i class="fa fa-trash btn-filter sipLogClear"></i>
+              </div>
+            </div>
+          </div>
+          <div id="sip-logitems" class="list-sip">
+            <div id="sip-splash" class="text-muted text-center panel panel-default">
+              <div class="panel-body">
+                <h3 class="page-header">
+                <span class="fa-stack fa-2x">
+                    <i class="fa fa-circle fa-stack-2x text-success"></i>
+                    <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+                </span></p>
+                Contakti Caller</p></h3>
+                <h5><%= t('user_dashboard.startscreen') %></h5>
+              </div>
+            </div>
+            <div id="calls-list"></div>
+            <p class="text-muted text-center"></p>
+          </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer">
+      <div id="recorder-amr">
+        <div class="center-align">
+          <button class="btn-recordingstart" id="startRecording"><i class="fa fa-circle"></i></button>
+          <button class="btn-recordingend" id="stopRecording"><i class="fa fa-stop"></i></button>
+          <button class="btn-playpause hide" id="amr-play-record"><i class="fa fa-play"></i></button>
+          <a class="btn-createtask hide" id="amr-down-record" download="contakti-recording.amr"><i class="fa fa-upload"></i></a>
+          <span
+            class="btn-createtask"
+            id="afterStopButton"
+            data-bind="click: createTaskWithRecording"
+            title='create task'
+            ><i class="fa fa-tag"></i></span>
+
+          <br>
+          <span id="recordingTimer" class="label label-danger hide"></span>
+          <span id="amr-record-duration">0'</span>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+<audio id="dtmfTone0" src="/assets/dtmf/0.wav"></audio>
+<audio id="dtmfTone1" src="/assets/dtmf/1.wav"></audio>
+<audio id="dtmfTone2" src="/assets/dtmf/2.wav"></audio>
+<audio id="dtmfTone3" src="/assets/dtmf/3.wav"></audio>
+<audio id="dtmfTone4" src="/assets/dtmf/4.wav"></audio>
+<audio id="dtmfTone5" src="/assets/dtmf/5.wav"></audio>
+<audio id="dtmfTone6" src="/assets/dtmf/6.wav"></audio>
+<audio id="dtmfTone7" src="/assets/dtmf/7.wav"></audio>
+<audio id="dtmfTone8" src="/assets/dtmf/8.wav"></audio>
+<audio id="dtmfTone9" src="/assets/dtmf/9.wav"></audio>
+<audio id="dtmfToneHash" src="/assets/dtmf/hash.wav"></audio>
+<audio id="dtmfToneStar" src="/assets/dtmf/star.wav"></audio>
+<audio id="dtmfTone-silence" src="/assets/dtmf/silence.wav"></audio>
+
+<audio id="ringtone" src="/assets/sip/incoming.mp3" loop></audio>
+<audio id="ringbacktone" src="/assets/sip/outgoing.mp3" loop></audio>
+<audio id="dtmfTone" src="/assets/sip/dtmf.mp3"></audio>
+<audio id="audioRemote"></audio>
+<audio id="audioLocal"></audio>
+
+
+
+<script>
+    (function () {
+        function E(selector) {
+          return document.querySelector(selector);
+        }
+        var amrForRecorder;
+        var recordBtn = E('#amr-record');
+        var playRecordBtn = E('#amr-play-record');
+        var downRecordLink = E('#amr-down-record');
+        var recordDuration = E('#amr-record-duration');
+        var displayTimer = document.getElementById("recordingTimer");
+        let afterStopButton = document.getElementById('afterStopButton');
+
+        // let downloadLink = document.getElementById('download');
+        let downloadLink = document.getElementById('amr-down-record');
+
+        let startBtn = document.getElementById('startRecording');
+        let stopBtn = document.getElementById('stopRecording');
+        let codeBtn = document.querySelector('.js-code');
+
+        startBtn.addEventListener('click', () => {
+          downloadLink.classList.add('hide');
+          // afterStopButton.classList.add('hide');
+          playRecordBtn.classList.add('hide');
+          downRecordLink.classList.add('hide');
+          displayTimer.classList.remove('hide');
+
+          startAmrtRecording()
+          dTimer.reset();
+          dTimer.start();
+        });
+
+        stopBtn.addEventListener('click', () => {
+          downloadLink.classList.remove('hide');
+          // afterStopButton.classList.remove('hide');
+          playRecordBtn.classList.remove('hide');
+          downRecordLink.classList.remove('hide');
+          dTimer.stop();
+          // $(playRecordBtn).show();
+          stopAmrtRecording();
+        });
+
+
+        function stopAmrtRecording(){
+          playRecordBtn.removeAttribute('disabled');
+          amrForRecorder.finishRecord().then(() => {
+            window.lastCallRecordingBlob = amrForRecorder.getBlob()
+            downRecordLink.href = window.URL.createObjectURL(window.lastCallRecordingBlob);
+            recordDuration.innerHTML = amrForRecorder.getDuration().toFixed(2) + '\'';
+          });
+        }
+
+        function startAmrtRecording(){
+          // recordBtn.innerHTML = 'Stop Record';
+          playRecordBtn.setAttribute('disabled', true);
+          amrForRecorder = new BenzAMRRecorder();
+          amrForRecorder.initWithRecord().then(() => {
+              amrForRecorder.startRecord();
+          }).catch(function(e) {
+              alert(e.message || e.name || JSON.stringify(e));
+          });
+
+          amrForRecorder.onPlay(function () {
+              // console.log('Recorder Event: play');
+              playRecordBtn.querySelector("i").classList.remove("fa-play");
+                playRecordBtn.querySelector("i").classList.add("fa-pause");
+              // playRecordBtn.innerHTML = 'Stop Playing';
+          });
+          amrForRecorder.onStop(function () {
+            playRecordBtn.querySelector("i").classList.add("fa-play");
+                playRecordBtn.querySelector("i").classList.remove("fa-pause");
+              // console.log('Recorder Event: stop');
+              // playRecordBtn.innerHTML = 'Play Record';
+          });
+
+          amrForRecorder.onPause(function () {
+            playRecordBtn.querySelector("i").classList.add("fa-play");
+                playRecordBtn.querySelector("i").classList.remove("fa-pause");
+              // console.log('Recorder Event: pause');
+              // playRecordBtn.innerHTML = 'Play Record';
+          });
+
+          amrForRecorder.onEnded(function () {
+              // console.log('Recorder Event: ended');
+              // playRecordBtn.innerHTML = 'Play Record';
+          });
+          amrForRecorder.onAutoEnded(function () {
+              // console.log('Recorder Event: autoEnded');
+          });
+          amrForRecorder.onStartRecord(function () {
+              // console.log('Recorder Event: startRecord');
+              // recordBtn.innerHTML = 'Stop Record';
+          });
+          amrForRecorder.onFinishRecord(function () {
+              // console.log('Recorder Event: finishRecord');
+              // recordBtn.innerHTML = 'Start Record';
+          });
+          amrForRecorder.onCancelRecord(function () {
+              // console.log('Recorder Event: cancelRecord');
+              // recordBtn.innerHTML = 'Start Record';
+          });
+        }
+
+
+        dTimer = new Stopwatch(displayTimer, {delay: 1000, customControlls: true});
+        playRecordBtn.onclick = function () {
+            if (amrForRecorder.isPlaying()) {
+                amrForRecorder.pause();
+            }
+            else if (amrForRecorder.isPaused())
+            {
+                amrForRecorder.resume();
+            }
+            else {
+                amrForRecorder.play();
+            }
+        };
+    })();
+</script>
+

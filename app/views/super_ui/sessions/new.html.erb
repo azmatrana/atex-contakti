@@ -1,0 +1,58 @@
+<div class="container-fluid" style="visibility: visible;">
+  <!-- row-app -->
+  <div class="row row-app">
+    <!-- col -->
+    <!-- col-separator.box -->
+    <div class="col-separator col-unscrollable box">
+      <!-- col-table -->
+      <div class="col-table">
+        <!--<h4 class="innerAll margin-none border-bottom text-center"><i class="fa fa-lock"></i> Login to Admin Account</h4>-->
+        <!-- col-table-row -->
+        <div class="col-table-row">
+          <!-- col-app -->
+          <div class="col-app col-unscrollable">
+            <!-- col-app -->
+            <div class="col-app">
+              <div class="login authform">
+                <div class="placeholder text-center"><i class="fa fa-lock"></i>
+                </div>
+                <div class="panel panel-default col-md-4 col-sm-6 col-sm-offset-3 col-md-offset-4">
+                  <div class="panel-body">
+                    <%= form_for(resource, :as => resource_name, :url => super_admin_session_url, :html => { :role => 'form'}) do |f| %>
+                      <%= devise_error_messages! %>
+                      <div class="form-group">
+                        <%= f.label :login %>
+                        <%= f.email_field :login, :autofocus => true, class: 'form-control' %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :password %>
+                        <%= f.password_field :password, class: 'form-control' %>
+                      </div>
+                      <%= f.submit 'Log in', :class => 'btn btn-default btn-block' %>
+                      <%- if devise_mapping.recoverable? %>
+                        <%= link_to "Forgot password?", new_password_path(resource_name), class: '' %>
+                      <% end -%>
+                      <% if devise_mapping.rememberable? -%>
+                        <div class="checkbox">
+                          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+                        </div>
+                      <% end -%>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- // END col-app -->
+          </div>
+          <!-- // END col-app.col-unscrollable -->
+        </div>
+        <!-- // END col-table-row -->
+      </div>
+      <!-- // END col-table -->
+    </div>
+    <!-- // END col-separator.box -->
+  </div>
+  <!-- // END row-app -->
+  <!-- Global -->
+
+</div>

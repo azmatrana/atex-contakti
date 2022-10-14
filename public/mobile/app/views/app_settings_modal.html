@@ -1,0 +1,75 @@
+<div id="app-settings-modal" class="modal fade bottom scroll-modal">
+    <div class="modal-dialog" data-bind="if: appSettingsActive">
+        <div class="modal-content">
+            <form id="app-settings-form">
+                <div class="modal-body scroll-body">
+                    <fieldset>
+                        <h4 data-i18n="app:app_settings.section.personal_details"></h4>
+                        <div class="form-group">
+                            <label for="user_first_name" data-i18n="app:app_settings.first_name"></label>
+                            <input id="user_first_name" type="text" class="form-control" name="user_first_name" data-bind="value: currentUser().firstName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_last_name" data-i18n="app:app_settings.last_name"></label>
+                            <input id="user_last_name" type="text" class="form-control" name="user_last_name" data-bind="value: currentUser().lastName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_title" data-i18n="app:app_settings.title"></label>
+                            <input id="user_title" type="text" class="form-control" name="user_title" data-bind="value: currentUser().title" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_mobile" data-i18n="app:app_settings.mobile"></label>
+                            <input id="user_mobile" type="text" class="form-control" name="user_mobile" data-bind="value: currentUser().mobile" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_email" data-i18n="app:app_settings.email"></label>
+                            <input id="user_email" type="text" class="form-control" name="user_email" data-bind="value: currentUser().email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_password" data-i18n="app:app_settings.password"></label>
+                            <input id="user_password" type="text" class="form-control" name="user_password" data-i18n="[placeholder]app:app_settings.empty_if_no_change" data-bind="value: appSettings().password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="user_password_confirmation" data-i18n="app:app_settings.password_confirmation"></label>
+                            <input id="user_password_confirmation" type="text" class="form-control" name="user_password_confirmation" data-i18n="[placeholder]app:app_settings.empty_if_no_change" data-bind="value: appSettings().password_confirmation" />
+                        </div>
+                    </fieldset>
+                    <fieldset>
+
+                        <div class="form-group">
+                            <label for="user_language" data-i18n="app:app_settings.language"></label>
+                            <select class="form-control" id="user_language" name="user_language"
+                                data-bind="options: availableLanguages,
+                                           optionsText: 'name',
+                                           optionsValue: 'key',
+                                           value: appSettings().language">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_signature" data-i18n="app:app_settings.user_signature"></label>
+                            <textarea id="user_signature" class="form-control" type="text" name="user_signature" data-bind="value: currentUser().signature" rows="10"></textarea>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <div class="pull-left">
+                        <div class="message-actions" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onCancelAppSettings">
+                                <span class="fa fa-times"></span>
+                                <span data-i18n="app:app_settings.action.cancel"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="message-actions">
+                            <button type="button" class="btn btn-primary btn-sm" data-bind="click: onConfirmAppSettings">
+                                <span class="fa fa-check"></span>
+                                <span data-i18n="app:app_settings.action.save"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

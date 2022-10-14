@@ -1,0 +1,22 @@
+
+<tr id="campaign_item-row-<%= campaign_item.id %>" class="<%= (in_call ? 'called' : '') + (campaign_item.task.present? ? ' have_task' : '') %>" data-phone="<%= campaign_item.phone %>">
+  <td> <%= campaign_item.first_name %> </td>
+  <td> <%= campaign_item.last_name %> </td>
+  <td> <%= campaign_item.phone %> </td>
+  <td> <%= campaign_item.email %> </td>
+  <td> <%= campaign_item.address %> </td>
+  <td> <%= campaign_item.postcode %> </td>
+  <td> <%= campaign_item.city %> </td>
+  <td> <%= campaign_item.country %> </td>
+  <td> <%= campaign_item.last_call_time %> </td>
+  <td> <%= campaign_item.info_1 %> </td>
+  <td> <%= campaign_item.info_2 %> </td>
+
+  <td>
+    <% if @is_agent && !in_call %>
+      <%= link_to '<i class="fa fa-phone"></i>'.html_safe, 'javascript:void(0);', class: 'contact-call-btn', data: {phone: campaign_item.phone, source_type: 'campaign_item', source_id: campaign_item.id, call_details_data: campaing_data_for_task(campaign_item)} %>
+    <% end %>
+    <%= link_to '<i class="fa fa-eye"></i>'.html_safe, campaign_campaign_item_path(campaign_item.campaign_id, campaign_item.id), remote: true %>
+  </td>
+
+</tr>

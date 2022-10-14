@@ -1,0 +1,22 @@
+<script type="text/html" id="task_container_template">
+    <div class="widget widget-tabs border-bottom-none">
+        <!-- Widget heading -->
+
+        <!-- // Widget heading END -->
+        <div class="widget-body">
+            <div class="tab-content">
+                <div class="tab-pane active clearfix" id="tasks">
+   
+                    <div class="row tab-header" id="message-header" data-bind="template: { name: 'task_header_template' }"></div>
+                    <div id="message-thread" class="message-thread has-scroll"
+                         data-bind="template: { name: 'task_messages_container_template'}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+		
+
+

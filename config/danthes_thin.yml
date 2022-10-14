@@ -1,0 +1,6 @@
+address: 127.0.0.1
+port: 9292
+environment: staging
+rackup: danthes.ru
+ssl_cert_file: /home/admin/certs/2021/bundle.crt
+ssl_key_file: /home/admin/certs/2021/server.key

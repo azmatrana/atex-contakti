@@ -1,0 +1,261 @@
+<div class="widget widget-tabs border-bottom-none contact-card-customer">
+    <div class="contact-card-customer-header"><%= t('user_dashboard.contact_card.company') %>
+        <span data-bind="text: $data.company.companySafe().name"></span>
+    </div>
+    <div class="widget-head">
+        <ul>
+            <li class="active">
+                <a data-toggle="tab" href="#company_basic_info"><%= t('user_dashboard.contact_card.basic_information') %></a>
+            </li>
+            <li>
+                <a data-bind="css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }" data-toggle="tab" href="#company_customers"><%= t('user_dashboard.contact_card.customers') %></a>
+            </li>
+            <li>
+                <a data-bind="click: $data.company.loadCompanyTasks, css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }" data-toggle="tab" href="#company_tasks"><%= t('user_dashboard.contact_card.tasks') %></a>
+            </li>
+            <!--
+            <li>
+                <a data-bind="css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }" data-toggle="tab" href="#company_calls"><%= t('user_dashboard.contact_card.calls') %></a>
+            </li>
+            <li>
+                <a data-bind="css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }"data-toggle="tab" href="#company_emails"><%= t('user_dashboard.contact_card.emails') %></a>
+            </li>
+            <li>
+                <a data-bind="css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }"data-toggle="tab" href="#company_chats"><%= t('user_dashboard.contact_card.chats') %></a>
+            </li>
+            <li>
+                <a data-bind="css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }"data-toggle="tab" href="#company_sms"><%= t('user_dashboard.contact_card.sms') %></a>
+            </li>
+            <li>
+                <a data-bind="css: { 'disabled-link-in-tabs': $data.company.companyLoading() || $data.company.company() == null }" data-toggle="tab" href="#company_web_forms"><%= t('user_dashboard.contact_card.web_forms') %></a>
+            </li>
+            -->
+        </ul>
+    </div>
+    <div class="widget-body">
+        <div class="tab-content">
+
+            <!-- COMPANY BASIC INFORMATION HERE -->
+            <div id="company_basic_info" class="tab-pane active">
+                <%= simple_form_for CustomerCompany.new, url: "/customer_companies/proceed_company", remote: true, :html => {:class => 'form-horizontal'} do |f| %>
+                    <% f.simple_fields_for :tasks do |ff|%>
+                        <% f.simple_fields_for :customers do |fff|%>
+                            <div class="row basic-information-row">
+                                <div class="col-md-12">
+                                    <h3 data-bind="visible: !$data.company.companyLoading()" class="contact-card-header"><%= t('user_dashboard.contact_card.company_basic_information') %></h3>
+                                    <h3 data-bind="visible: $data.company.companyLoading" class="contact-card-header"><%= t('user_dashboard.contact_card.loading') %></h3>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group margin-none innerB">
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.company_name') %></label>
+                                            <i data-bind="css: {
+                                                'fa-search' : !$data.company.companyNameSearchInProgress(),
+                                                'fa-spinner fa-spin' : $data.company.companyNameSearchInProgress() }" class="contact-card-search-icon fa"></i>
+                                            <%= f.text_field :name, class: 'form-control', "data-bind" => "value: $data.company.companySafe().name,
+                                                                                                            disable: $data.company.companyLoading,
+                                                                                                            valueUpdate: ['input', 'afterkeydown'],
+                                                                                                            hasFocus: $data.company.companySearchResultsShow,
+                                                                                                            event: { blur: $data.company.companySearchFieldFocusLost,
+                                                                                                                    keypress: $data.company.companyInputChanged }" %>
+                                            <ul data-bind="foreach: $data.company.companySearchResults, visible: $data.company.companySearchResultsShow">
+                                                <li>
+                                                    <span data-bind="text: name + ', ' + businessCode, click: $parent.company.companySearchResultClicked"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group margin-none innerB">
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.business_number') %></label>
+                                            <%= f.text_field :code, class: 'form-control', "data-bind" => "value: $data.company.companySafe().businessCode,
+                                                                                                            disable: $data.company.companyLoading" %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="contact-card-divider"></span>
+
+                                <div class="col-md-6">
+                                    <div class="form-group margin-none innerB">
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.address') %></label>
+                                            <%= f.text_field :street_address, class: 'form-control', "data-bind" => "value: $data.company.companySafe().streetAddress,
+                                                                                                                    disable: $data.company.companyLoading" %>
+                                        </div>
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.primary_contact_person') %></label>
+                                            <i data-bind="css: {
+                                                'fa-search' : !$data.company.contactPersonSearchInProgress(),
+                                                'fa-spinner fa-spin' : $data.company.contactPersonSearchInProgress() }" class="contact-card-search-icon fa"></i>
+                                            <input data-bind="value: $data.company.companySafe().contactPersonEmail,
+                                                                valueUpdate: ['input', 'afterkeydown'],
+                                                                hasFocus: $data.company.contactPersonSearchResultsShow,
+                                                                event: { blur: $data.company.contactPersonFieldFocusLost,
+                                                                         keypress: $data.company.contactPersonInputChanged },
+                                                                disable: ($data.company.company() == null) || $data.company.companyLoading"
+                                                                id="primary_contact_person_name" type="text" class="form-control"/>
+                                            <a data-bind="click: $data.company.removeContactPersonFromModel,
+                                                            visible: $data.company.companySafe().contactPersonId,
+                                                            css: { 'disabled-link-in-tabs': $data.company.companyLoading() }" class="fa fa-times contact-card-remove-icon"></a>
+                                            <%= fff.hidden_field :id, "data-bind" => "value: $data.company.companySafe().contactPersonId" %>
+
+                                            <ul data-bind="foreach: $data.company.contactPersonSearchResult, visible: $data.company.contactPersonSearchResultsShow">
+                                                <li>
+                                                    <span data-bind="text: first_name + ': ' + email, click: $parent.company.contactPersonSearchResultClicked"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group margin-none innerB">
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.postal_code') %></label>
+                                            <%= f.text_field :zip_code, class: 'form-control', "data-bind" => "value: $data.company.companySafe().zipCode,
+                                                                                                                    disable: $data.company.companyLoading" %>
+                                        </div>
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.city') %></label>
+                                            <%= f.text_field :city, class: 'form-control', "data-bind" => "value: $data.company.companySafe().city,
+                                                                                                                    disable: $data.company.companyLoading" %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="contact-card-divider"></span>
+
+                                <div class="col-md-6">
+                                    <div class="form-group margin-none innerB">
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.email_address') %></label>
+                                            <%= f.text_field :email, class: 'form-control', "data-bind" => "value: $data.company.companySafe().email,
+                                                                                                                    disable: $data.company.companyLoading" %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group margin-none innerB">
+                                        <div class="input-group">
+                                            <label><%= t('user_dashboard.contact_card.phone_number') %></label>
+                                            <%= f.text_field :phone, class: 'form-control', "data-bind" => "value: $data.company.companySafe().phone,
+                                                                                                                    disable: $data.company.companyLoading" %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%= f.hidden_field :id, "data-bind" => "value: $data.company.companySafe().id" %>
+                                <%= ff.hidden_field :id, "data-bind" => "value: task().id" %>
+
+                                <span class="contact-card-divider"></span>
+
+                                <div class="col-md-12">
+                                    <div class="form-group innerB contact-card-bs-save-button-div">
+                                        <div class="input-group">
+                                            <button data-bind="click: $data.company.removeCompany, disable: $data.company.companyLoading" id="customer-company-delete-button" class="btn btn-default contact-card-bs-button" type="button" data-loading-text="<%= t('user_dashboard.contact_card.deleting') %>">
+                                                <i class="fa fa-times"></i>
+                                                <br/>
+                                                <span><%= t('user_dashboard.contact_card.delete') %></span>
+                                            </button>
+
+                                            <button data-bind="click: $data.company.saveCompany, disable: $data.company.companyLoading" id="customer-company-save-button" class="btn btn-default contact-card-bs-button" type="button" data-loading-text="<%= t('user_dashboard.contact_card.saving') %>">
+                                                <i class="fa fa-floppy-o"></i>
+                                                <br/>
+                                                <span><%= t('user_dashboard.contact_card.save') %></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
+
+            <!-- COMPANY CUSTOMERS HERE -->
+            <div id="company_customers" class="tab-pane">
+            </div>
+
+            <!-- COMPANY TASKS HERE -->
+            <div id="company_tasks" class="tab-pane contact-card-tasks">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 data-bind="visible: !$data.company.companyTasksLoading()" class="contact-card-header"><%= t('user_dashboard.contact_card.task_history') %></h3>
+                        <h3 data-bind="visible: $data.company.companyTasksLoading" class="contact-card-header"><%= t('user_dashboard.contact_card.loading') %></h3>
+                    </div>
+                    <div class="col-md-12">
+                        <ul data-bind="foreach: $data.company.companyTasks">
+                            <li data-bind="css: cssLeftBorder" class="row">
+                                <div class="col-md-12">
+                                    <i data-bind="css: contentHidden ? cssArrowDown : cssArrowUp" class="fa"></i>
+                                    <div class="pull-left">
+                                        <span data-bind="css: iconClass" class="glyphicon contact-card-tasks-glyphicon"></span>
+                                        <span data-bind="text: name, click: $parent.company.companyTaskClicked" class="task-name-header"></span>
+                                    </div>
+                                    <span data-bind="text: date" class="pull-right"></span>
+                                </div>
+                                <div data-bind="visible: !contentHidden" class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                            <div>
+                                                <label for="date_created_span"><%= t('user_dashboard.contact_card.date_created') %>: </label><span data-bind="text: date" id="date_created_span"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 contact-card-tasks-content-column">
+                                            <div>
+                                                <label for="agent_fullname_span"><%= t('user_dashboard.contact_card.from') %>: </label><span data-bind="text: agentFullName" id="agent_fullname_span"></span>
+                                                <div class="clearfix"></div>
+                                                <label for="to_span">To: </label><span data-bind="text: agentFullName" id="to_span"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 contact-card-tasks-content-column">
+                                            <div>
+                                                <label for="media_channel_span"><%= t('user_dashboard.contact_card.media_channel') %>: </label><span data-bind="text: mediaChannel" id="media_channel_span"></span>
+                                                <div class="clearfix"></div>
+                                                <label for="service_channel_span"><%= t('user_dashboard.contact_card.service_channel') %>: </label><span data-bind="text: serviceChannel.name" id="service_channel_span"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                            <div class="input-group">
+                                                <label for="reminder_textarea"><%= t('user_dashboard.contact_card.reminder') %>:</label>
+                                                <textarea class="form-control" data-bind="text: reminder.text" id="reminder_textarea" rows="5" readonly></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 contact-card-tasks-content-column">
+                                            <label for="internal_notes"><%= t('user_dashboard.contact_card.internal_notes') %>:</label>
+                                            <textarea data-bind="text: internalNotes" class="form-control" id="internal_notes" rows="5" readonly></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPANY CALLS HERE -->
+            <div id="company_calls" class="tab-pane">
+            </div>
+
+            <!-- COMPANY EMAILS HERE -->
+            <div id="company_emails" class="tab-pane">
+            </div>
+
+            <!-- COMPANY CHATS HERE -->
+            <div id="company_chats" class="tab-pane">
+            </div>
+
+            <!-- COMPANY SMS HERE -->
+            <div id="company_sms" class="tab-pane">
+            </div>
+
+            <!-- COMPANY WEB FORMS HERE -->
+            <div id="company_web_forms" class="tab-pane">
+            </div>
+        </div>
+    </div>
+</div>
